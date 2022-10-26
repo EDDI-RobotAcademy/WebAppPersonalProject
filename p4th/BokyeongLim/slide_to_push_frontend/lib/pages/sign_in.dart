@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:slide_to_push_frontend/utility/size.dart';
 import 'package:slide_to_push_frontend/utility/color.dart';
+import '../api/spring_api.dart';
 import '../utility/input_validate.dart';
 
 class SignIn extends StatefulWidget {
@@ -88,6 +89,11 @@ class _SignInState extends State<SignIn> {
       focusNode:_emailFocus,
       validator: (value) => CheckValidate().validateEmail(_emailFocus, value!),
       autovalidateMode: AutovalidateMode.onUserInteraction,
+      onSaved: (value) {
+        setState(() {
+          this.email = value!;
+        });
+      },
     );
   }
 
@@ -125,6 +131,11 @@ class _SignInState extends State<SignIn> {
       autovalidateMode: AutovalidateMode.onUserInteraction,
       validator: (value) => CheckValidate().validatePassword(_passwordFocus, value!),
       obscureText: true,
+      onSaved: (value) {
+        setState(() {
+          this.password = value!;
+        });
+      },
     );
   }
 
@@ -139,7 +150,9 @@ class _SignInState extends State<SignIn> {
   Widget _submitButton(){
     return ElevatedButton(
       onPressed: (){
-
+        // formkey.currentState?.validate();
+        this.formkey.currentState?.save();
+        SpringApi().signIn(SignInRequest(email, password));
       },
       child: Text("SIGN IN", style: TextStyle(color: Colors.white),),
       style: ElevatedButton.styleFrom(
