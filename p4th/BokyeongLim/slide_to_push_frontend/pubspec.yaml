@@ -34,6 +34,14 @@ dependencies:
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.
   cupertino_icons: ^1.0.2
+  http: ^0.13.4
+
+
+  # The following adds the Cupertino Icons font to your application.
+  # Use with the CupertinoIcons class for iOS style icons.
+
+
+
 
 dev_dependencies:
   flutter_test:
@@ -74,17 +82,17 @@ flutter:
   # "family" key with the font family name, and a "fonts" key with a
   # list giving the asset and other descriptors for the font. For
   # example:
-   fonts:
-     - family: AppleSDGothicNeo
-       fonts:
-         - asset: assets/font/AppleSDGothicNeoL.ttf
-           weight: 300
-         - asset: assets/font/AppleSDGothicNeoM.ttf
-           weight: 500
-         - asset: assets/font/AppleSDGothicNeoB.ttf
-           weight: 700
-         - asset: assets/font/AppleSDGothicNeoH.ttf
-           weight: 800
+  fonts:
+    - family: AppleSDGothicNeo
+      fonts:
+        - asset: assets/font/AppleSDGothicNeoL.ttf
+          weight: 300
+        - asset: assets/font/AppleSDGothicNeoM.ttf
+          weight: 500
+        - asset: assets/font/AppleSDGothicNeoB.ttf
+          weight: 700
+        - asset: assets/font/AppleSDGothicNeoH.ttf
+          weight: 800
 
   #   - family: Trajan Pro
   #     fonts:
