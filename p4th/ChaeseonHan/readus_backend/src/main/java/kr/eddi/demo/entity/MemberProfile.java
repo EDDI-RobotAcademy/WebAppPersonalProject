@@ -38,4 +38,7 @@ public class MemberProfile {
         this.biography = biography;
     }
 
+    public void setMember(ReadUsMember member) {
+        this.member = member;
+    }
 }
