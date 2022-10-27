@@ -1,6 +1,8 @@
 package kr.eddi.demo.service;
 
 
+import kr.eddi.demo.entity.Authentication;
+import kr.eddi.demo.entity.BasicAuthentication;
 import kr.eddi.demo.entity.ReadUsMember;
 import kr.eddi.demo.repository.AuthenticationRepository;
 import kr.eddi.demo.repository.MemberRepository;
@@ -33,8 +35,14 @@ public class MemberServiceImpl implements MemberService{
 
     @Override
     public Boolean signUp(MemberRegisterRequest request) {
-       /* final ReadUsMember member =*/
-        return null;
+        final ReadUsMember member = request.toMember();
+        memberRepository.save(member);
+
+        final BasicAuthentication auth = new BasicAuthentication(member, Authentication.BASIC_AUTH, request.getPassword());
+
+        authenticationRepository.save(auth);
+
+        return true;
     }
 
 
