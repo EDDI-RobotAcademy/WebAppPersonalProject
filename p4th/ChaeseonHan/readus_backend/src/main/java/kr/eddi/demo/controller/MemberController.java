@@ -1,17 +1,16 @@
 package kr.eddi.demo.controller;
 
 
+import kr.eddi.demo.controller.form.MemberRegisterForm;
 import kr.eddi.demo.service.MemberServiceImpl;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @Slf4j
 @RestController
 @RequestMapping("/member")
+@CrossOrigin(origins = "http://localhost:8080", allowedHeaders = "*")
 public class MemberController {
 
 
@@ -23,5 +22,12 @@ public class MemberController {
         log.info("checkEmail()");
 
         return service.emailValidation(email);
+    }
+
+    @PostMapping("/register")
+    public Boolean signUp(@RequestBody MemberRegisterForm form){
+        log.info("signup: " + form);
+
+        return service.signUp(form.toMemberRegisterRequest());
     }
 }
