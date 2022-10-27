@@ -16,4 +16,3 @@ spring:
     generate-ddl: true
     hibernate:
       ddl-auto: update
-
