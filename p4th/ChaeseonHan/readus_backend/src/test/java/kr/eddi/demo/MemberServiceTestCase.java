@@ -1,6 +1,7 @@
 package kr.eddi.demo;
 
 import kr.eddi.demo.service.MemberServiceImpl;
+import kr.eddi.demo.service.request.MemberLoginRequest;
 import kr.eddi.demo.service.request.MemberRegisterRequest;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,6 +25,13 @@ public class MemberServiceTestCase {
         MemberRegisterRequest request = new MemberRegisterRequest("test@gmail.com", "123456", "", "");
         Boolean isSuccess = service.signUp(request);
         System.out.println("isSuccess: " + isSuccess);
+    }
+
+    @Test
+    void signInTest() {
+        MemberLoginRequest request = new MemberLoginRequest("test@gmail.com", "123456");
+        String userToken = service.signIn(request);
+        System.out.println("userToken: " + userToken);
     }
 
 }

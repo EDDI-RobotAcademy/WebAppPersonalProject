@@ -1,6 +1,7 @@
 package kr.eddi.demo.controller;
 
 
+import kr.eddi.demo.controller.form.MemberLoginForm;
 import kr.eddi.demo.controller.form.MemberRegisterForm;
 import kr.eddi.demo.service.MemberServiceImpl;
 import lombok.extern.slf4j.Slf4j;
@@ -29,5 +30,12 @@ public class MemberController {
         log.info("signup: " + form);
 
         return service.signUp(form.toMemberRegisterRequest());
+    }
+
+    @PostMapping("/login")
+    public String signIn(@RequestBody MemberLoginForm form) {
+        log.info("signin:" + form);
+
+        return service.signIn(form.toMemberLoginRequest());
     }
 }
