@@ -34,9 +34,8 @@ public class ReadUsMember {
 
     public ReadUsMember(String email, MemberProfile profile) {
         this.email = email;
-        this.profile = profile.builder()
-                                .member(this)
-                                .build();
+        this.profile = profile;
+        profile.setMember(this);
     }
 
 
