@@ -12,14 +12,12 @@ public class MemberRegisterRequest {
     private final String id;
     private final String pw;
     private final String nickName;
-    private final String auth;
 
 
 
     public Member toMember () {
         return new Member(
                 id,
-                pw,
                 nickName
         );
     }

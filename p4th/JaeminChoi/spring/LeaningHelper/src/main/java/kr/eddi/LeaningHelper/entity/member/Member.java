@@ -21,11 +21,8 @@ public class Member {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long memberNo;
 
-    @Column(length = 30,nullable = false)
+    @Column(name = "member_id",length = 30,nullable = false)
     private String id;
-
-    @Column(length = 30,nullable = false)
-    private String pw;
 
     @Column(length = 64,nullable = false)
     private String nickName;
@@ -36,12 +33,33 @@ public class Member {
     @UpdateTimestamp
     private Date updDate;
 
-    @OneToOne(mappedBy = "member", fetch = FetchType.LAZY, cascade = CascadeType.PERSIST)
+    @OneToOne(mappedBy = "member", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private MemberProfile profile;
 
-    public Member(String id, String pw, String nickName){
+    public Member(String id, String nickName){
         this.id = id;
-        this.pw = pw;
         this.nickName = nickName;
+    }
+
+    @OneToMany(mappedBy = "member", fetch = FetchType.LAZY)
+    final private Set<MemberAuth> memberAuths = new HashSet<>();
+
+
+    public boolean isRightPassword(String plainToCheck) {
+        final Optional<MemberAuth> maybeBasicAuth = findBasicAuthentication();
+
+        if (maybeBasicAuth.isPresent()) {
+            final MemberBasicAuth auth = (MemberBasicAuth) maybeBasicAuth.get();
+            return auth.isRightPassword(plainToCheck);
+        }
+
+        return false;
+    }
+
+    private Optional<MemberAuth> findBasicAuthentication() {
+        return memberAuths
+                .stream()
+                .filter(auth -> auth instanceof MemberBasicAuth)
+                .findFirst();
     }
 }

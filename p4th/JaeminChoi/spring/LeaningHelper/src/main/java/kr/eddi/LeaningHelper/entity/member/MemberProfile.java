@@ -2,6 +2,7 @@ package kr.eddi.LeaningHelper.entity.member;
 
 
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
@@ -9,11 +10,12 @@ import javax.persistence.*;
 @Entity
 @NoArgsConstructor
 @AllArgsConstructor
+@Builder
 public class MemberProfile {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long memberNo = null;
+    private Long memberNo;
 
     @Embedded
     MemberTestGrade memberTestGrade;
