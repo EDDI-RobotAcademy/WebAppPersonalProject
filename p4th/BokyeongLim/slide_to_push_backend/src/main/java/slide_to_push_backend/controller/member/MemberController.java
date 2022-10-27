@@ -1,8 +1,10 @@
 package slide_to_push_backend.controller.member;
 
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import slide_to_push_backend.controller.member.form.MemberSignInForm;
+import slide_to_push_backend.service.member.MemberService;
 
 @Slf4j
 @RestController
@@ -10,10 +12,13 @@ import slide_to_push_backend.controller.member.form.MemberSignInForm;
 @CrossOrigin(origins = "*", allowedHeaders = "*")
 public class MemberController {
 
+    @Autowired
+    private MemberService service;
     @PostMapping("/sign-in")
-    public Boolean memberSignIn (@RequestBody MemberSignInForm memberSignInForm) {
-        log.info("memberSignIn(): " + memberSignInForm);
-        return true;
+    public String memberSignIn (@RequestBody MemberSignInForm form) {
+        log.info("memberSignIn(): " + form);
+
+        return service.signIn(form.toMemberSignInRequest());
     }
 
 
