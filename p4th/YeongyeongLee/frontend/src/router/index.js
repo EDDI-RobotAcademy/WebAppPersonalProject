@@ -2,13 +2,12 @@ import Vue from 'vue'
 import VueRouter from 'vue-router'
 import HomeView from '../views/HomeView.vue'
 
-import BoardListView1 from "@/views/board/BoardListView1";
 import BoardListView from "@/views/board/BoardListView";
 
 import FooterView from "@/views/main/FooterView";
 import FootersTestView from "@/ex/FootersTestView";
-import LoginForm from "@/views/main/member/LoginForm";
-import SignUpForm from "@/views/main/member/SignUpForm";
+import LoginForm from "@/components/account/LoginForm";
+import SignUpForm from "@/components/account/SignUpForm";
 
 
 Vue.use(VueRouter)
@@ -24,11 +23,7 @@ const routes = [
     name: 'board-list-view',
     component: BoardListView
   },
-  {
-    path: '/board-list-view1',
-    name: 'board-list-view1',
-    component: BoardListView1
-  },
+
   {
     path: '/footer-view',
     name: 'footer-view',

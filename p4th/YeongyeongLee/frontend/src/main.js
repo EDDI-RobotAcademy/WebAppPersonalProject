@@ -5,7 +5,6 @@ import store from './store'
 import vuetify from './plugins/vuetify'
 import CommonButton from '@/components/common/CommonButton'
 
-
 Vue.component('CommonButton', CommonButton)
 Vue.config.productionTip = false
 
@@ -14,4 +13,5 @@ new Vue({
   store,
   vuetify,
   render: h => h(App)
+
 }).$mount('#app')

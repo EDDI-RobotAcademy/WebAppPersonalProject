@@ -12,7 +12,19 @@ export default {
   name: 'App',
 
   data: () => ({
-    //
-  }),
+
+
+
+    }),
 };
 </script>
+
+<style>
+
+body{
+  margin:120px;
+
+}
+
+
+</style>
