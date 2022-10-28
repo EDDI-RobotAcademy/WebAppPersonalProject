@@ -1,4 +1,4 @@
-package com.example.flutter_login_ui
+package com.example.lol_esports_korea_app
 
 import io.flutter.embedding.android.FlutterActivity
 

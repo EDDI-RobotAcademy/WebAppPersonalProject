@@ -1,4 +1,4 @@
-# flutter_login_ui
+# lol_esports_korea_app
 
 A new Flutter project.
 
