@@ -1,21 +1,25 @@
 import 'package:flutter/material.dart';
-import 'package:lol_esports_korea_app/components/app_bar/common_top_app_bar.dart';
-
+import 'package:lol_esports_korea_app/components/app_bar/bottom_navigation_bar.dart';
 import '../components/app_bar/common_drawer_menu.dart';
 
-class HomePage extends StatelessWidget {
+class HomePage extends StatefulWidget {
   const HomePage({Key? key}) : super(key: key);
 
   @override
+  _HomePageState createState() => _HomePageState();
+}
+
+class _HomePageState extends State<HomePage>{
+
+  @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: CommonTopAppBar(
-        title: const Text('Home'),
-        appBar: AppBar(),
-      ),
-      drawer: const Drawer(
+    return const Scaffold(
+      drawer: Drawer(
         child: CommonDrawerMenu(),
-      )
+      ),
+      body: Center(
+        child: BottomBar(),
+      ),
     );
   }
 }
