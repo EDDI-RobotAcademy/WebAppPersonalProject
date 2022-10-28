@@ -1,5 +1,6 @@
 package com.example.bucket_list_project.controller.member;
 
+import com.example.bucket_list_project.controller.member.form.MemberSignUpForm;
 import com.example.bucket_list_project.service.member.MemberService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,5 +20,12 @@ public class MemberController {
         log.info("emailValidation(): " + email);
 
         return memberService.emailValidation(email);
+    }
+
+    @PostMapping("/sign-up")
+    public Boolean signUp(@RequestBody MemberSignUpForm signUpForm) {
+        log.info("signUp: " + signUpForm);
+
+        return memberService.signUp(signUpForm.memberSignUpRequest());
     }
 }
