@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:slide_to_push_frontend/components/inputs/text_field_nickName.dart';
+import 'package:fluttertoast/fluttertoast.dart';
+import 'package:slide_to_push_frontend/api/spring_api.dart';
+import 'package:slide_to_push_frontend/components/inputs/text_field_common.dart';
 import 'package:slide_to_push_frontend/components/inputs/text_field_email.dart';
 import 'package:slide_to_push_frontend/components/inputs/text_field_password.dart';
 import 'package:slide_to_push_frontend/components/inputs/text_field_checked_password.dart';
@@ -8,7 +10,7 @@ import 'package:slide_to_push_frontend/utility/buttons.dart';
 import 'package:slide_to_push_frontend/utility/color.dart';
 import 'package:slide_to_push_frontend/utility/size.dart';
 
-
+import 'inputs/checkBox_field.dart';
 
 class SignUpForm extends StatefulWidget {
   const SignUpForm({Key? key}) : super(key: key);
@@ -19,7 +21,8 @@ class SignUpForm extends StatefulWidget {
 
 class _SignUpFormState extends State<SignUpForm> {
 
-  bool _isChecked = false;
+  String firstPassword = TextFieldPassword.password;
+  String secondPassword = TextFieldCheckedPassword.checkedPassword;
 
   @override
   Widget build(BuildContext context) {
@@ -28,7 +31,7 @@ class _SignUpFormState extends State<SignUpForm> {
         key: formKey,
         child: Column(
           children: [
-            TextFieldCommon(),
+            TextFieldCommon(formName: '닉네임'),
             SizedBox(height: medium_gap),
             TextFieldEmail(),
             SizedBox(height: small_gap),
@@ -42,26 +45,26 @@ class _SignUpFormState extends State<SignUpForm> {
             SizedBox(height: medium_gap),
             TextFieldCheckedPassword(),
             SizedBox(height: small_gap),
-            Row(
-              children: <Widget>[
-                Checkbox(
-                    value: _isChecked,
-                    onChanged: (value){
-                      setState(() {
-                        _isChecked = value!;
-                      });
-                    }
-                ),
-                SizedBox(width: small_gap),
-                Text('이용약관에 동의하십니까?')
-              ],
-            ),
+            CheckBoxField(title: '이용약관에 동의하십니까?'),
             SizedBox(height: small_gap),
             ElevatedButton(
               onPressed:(){
-                if(TextFieldPassword.password == TextFieldCheckedPassword.checkedPassword){
-                  formKey.currentState?.save();
-                  debugPrint(TextFieldPassword.password + TextFieldCheckedPassword.checkedPassword + "체크");
+                formKey.currentState?.save();
+                int tmp = compareToString(TextFieldPassword.password,TextFieldCheckedPassword.checkedPassword);
+
+                // debugPrint(TextFieldPassword.password + " "+TextFieldCheckedPassword.checkedPassword );
+                // debugPrint('$tmp');
+
+                if(tmp != 0) {
+                  failDueToPasswordError();
+                } else if (CheckBoxField.isChecked == false) {
+                  failDueToUnchecked();
+                } else {
+                  SpringApi().signUp(SignUpRequest(
+                      TextFieldCommon.enteredMessage,
+                      TextFieldEmail.email,
+                      TextFieldPassword.password
+                  ));
                 }
               },
               child:Text("SIGN UP", style: TextStyle(color: Colors.white,)),
@@ -77,4 +80,24 @@ class _SignUpFormState extends State<SignUpForm> {
         )
     );
   }
+}
+
+int compareToString(String msg1, String msg2){
+  return msg1.compareTo(msg2);
+}
+
+void failDueToUnchecked() {
+  Fluttertoast.showToast(
+    msg:"이용약관에 동의해주세요.",
+    gravity: ToastGravity.TOP,
+    toastLength: Toast.LENGTH_SHORT,
+  );
+}
+
+void failDueToPasswordError() {
+  Fluttertoast.showToast(
+    msg:"비밀번호를 확인해주세요.",
+    gravity: ToastGravity.TOP,
+    toastLength: Toast.LENGTH_SHORT,
+  );
 }
