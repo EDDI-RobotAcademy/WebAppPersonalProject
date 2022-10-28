@@ -1,17 +1,24 @@
 <template>
-  <hello-world/>
+  <common-main-form/>
+
 </template>
 
 <script>
 
 
-  import HelloWorld from "@/components/HelloWorld";
-
+  import CommonMainForm from "@/components/layout/CommonMainForm";
   export default {
     name: 'HomeView',
 
     components: {
-      HelloWorld
+      CommonMainForm
+
+
     },
+    data () {
+      return {
+
+      }
+    }
   }
 </script>
