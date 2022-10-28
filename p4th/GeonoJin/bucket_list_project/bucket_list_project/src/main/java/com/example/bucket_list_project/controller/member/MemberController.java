@@ -26,6 +26,6 @@ public class MemberController {
     public Boolean signUp(@RequestBody MemberSignUpForm signUpForm) {
         log.info("signUp: " + signUpForm);
 
-        return memberService.signUp(signUpForm.memberSignUpRequest());
+        return memberService.signUp(signUpForm.toMemberSignUpRequest());
     }
 }

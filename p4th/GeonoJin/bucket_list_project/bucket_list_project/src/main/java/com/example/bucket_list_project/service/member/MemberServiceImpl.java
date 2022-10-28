@@ -35,7 +35,7 @@ public class MemberServiceImpl implements MemberService {
 
     @Override
     public Boolean signUp(MemberSignUpRequest signUpRequest) {
-        final MemberInfo member = signUpRequest.memberInfo();
+        final MemberInfo member = signUpRequest.toMemberInfo();
         memberRepository.save(member);
 
         final BasicAuthentication auth = new BasicAuthentication(member,
