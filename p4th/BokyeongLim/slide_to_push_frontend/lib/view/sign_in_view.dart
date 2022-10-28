@@ -11,12 +11,11 @@ class SignInView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      resizeToAvoidBottomInset : false,
       body: SafeArea(
         child: Container(
-          width: double.infinity,
-          // height: double.infinity,
-          // decoration: defaultContainerLine();,
-          padding: EdgeInsets.all(30),
+            width: double.infinity,
+            padding: EdgeInsets.all(30),
           child: Column(
             children: [
               SizedBox(height: 80),
