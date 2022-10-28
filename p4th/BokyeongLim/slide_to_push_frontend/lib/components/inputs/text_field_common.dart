@@ -5,9 +5,13 @@ import '../../utility/input_validate.dart';
 
 
 class TextFieldCommon extends StatefulWidget {
-  TextFieldCommon({Key? key}) : super(key: key);
+  final String formName;
+  static String enteredMessage = '';
 
-  static String message = '';
+  TextFieldCommon({
+    Key? key,
+    required this.formName,
+  }) : super(key: key);
 
   @override
   State<TextFieldCommon> createState() => _TextFieldCommonState();
@@ -15,18 +19,27 @@ class TextFieldCommon extends StatefulWidget {
 
 class _TextFieldCommonState extends State<TextFieldCommon> {
 
-  FocusNode _nickNameFocus = new FocusNode();
+  var formName = '';
+
+  @override
+  void initState() {
+    super.initState();
+    formName = widget.formName;
+  }
+
+  FocusNode _thisTextFieldFocus = new FocusNode();
+
   @override
   Widget build(BuildContext context) {
     return TextFormField(
-      decoration:textFormDecoration("닉네임을 입력해주세요." ),
+      decoration:textFormDecoration('$formName 입력해주세요.'),
       keyboardType: TextInputType.emailAddress,
-      focusNode:_nickNameFocus,
-      validator: (value) => CheckValidate().validateText(_nickNameFocus, value!),
+      focusNode:_thisTextFieldFocus,
+      validator: (value) => CheckValidate().validateText(_thisTextFieldFocus, value!),
       autovalidateMode: AutovalidateMode.onUserInteraction,
       onSaved: (value) {
         setState(() {
-          TextFieldCommon.message = value!;
+          TextFieldCommon.enteredMessage = value!;
         });
       },
     );
