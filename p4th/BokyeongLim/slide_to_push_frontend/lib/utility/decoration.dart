@@ -29,7 +29,7 @@ InputDecoration textFormDecoration(hintText) {
   return InputDecoration(
     hintText: hintText,
     contentPadding: const EdgeInsets.symmetric(vertical: 20.0, horizontal: 15.0),
-    // contentPadding: EdgeInsets.fromLTRB(20, 10, 20, 10),
+
     enabledBorder:
     OutlineInputBorder(
         borderRadius: BorderRadius.zero,

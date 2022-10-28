@@ -4,6 +4,7 @@ import 'package:slide_to_push_frontend/components/inputs/text_field_email.dart';
 import 'package:slide_to_push_frontend/components/inputs/text_field_password.dart';
 
 import 'package:slide_to_push_frontend/utility/buttons.dart';
+import 'package:slide_to_push_frontend/utility/routes.dart';
 import 'package:slide_to_push_frontend/utility/size.dart';
 
 import 'package:slide_to_push_frontend/api/spring_api.dart';
@@ -21,7 +22,6 @@ class _SignInFormState extends State<SignInForm> {
 
     GlobalKey<FormState> formkey = GlobalKey<FormState>();
 
-
     return Form(
         key: formkey,
         child: Column(
@@ -34,7 +34,9 @@ class _SignInFormState extends State<SignInForm> {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 TextButton(
-                  onPressed: (){},
+                  onPressed: (){
+                    Navigator.of(context).pushNamed(Routes.signUp);
+                  },
                   child: Text('SIGN UP'),
                   style: Buttons.defaultTextButton,
                 ),
