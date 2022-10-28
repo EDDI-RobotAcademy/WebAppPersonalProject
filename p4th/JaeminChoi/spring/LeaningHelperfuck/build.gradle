@@ -4,7 +4,7 @@ plugins {
 	id 'java'
 }
 
-group = 'kr.eddi'
+group = 'LeaningHelper_backEnd'
 version = '0.0.1-SNAPSHOT'
 sourceCompatibility = '11'
 

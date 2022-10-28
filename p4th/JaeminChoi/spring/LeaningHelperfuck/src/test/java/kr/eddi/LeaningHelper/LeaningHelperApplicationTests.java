@@ -1,4 +1,4 @@
-package LeaningHelper_backEnd.LeaningHelper;
+package kr.eddi.LeaningHelper;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
