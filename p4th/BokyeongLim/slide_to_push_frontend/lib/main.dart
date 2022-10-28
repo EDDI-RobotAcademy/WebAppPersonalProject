@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:slide_to_push_frontend/utility/color.dart';
-import 'package:slide_to_push_frontend/view/sign_in_view.dart';
+import 'package:slide_to_push_frontend/utility/routes.dart';
+
 
 void main() {
   runApp(const MyApp());
@@ -13,15 +14,14 @@ class MyApp extends StatelessWidget {
 
     return MaterialApp(
       title: 'Slide to Push',
-        theme: ThemeData(
-          fontFamily: 'AppleSDGothicNeo',
-          scaffoldBackgroundColor: ColorPicker.defaultBackground,
-        ),
+      routes: Routes.routes,
+      theme: ThemeData(
+        fontFamily: 'AppleSDGothicNeo',
+        scaffoldBackgroundColor: ColorPicker.defaultBackground,
+      ),
 
-        initialRoute: "/sign_in",
-        routes: {
-          "/sign_in": (context) => SignInView()
-        },
+      initialRoute: "/sign_in",
+
     );
 
 
