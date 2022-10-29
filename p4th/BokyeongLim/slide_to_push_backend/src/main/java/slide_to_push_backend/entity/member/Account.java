@@ -1,5 +1,6 @@
 package slide_to_push_backend.entity.member;
 
+import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
@@ -21,9 +22,17 @@ public class Account {
     @Column(nullable = false)
     private String email;
 
+    @OneToOne(mappedBy = "account", fetch = FetchType.LAZY, cascade = CascadeType.PERSIST)
+    private AccountProfile profile;
 
     @OneToMany(mappedBy = "account", fetch = FetchType.LAZY)
     private Set<Authentication> authentications = new HashSet<>();
+
+    public Account(String email, AccountProfile profile) {
+        this.email = email;
+        this.profile = profile;
+        profile.setAccount(this);
+    }
 
     public boolean isRightPassword(String plainToCheck) {
         final Optional<Authentication> maybeBasicAuth = findBasicAuthentication();
