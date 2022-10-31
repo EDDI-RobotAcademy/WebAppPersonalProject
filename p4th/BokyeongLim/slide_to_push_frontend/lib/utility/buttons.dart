@@ -8,40 +8,19 @@ class Buttons {
   Buttons._();
 
   static ButtonStyle get defaultButton => ElevatedButton.styleFrom(
+    elevation: 0.0,
+    shadowColor: Colors.transparent,
     textStyle: TextStyle(
       fontFamily: 'AppleSDGothicNeoH',
       fontWeight: FontWeight.w800,
       fontSize: 15,
       color: Colors.white,
     ),
+
     primary: ColorPicker.defaultBlack,
     onPrimary: Colors.black,
     shape: ContinuousRectangleBorder(),
     minimumSize: Size(400, 60),
-  );
-  static ButtonStyle get defaultButtonH => ElevatedButton.styleFrom(
-    textStyle: TextStyle(
-      fontFamily: 'AppleSDGothicNeoH',
-      fontWeight: FontWeight.w800,
-      fontSize: 15,
-      color: Colors.white,
-    ),
-    primary: ColorPicker.defaultBlack,
-    onPrimary: Colors.black,
-    shape: ContinuousRectangleBorder(),
-    minimumSize: Size(160, 60),
-  );
-
-  static ButtonStyle get subButton => ElevatedButton.styleFrom(
-    textStyle: TextStyle(
-      fontFamily: 'AppleSDGothicNeoH',
-      fontWeight: FontWeight.w800,
-      fontSize: 15,
-    ),
-    primary: ColorPicker.subBackground,
-    onPrimary: Colors.black,
-    shape: ContinuousRectangleBorder(),
-    minimumSize: Size(120, 60),
   );
 
   static ButtonStyle get defaultTextButton => TextButton.styleFrom(
@@ -51,14 +30,16 @@ class Buttons {
     ),
   );
 
-  static ButtonStyle get subButton2 => ElevatedButton.styleFrom(
+  static ButtonStyle get subLongButton => ElevatedButton.styleFrom(
+    elevation: 0.0,
+    shadowColor: Colors.transparent,
     textStyle: TextStyle(
       fontFamily: 'AppleSDGothicNeoM',
       fontWeight: FontWeight.w400,
     ),
     shape: ContinuousRectangleBorder(),
     primary: ColorPicker.subBackground,
-    onPrimary: Colors.black,
+    onPrimary:  ColorPicker.defaultBlack,
     side: BorderSide(width: 1.0, color: ColorPicker.subTextButton),
     minimumSize: Size(400, 40),
   );
