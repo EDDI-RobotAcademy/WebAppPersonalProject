@@ -22,6 +22,14 @@ public class MemberController {
         return service.signIn(form.toMemberSignInRequest());
     }
 
+    @PostMapping("/check-email/{email}")
+    public Boolean emailValidation(@PathVariable("email")  String email) {
+        log.info("emailValidation(): " + email);
+        String tmp = service.emailValidation(email).toString();
+
+        log.info(tmp);
+        return service.emailValidation(email);
+    }
     @PostMapping("/sign-up")
     public Boolean memberRegister (@RequestBody MemberRegisterForm form) {
         log.info("memberRegister(): " + form);

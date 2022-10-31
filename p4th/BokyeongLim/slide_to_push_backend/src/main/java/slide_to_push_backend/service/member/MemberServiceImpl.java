@@ -26,6 +26,16 @@ public class MemberServiceImpl implements MemberService{
     @Autowired
     private AuthenticationRepository authenticationRepository;
     @Override
+    public Boolean emailValidation(String email) {
+        Optional<Account> maybeMember = accountRepository.findByEmail(email);
+
+        if (maybeMember.isPresent()) {
+            return false;
+        }
+
+        return true;
+    }
+    @Override
     public Boolean signUp(MemberRegisterRequest request) {
         final Account account = request.toMember();
         accountRepository.save(account);
@@ -37,7 +47,6 @@ public class MemberServiceImpl implements MemberService{
 
         return true;
     }
-
     @Override
     public String signIn(MemberSignInRequest request) {
         String email = request.getEmail();
