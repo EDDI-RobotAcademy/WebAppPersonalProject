@@ -1,17 +1,17 @@
 <template>
-  <common-main-form/>
+  <common-menu-bar/>
 
 </template>
 
 <script>
 
 
-  import CommonMainForm from "@/components/layout/CommonMainForm";
+  import CommonMenuBar from "@/components/common/CommonMenuBar";
   export default {
     name: 'HomeView',
 
     components: {
-      CommonMainForm
+      CommonMenuBar,
 
 
     },
