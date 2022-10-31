@@ -1,17 +1,24 @@
 <template>
-  <hello-world/>
+  <common-menu-bar/>
+
 </template>
 
 <script>
 
 
-  import HelloWorld from "@/components/HelloWorld";
-
+  import CommonMenuBar from "@/components/common/CommonMenuBar";
   export default {
     name: 'HomeView',
 
     components: {
-      HelloWorld
+      CommonMenuBar,
+
+
     },
+    data () {
+      return {
+
+      }
+    }
   }
 </script>
