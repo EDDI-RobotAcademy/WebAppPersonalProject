@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:leaing_helper/pages/main_manu.dart';
-import 'package:leaing_helper/pages/sign_in.dart';
+import 'package:leaing_helper/pages/main_page.dart';
+import 'package:leaing_helper/pages/sign_in_Page.dart';
 import 'package:leaing_helper/utility/color.dart';
 
 
@@ -25,7 +25,7 @@ class MyApp extends StatelessWidget {
               primary: Colors.white,
               shape:
               RoundedRectangleBorder(borderRadius: BorderRadius.circular(30)),
-              minimumSize: Size(300, 45),
+              minimumSize: const Size(300, 45),
             )
         ),
 
@@ -33,8 +33,8 @@ class MyApp extends StatelessWidget {
 
       initialRoute: "/main_manu",
       routes: {
-        "/main_manu": (context) => MainManu(),
-        "/sign_in" : (context) => SignIn(),
+        "/main_manu": (context) => const MainPage(),
+        "/sign_in_view" : (context) => const SignInPage(),
       },
     );
 
