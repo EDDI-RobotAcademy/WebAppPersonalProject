@@ -3,6 +3,9 @@ import App from './App.vue'
 import router from './router'
 import store from './store'
 import vuetify from './plugins/vuetify'
+import CommonMenuBar from "@/components/common/CommonMenuBar";
+
+Vue.component('CommonMenuBar', CommonMenuBar)
 
 Vue.config.productionTip = false
 
