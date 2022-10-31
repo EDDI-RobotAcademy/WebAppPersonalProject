@@ -1,11 +1,16 @@
-import {} from './mutation-types'
+import {REQUEST_LOGIN_FROM_SPRING} from './mutation-types'
 
 import axios from 'axios'
+import Vue from 'vue';
+import Vuex from 'vuex'
+import cookies from "vue-cookies";
+import store from "@/store";
+Vue.use(cookies, Vuex, store)
 
 export default {
 
     // eslint-disable-next-line no-empty-pattern
-    requestSignInToSpring({ }, payload ) {
+    requestSignInToSpring({ commit }, payload ) {
         console.log("requestSignInToSpring()")
 
         const { email, password } = payload
@@ -13,13 +18,8 @@ export default {
         return axios.post('http://localhost:7776/member/login', {email, password})
             .then((res) => {
                 if (res.data) {
-                    this.$store.state.isAuthenticated = true
-                    this.$cookies.set("user", res.data, 3600)
-                    localStorage.setItem("userInfo", JSON.stringify(res.data))
-                    alert("로그인 성공!")
-                    this.$router.push({
-                        name: 'home'
-                    })
+                    commit(REQUEST_LOGIN_FROM_SPRING, true)
+
                 } else {
                     alert("아이디 혹은 비밀번호가 존재하지 않거나 틀렸습니다!")
                 }
