@@ -1,5 +1,6 @@
 package com.example.bucket_list_project.controller.member;
 
+import com.example.bucket_list_project.controller.member.form.MemberSignInForm;
 import com.example.bucket_list_project.controller.member.form.MemberSignUpForm;
 import com.example.bucket_list_project.service.member.MemberService;
 import lombok.extern.slf4j.Slf4j;
@@ -27,5 +28,12 @@ public class MemberController {
         log.info("signUp: " + signUpForm);
 
         return memberService.signUp(signUpForm.toMemberSignUpRequest());
+    }
+
+    @PostMapping("/sign-in")
+    public String SignIn(@RequestBody MemberSignInForm signInForm) {
+        log.info("SignIn: " + signInForm);
+
+        return memberService.signIn(signInForm.toMemberSignInRequest());
     }
 }

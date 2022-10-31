@@ -2,6 +2,7 @@ package com.example.bucket_list_project.service.member;
 
 import com.example.bucket_list_project.entity.member.MemberInfo;
 import com.example.bucket_list_project.repository.member.MemberRepository;
+import com.example.bucket_list_project.service.member.request.MemberSignInRequest;
 import com.example.bucket_list_project.service.member.request.MemberSignUpRequest;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,5 +30,13 @@ public class MemberTestCase {
 
         boolean duplicateCheck = service.emailValidation(email);
         System.out.println(duplicateCheck);
+    }
+
+    @Test
+    public void memberSignInTest() {
+        MemberSignInRequest request = new MemberSignInRequest("sss@naver.com", "123415");
+        String token = service.signIn(request);
+
+        System.out.println(token);
     }
 }
