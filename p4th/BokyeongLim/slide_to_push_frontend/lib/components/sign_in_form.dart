@@ -17,16 +17,29 @@ class SignInForm extends StatefulWidget {
 }
 
 class _SignInFormState extends State<SignInForm> {
+  late TextEditingController emailEditController;
+
+  @override
+  void initState() {
+    super.initState();
+    emailEditController = TextEditingController();
+  }
+
+  @override
+  void dispose() {
+    emailEditController.dispose();
+    super.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
-
-    GlobalKey<FormState> formkey = GlobalKey<FormState>();
+    GlobalKey<FormState> formKey = GlobalKey<FormState>();
 
     return Form(
-        key: formkey,
+        key: formKey,
         child: Column(
           children: [
-            TextFieldEmail(),
+            TextFieldEmail(controller: emailEditController,),
             SizedBox(height: medium_gap),
             TextFieldPassword(),
             SizedBox(height: medium_gap),
@@ -50,8 +63,8 @@ class _SignInFormState extends State<SignInForm> {
             SizedBox(height: medium_gap),
             ElevatedButton(
               onPressed:(){
-                formkey.currentState?.save();
-                SpringApi().signIn(SignInRequest(TextFieldEmail.email, TextFieldPassword.password));
+                formKey.currentState?.save();
+                SpringApi().signIn(SignInRequest(emailEditController.text, TextFieldPassword.password));
               },
               child:Text("SIGN IN", style: TextStyle(color: Colors.white,)),
               style: Buttons.defaultButton,
