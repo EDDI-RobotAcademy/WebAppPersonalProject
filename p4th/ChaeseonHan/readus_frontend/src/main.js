@@ -9,6 +9,8 @@ Vue.component('CommonButton', CommonButton)
 
 Vue.config.productionTip = false
 
+Vue.use(vuetify)
+
 new Vue({
   router,
   store,
