@@ -2,6 +2,7 @@ import Vue from 'vue'
 import VueRouter from 'vue-router'
 import HomeView from '../views/HomeView.vue'
 import CommonComponentsTestView from "@/views/board/CommonComponentsTestView";
+import SignInView from "@/views/account/SignInView";
 import SignUpView from "@/views/account/SignUpView";
 
 Vue.use(VueRouter)
@@ -22,6 +23,12 @@ const routes = [
     name: 'SignUpView',
     component: SignUpView
   },
+  {
+    path: '/sign-in',
+    name: 'SignInView',
+    component: SignInView
+  },
+
 
 ]
 
