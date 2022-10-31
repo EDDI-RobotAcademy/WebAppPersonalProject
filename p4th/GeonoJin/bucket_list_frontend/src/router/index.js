@@ -7,6 +7,10 @@ import StudyBucketList from "@/views/bucketListKind/StudyBucketList";
 import TravelBucketList from "@/views/bucketListKind/TravelBucketList";
 import CookBucketList from "@/views/bucketListKind/CookBucketList";
 
+//member
+import SignInView from "@/views/member/SignInView";
+import SignUpView from "@/views/member/SignUpView";
+
 Vue.use(VueRouter)
 
 const routes = [
@@ -39,6 +43,16 @@ const routes = [
     path: '/cook',
     name: 'CookBucketList',
     component: CookBucketList
+  },
+  {
+    path: '/signIn',
+    name: 'SignInView',
+    component: SignInView
+  },
+  {
+    path: '/signUp',
+    name: 'SignUpView',
+    component: SignUpView
   },
 
 ]
