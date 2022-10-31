@@ -18,16 +18,19 @@ class SignInForm extends StatefulWidget {
 
 class _SignInFormState extends State<SignInForm> {
   late TextEditingController emailEditController;
+  late TextEditingController passwordController;
 
   @override
   void initState() {
     super.initState();
     emailEditController = TextEditingController();
+    passwordController = TextEditingController();
   }
 
   @override
   void dispose() {
     emailEditController.dispose();
+    passwordController.dispose();
     super.dispose();
   }
 
@@ -41,7 +44,7 @@ class _SignInFormState extends State<SignInForm> {
           children: [
             TextFieldEmail(controller: emailEditController,),
             SizedBox(height: medium_gap),
-            TextFieldPassword(),
+            TextFieldPassword(controller: passwordController),
             SizedBox(height: medium_gap),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -64,7 +67,7 @@ class _SignInFormState extends State<SignInForm> {
             ElevatedButton(
               onPressed:(){
                 formKey.currentState?.save();
-                SpringApi().signIn(SignInRequest(emailEditController.text, TextFieldPassword.password));
+                SpringApi().signIn(SignInRequest(emailEditController.text, passwordController.text));
               },
               child:Text("SIGN IN", style: TextStyle(color: Colors.white,)),
               style: Buttons.defaultButton,

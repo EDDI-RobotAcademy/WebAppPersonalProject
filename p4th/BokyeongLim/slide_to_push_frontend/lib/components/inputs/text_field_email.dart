@@ -43,7 +43,7 @@ class _TextFieldEmailState extends State<TextFieldEmail> {
       focusNode:emailFocus,
       validator: (value) => CheckValidate().validateEmail(emailFocus, value!),
       autovalidateMode: AutovalidateMode.onUserInteraction,
-      onSaved: (value) {
+      onChanged: (value) {
         setState(() {
           controller.text = value;
         });
