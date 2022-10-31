@@ -1,4 +1,4 @@
-import 'package:demo/signup_screen.dart';
+import 'package:demo/account/signin_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'introduction/intro_screen.dart';
@@ -20,33 +20,8 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      home: show ? const OnBoardingPage() : const SignupPage()
+      home: show ? const OnBoardingPage() : const SigninPage()
     );
   }
 }
-는
-class MyPage extends StatelessWidget {
-  const MyPage({Key? key}) : super(key: key);
 
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: const Text('Main page'),
-      ),
-      body: Center(
-        child: Column(
-          children: [
-            const Text(
-              'Main Screen',
-              style: TextStyle(fontWeight: FontWeight.bold, fontSize: 25),
-            ),
-            ElevatedButton(
-                onPressed: () {},
-                child: const Text('Go to onboarding screeen'))
-          ]
-        ),
-      ),
-    );
-  }
-}
