@@ -12,8 +12,13 @@
       <v-toolbar-items class="btnItems"
       >
         <template>
+          <v-layout style="height: 20px">
+            <text-field-component
+                :placeholderText=placeholderText
+            />
+          </v-layout>
           <button-component
-              :btnValues="btnValues"
+              :btnValues=btnValues
           />
         </template>
       </v-toolbar-items>
@@ -24,12 +29,14 @@
 <script>
 import LogoComponent from "@/components/common/LogoComponent";
 import ButtonComponent from "@/components/common/account/ButtonComponent";
+import TextFieldComponent from "@/components/common/account/TextFieldComponent";
 
 export default {
   name: "ToolBarComponent",
   components: {
     ButtonComponent,
     LogoComponent,
+    TextFieldComponent,
   },
   data() {
     return {
@@ -38,14 +45,10 @@ export default {
         {name: '로그인', route: '/signIn'},
         {name: '회원가입', route: '/signUp'},
       ],
+      placeholderText:"검색하실 내용을 입력하세요"
     }
   },
-  methods: {
-    btnClick() {
-      this.$router.push({name: 'HomeView'}).catch(() => {
-      })
-    }
-  }
+  methods: {}
 }
 </script>
 

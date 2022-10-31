@@ -1,6 +1,13 @@
 <template>
   <div>
-    <v-text-field :placeholder="placeholderText" :value="textFieldValue" type="text">
+    <v-text-field
+        :placeholder=placeholderText
+        v-model="textFieldValue"
+        type="text"
+        outlined
+        dense
+    >
+
     </v-text-field>
   </div>
 </template>
@@ -16,10 +23,12 @@ export default {
     placeholderText:{
       type: String
     },
-    textFieldValue:{
-      type: String
-    }
   },
+  data(){
+    return{
+      textFieldValue: "",
+    }
+  }
 }
 </script>
 
