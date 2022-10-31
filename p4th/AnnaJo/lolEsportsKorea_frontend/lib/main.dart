@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:lol_esports_korea_app/pages/authentication/sign_in_page.dart';
+import 'package:lol_esports_korea_app/pages/authentication/sign_up_page.dart';
 import 'package:lol_esports_korea_app/pages/home_page.dart';
 
 void main(){
@@ -13,9 +15,14 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
         debugShowCheckedModeBanner: false,
         theme: ThemeData(
-            primarySwatch: Colors.deepPurple
+          primarySwatch: Colors.deepPurple,
         ),
-        home: const HomePage(),
+      initialRoute: "/signIn",
+      routes: {
+        "/home": (context) => const HomePage(),
+        "/signIn": (context) => const SignInPage(),
+        "/signUp": (context) => const SignUpPage(),
+      },
     );
   }
 }
