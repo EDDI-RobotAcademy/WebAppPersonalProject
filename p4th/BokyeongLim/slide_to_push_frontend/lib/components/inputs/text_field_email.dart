@@ -4,9 +4,12 @@ import '../../utility/input_validate.dart';
 
 
 class TextFieldEmail extends StatefulWidget {
-  const TextFieldEmail({Key? key}) : super(key: key);
+  final TextEditingController controller;
 
-  static String email = '';
+  TextFieldEmail({
+    Key? key,
+    required this.controller,
+  }) : super(key: key);
 
   @override
   State<TextFieldEmail> createState() => _TextFieldEmailState();
@@ -14,23 +17,38 @@ class TextFieldEmail extends StatefulWidget {
 
 class _TextFieldEmailState extends State<TextFieldEmail> {
 
-  FocusNode _emailFocus = new FocusNode();
+  late FocusNode emailFocus;
   var textFieldStyle = textFormDecoration('email을 입력해주세요.');
+  var controller;
+
+  @override
+  void initState() {
+    super.initState();
+    controller = widget.controller;
+    emailFocus = FocusNode();
+  }
+
+  @override
+  void dispose() {
+    emailFocus.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
-
     return TextFormField(
+      controller: controller,
       decoration: textFieldStyle,
       keyboardType: TextInputType.emailAddress,
-      focusNode:_emailFocus,
-      validator: (value) => CheckValidate().validateEmail(_emailFocus, value!),
+      focusNode:emailFocus,
+      validator: (value) => CheckValidate().validateEmail(emailFocus, value!),
       autovalidateMode: AutovalidateMode.onUserInteraction,
       onSaved: (value) {
         setState(() {
-          TextFieldEmail.email = value!;
+          controller.text = value;
         });
       },
+      // onChanged: (value) => setState(()=> controller.text = value)
     );
   }
 

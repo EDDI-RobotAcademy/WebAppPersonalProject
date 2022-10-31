@@ -22,7 +22,7 @@ class _TextFieldPasswordState extends State<TextFieldPassword> {
 
     return TextFormField(
       decoration: textFieldStyle,
-      keyboardType: TextInputType.emailAddress,
+      keyboardType: TextInputType.visiblePassword,
       focusNode:_passwordFocus,
       autovalidateMode: AutovalidateMode.onUserInteraction,
       validator: (value) => CheckValidate().validatePassword(_passwordFocus, value!),

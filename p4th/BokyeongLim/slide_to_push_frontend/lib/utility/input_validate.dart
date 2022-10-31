@@ -2,6 +2,14 @@
 import 'package:flutter/material.dart';
 
 class CheckValidate {
+  String? validateText(FocusNode focusNode, String value) {
+    if(value.isEmpty) {
+      focusNode.requestFocus();
+      return '필수 사항입니다.';
+    } else {
+      return null;
+    }
+  }
   String? validateEmail(FocusNode focusNode, String value) {
     if(value.isEmpty) {
       focusNode.requestFocus();
@@ -14,10 +22,7 @@ class CheckValidate {
     }
   }
   String? validatePassword(FocusNode focusNode, String value) {
-    if(value.isEmpty) {
-      focusNode.requestFocus();
-      return '비밀번호를 입력하세요';
-    } else if(!value.isValidPasswordFormat()) {
+    if(!value.isValidPasswordFormat()) {
       focusNode.requestFocus();
       return '유효하지 않은 비밀번호입니다.';
     } else {

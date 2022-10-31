@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/rendering.dart';
 import 'package:slide_to_push_frontend/components/sign_in_form.dart';
 import 'package:slide_to_push_frontend/utility/color.dart';
 import 'package:slide_to_push_frontend/utility/size.dart';
@@ -9,15 +8,14 @@ import '../utility/decoration.dart';
 class SignInView extends StatelessWidget {
   SignInView({Key? key}) : super(key: key);
 
-  var containerLine = defaultContainerLine();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      resizeToAvoidBottomInset : false,
       body: SafeArea(
         child: Container(
-          width: double.infinity,
-          padding: EdgeInsets.all(30),
-          decoration: containerLine,
+            width: double.infinity,
+            padding: EdgeInsets.all(30),
           child: Column(
             children: [
               SizedBox(height: 80),

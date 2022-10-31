@@ -23,6 +23,33 @@ class SpringApi {
 
     return SignInResponse(true);
   }
+  Future<SignUpResponse>signUp (SignUpRequest signUpRequest) async {
+    var data = { 'nickName': signUpRequest.nickName, 'email': signUpRequest.email, 'password': signUpRequest.password };
+    var body = json.encode(data);
+
+    debugPrint("body:" + body); // json형태로 encoding 확인
+
+    final response = await http.post(
+      Uri.http(httpUri, '/member/sign-up'),
+      headers: {"Content-Type" : "application/json"},
+      body: body,
+    );
+
+    return SignUpResponse(true);
+  }
+}
+
+
+class SignUpResponse {
+  bool? success;
+  SignUpResponse(this.success);
+}
+
+class SignUpRequest {
+  String nickName;
+  String email;
+  String password;
+  SignUpRequest(this.nickName, this.email, this.password);
 }
 
 class SignInResponse {
