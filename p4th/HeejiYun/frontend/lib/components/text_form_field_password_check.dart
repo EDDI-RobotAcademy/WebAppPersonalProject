@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:frontend/components/sign_up_form.dart';
 
 import '../utility/size.dart';
-import '../utility/validate.dart';
 
 class TextFormFieldPasswordCheck extends StatefulWidget {
   const TextFormFieldPasswordCheck({Key? key}) : super(key: key);
