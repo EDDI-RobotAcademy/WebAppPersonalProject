@@ -4,7 +4,7 @@
       <v-col cols="auto" style="padding-bottom: 90px">
         <v-card width="460">
           <v-card-text class="text-lg-center px-12 py-16">
-            <v-from @submit.prevent="onSubmit">
+            <v-form ref="form" @submit.prevent="onSubmit">
               <div class="text-h4 font-weight-black mb-10">로그인</div>
 
               <div class="d-flex">
@@ -17,23 +17,22 @@
                               :rules="password_rule" clearable prepend-icon="mdi-lock-outline"/>
               </div>
 
-              <v-btn type="submit" block x-large rounded color="teal lighten-2"
+<!--              <v-btn type="submit" block x-large rounded color="teal lighten-2"
                      class="mt-6"  :disabled="false">
                 로그인
-              </v-btn>
+              </v-btn>-->
 
 
-
-<!--              <common-button
+              <common-button
                   type="submit"
                   block
                   x-large
                   rounded
                   color="light-green darken-2"
                   btn-name="로그인"
-                  :disabled="false"/>-->
+                  :disabled="false"/>
 
-            </v-from>
+            </v-form>
           </v-card-text>
         </v-card>
       </v-col>

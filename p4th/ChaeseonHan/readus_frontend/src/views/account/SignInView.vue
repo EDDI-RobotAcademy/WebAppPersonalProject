@@ -4,30 +4,38 @@
 
 <script>
 import LoginForm from "@/components/account/LoginForm";
-import {mapActions, } from "vuex";
+import { mapActions, mapState } from "vuex";
 
 
 export default {
   name: "SignInView",
-  components: {LoginForm},
+  components: { LoginForm },
   data() {
     return {
+      ...mapState(['isAuthenticated']),
       isLogin: false,
     }
   }, // data
   mounted() {
-    this.isLogin = (this.$store.state.isAuthenticated != false);
+    if (this.$store.state.isAuthenticated != false) {
+      this.isLogin = true
+    } else {
+      this.isLogin = false
+    }
   }, // mounted
   methods: {
     ...mapActions([ 'requestSignInToSpring' ]),
     async onSubmit(payload) {
+
+      const { email, password } = payload
+
       if(!this.isLogin) {
-        const { email, password } = payload
-        await this.requestSignInToSpring( {email, password});
-        this.isLogin = true;
-        await this.$router.push("/")
+        await this.requestSignInToSpring( {email, password})
       } else {
         alert("이미 로그인이 되어있습니다.")
+        await this.$router.push({
+          name: 'home'
+        })
       }
     }
   }, //methods
