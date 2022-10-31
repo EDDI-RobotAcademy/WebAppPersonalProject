@@ -8,17 +8,24 @@ import kr.eddi.LeaningHelper.repository.Member.MemberAuthRepository;
 import kr.eddi.LeaningHelper.repository.Member.MemberProfileRepository;
 import kr.eddi.LeaningHelper.repository.Member.MemberRepository;
 import kr.eddi.LeaningHelper.request.member.MemberRegisterRequest;
+import kr.eddi.LeaningHelper.request.member.MemberSignInRequest;
+import kr.eddi.LeaningHelper.service.security.RedisService;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.Optional;
+import java.util.UUID;
 
+@Slf4j
 @Service
 public class MemberServiceImpl implements MemberService{
 
     @Autowired
     MemberRepository memberRepository;
 
+    @Autowired
+    private RedisService redisService;
     @Autowired
     MemberProfileRepository memberProfileRepository;
 
@@ -56,4 +63,29 @@ public class MemberServiceImpl implements MemberService{
         return true;
     }
 
+    @Override
+    public String signIn(MemberSignInRequest memberSignInRequest) {
+        String id = memberSignInRequest.getId();
+        Optional<Member> maybeMember = memberRepository.findById(id);
+
+        if(maybeMember.isPresent()){
+            Member member = maybeMember.get();
+
+            log.info("member ID: " + member.getId());
+            log.info("request ID: " + memberSignInRequest.getId());
+            log.info("request PW: " + memberSignInRequest.getPw());
+
+            if (!member.isRightPassword(memberSignInRequest.getPw())) {
+                throw new RuntimeException("패스워드가 잘못됨!");
+            }
+            UUID userToken = UUID.randomUUID();
+
+            redisService.deleteByKey(userToken.toString());
+            redisService.setKeyAndValue(userToken.toString(), member.getMemberNo());
+
+            return userToken.toString();
+        }
+
+        throw new RuntimeException("가입된 사용자가 아님!");
+    }
 }
