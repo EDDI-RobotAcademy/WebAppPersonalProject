@@ -15,16 +15,10 @@ class SignUpPage extends StatelessWidget {
         body: Padding(
           padding: const EdgeInsets.all(16.0),
           child: ListView(
-            children: [
-              const SizedBox(
-                height: small_gap,
-              ),
-              const Logo(
-                title: "회원 가입",
-              ),
-              const SizedBox(
-                height: small_gap,
-              ),
+            children: const [
+              SizedBox(height: small_gap,),
+              Logo(title: "회원 가입",),
+              SizedBox(height: small_gap,),
               SignUpForm(),
             ],
           ),

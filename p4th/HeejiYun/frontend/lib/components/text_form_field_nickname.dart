@@ -5,16 +5,15 @@ import 'package:frontend/components/sign_up_form.dart';
 import '../utility/size.dart';
 import '../utility/validate.dart';
 
-class TextFormFieldEmail extends StatefulWidget {
-  const TextFormFieldEmail({Key? key}) : super(key: key);
+class TextFormFieldNickname extends StatefulWidget {
+  const TextFormFieldNickname({Key? key}) : super(key: key);
 
   @override
-  State<TextFormFieldEmail> createState() => _TextFormFieldEmailState();
+  State<TextFormFieldNickname> createState() => _TextFormFieldNicknameState();
 }
 
-class _TextFormFieldEmailState extends State<TextFormFieldEmail> {
-
-  FocusNode _emailFocus = FocusNode();
+class _TextFormFieldNicknameState extends State<TextFormFieldNickname> {
+  FocusNode _nicknameFocus = FocusNode();
 
   @override
   Widget build(BuildContext context) {
@@ -22,17 +21,17 @@ class _TextFormFieldEmailState extends State<TextFormFieldEmail> {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Text("이메일"),
+        Text("닉네임"),
         const SizedBox(height: small_gap,),
         TextFormField(
-          focusNode: _emailFocus,
-          validator: (value) => CheckValidate().validateEmail(_emailFocus, value!),
+          focusNode: _nicknameFocus,
+          validator: (value) => CheckValidate().validateNickname(_nicknameFocus, value!),
           autovalidateMode: AutovalidateMode.onUserInteraction,
           onChanged: (text) {
-            form?.email = text;
+            form?.nickname = text;
           },
           decoration: InputDecoration(
-            hintText: "Enter email",
+            hintText: "Enter nickname",
             enabledBorder:
             OutlineInputBorder(borderRadius: BorderRadius.circular(20)),
             focusedBorder:

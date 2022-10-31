@@ -5,16 +5,16 @@ import 'package:frontend/components/sign_up_form.dart';
 import '../utility/size.dart';
 import '../utility/validate.dart';
 
-class TextFormFieldEmail extends StatefulWidget {
-  const TextFormFieldEmail({Key? key}) : super(key: key);
+class TextFormFieldPassword extends StatefulWidget {
+  const TextFormFieldPassword({Key? key}) : super(key: key);
 
   @override
-  State<TextFormFieldEmail> createState() => _TextFormFieldEmailState();
+  State<TextFormFieldPassword> createState() => _TextFormFieldPasswordState();
 }
 
-class _TextFormFieldEmailState extends State<TextFormFieldEmail> {
+class _TextFormFieldPasswordState extends State<TextFormFieldPassword> {
 
-  FocusNode _emailFocus = FocusNode();
+  FocusNode _passwordFocus = FocusNode();
 
   @override
   Widget build(BuildContext context) {
@@ -22,17 +22,18 @@ class _TextFormFieldEmailState extends State<TextFormFieldEmail> {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Text("이메일"),
+        Text("비밀번호"),
         const SizedBox(height: small_gap,),
         TextFormField(
-          focusNode: _emailFocus,
-          validator: (value) => CheckValidate().validateEmail(_emailFocus, value!),
+          focusNode: _passwordFocus,
+          obscureText: true,
+          validator: (value) => CheckValidate().validatePassword(_passwordFocus, value!),
           autovalidateMode: AutovalidateMode.onUserInteraction,
           onChanged: (text) {
-            form?.email = text;
+            form?.password = text;
           },
           decoration: InputDecoration(
-            hintText: "Enter email",
+            hintText: "Enter password",
             enabledBorder:
             OutlineInputBorder(borderRadius: BorderRadius.circular(20)),
             focusedBorder:
