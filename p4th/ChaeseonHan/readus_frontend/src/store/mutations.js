@@ -1,9 +1,9 @@
-import {REQUEST_LOGIN_FROM_SPRING} from './mutation-types'
+import {REQUEST_EMAIL_PASS_CHECK, } from './mutation-types'
 
 export default {
 
-    [REQUEST_LOGIN_FROM_SPRING] (state, passingData) {
-        state.isAuthenticated = passingData
-    }
+    [REQUEST_EMAIL_PASS_CHECK] (state, passingData) {
+        state.unDuplicateEmailPass = passingData
+    },
 
 }

@@ -1,3 +1,4 @@
 export default {
-    isAuthenticated: false
+    isAuthenticated: false,
+    unDuplicateEmailPass: false
 }
