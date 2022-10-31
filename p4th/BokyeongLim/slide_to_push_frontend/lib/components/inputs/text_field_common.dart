@@ -28,6 +28,7 @@ class _TextFieldCommonState extends State<TextFieldCommon> {
   void initState() {
     super.initState();
     formName = widget.formName;
+    controller = widget.controller;
     textFocus = FocusNode();
   }
 
