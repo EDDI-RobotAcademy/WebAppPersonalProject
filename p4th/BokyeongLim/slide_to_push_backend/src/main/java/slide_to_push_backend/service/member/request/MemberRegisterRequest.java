@@ -1,6 +1,5 @@
 package slide_to_push_backend.service.member.request;
 
-import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import lombok.ToString;
@@ -10,11 +9,10 @@ import slide_to_push_backend.entity.member.AccountProfile;
 @Getter
 @ToString
 @RequiredArgsConstructor
-@AllArgsConstructor
 public class MemberRegisterRequest {
-    String nickName;
-    String email;
-    String password;
+    private final String nickName;
+    private final String email;
+    private final String password;
 
     public Account toMember () {
         AccountProfile profile = new AccountProfile(nickName);
