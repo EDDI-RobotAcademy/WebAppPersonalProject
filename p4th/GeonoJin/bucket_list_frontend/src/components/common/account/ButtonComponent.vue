@@ -4,10 +4,7 @@
       <template>
         <v-btn color="white" rounded elevation="0" :to="btnValue.route"
         >
-          <div v-if="btnValue.name == '검색'">
-            <v-icon>{{ btnValue.iconName }}</v-icon>
-          </div>
-          <div v-else>
+          <div>
             {{ btnValue.name }}
             <v-icon>{{ btnValue.iconName }}</v-icon>
           </div>
@@ -24,7 +21,7 @@ export default {
   props: {
     btnValues: {
       type: Array
-    }
+    },
   },
 }
 </script>
