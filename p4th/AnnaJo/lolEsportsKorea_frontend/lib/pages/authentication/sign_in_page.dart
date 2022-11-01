@@ -1,63 +1,194 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:lol_esports_korea_app/components/authentication/custom_form.dart';
+import 'package:lol_esports_korea_app/components/authentication/user.dart';
+import 'package:lol_esports_korea_app/pages/authentication/sign_up_page.dart';
+import 'package:lol_esports_korea_app/pages/home_page.dart';
 
-import '../../components/app_bar/common_top_app_bar.dart';
+import '../../api/authentication/spring_sign_in_api.dart';
 import '../../utility/size.dart';
+import '../../components/app_bar/common_top_app_bar.dart';
 
-class SignInPage extends StatelessWidget {
+class SignInPage extends StatefulWidget {
   const SignInPage({Key? key}) : super(key: key);
 
+  @override
+  State<SignInPage> createState() => _SignInPageState();
+}
+
+class _SignInPageState extends State<SignInPage> {
+  final _formKey = GlobalKey<FormState>();
+  User user = User("","");
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       resizeToAvoidBottomInset : false,
       appBar: CommonTopAppBar(
-        title: const Text('MEMBER LOGIN'),
-        appBar: AppBar(),
+          title: const Text('MEMBER LOGIN'),
+          appBar: AppBar()
       ),
-      body: Form(
-          child : Column(
-            children: <Widget>[
-              Padding(
-          padding: const EdgeInsets.all(16.0),
-              child: ListView(
-                shrinkWrap: true,
-                children: const [
-                  Icon(
-                    Icons.account_circle,
-                    size:xxlarge_gap,
-                    color: Colors.deepPurple,
-                  ),
-                  SizedBox(
-                    height: large_gap,
-                  ),
-                  CustomForm(),
-                SizedBox(
-                  height: xlarge_gap
-                ),
-                ],
-              ),
-              ),
-              Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                  const Text('Not a member?'),
-                    const SizedBox(
-                      width: small_gap,
-                    ),
-                    TextButton(
-                        onPressed:
-                        () {
-                          Navigator.pushNamed(context, "/signUp");
-                        },
-                        child: const Text("Create account",
+      body: SingleChildScrollView(
+        child: Form(
+        key: _formKey,
+          child: Column(
+            children: [
+              Container(
+                height: 500,
+                width: MediaQuery.of(context).size.width,
+                decoration: const BoxDecoration(
+                  color: Color(0xff23124b),
+                borderRadius: BorderRadius.only(
+                  //둥글게 만들기
+                  bottomLeft: Radius.circular(80),
+                  bottomRight: Radius.circular(80)
+                )),
+                child: Padding(
+                  padding: const EdgeInsets.all(16.0),
+                  child: Column(
+                    children: [
+                      const SizedBox(
+                          height: large_gap
+                      ),
+                      const Icon(
+                        Icons.account_circle,
+                        size:150,
+                        color: Colors.deepPurple,),
+                      const SizedBox(height: medium_gap),
+                      const Align(
+                        alignment: Alignment.topLeft,
+                        child: Text("E-mail",
                         style: TextStyle(
-                            color: Colors.blue, fontWeight: FontWeight.bold
-                        ),)),
-                  ],
+                          color: Colors.white,
+                          fontSize: 20,
+                        ),
+                        ),
+                      ),
+                      TextFormField(
+                        controller: TextEditingController(text: user.email),
+                        onChanged: (val){
+                          user.email = val;
+                        },
+                          validator: (value) => value!.isEmpty ? "E-mail is Empty" : null,
+                        //   validator: (value){
+                        //   if(value!.isEmpty){
+                        //     return 'Email is Empty';
+                        //   }
+                        //   return '';
+                        // },
+                        style: const TextStyle(
+                          fontSize: 20,
+                          color: Colors.white
+                        ),
+                        decoration: const InputDecoration(
+                            hintText: "Please enter E-mail",
+                            hintStyle: TextStyle(
+                            color: Colors.grey,
+                              fontSize: 15
+                        ),
+                            border: OutlineInputBorder(borderSide: BorderSide.none))
+                        ),
+                      Container(
+                        height: 3.0,
+                        color: Colors.white,
+                      ),
+
+
+                      const SizedBox(height: large_gap),
+
+
+                      const Align(
+                        alignment: Alignment.topLeft,
+                        child: Text("Password",
+                          style: TextStyle(
+                            color: Colors.white,
+                            fontSize: 20,
+                          ),
+                        ),
+                      ),
+                      TextFormField(
+                          controller: TextEditingController(text: user.password),
+                          onChanged: (val){
+                            user.password = val;
+                          },
+                          validator: (value) => value!.isEmpty ? "password is Empty" : null,
+                          // validator: (value){
+                          //   if(value!.isEmpty){
+                          //     return 'Email is Empty';
+                          //   }
+                          //   return '';
+                          // },
+                          style: const TextStyle(
+                              fontSize: 20,
+                              color: Colors.white
+                          ),
+                          decoration: const InputDecoration(
+                            hintText: "Please enter Password",
+                            hintStyle: TextStyle(
+                              color: Colors.grey,
+                                fontSize: 15
+                            ),
+                            border: OutlineInputBorder(borderSide: BorderSide.none)
+                          )
+                      ),
+                      Container(
+                        height: 3.0,
+                        color: Colors.white,
+                      ),
+                    ],
+                  ),
+                ),
+              ),
+
+
+              const SizedBox(height: 40),
+
+              Padding(
+                  padding: const EdgeInsets.symmetric(vertical: 16.0),
+                child: ElevatedButton(
+                  onPressed: () {
+                    if(_formKey.currentState!.validate()){
+                      SpringApi().login(UserLoginRequest(user.email, user.password));
+                      Navigator.push(context,
+                          MaterialPageRoute(builder: (context)=>const HomePage()));
+                    }else{
+                      return;
+                    }
+                  },
+                  child: const Text("LogIn",
+                    style: TextStyle(
+                        fontSize: 20),
+                  ),
+                  style: ElevatedButton.styleFrom(
+                    shape:RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(30.0)
+                    ),
+                  ),
+                )
+              ),
+
+
+              const SizedBox(height: 50),
+              const Center(
+                  child: Text("Not a member?",
+                    style: TextStyle(
+                        fontSize: 15),
+                  )
+              ),
+              Center(
+                child: InkWell(
+                  onTap: (){
+                    Navigator.push(context,
+                        MaterialPageRoute(builder: (context)=>const SignUpPage()));
+                  },
+                  child: const Text(
+                      "Create account",
+                      style: TextStyle(
+                          color: Colors.blue, fontWeight: FontWeight.bold)
+                  ),
+                ),
               ),
             ],
           ),
+        ),
       ),
     );
   }

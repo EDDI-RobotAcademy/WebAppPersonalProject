@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:lol_esports_korea_app/pages/authentication/sign_in_page.dart';
-import 'package:lol_esports_korea_app/pages/authentication/sign_up_page.dart';
 import 'package:lol_esports_korea_app/pages/home_page.dart';
 
 void main(){
@@ -13,16 +12,11 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-        debugShowCheckedModeBanner: false,
+      debugShowCheckedModeBanner: false,
         theme: ThemeData(
           primarySwatch: Colors.deepPurple,
         ),
-      initialRoute: "/signIn",
-      routes: {
-        "/home": (context) => const HomePage(),
-        "/signIn": (context) => const SignInPage(),
-        "/signUp": (context) => const SignUpPage(),
-      },
+      home:const SignInPage(),
     );
   }
 }
