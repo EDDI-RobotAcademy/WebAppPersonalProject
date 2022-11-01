@@ -1,4 +1,4 @@
-import 'package:demo/account/signin_screen.dart';
+import 'package:demo/account/login_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'introduction/intro_screen.dart';
@@ -20,7 +20,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      home: show ? const OnBoardingPage() : const SigninPage()
+      home: show ? const OnBoardingPage() : const LoginScreen()
     );
   }
 }
