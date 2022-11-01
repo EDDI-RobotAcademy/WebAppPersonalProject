@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:leaing_helper/components/Forms/sign_in_form.dart';
 import 'package:leaing_helper/utility/color.dart';
 
+import '../components/text_btn_box.dart';
 import '../utility/size.dart';
 
 class SignInPage extends StatelessWidget {
@@ -11,6 +12,7 @@ class SignInPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      resizeToAvoidBottomInset: false,
       body: SafeArea(
         child: Container(
             width: double.infinity,
@@ -19,6 +21,7 @@ class SignInPage extends StatelessWidget {
               children: const [
                 SizedBox(height: 80),
                 SignInForm(),
+                TextBtnBoxRouter(text: "회원 가입",router: "/sign_up_page",)
               ],
             )
         ),

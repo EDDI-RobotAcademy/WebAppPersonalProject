@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 
-import '../../api/spring_api.dart';
+import '../../api/spring_sign_in_api.dart';
 import '../logo.dart';
+import '../text_btn_box.dart';
 import '../text_form_filed/email_text_form_field.dart';
 import '../text_form_filed/password_text_form_field.dart';
 import '../../utility/size.dart';
@@ -11,10 +12,10 @@ class SignInForm extends StatefulWidget {
   const SignInForm({Key? key}) : super(key: key);
 
   @override
-  State<SignInForm> createState() => _SignInState();
+  State<SignInForm> createState() => _SignInFormState();
 }
 
-class _SignInState extends State<SignInForm> {
+class _SignInFormState extends State<SignInForm> {
   @override
   Widget build(BuildContext context) {
 
@@ -24,19 +25,19 @@ class _SignInState extends State<SignInForm> {
         key: formkey,
         child: Column(
           children: [
-            const Logo(title: "Leaning_Helper",),
+            const Logo(title: "로그인",),
             const SizedBox(height: large_gap),
-            const EmailTextFormField(),
+            const EmailTextFormField(widthSize: large_container_width,),
             const SizedBox(height: medium_gap),
-            const PasswordTextFormField(),
+            const PasswordTextFormField(widthSize: large_container_width),
             const SizedBox(height: medium_gap),
             ElevatedButton(
               onPressed: (){
                 formkey.currentState?.save();
-                SpringApi().login(UserLoginRequest(EmailTextFormField.email , PasswordTextFormField.password));
+                SpringSignInApi().login(UserLoginRequest(EmailTextFormField.email , PasswordTextFormField.password));
                 },
               child: const Text("로그인", style: TextStyle(color: Colors.white),),
-            )
+            ),
           ],
         )
     );
