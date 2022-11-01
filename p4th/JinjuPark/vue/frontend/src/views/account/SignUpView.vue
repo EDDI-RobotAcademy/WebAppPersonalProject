@@ -16,13 +16,13 @@ export default {
   },
   methods: {
      onSubmit (payload) {
-      const { username, email, password, city, street, addressDetail, zipcode } = payload;
+      const { email, password, username, nickname, city, street, addressDetail, zipcode } = payload;
 
       axios.post("http://localhost:7777/hometwang/member/sign-up", {
-        username, email, password, city, street, addressDetail, zipcode
+         email, password, username, nickname, city, street, addressDetail, zipcode
       })
       .then((res) => {
-        alert("회원 가입 완료!")
+        alert("회원 가입이 완료되었습니다.")
         console.log(res)
         this.$router.push("/sign-in")
       })

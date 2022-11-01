@@ -12,10 +12,6 @@
               <div class="text-h4 font-weight-black mb-10">회원 가입</div>
 
               <div class="d-flex">
-                <v-text-field v-model="username" label="사용자명" :disabled="false" required/>
-              </div>
-
-              <div class="d-flex">
                 <v-text-field v-model="email" label="이메일" @change="emailValidation"
                               :rules="email_rule" :disabled="false" required/>
                 <common-button-white text large style="font-size: 13px"
@@ -23,7 +19,6 @@
                        @click="checkDuplicateEmail"
                        :disabled="!emailPass"
                         btn-name="이메일 중복검사">
-
                 </common-button-white>
               </div>
 
@@ -35,6 +30,20 @@
               <div class="d-flex">
                 <v-text-field v-model="password_confirm" label="비밀번호 확인" type="password"
                               :rules="password_confirm_rule" :disabled="false" required/>
+              </div>
+
+              <div class="d-flex">
+                <v-text-field v-model="username" label="사용자명" :disabled="false" required/>
+              </div>
+
+              <div class="d-flex">
+                <v-text-field v-model="nickname" label="닉네임" :disabled="false" required/>
+                <common-button-white text large style="font-size: 13px"
+                                     class="mt-3 ml-5"
+                                     @click="checkDuplicateNickName"
+                                     :disabled="false"
+                                     btn-name="닉네임 확인">
+                </common-button-white>
               </div>
 
               <div class="d-flex">
@@ -85,6 +94,7 @@ export default {
       password_confirm: "",
 
       username: "",
+      nickname: "",
 
       city: '',
       street: '',
@@ -92,6 +102,7 @@ export default {
       zipcode: '',
 
       emailPass: false,
+      nicknamePass: false,
       streetPass: false,
 
       email_rule: [
@@ -116,8 +127,8 @@ export default {
   methods: {
     onSubmit () {
       if (this.$refs.form.validate()) {
-        const { username, email, password, city, street, addressDetail, zipcode } = this
-        this.$emit("submit", { username, email, password, city, street, addressDetail, zipcode })
+        const { email, password, username, nickname, city, street, addressDetail, zipcode } = this
+        this.$emit("submit", {  email, password, username, nickname, city, street, addressDetail, zipcode })
       } else {
         alert('올바른 정보를 입력하세요!')
       }
@@ -141,14 +152,34 @@ export default {
         axios.post(`http://localhost:7777/hometwang/member/check-email/${email}`)
             .then((res) => {
               if (res.data) {
-                alert("사용 가능한 이메일입니다!")
+                alert("사용 가능한 이메일입니다.")
                 this.emailPass = true
               } else {
-                alert("중복된 이메일입니다!")
+                alert("중복된 이메일입니다.")
                 this.emailPass = false
               }
             })
       }
+    },
+    // nicknameValidation() {
+    //   if (nicknameValid) {
+    //     this.nicknamePass = true
+    //   }
+    // },
+    checkDuplicateNickName(){
+      // if (nicknameValid) {
+        const {nickname} = this
+        axios.post(`http://localhost:7777/hometwang/member/check-nickname/${nickname}`)
+            .then((res) => {
+              if (res.data) {
+                alert("사용 가능한 닉네임입니다.")
+                this.nicknamePass = true
+              } else {
+                alert("중복된 닉네임입니다.")
+                this.nicknamePass = false
+              }
+            })
+      // }
     },
     callDaumAddressApi () {
       new window.daum.Postcode({
