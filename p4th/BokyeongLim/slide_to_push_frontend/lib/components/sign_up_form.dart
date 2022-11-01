@@ -14,7 +14,6 @@ import 'package:slide_to_push_frontend/utility/routes.dart';
 import 'package:slide_to_push_frontend/utility/size.dart';
 
 import '../api/http_service_api.dart';
-import '../api/spring_api.dart';
 import 'inputs/checkBox_field.dart';
 
 class SignUpForm extends StatefulWidget {
