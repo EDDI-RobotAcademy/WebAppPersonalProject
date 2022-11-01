@@ -6,9 +6,9 @@ import {
 
 import axios from "axios";
 
-export default{
+export default {
     // eslint-disable-next-line no-unused-vars
-    checkDuplicateEmailToSpring({ commit } ,payload) {
+    checkDuplicateEmailToSpring({ commit }, payload) {
 
         const {email} = payload;
 
@@ -22,5 +22,22 @@ export default{
                 }
             })
     },
+
+    // eslint-disable-next-line no-empty-pattern
+    signUpDataFromSpring({ }, payload) {
+
+        const {email, password, nickName} = payload
+
+        axios.post("http://localhost:7777/member/sign-up", {
+            email, password, nickName
+        })
+            .then((res) => {
+                alert("회원 가입 완료!" + res)
+            })
+            .catch((res) => {
+                alert(res.response.data.message)
+            })
+
+    }
 
 }
