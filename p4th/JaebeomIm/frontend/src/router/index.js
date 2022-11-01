@@ -35,10 +35,12 @@ import D3SensorTestView from "@/views/d3test/D3SensorTestView";
 import SignUpView from "@/views/account/SignUpView";
 import SignInView from "@/views/account/SignInView";
 import InsoyaMainView from "@/views/insoya/InsoyaMainView";
-import FreeBoardView from "@/views/insoya/Board/FreeBoardView";
-import GradeUpBoardView from "@/views/insoya/Board/GradeUpBoardView";
-import QuestionBoardView from "@/views/insoya/Board/QuestionBoardView";
-import TradeBoardView from "@/views/insoya/Board/TradeBoardView";
+
+import GradeUpBoardView from "@/views/insoya/Views/GradeUpBoardView/GradeUpBoardView";
+import QuestionBoardView from "@/views/insoya/Views/QuestionBoardView/QuestionBoardView";
+import TradeBoardView from "@/views/insoya/Views/TradeBoardView/TradeBoardView";
+import FreeBoardRegisterView from "@/views/insoya/Views/FreeBoardView/FreeBoardRegisterView";
+import FreeBoardListView from "@/views/insoya/Views/FreeBoardView/FreeBoardListView";
 
 Vue.use(VueRouter)
 
@@ -205,8 +207,8 @@ const routes = [
   },
   {
     path: '/insoya-free-board',
-    name: 'FreeBoardView',
-    component: FreeBoardView
+    name: 'FreeBoardListView',
+    component: FreeBoardListView
   },
   {
     path: '/insoya-grade-up-board',
@@ -222,6 +224,11 @@ const routes = [
     path: '/insoya-trade-board',
     name: 'TradeBoardView',
     component: TradeBoardView
+  },
+  {
+    path: '/insoya-free-board-register',
+    name: 'FreeBoardRegisterView',
+    component: FreeBoardRegisterView
   },
 
 

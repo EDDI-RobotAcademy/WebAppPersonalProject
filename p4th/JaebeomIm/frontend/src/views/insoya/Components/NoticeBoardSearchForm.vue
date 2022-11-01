@@ -1,12 +1,12 @@
-<template>
+<template xmlns:border="http://www.w3.org/1999/xhtml">
   <form @submit.prevent="onSubmit">
     <table>
       <tr>
+        <div style="border: 1px">
         <td>
-          <input type="text" v-model="memberName"/>
-        </td>
-        <div>
+          <input type="text"  v-model="memberName"/>
           <button type="submit"><v-btn class="teal" rounded>검색</v-btn></button>
+        </td>
         </div>
       </tr>
     </table>

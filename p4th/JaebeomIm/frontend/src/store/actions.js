@@ -6,7 +6,7 @@ import {
     REQUEST_BOARD_LIST_FROM_SPRING,
     REQUEST_BOARD_FROM_SPRING,
     REQUEST_PRODUCT_LIST_FROM_SPRING,
-    REQUEST_PRODUCT_FROM_SPRING,
+    REQUEST_PRODUCT_FROM_SPRING, REQUEST_FREE_BOARD_LIST_FROM_SPRING, REQUEST_FREE_BOARD_FROM_SPRING,
 } from './mutation-types'
 
 // npm install axios --save-dev
@@ -74,6 +74,14 @@ export default {
                 commit(REQUEST_BOARD_LIST_FROM_SPRING, res.data)
             })
     },
+    requestFreeBoardListFromSpring ({ commit }) {
+        console.log('requestFreeBoardListFromSpring()')
+
+        return axios.get('http://localhost:7777/insoya/jpa/board/free/list')
+            .then((res) => {
+                commit(REQUEST_FREE_BOARD_LIST_FROM_SPRING, res.data)
+            })
+    },
     requestBoardFromSpring ({ commit }, boardNo) {
         console.log('requestBoardFromSpring()')
 
@@ -82,12 +90,31 @@ export default {
                 commit(REQUEST_BOARD_FROM_SPRING, res.data)
             })
     },
+    requestFreeBoardFromSpring ({ commit }, boardNo) {
+        console.log('requestFreeBoardFromSpring()')
+
+        return axios.get(`http://localhost:7777/insoya/jpa/board/free/${boardNo}`)
+            .then((res) => {
+                commit(REQUEST_FREE_BOARD_FROM_SPRING, res.data)
+            })
+    },
     // eslint-disable-next-line no-empty-pattern
     requestCreateBoardContentsToSpring ({ }, payload) {
         console.log('requestCreateBoardContentsToSpring()')
 
         const { title, content, writer } = payload
         return axios.post('http://localhost:7777/39th/jpa/board/register',
+            { title, content, writer })
+            .then(() => {
+                alert('게시물 등록 성공')
+            })
+    },
+    // eslint-disable-next-line no-empty-pattern
+    requestCreateFreeBoardContentsToSpring ({ }, payload) {
+        console.log('requestCreateFreeBoardContentsToSpring()')
+
+        const { title, content, writer } = payload
+        return axios.post('http://localhost:7777/insoya/jpa/board/free/register',
             { title, content, writer })
             .then(() => {
                 alert('게시물 등록 성공')

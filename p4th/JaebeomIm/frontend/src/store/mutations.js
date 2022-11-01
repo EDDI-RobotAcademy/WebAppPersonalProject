@@ -8,6 +8,8 @@ import {
     REQUEST_BOARD_FROM_SPRING,
     REQUEST_PRODUCT_LIST_FROM_SPRING,
     REQUEST_PRODUCT_FROM_SPRING,
+    REQUEST_FREE_BOARD_LIST_FROM_SPRING,
+    REQUEST_FREE_BOARD_FROM_SPRING,
 } from './mutation-types'
 
 export default {
@@ -38,4 +40,12 @@ export default {
     [REQUEST_PRODUCT_FROM_SPRING] (state, passingData) {
         state.product = passingData
     },
+    [REQUEST_FREE_BOARD_LIST_FROM_SPRING] (state, passingData) {
+        state.freeBoards = passingData
+    },
+    [REQUEST_FREE_BOARD_FROM_SPRING] (state, passingData) {
+        state.freeBoard = passingData
+    },
+
+
 }

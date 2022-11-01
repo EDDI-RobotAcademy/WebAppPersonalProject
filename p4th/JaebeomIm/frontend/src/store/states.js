@@ -8,6 +8,9 @@ export default {
     boards: [],
     board: {},
 
+    freeBoards: [],
+    freeBoard: {},
+
     products: [],
     product: {},
 

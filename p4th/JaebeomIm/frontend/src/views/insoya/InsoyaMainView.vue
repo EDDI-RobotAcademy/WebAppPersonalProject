@@ -15,7 +15,7 @@
       <notice-board-search-form @submit="onSubmit"/>
     </div>
 
-    <br/><br/><br/><v-btn class="indigo white--text" color="orange darken-1"><router-link :to="{ name: 'FreeBoardView' }">자유게시판</router-link></v-btn><br/><br/>
+    <br/><br/><br/><v-btn class="indigo white--text" color="orange darken-1"><router-link :to="{ name: 'FreeBoardListView' }">자유게시판</router-link></v-btn><br/><br/>
 
     <div>
       <v-menu offset-y>
