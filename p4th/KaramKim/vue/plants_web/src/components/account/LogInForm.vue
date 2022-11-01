@@ -20,10 +20,12 @@
                      class="mt-1 font-weight-bold white--text" :disabled="false">
                 로그인
               </v-btn>
+              <router-link to="/sign-up" style="text-decoration: none">
               <v-btn type="submit" block x-large color="white"
                      class="mt-6 font-weight-bold light-green--text" :disabled="false">
                 회원가입
               </v-btn>
+              </router-link>
             </v-form>
           </v-card-text>
         </v-card>
@@ -33,6 +35,7 @@
 </template>
 
 <script>
+
 export default {
   name: "LogInForm",
   data() {
@@ -49,6 +52,7 @@ export default {
       ],
       password_rule: [
         v => !!v || '비밀번호를 입력해주세요.',
+        v => !(v && v.length >= 16) || '패스워드는 16자 이상 입력할 수 없습니다.',
       ]
     }
   },
