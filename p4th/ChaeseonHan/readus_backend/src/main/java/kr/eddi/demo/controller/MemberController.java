@@ -11,14 +11,14 @@ import org.springframework.web.bind.annotation.*;
 @Slf4j
 @RestController
 @RequestMapping("/member")
-@CrossOrigin(origins = "http://localhost:8080", allowedHeaders = "*")
+@CrossOrigin(origins = "http://localhost:8166", allowedHeaders = "*")
 public class MemberController {
 
 
     @Autowired
     MemberServiceImpl service;
 
-    @GetMapping("/check-email/{email}")
+    @PostMapping ("/check-email/{email}")
     public Boolean emailValidation(@PathVariable("email") String email) {
         log.info("checkEmail()");
 
