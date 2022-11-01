@@ -35,10 +35,10 @@ export default {
       links: [
           //home에 배너+ 운동영상
         // { icon: 'mdi-home', text: 'Home', name: 'home', route: '/' },
-        { icon: 'mdi-headphones', text: '홈트영상', name: 'home', route: '/' },
-        { icon: 'mdi-calendar-check-outline', text: '운동일기', name: 'home', route: '/' },
-        { icon: 'mdi-comment-processing-outline', text: '자유게시판', name: 'home', route: '/' },
-        { icon: 'mdi-comment-question-outline', text: '질문게시판', name: 'home', route: '/' },
+        { icon: 'mdi-headphones', text: '홈트영상', name: 'home', route: '/home' },
+        { icon: 'mdi-calendar-check-outline', text: '운동일기', name: 'home', route: '/home' },
+        { icon: 'mdi-comment-processing-outline', text: '자유게시판', name: 'home', route: '/home' },
+        { icon: 'mdi-comment-question-outline', text: '질문게시판', name: 'home', route: '/home' },
       ],
     }
   }

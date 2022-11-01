@@ -1,15 +1,17 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
-import HomeView from '../views/HomeView.vue'
 import CommonComponentsTestView from "@/views/board/CommonComponentsTestView";
 import SignInView from "@/views/account/SignInView";
 import SignUpView from "@/views/account/SignUpView";
+import MainHomeBoardView from "@/components/common/CommonMainMenuTemplate";
+import BoardTestView from "@/views/board/BoardTestView";
+import HomeView from "@/views/HomeView";
 
 Vue.use(VueRouter)
 
 const routes = [
   {
-    path: '/',
+    path: '/home',
     name: 'home',
     component: HomeView
   },
@@ -27,6 +29,16 @@ const routes = [
     path: '/sign-in',
     name: 'SignInView',
     component: SignInView
+  },
+  {
+    path: '/main-home-board',
+    name: 'MainHomeBoardView',
+    component: MainHomeBoardView
+  },
+  {
+    path: '/',
+    name: 'BoardTest',
+    component: BoardTestView
   },
 
 
