@@ -1,11 +1,13 @@
 <template>
   <div style="font-family: Arial">
     <v-row justify="center">
-      <v-col cols="auto" >
+      <v-col cols="auto">
         <div align="center">
-          <logo-component
-              class="logo"
-          />
+          <router-link to="/home">
+            <logo-component
+                class="logo"
+            />
+          </router-link>
         </div>
         <br/>
         <div class="text-center px-12 py-16 mt-5">
@@ -14,9 +16,23 @@
               버킷리스트에 오신걸 환영합니다!
 
             </div>
-            <v-divider style="size: 20px" ></v-divider>
+            <v-divider style="size: 20px"></v-divider>
             <br/>
             <br/>
+
+            <div class="d-flex">
+              <v-text-field v-model="nickName" label="닉네임" type="text" :disabled="false" required outlined/>
+            </div>
+
+            <div class="d-flex">
+              <v-text-field v-model="password" label="비밀번호" type="password"
+                            :rules="password_rule" :disabled="false" required outlined/>
+            </div>
+
+            <div class="d-flex">
+              <v-text-field v-model="password_confirm" label="비밀번호 확인" type="password"
+                            :rules="password_confirm_rule" :disabled="false" required outlined/>
+            </div>
 
             <div class="d-flex">
               <v-layout>
@@ -31,22 +47,9 @@
                 </v-btn>
               </v-layout>
             </div>
-            <div class="d-flex">
-              <v-text-field v-model="password" label="비밀번호" type="password"
-                            :rules="password_rule" :disabled="false" required outlined/>
-            </div>
-
-            <div class="d-flex">
-              <v-text-field v-model="password_confirm" label="비밀번호 확인" type="password"
-                            :rules="password_confirm_rule" :disabled="false" required outlined/>
-            </div>
-
-            <div class="d-flex">
-              <v-text-field v-model="nickName" label="닉네임" type="text" :disabled="false" required outlined/>
-            </div>
 
             <v-btn type="submit" block x-large rounded
-                   class="mt-6" color="green lighten-1" :disabled="(emailPass) == false">
+                   class="mt-6" color="green lighten-1" :disabled="emailPass">
               가입하기
             </v-btn>
           </v-form>
@@ -72,7 +75,7 @@ export default {
       password: "",
       password_confirm: "",
       nickName: "",
-      emailPass: false,
+      emailPass: true,
       email_rule: [
         v => !!v || '이메일을 입력해주세요.',
         v => {
@@ -93,15 +96,15 @@ export default {
     }
   },
   methods: {
-   onSubmit(){
-     if (this.$refs.form.validate()) {
-       const { email, password, nickName} = this
-       this.$emit("submit", { email, password,  nickName})
-     } else {
-       alert('올바른 정보를 입력하세요!')
-     }
-   },
-    emailValidation () {
+    onSubmit() {
+      if (this.$refs.form.validate()) {
+        const {email, password, nickName} = this
+        this.$emit("submit", {email, password, nickName})
+      } else {
+        alert('올바른 정보를 입력하세요!')
+      }
+    },
+    emailValidation() {
       const emailValid = this.email.match(
           /^(([^<>()[\]\\.,;:\s@]+(\.[^<>()[\]\\.,;:\s@]+)*)|(.+))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
       );
@@ -111,7 +114,7 @@ export default {
     },
 
     ...mapActions([
-        'checkDuplicateEmailToSpring'
+      'checkDuplicateEmailToSpring'
     ]),
 
     checkDuplicateEmail: function () {
@@ -122,6 +125,7 @@ export default {
       if (emailValid) {
         const {email} = this
         this.checkDuplicateEmailToSpring({email})
+        this.emailPass = this.$store.state.emailPassValue;
       }
     },
   }
