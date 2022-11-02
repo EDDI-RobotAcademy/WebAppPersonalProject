@@ -130,12 +130,33 @@ export default {
             })
     },
     // eslint-disable-next-line no-empty-pattern
+    requestDeleteFreeBoardToSpring ({ }, boardNo) {
+        console.log('requestDeleteFreeBoardToSpring()')
+
+        return axios.delete(`http://localhost:7777/insoya/jpa/board/free/${boardNo}`)
+            .then(() => {
+                alert('삭제 성공')
+            })
+    },
+    // eslint-disable-next-line no-empty-pattern
     requestBoardModifyToSpring ({ }, payload) {
         console.log('requestBoardModifyToSpring()')
 
         const { title, content, boardNo, writer, regDate } = payload
 
         return axios.put(`http://localhost:7777/39th/jpa/board/${boardNo}`,
+            { title, content, writer, regDate })
+            .then(() => {
+                alert('수정 성공')
+            })
+    },
+    // eslint-disable-next-line no-empty-pattern
+    requestFreeBoardModifyToSpring ({ }, payload) {
+        console.log('requestFreeBoardModifyToSpring()')
+
+        const { title, content, boardNo, writer, regDate } = payload
+
+        return axios.put(`http://localhost:7777/insoya/jpa/board/free/${boardNo}`,
             { title, content, writer, regDate })
             .then(() => {
                 alert('수정 성공')

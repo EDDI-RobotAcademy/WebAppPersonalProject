@@ -2,7 +2,7 @@
   <v-container>
   <v-layout wrap>
     <v-flex class="orange white--text">
-      <div><router-link :to="{ name: 'FreeBoardView' }">자유게시판</router-link></div>
+      <div><router-link :to="{ name: 'FreeBoardListView' }">자유게시판</router-link></div>
     </v-flex>
     <v-flex class="red white--text">
       <div><router-link :to="{ name: '' }">직업별게시판</router-link></div> <!--아직 직업별 게시판버튼 구현 못함.-->

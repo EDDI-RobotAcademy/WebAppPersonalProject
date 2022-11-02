@@ -41,6 +41,8 @@ import QuestionBoardView from "@/views/insoya/Views/QuestionBoardView/QuestionBo
 import TradeBoardView from "@/views/insoya/Views/TradeBoardView/TradeBoardView";
 import FreeBoardRegisterView from "@/views/insoya/Views/FreeBoardView/FreeBoardRegisterView";
 import FreeBoardListView from "@/views/insoya/Views/FreeBoardView/FreeBoardListView";
+import FreeBoardReadView from "@/views/insoya/Views/FreeBoardView/FreeBoardReadView";
+import FreeBoardModifyView from "@/views/insoya/Views/FreeBoardView/FreeBoardModifyView";
 
 Vue.use(VueRouter)
 
@@ -231,6 +233,26 @@ const routes = [
     component: FreeBoardRegisterView
   },
 
+  {
+    path: '/insoya-free-read/:boardNo',
+    name: 'FreeBoardReadView',
+    components: {
+      default: FreeBoardReadView
+    },
+    props: {
+      default: true
+    }
+  },
+  {
+    path: '/insoya-free-modify/:boardNo',
+    name: 'FreeBoardModifyView',
+    components: {
+      default: FreeBoardModifyView
+    },
+    props: {
+      default: true
+    }
+  },
 
 ]
 
