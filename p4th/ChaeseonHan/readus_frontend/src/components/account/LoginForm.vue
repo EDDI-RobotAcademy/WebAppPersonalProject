@@ -1,5 +1,5 @@
 <template>
-  <div class="#FFFBE6" style="font-family: Arial">
+  <div style="font-family: Arial">
     <v-row justify="center">
       <v-col cols="auto" style="padding-bottom: 90px">
         <v-card width="460">
