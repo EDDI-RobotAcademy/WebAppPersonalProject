@@ -1,5 +1,5 @@
 <template>
-  <div class="#FFFBE6" style="font-family: Arial">
+  <div style="font-family: Arial">
     <v-row justify="center">
       <v-col cols="auto" style="padding-bottom: 90px">
         <v-card width="460">
@@ -11,7 +11,7 @@
                 <v-text-field v-model="email" label="이메일*" @change="emailValidation"
                               :rules="email_rule" :disabled="false" required/>
                 <v-btn text large outlined style="font-size: 13px"
-                       class="mt-3 ml-5" color="light-green darken-2"
+                       class="mt-3 ml-5" color="#356859"
                        @click="checkDuplicateEmail"
                        :disabled="!emailPass">
                   이메일 <br/>중복 확인
@@ -31,7 +31,7 @@
               </div>
 
               <v-btn type="submit" block x-large rounded
-                     class="mt-6" color="light-green darken-2" :disabled="(this.$store.state.unDuplicateEmailPass && passwordPass) == false">
+                     class="mt-6" color="#356859" :disabled="(this.$store.state.unDuplicateEmailPass && passwordPass) == false">
                 가입하기
               </v-btn>
 

@@ -17,6 +17,7 @@ export default {
       isLogin: false,
     }
   }, // data
+
   mounted() {
     if (this.$store.state.isAuthenticated != false) {
       this.isLogin = true
@@ -24,8 +25,11 @@ export default {
       this.isLogin = false
     }
   }, // mounted
+
   methods: {
+
     ...mapActions([ 'requestSignInToSpring' ]),
+
     async onSubmit(payload) {
       if (!this.isLogin) {
         const { email, password } = payload
@@ -48,8 +52,9 @@ export default {
       } else {
         alert("이미 로그인 되어 있습니다!")
       }
-    }
-  }, //methods
+    }, // onSubmit
+
+  }, // methods
 }
 </script>
 
