@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:leaing_helper/utility/decorations/buttonStyle.dart';
 
 import '../../api/spring_sign_in_api.dart';
 import '../logo.dart';
@@ -37,6 +38,7 @@ class _SignInFormState extends State<SignInForm> {
                 SpringSignInApi().login(UserLoginRequest(EmailTextFormField.email , PasswordTextFormField.password));
                 },
               child: const Text("로그인", style: TextStyle(color: Colors.white),),
+              style: elevatedButtonStyle(),
             ),
           ],
         )
