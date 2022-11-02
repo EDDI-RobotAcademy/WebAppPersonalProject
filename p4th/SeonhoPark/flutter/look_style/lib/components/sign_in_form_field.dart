@@ -16,6 +16,7 @@ class _SignInFormFieldState extends State<SignInFormField> {
   final _formKey = GlobalKey<FormState>();
   final emailController = TextEditingController();
   final passwordController = TextEditingController();
+  final focusnode = FocusNode();
 
   @override
   void dispose() {
@@ -30,14 +31,14 @@ class _SignInFormFieldState extends State<SignInFormField> {
       key: _formKey,
       child: Column(
         children: [
-          SignInEmailTextFormField(controller: emailController,),
+          SignInEmailTextFormField(controller: emailController),
           SizedBox(height: 30),
           SignInPasswordTextFormField(controller: passwordController,),
           SizedBox(height: 50),
           ElevatedButton(
               style: ElevatedButton.styleFrom(
-                  minimumSize: Size(double.infinity, 50),
-                  shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
+                  minimumSize: Size(250, 50),
+                  shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(30)),
                   primary: Colors.indigo
               ),
               onPressed: () {

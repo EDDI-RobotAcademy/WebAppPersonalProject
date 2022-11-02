@@ -10,22 +10,20 @@ class SignInEmailTextFormField extends StatefulWidget {
   State<SignInEmailTextFormField> createState() => _SignInEmailTextFieldState();
 }
 
-
-
 class _SignInEmailTextFieldState extends State<SignInEmailTextFormField> {
   @override
   Widget build(BuildContext context) {
     return TextFormField(
       controller: widget.controller,
       keyboardType: TextInputType.emailAddress,
-      validator: (text) {
-        Validation().validateEmail(text!);
-      },
+      validator: (text) => Validation().validateEmail(text!),
+      autovalidateMode: AutovalidateMode.onUserInteraction,
       decoration: InputDecoration(
           labelText: "Email",
           hintText: "이메일을 입력해주세요",
+          prefixIcon: Icon(Icons.email),
           border:
-              OutlineInputBorder(borderRadius: BorderRadius.circular(10.0))),
+              OutlineInputBorder(borderRadius: BorderRadius.circular(20.0))),
     );
   }
 }

@@ -17,15 +17,16 @@ class SignInPage extends StatelessWidget {
       // ),
       body: SingleChildScrollView(
         child: Container(
-          padding: EdgeInsets.fromLTRB(30, 150, 30, 0),
+          decoration: BoxDecoration(),
+          padding: EdgeInsets.fromLTRB(30, 100, 30, 0),
           child: Center(
             child: Column(
               children: [
-                Text("Look Style", style: TextStyle(fontSize: 40, fontFamily: "bazzi")),
-                SizedBox(height: 80),
+                Image.asset('assets/logo.png' ,width: 300, height: 300,),
+                // Text("Look Style", style: TextStyle(fontSize: 40, fontFamily: "bazzi")),
                 SignInFormField(),
-                Divider(height: 40, thickness: 1),
-                RouteButton(name: "회원가입", route: "/sign-up")
+                Divider(height: 40, thickness: 1, indent: 30, endIndent: 30,),
+                RouteButton(name: "회원가입", route: "/sign-up", width: 250, height: 50,)
               ],
             ),
           ),
