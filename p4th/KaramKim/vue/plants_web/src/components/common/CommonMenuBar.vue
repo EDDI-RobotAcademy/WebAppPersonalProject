@@ -23,7 +23,7 @@
             <span class="grey--text mr-3" style="font-size: 13px">로그인</span>
           </router-link>
 
-          <router-link style="text-decoration: none;" to="/">
+          <router-link style="text-decoration: none;" to="/sign-up">
             <span class="grey--text" style="font-size: 13px">회원가입</span>
           </router-link>
         </div>
@@ -60,7 +60,7 @@
         </v-col>
       </v-row>
     </v-container>
-    <v-divider inset></v-divider>
+    <v-divider></v-divider>
   </div>
 </template>
 
