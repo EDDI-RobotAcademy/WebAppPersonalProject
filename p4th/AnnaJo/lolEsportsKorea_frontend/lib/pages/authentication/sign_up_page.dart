@@ -1,4 +1,3 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:lol_esports_korea_app/components/authentication/user.dart';
 import 'package:lol_esports_korea_app/pages/authentication/sign_in_page.dart';
@@ -66,8 +65,17 @@ class _SignUpPageState extends State<SignUpPage> {
                                 onChanged: (val) {
                                   user.email = val;
                                 },
-                                validator: (value) =>
-                                    value!.isEmpty ? "E-mail is Empty" : null,
+                                validator: (value) {
+                                  value!.isEmpty ? "E-mail is Empty" : null;
+                                  if (!RegExp(
+                                          r'^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|'
+                                          r'(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|'
+                                          r'(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$')
+                                      .hasMatch(value)) {
+                                    return '잘못된 이메일 형식입니다.';
+                                  }
+                                  return null;
+                                },
                                 style: const TextStyle(
                                     fontSize: 20, color: Colors.white),
                                 decoration: InputDecoration(

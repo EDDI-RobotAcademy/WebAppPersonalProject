@@ -1,4 +1,3 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:lol_esports_korea_app/components/authentication/user.dart';
 import 'package:lol_esports_korea_app/pages/authentication/sign_up_page.dart';
@@ -17,87 +16,43 @@ class SignInPage extends StatefulWidget {
 
 class _SignInPageState extends State<SignInPage> {
   final _formKey = GlobalKey<FormState>();
-  User user = User("","");
+  User user = User("", "", "");
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      resizeToAvoidBottomInset : false,
-      appBar: CommonTopAppBar(
-          title: const Text('MEMBER LOGIN'),
-          appBar: AppBar()
-      ),
+      resizeToAvoidBottomInset: false,
+      appBar:
+          CommonTopAppBar(title: const Text('MEMBER LOGIN'), appBar: AppBar()),
       body: SingleChildScrollView(
         child: Form(
-        key: _formKey,
+          key: _formKey,
           child: Column(
             children: [
               Container(
                 height: 500,
                 width: MediaQuery.of(context).size.width,
                 decoration: const BoxDecoration(
-                  color: Color(0xff23124b),
-                borderRadius: BorderRadius.only(
-                  //둥글게 만들기
-                  bottomLeft: Radius.circular(80),
-                  bottomRight: Radius.circular(80)
-                )),
+                    color: Color(0xff23124b),
+                    borderRadius: BorderRadius.only(
+                        //둥글게 만들기
+                        bottomLeft: Radius.circular(80),
+                        bottomRight: Radius.circular(80))),
                 child: Padding(
                   padding: const EdgeInsets.all(16.0),
                   child: Column(
                     children: [
-                      const SizedBox(
-                          height: large_gap
-                      ),
+                      const SizedBox(height: large_gap),
                       const Icon(
                         Icons.account_circle,
-                        size:150,
-                        color: Colors.deepPurple,),
+                        size: 150,
+                        color: Colors.deepPurple,
+                      ),
                       const SizedBox(height: medium_gap),
                       const Align(
                         alignment: Alignment.topLeft,
-                        child: Text("E-mail",
-                        style: TextStyle(
-                          color: Colors.white,
-                          fontSize: 20,
-                        ),
-                        ),
-                      ),
-                      TextFormField(
-                        controller: TextEditingController(text: user.email),
-                        onChanged: (val){
-                          user.email = val;
-                        },
-                          validator: (value) => value!.isEmpty ? "E-mail is Empty" : null,
-                        //   validator: (value){
-                        //   if(value!.isEmpty){
-                        //     return 'Email is Empty';
-                        //   }
-                        //   return '';
-                        // },
-                        style: const TextStyle(
-                          fontSize: 20,
-                          color: Colors.white
-                        ),
-                        decoration: const InputDecoration(
-                            hintText: "Please enter E-mail",
-                            hintStyle: TextStyle(
-                            color: Colors.grey,
-                              fontSize: 15
-                        ),
-                            border: OutlineInputBorder(borderSide: BorderSide.none))
-                        ),
-                      Container(
-                        height: 3.0,
-                        color: Colors.white,
-                      ),
-
-
-                      const SizedBox(height: large_gap),
-
-
-                      const Align(
-                        alignment: Alignment.topLeft,
-                        child: Text("Password",
+                        child: Text(
+                          "E-mail",
                           style: TextStyle(
                             color: Colors.white,
                             fontSize: 20,
@@ -105,30 +60,60 @@ class _SignInPageState extends State<SignInPage> {
                         ),
                       ),
                       TextFormField(
-                          controller: TextEditingController(text: user.password),
-                          onChanged: (val){
+                          controller: TextEditingController(text: user.email),
+                          onChanged: (val) {
+                            user.email = val;
+                          },
+                          validator: (value) {
+                            value!.isEmpty ? "E-mail is Empty" : null;
+                            if (!RegExp(
+                                    r'^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|'
+                                    r'(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|'
+                                    r'(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$')
+                                .hasMatch(value)) {
+                              return '잘못된 이메일 형식입니다.';
+                            }
+                            return null;
+                          },
+                          style: const TextStyle(
+                              fontSize: 20, color: Colors.white),
+                          decoration: const InputDecoration(
+                              hintText: "Please enter E-mail",
+                              hintStyle:
+                                  TextStyle(color: Colors.grey, fontSize: 15),
+                              border: OutlineInputBorder(
+                                  borderSide: BorderSide.none))),
+                      Container(
+                        height: 3.0,
+                        color: Colors.white,
+                      ),
+                      const SizedBox(height: large_gap),
+                      const Align(
+                        alignment: Alignment.topLeft,
+                        child: Text(
+                          "Password",
+                          style: TextStyle(
+                            color: Colors.white,
+                            fontSize: 20,
+                          ),
+                        ),
+                      ),
+                      TextFormField(
+                          controller:
+                              TextEditingController(text: user.password),
+                          onChanged: (val) {
                             user.password = val;
                           },
-                          validator: (value) => value!.isEmpty ? "password is Empty" : null,
-                          // validator: (value){
-                          //   if(value!.isEmpty){
-                          //     return 'Email is Empty';
-                          //   }
-                          //   return '';
-                          // },
+                          validator: (value) =>
+                              value!.isEmpty ? "password is Empty" : null,
                           style: const TextStyle(
-                              fontSize: 20,
-                              color: Colors.white
-                          ),
+                              fontSize: 20, color: Colors.white),
                           decoration: const InputDecoration(
-                            hintText: "Please enter Password",
-                            hintStyle: TextStyle(
-                              color: Colors.grey,
-                                fontSize: 15
-                            ),
-                            border: OutlineInputBorder(borderSide: BorderSide.none)
-                          )
-                      ),
+                              hintText: "Please enter Password",
+                              hintStyle:
+                                  TextStyle(color: Colors.grey, fontSize: 15),
+                              border: OutlineInputBorder(
+                                  borderSide: BorderSide.none))),
                       Container(
                         height: 3.0,
                         color: Colors.white,
@@ -137,53 +122,48 @@ class _SignInPageState extends State<SignInPage> {
                   ),
                 ),
               ),
-
-
               const SizedBox(height: 40),
-
               Padding(
                   padding: const EdgeInsets.symmetric(vertical: 16.0),
-                child: ElevatedButton(
-                  onPressed: () {
-                    if(_formKey.currentState!.validate()){
-                      SpringApi().login(UserLoginRequest(user.email, user.password));
-                      Navigator.push(context,
-                          MaterialPageRoute(builder: (context)=>const HomePage()));
-                    }else{
-                      return;
-                    }
-                  },
-                  child: const Text("LogIn",
-                    style: TextStyle(
-                        fontSize: 20),
-                  ),
-                  style: ElevatedButton.styleFrom(
-                    shape:RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(30.0)
+                  child: ElevatedButton(
+                    onPressed: () {
+                      if (_formKey.currentState!.validate()) {
+                        SpringSignInApi()
+                            .login(UserLoginRequest(user.email, user.password));
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => const HomePage()));
+                      } else {
+                        return;
+                      }
+                    },
+                    child: const Text(
+                      "LogIn",
+                      style: TextStyle(fontSize: 20),
                     ),
-                  ),
-                )
-              ),
-
-
-              const SizedBox(height: 50),
+                    style: ElevatedButton.styleFrom(
+                      shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(30.0)),
+                    ),
+                  )),
+              const SizedBox(height: 40),
               const Center(
-                  child: Text("Not a member?",
-                    style: TextStyle(
-                        fontSize: 15),
-                  )
-              ),
+                  child: Text(
+                "Not a member?",
+                style: TextStyle(fontSize: 15),
+              )),
               Center(
                 child: InkWell(
-                  onTap: (){
-                    Navigator.push(context,
-                        MaterialPageRoute(builder: (context)=>const SignUpPage()));
+                  onTap: () {
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => const SignUpPage()));
                   },
-                  child: const Text(
-                      "Create account",
+                  child: const Text("Create account",
                       style: TextStyle(
-                          color: Colors.blue, fontWeight: FontWeight.bold)
-                  ),
+                          color: Colors.blue, fontWeight: FontWeight.bold)),
                 ),
               ),
             ],
