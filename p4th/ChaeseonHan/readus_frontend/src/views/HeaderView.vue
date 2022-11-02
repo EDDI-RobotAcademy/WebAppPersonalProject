@@ -1,9 +1,9 @@
 <template>
-  <v-container>
-    <div>
+  <div style="background-color: #356859" >
+    <v-container>
       <app-bar-component/>
-    </div>
-  </v-container>
+    </v-container>
+  </div>
 </template>
 
 <script>

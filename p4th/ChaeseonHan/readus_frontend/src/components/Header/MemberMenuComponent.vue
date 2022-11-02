@@ -1,0 +1,63 @@
+<template>
+  <v-app-bar elevation="0" color="#356859" class="white--text">
+    <h4 class="white--text px-2">
+      안녕하세요, {{nickName}} 님!
+    </h4>
+
+    <v-menu  open-on-hover offset-y>
+      <template v-slot:activator="{ on }">
+        <v-btn class="px-2" elevation="0" color="#356859" rounded v-on="on">
+          <v-icon color="white">
+            mdi-dots-vertical
+          </v-icon>
+        </v-btn>
+      </template>
+
+      <v-list style="background-color: #356859">
+        <v-list-item class="white--text" v-for="(item, index) in memberMenuItems" :key="index" :to="item.route">
+          <v-list-item-title class="text-center">
+            {{ item.text }}
+          </v-list-item-title>
+        </v-list-item>
+      </v-list>
+    </v-menu>
+  </v-app-bar>
+</template>
+
+<script>
+export default {
+  name: "MemberMenuComponent",
+  props: {
+    nickName: String,
+  },
+  mounted() {
+    if (this.$store.state.isAuthenticated == true) {
+      this.memberMenuItems = this.yesSignInItems
+    } else {
+      this.memberMenuItems = this.nonSignInItems
+    }
+  },
+  data() {
+    return {
+      memberMenuItems: [
+
+      ],
+
+      yesSignInItems: [
+        { text: '마이페이지', name: 'SignIn', route: '/sign-in' },
+        { text: '로그아웃', name: 'SignUp', route: '/sign-up'}
+      ],
+
+      nonSignInItems: [
+        { text: '로그인', name: 'SignIn', route: '/sign-in' },
+        { text: '회원가입', name: 'SignUp', route: '/sign-up'}
+      ],
+
+    }
+  },
+}
+</script>
+
+<style scoped>
+
+</style>

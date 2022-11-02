@@ -1,10 +1,6 @@
 <template>
-  <v-app style="background-color: #FFFBE6">
-    <v-container>
-      <v-layout>
-        <header-view/>
-      </v-layout>
-    </v-container>
+  <v-app>
+    <header-view/>
     <v-main>
       <v-container>
         <router-view/>
