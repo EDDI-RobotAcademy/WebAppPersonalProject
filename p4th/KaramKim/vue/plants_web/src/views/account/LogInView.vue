@@ -1,6 +1,5 @@
 <template>
   <div>
-    <common-menu-bar/>
     <log-in-form @submit="onSubmit"/>
   </div>
 </template>
