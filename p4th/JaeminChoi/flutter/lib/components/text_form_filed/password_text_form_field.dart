@@ -1,7 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import '../../utility/decorations/text_form_decoration.dart';
-import '../../utility/form_validate.dart';
+import '../../utility/validation/form_validate.dart';
 import '../../utility/size.dart';
 
 

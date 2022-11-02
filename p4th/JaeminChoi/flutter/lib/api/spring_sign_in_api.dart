@@ -3,7 +3,7 @@ import 'dart:convert';
 import 'package:flutter/cupertino.dart';
 import 'package:http/http.dart' as http;
 
-class SpringApi {
+class SpringSignInApi {
   static const String httpUri = '192.168.0.8:7777';
 
   Future<UserLoginResponse> login (UserLoginRequest request) async {

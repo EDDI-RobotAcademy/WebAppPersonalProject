@@ -29,7 +29,7 @@ class CheckValidate {
     if(value.isEmpty) {
       focusNode.requestFocus();
       return '닉네임을 입력하세요';
-    } else if(!value.isValidEmail()) {
+    } else if(!value.isValidNickName()) {
       focusNode.requestFocus();
       return '해당 닉네임은 사용 할 수 없습니다.';
     } else {

@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:leaing_helper/pages/main_page.dart';
 import 'package:leaing_helper/pages/sign_in_Page.dart';
 import 'package:leaing_helper/pages/sign_up_page.dart';
-import 'package:leaing_helper/utility/color.dart';
+import 'package:leaing_helper/utility/decorations/color.dart';
 
 
 void main() {
