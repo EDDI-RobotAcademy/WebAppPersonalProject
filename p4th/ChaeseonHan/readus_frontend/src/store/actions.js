@@ -1,4 +1,4 @@
-import {REQUEST_EMAIL_PASS_CHECK} from './mutation-types'
+import {REQUEST_EMAIL_PASS_CHECK, REQUEST_LOGGED_IN_USER_PROFILE} from './mutation-types'
 
 import axios from 'axios'
 import Vue from 'vue';
@@ -32,9 +32,9 @@ export default {
     requestMemberRegisterToSpring( { }, payload) {
         console.log('requestMemberRegisterToSpring')
 
-        const { email, password, nickname } = payload
+        const { email, password, nickName } = payload
 
-        return axios.post('http://localhost:7776/member/register/', { email, password, nickname })
+        return axios.post('http://localhost:7776/member/register', { email, password, nickName })
             .then((res) => {
                 if(res.data) {
                     alert("회원 가입이 완료되었습니다. 메인으로 돌아가 로그인 해주세요.")
@@ -43,6 +43,20 @@ export default {
             })
             .catch((error) => {
                 alert(error)
+            })
+    },
+
+    requestLoggedInUserProfileToSpring ( { commit }, payload) {
+        console.log('requestLoggedInUserProfileToSpring')
+
+        const { userToken } = payload
+        return axios.post('http://localhost:7776/member/login-user-profile', { userToken })
+            .then((res) => {
+                if(res.data) {
+                    commit(REQUEST_LOGGED_IN_USER_PROFILE, res.data)
+                }
+            }).catch((error) => {
+                console.log(error)
             })
     }
 
