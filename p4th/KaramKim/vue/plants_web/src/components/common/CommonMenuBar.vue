@@ -19,11 +19,11 @@
 
         <!-- 비로그인 사용자용, v-if 추후 구현 필요-->
         <div style="height: 120px;" v-if="userInfo == null">
-          <router-link style="text-decoration: none;" to="/">
+          <router-link style="text-decoration: none;" to="/log-in">
             <span class="grey--text mr-3" style="font-size: 13px">로그인</span>
           </router-link>
 
-          <router-link style="text-decoration: none;" to="/">
+          <router-link style="text-decoration: none;" to="/sign-up">
             <span class="grey--text" style="font-size: 13px">회원가입</span>
           </router-link>
         </div>
@@ -60,6 +60,7 @@
         </v-col>
       </v-row>
     </v-container>
+    <v-divider></v-divider>
   </div>
 </template>
 

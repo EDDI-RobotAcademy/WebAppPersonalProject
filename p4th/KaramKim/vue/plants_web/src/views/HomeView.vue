@@ -1,17 +1,16 @@
 <template>
-  <common-menu-bar/>
+  <div>
 
+  </div>
 </template>
 
 <script>
 
 
-  import CommonMenuBar from "@/components/common/CommonMenuBar";
   export default {
     name: 'HomeView',
 
     components: {
-      CommonMenuBar,
 
 
     },
