@@ -74,4 +74,15 @@ public class MemberServiceImpl implements MemberService {
 
         throw new RuntimeException("회원가입이 되어있지 않는 회원");
     }
+
+    @Override
+    public Boolean nicknameDoubleCheck(String nickName) {
+        Optional<MemberInfo> maybeMemberNickname = memberRepository.findByNickname(nickName);
+
+        if (maybeMemberNickname.isPresent()) {
+            return false;
+        }
+
+        return true;
+    }
 }

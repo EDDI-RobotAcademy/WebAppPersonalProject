@@ -36,4 +36,12 @@ public class MemberController {
 
         return memberService.signIn(signInForm.toMemberSignInRequest());
     }
+
+    @PostMapping ("/ckeck-nickname/{nickName}")
+    public Boolean NicknameDoubleCheck(@PathVariable("nickName") String nickName) {
+        log.info("NicknameDoubleCheck: " + nickName);
+
+        return memberService.nicknameDoubleCheck(nickName);
+    }
 }
+

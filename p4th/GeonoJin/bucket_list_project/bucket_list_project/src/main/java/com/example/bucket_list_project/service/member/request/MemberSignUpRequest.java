@@ -1,7 +1,6 @@
 package com.example.bucket_list_project.service.member.request;
 
 import com.example.bucket_list_project.entity.member.MemberInfo;
-import com.example.bucket_list_project.entity.member.MemberProfile;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import lombok.ToString;
@@ -16,6 +15,6 @@ public class MemberSignUpRequest {
     private final String nickName;
 
     public MemberInfo toMemberInfo(){
-        return new MemberInfo(email, MemberProfile.of(nickName));
+        return new MemberInfo(email, nickName);
     }
 }
