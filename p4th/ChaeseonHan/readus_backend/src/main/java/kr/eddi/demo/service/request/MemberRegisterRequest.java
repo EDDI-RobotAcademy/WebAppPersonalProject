@@ -17,7 +17,7 @@ public class MemberRegisterRequest {
 
     private final String email;
     private final String password;
-    private final String nickname;
+    private final String nicKName;
     private final String biography;
 
 
@@ -26,7 +26,7 @@ public class MemberRegisterRequest {
 
         MemberProfile profile = new MemberProfile();
 
-        if (nickname == null || nickname.length() == 0) {
+        if (nicKName == null || nicKName.length() == 0) {
 
             log.info("nickname is null or length is 0");
 
@@ -45,7 +45,7 @@ public class MemberRegisterRequest {
         return new ReadUsMember(
                 this.email,
                 profile.builder()
-                        .nickName(this.nickname)
+                        .nickName(this.nicKName)
                         .biography(this.biography)
                         .build());
     }
