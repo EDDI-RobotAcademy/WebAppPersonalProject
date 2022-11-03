@@ -1,5 +1,6 @@
 package kr.eddi.demo;
 
+import kr.eddi.demo.entity.MemberProfile;
 import kr.eddi.demo.service.MemberServiceImpl;
 import kr.eddi.demo.service.request.MemberLoginRequest;
 import kr.eddi.demo.service.request.MemberRegisterRequest;
@@ -32,6 +33,12 @@ public class MemberServiceTestCase {
         MemberLoginRequest request = new MemberLoginRequest("test@gmail.com", "123456");
         String userToken = service.signIn(request);
         System.out.println("userToken: " + userToken);
+    }
+
+    @Test
+    void loginProfile() {
+        MemberProfile memberProfile = service.getSignInMemberProfile("usertokenhere");
+        System.out.println(memberProfile);
     }
 
 }

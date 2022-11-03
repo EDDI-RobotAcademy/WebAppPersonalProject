@@ -26,6 +26,7 @@ public class ReadUsMember {
     @Column(nullable = false)
     private String email;
 
+    @Getter
     @OneToOne(mappedBy = "member", fetch = FetchType.LAZY, cascade = CascadeType.PERSIST)
     private MemberProfile profile;
 
