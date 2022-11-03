@@ -17,7 +17,6 @@
               v-for="link in links" :key="link.icon" :to="link.route">
             {{ link.text }}
           </v-btn>
-          <v-spacer class="col-1"></v-spacer>
         </v-app-bar>
       </v-col>
 
@@ -29,7 +28,7 @@
 
       <!-- 회원 메뉴 -->
      <v-col>
-        <member-menu-component :nick-name="this.nickName"/>
+        <member-menu-component :nick-name="this.nickName" :is-login="this.isLogin"/>
       </v-col>
     </v-row>
 
@@ -42,20 +41,22 @@ import MemberMenuComponent from "@/components/Header/MemberMenuComponent";
 export default {
   name: "AppBarComponent",
   components: {MemberMenuComponent},
+  props: {
+    nickName: String,
+    isLogin: Boolean,
+  },
   data() {
     return {
       links: [
-        { icon: 'mdi-home', text: '모두의 서재', name: 'HomeView', route: '/' },
-        { icon: 'mdi-ev-station', text: '커뮤니티', name: 'SignIn', route: '/sign-in' },
+        { text: '서재', name: 'HomeView', route: '/' },
+        { text: '커뮤니티', name: 'SignIn', route: '/sign-in' },
       ],
-      nickName: "",
     }
   },
 
-  mounted() {
-    if (this.nickName.length == 0) {
-      this.nickName = "dfadfasdf@gmail.com"
-    }
+
+  methods: {
+
   }
 }
 </script>

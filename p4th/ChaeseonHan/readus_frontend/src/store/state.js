@@ -1,4 +1,6 @@
 export default {
     isAuthenticated: false,
-    unDuplicateEmailPass: false
+    unDuplicateEmailPass: false,
+    loggedInUserProfile: {},
+
 }

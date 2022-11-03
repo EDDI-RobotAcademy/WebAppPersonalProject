@@ -1,8 +1,9 @@
 <template>
   <v-app-bar elevation="0" color="#356859" class="white--text">
-    <h4 class="white--text px-2">
-      안녕하세요, {{nickName}} 님!
-    </h4>
+    <v-spacer></v-spacer>
+    <h5 class="white--text px-2">
+      {{nickName}} 님
+    </h5>
 
     <v-menu  open-on-hover offset-y>
       <template v-slot:activator="{ on }">
@@ -29,9 +30,10 @@ export default {
   name: "MemberMenuComponent",
   props: {
     nickName: String,
+    isLogin: Boolean,
   },
   mounted() {
-    if (this.$store.state.isAuthenticated == true) {
+    if (this.isLogin == true) {
       this.memberMenuItems = this.yesSignInItems
     } else {
       this.memberMenuItems = this.nonSignInItems
