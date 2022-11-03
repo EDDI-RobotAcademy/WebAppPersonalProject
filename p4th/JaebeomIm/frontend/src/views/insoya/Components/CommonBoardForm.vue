@@ -8,7 +8,7 @@
       <div><router-link :to="{ name: '' }">직업별게시판</router-link></div> <!--아직 직업별 게시판버튼 구현 못함.-->
     </v-flex>
     <v-flex class="yellow white--text">
-      <div><router-link :to="{ name: 'QuestionBoardView' }">질문게시판</router-link></div>
+      <div><router-link :to="{ name: 'QuestionBoardListView' }">질문게시판</router-link></div>
     </v-flex>
     <v-flex class="grey white--text">
       <div><router-link :to="{ name: 'TradeBoardView' }">사고팔고게시판</router-link></div>

@@ -37,12 +37,15 @@ import SignInView from "@/views/account/SignInView";
 import InsoyaMainView from "@/views/insoya/InsoyaMainView";
 
 import GradeUpBoardView from "@/views/insoya/Views/GradeUpBoardView/GradeUpBoardView";
-import QuestionBoardView from "@/views/insoya/Views/QuestionBoardView/QuestionBoardView";
 import TradeBoardView from "@/views/insoya/Views/TradeBoardView/TradeBoardView";
 import FreeBoardRegisterView from "@/views/insoya/Views/FreeBoardView/FreeBoardRegisterView";
 import FreeBoardListView from "@/views/insoya/Views/FreeBoardView/FreeBoardListView";
 import FreeBoardReadView from "@/views/insoya/Views/FreeBoardView/FreeBoardReadView";
 import FreeBoardModifyView from "@/views/insoya/Views/FreeBoardView/FreeBoardModifyView";
+import InsoyaSignInView from "@/views/insoya/Views/account/InsoyaSignInView";
+import InsoyaSignUpView from "@/views/insoya/Views/account/InsoyaSignUpView";
+import QuestionBoardListView from "@/views/insoya/Views/QuestionBoardView/QuestionBoardListView";
+import QuestionBoardRegisterView from "@/views/insoya/Views/QuestionBoardView/QuestionBoardRegisterView";
 
 Vue.use(VueRouter)
 
@@ -219,8 +222,8 @@ const routes = [
   },
   {
     path: '/insoya-question-board',
-    name: 'QuestionBoardView',
-    component: QuestionBoardView
+    name: 'QuestionBoardListView',
+    component: QuestionBoardListView
   },
   {
     path: '/insoya-trade-board',
@@ -231,6 +234,11 @@ const routes = [
     path: '/insoya-free-board-register',
     name: 'FreeBoardRegisterView',
     component: FreeBoardRegisterView
+  },
+  {
+    path: '/insoya-question-board-register',
+    name: 'QuestionBoardRegisterView',
+    component: QuestionBoardRegisterView
   },
 
   {
@@ -252,6 +260,18 @@ const routes = [
     props: {
       default: true
     }
+  },
+
+  {
+    path: '/insoya-sign-in',
+    name: 'InsoyaSignInView',
+    component: InsoyaSignInView
+  },
+
+  {
+    path: '/insoya-sign-up',
+    name: 'InsoyaSignUpView',
+    component: InsoyaSignUpView
   },
 
 ]

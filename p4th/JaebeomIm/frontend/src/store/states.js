@@ -11,6 +11,9 @@ export default {
     freeBoards: [],
     freeBoard: {},
 
+    questionBoards: [],
+    questionBoard: {},
+
     products: [],
     product: {},
 

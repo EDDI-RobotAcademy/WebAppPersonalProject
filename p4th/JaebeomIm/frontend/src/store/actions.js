@@ -6,7 +6,10 @@ import {
     REQUEST_BOARD_LIST_FROM_SPRING,
     REQUEST_BOARD_FROM_SPRING,
     REQUEST_PRODUCT_LIST_FROM_SPRING,
-    REQUEST_PRODUCT_FROM_SPRING, REQUEST_FREE_BOARD_LIST_FROM_SPRING, REQUEST_FREE_BOARD_FROM_SPRING,
+    REQUEST_PRODUCT_FROM_SPRING,
+    REQUEST_FREE_BOARD_LIST_FROM_SPRING,
+    REQUEST_FREE_BOARD_FROM_SPRING,
+    REQUEST_QUESTION_BOARD_FROM_SPRING, REQUEST_QUESTION_BOARD_LIST_FROM_SPRING,
 } from './mutation-types'
 
 // npm install axios --save-dev
@@ -82,6 +85,14 @@ export default {
                 commit(REQUEST_FREE_BOARD_LIST_FROM_SPRING, res.data)
             })
     },
+    requestQuestionBoardListFromSpring ({ commit }) {
+        console.log('requestQuestionBoardListFromSpring()')
+
+        return axios.get('http://localhost:7777/insoya/jpa/board/question/list')
+            .then((res) => {
+                commit(REQUEST_QUESTION_BOARD_LIST_FROM_SPRING, res.data)
+            })
+    },
     requestBoardFromSpring ({ commit }, boardNo) {
         console.log('requestBoardFromSpring()')
 
@@ -96,6 +107,14 @@ export default {
         return axios.get(`http://localhost:7777/insoya/jpa/board/free/${boardNo}`)
             .then((res) => {
                 commit(REQUEST_FREE_BOARD_FROM_SPRING, res.data)
+            })
+    },
+    requestQuestionBoardFromSpring ({ commit }, boardNo) {
+        console.log('requestQuestionBoardFromSpring()')
+
+        return axios.get(`http://localhost:7777/insoya/jpa/board/question/${boardNo}`)
+            .then((res) => {
+                commit(REQUEST_QUESTION_BOARD_FROM_SPRING, res.data)
             })
     },
     // eslint-disable-next-line no-empty-pattern
@@ -115,6 +134,17 @@ export default {
 
         const { title, content, writer } = payload
         return axios.post('http://localhost:7777/insoya/jpa/board/free/register',
+            { title, content, writer })
+            .then(() => {
+                alert('게시물 등록 성공')
+            })
+    },
+    // eslint-disable-next-line no-empty-pattern
+    requestCreateQuestionBoardContentsToSpring ({ }, payload) {
+        console.log('requestCreateQuestionBoardContentsToSpring()')
+
+        const { title, content, writer } = payload
+        return axios.post('http://localhost:7777/insoya/jpa/board/question/register',
             { title, content, writer })
             .then(() => {
                 alert('게시물 등록 성공')

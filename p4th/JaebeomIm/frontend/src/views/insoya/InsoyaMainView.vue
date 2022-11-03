@@ -1,10 +1,10 @@
 <template>
   <v-container>
     <v-btn class="yellow" rounded>
-      <router-link :to="{ name: 'SignInView' }">로그인</router-link></v-btn>
+      <router-link :to="{ name: 'InsoyaSignInView' }">로그인</router-link></v-btn>
 
     <v-btn class="yellow" rounded>
-    <router-link :to="{ name: 'SignUpView' }">회원가입</router-link>
+    <router-link :to="{ name: 'InsoyaSignUpView' }">회원가입</router-link>
     </v-btn>
 
 <center>
@@ -34,7 +34,7 @@
       </v-menu>
     </div><br/>
 
-    <v-btn class="indigo white--text" color="orange darken-1"><router-link :to="{ name: 'QuestionBoardView' }">질문게시판</router-link></v-btn><br/><br/>
+    <v-btn class="indigo white--text" color="orange darken-1"><router-link :to="{ name: 'QuestionBoardListView' }">질문게시판</router-link></v-btn><br/><br/>
 
     <v-btn class="indigo white--text" color="orange darken-1"><router-link :to="{ name: 'TradeBoardView' }">사고팔고게시판</router-link></v-btn><br/><br/>
 
