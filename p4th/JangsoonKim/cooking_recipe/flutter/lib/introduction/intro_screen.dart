@@ -1,4 +1,4 @@
-import 'package:demo/account/signin_screen.dart';
+import 'package:demo/account/login_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:introduction_screen/introduction_screen.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -31,7 +31,7 @@ class OnBoardingPage extends StatelessWidget {
           ),
           PageViewModel(
               title:'레시피 공유기능',
-              body: '나만의 레시피를 공유하고 맘에 드는 레시피를 골라보세요',
+              body: '나만의 레시피를 공유하고 맘에 드는 레시피를 골라보세요.',
               image: Image.asset('assets/images/introduction/withFood.png',
                   height: size.height * 0.5),
               decoration: getPageDecoration()
@@ -73,6 +73,6 @@ void onDone(context) async{
   final prefs = await SharedPreferences.getInstance();
   await prefs.setBool('ON_BOARDING', false);
   Navigator.of(context).pushReplacement(
-      MaterialPageRoute(builder: (context) => const SigninPage())
+      MaterialPageRoute(builder: (context) => const LoginScreen())
   );
 }
