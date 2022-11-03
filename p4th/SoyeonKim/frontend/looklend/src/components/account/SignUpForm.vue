@@ -55,6 +55,8 @@
 </template>
 
 <script>
+import axios from "axios";
+
 export default {
   name: "SignUpForm",
   data () {
@@ -87,8 +89,67 @@ export default {
       ],
     }
   },
+  methods: {
+    onSubmit () {
+      if (this.$refs.form.validate()) {
+        const { email, password, city, street, addressDetail, zipcode } = this
+        this.$emit("submit", { email, password, city, street, addressDetail, zipcode })
+      } else {
+        alert('올바른 정보를 입력하세요!')
+      }
+    },
+    emailValidation () {
+      const emailValid = this.email.match(
+          /^(([^<>()[\]\\.,;:\s@]+(\.[^<>()[\]\\.,;:\s@]+)*)|(.+))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
+      );
+      if (emailValid) {
+        this.emailPass = true
+      }
+    },
+    checkDuplicateEmail () {
+      const emailValid = this.email.match(
+          /^(([^<>()[\]\\.,;:\s@]+(\.[^<>()[\]\\.,;:\s@]+)*)|(.+))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
+      );
+      if (emailValid) {
+        const {email} = this
+        axios.post(`http://localhost:7777/member/check-email/${email}`)
+            .then((res) => {
+              if (res.data) {
+                alert("사용 가능한 이메일입니다!")
+                this.emailPass = true
+              } else {
+                alert("중복된 이메일입니다!")
+                this.emailPass = false
+              }
+            })
+      }
+    },
+    callDaumAddressApi () {
+      new window.daum.Postcode({
+        oncomplete: (data) => {
+          let fullRoadAddr = data.roadAddress;
+          let extraRoadAddr = '';
+          if (data.bname !== '' && /[동|로|가]$/g.test(data.bname)) {
+            extraRoadAddr += data.bname;
+          }
+          if (data.buildingName !== '' && data.apartment === 'Y') {
+            extraRoadAddr += (extraRoadAddr !== '' ? ', ' + data.buildingName : data.buildingName);
+          }
+          if (extraRoadAddr !== '') {
+            extraRoadAddr = ' (' + extraRoadAddr + ')';
+          }
+          if (fullRoadAddr !== '') {
+            fullRoadAddr += extraRoadAddr;
+          }
+          this.city = data.sido;
+          this.zipcode = data.zonecode;
+          this.street = data.sigungu + ' ' + fullRoadAddr;
+          this.streetPass = true
+        }
+      }).open()
+    }
+  }
 }
-
 </script>
 <style scoped>
 </style>
