@@ -1,4 +1,3 @@
-import 'dart:async';
 import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
@@ -10,7 +9,9 @@ class HttpService {
   static var resEmailValidation;
   static var resSignUp;
   static var resSignIn;
+  static var reqList;
 
+  //회원가입 로그인
   emailValidation(String email) async {
     var data = {'email': email};
     var body = json.encode(data);
@@ -26,7 +27,6 @@ class HttpService {
       debugPrint(e.toString());
     }
   }
-
   signUpService(Account account) async {
     var body = json.encode(account);
 
@@ -40,7 +40,6 @@ class HttpService {
       debugPrint(e.toString());
     }
   }
-
   signInService(SignInAccount account) async {
     var body = json.encode(account);
 
@@ -50,6 +49,20 @@ class HttpService {
         headers: {"Content-Type": "application/json"},
         body: body,
       );
+    } catch (e) {
+      debugPrint(e.toString());
+    }
+  }
+
+  //투두리스트
+  requestListFromSpring() async {
+
+    try {
+      reqList = await http.get(
+        Uri.http(httpUri, '/todos/list'),
+        headers: {"Content-Type": "application/json"},
+      );
+
     } catch (e) {
       debugPrint(e.toString());
     }
