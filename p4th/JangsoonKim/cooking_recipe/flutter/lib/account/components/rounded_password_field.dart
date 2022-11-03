@@ -1,21 +1,25 @@
 import 'package:flutter/material.dart';
 
 import '../../components/text_field_contanier.dart';
+import '../../validate/check_validate.dart';
 
 class RoundedPasswordField extends StatelessWidget {
   final ValueChanged<String> onChanged;
+  final String hinText;
+  final FocusNode _passwordFocus = new FocusNode();
 
-  const RoundedPasswordField({Key? key, required this.onChanged})
+  RoundedPasswordField({Key? key, required this.onChanged, required this.hinText})
       : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return TextFieldContanier(
-        child: TextField(
+        child: TextFormField(
+          validator: (value) => CheckValidate().validatePassword(_passwordFocus, value!),
           onChanged: onChanged,
           obscureText: true,
-          decoration: const InputDecoration(
-              hintText: "비밀번호",
+          decoration: InputDecoration(
+              hintText: hinText,
               icon: Icon(
                 Icons.lock,
                 color: Colors.orange,

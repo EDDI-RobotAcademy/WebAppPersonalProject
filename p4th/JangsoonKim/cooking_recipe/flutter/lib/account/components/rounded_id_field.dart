@@ -1,12 +1,15 @@
 import 'package:demo/components/text_field_contanier.dart';
 import 'package:flutter/material.dart';
 
+import '../../validate/check_validate.dart';
+
 class RoundedIdField extends StatelessWidget {
   final String hinText;
   final IconData icon;
   final ValueChanged<String> onChanged;
+  final FocusNode _emailFocus = new FocusNode();
 
-  const RoundedIdField(
+  RoundedIdField(
       {Key? key,
       required this.hinText,
       this.icon = Icons.person,
@@ -16,7 +19,8 @@ class RoundedIdField extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return TextFieldContanier(
-        child: TextField(
+        child: TextFormField(
+      validator: (value) => CheckValidate().validateEmail(_emailFocus, value!),
       onChanged: onChanged,
       decoration: InputDecoration(
           icon: Icon(
