@@ -26,7 +26,7 @@
                               :rules="password_confirm_rule" :disabled="false" required/>
               </div>
               <div class="d-flex">
-                <v-text-field v-model="nickname" label="닉네임" type="nickName"
+                <v-text-field v-model="nickName" label="닉네임" type="nickName"
                               :rules="nickname_rule" :disabled="false" required/>
               </div>
 
@@ -54,7 +54,7 @@ export default {
       email: "",
       password: "",
       password_confirm: "",
-      nickname: "",
+      nickName: "",
       emailPass: false,
       passwordPass: false,
 
