@@ -28,6 +28,7 @@ class _SignUpFormState extends State<SignUpForm> {
   late TextEditingController emailEditController;
   late TextEditingController textEditController;
   late TextEditingController passwordController;
+  late TextEditingController checkPasswordController;
 
   bool isButtonActive = true;
   bool isCheckedAccountEmail = false;
@@ -38,6 +39,7 @@ class _SignUpFormState extends State<SignUpForm> {
     emailEditController = TextEditingController();
     textEditController = TextEditingController();
     passwordController = TextEditingController();
+    checkPasswordController = TextEditingController();
   }
 
   @override
@@ -45,6 +47,7 @@ class _SignUpFormState extends State<SignUpForm> {
     emailEditController.dispose();
     textEditController.dispose();
     passwordController.dispose();
+    checkPasswordController.dispose();
     super.dispose();
   }
 
@@ -122,16 +125,17 @@ class _SignUpFormState extends State<SignUpForm> {
             SizedBox(height: medium_gap),
             TextFieldPassword(controller: passwordController),
             SizedBox(height: medium_gap),
-            TextFieldCheckedPassword(),
+            TextFieldCheckedPassword(controller: checkPasswordController,),
             SizedBox(height: small_gap),
             CheckBoxField(title: '이용약관에 동의하십니까?'),
             SizedBox(height: small_gap),
             ElevatedButton(
               onPressed:(){
-
                 //비밀번호 확인 & 동의 여부 확인 & 중복확인
-                int tmp = passwordController.text.compareTo(TextFieldCheckedPassword.checkedPassword);
+                String myPassword = passwordController.text;
+                int tmp = myPassword.compareTo(checkPasswordController.text);
                 if(tmp != 0) {
+                  debugPrint(myPassword + " , " + checkPasswordController.text);
                   failDueToPasswordError();
                 } else if (CheckBoxField.isChecked == false) {
                   failDueToUnchecked();
@@ -158,8 +162,6 @@ class _SignUpFormState extends State<SignUpForm> {
     );
   }
 }
-
-
 
 void alertFailedSignUp() {
   Fluttertoast.showToast(
