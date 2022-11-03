@@ -6,8 +6,8 @@
         type="text"
         outlined
         dense
+        @keyup.enter="toValue"
     >
-
     </v-text-field>
   </div>
 </template>
@@ -17,16 +17,20 @@
 
 export default {
   name: "TextFieldComponent",
-  components: {
-  },
-  props:{
-    placeholderText:{
+  components: {},
+  props: {
+    placeholderText: {
       type: String
     },
   },
-  data(){
-    return{
+  data() {
+    return {
       textFieldValue: "",
+    }
+  },
+  methods: {
+    toValue() {
+      this.$emit('update', this.textFieldValue)
     }
   }
 }

@@ -1,5 +1,6 @@
 package com.example.bucket_list_project.service.member;
 
+import com.example.bucket_list_project.service.member.request.MemberSignInRequest;
 import com.example.bucket_list_project.service.member.request.MemberSignUpRequest;
 
 public interface MemberService {
@@ -7,4 +8,8 @@ public interface MemberService {
 
     Boolean signUp(MemberSignUpRequest signUpRequest);
 
+    String signIn(MemberSignInRequest signInRequest);
+
+
+    Boolean nicknameDoubleCheck(String nickName);
 }

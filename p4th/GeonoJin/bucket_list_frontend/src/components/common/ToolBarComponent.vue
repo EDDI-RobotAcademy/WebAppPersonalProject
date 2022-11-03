@@ -15,6 +15,7 @@
           <v-layout style="height: 20px">
             <text-field-component
                 :placeholderText=placeholderText
+                @update="toValue"
             />
           </v-layout>
           <button-component
@@ -41,14 +42,18 @@ export default {
   data() {
     return {
       btnValues: [
-        {name: '검색', iconName: 'mdi-magnify'},
         {name: '로그인', route: '/signIn'},
         {name: '회원가입', route: '/signUp'},
       ],
-      placeholderText:"검색하실 내용을 입력하세요"
+      searchValue:'',
+      placeholderText: "검색"
     }
   },
-  methods: {}
+  methods:{
+    toValue(textFieldValue){
+      this.searchValue = textFieldValue
+    }
+  }
 }
 </script>
 

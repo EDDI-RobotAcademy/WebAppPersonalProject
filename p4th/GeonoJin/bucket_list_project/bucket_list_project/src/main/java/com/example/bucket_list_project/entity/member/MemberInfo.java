@@ -21,16 +21,15 @@ public class MemberInfo {
     @Column(nullable = false)
     private String email;
 
-    @OneToOne(mappedBy = "memberInfo", fetch = FetchType.LAZY, cascade = CascadeType.PERSIST)
-    private MemberProfile profile;
+    @Column(nullable = false)
+    private String nickName;
 
     @OneToMany(mappedBy = "memberInfo", fetch = FetchType.LAZY)
     private Set<Authentication> authentications = new HashSet<>();
 
-    public MemberInfo(String email, MemberProfile profile) {
+    public MemberInfo(String email, String nickName) {
         this.email = email;
-        this.profile = profile;
-        profile.setMemberInfo(this);
+        this.nickName = nickName;
     }
 
     public boolean isRightPassword(String plainToCheck) {
