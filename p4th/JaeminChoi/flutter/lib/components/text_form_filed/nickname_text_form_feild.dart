@@ -5,18 +5,18 @@ import '../../utility/validation/form_validate.dart';
 import '../../utility/size.dart';
 
 
-class PasswordTextFormField extends StatefulWidget {
-  const PasswordTextFormField({Key? key , required this.widthSize}) : super(key: key);
+class NickNameTextFormField extends StatefulWidget {
+  const NickNameTextFormField({Key? key , required this.widthSize}) : super(key: key);
 
-  static String password = '';
+  static String nickName = '';
   final double widthSize;
   @override
-  State<PasswordTextFormField> createState() => _PasswordTextFormFieldState();
+  State<NickNameTextFormField> createState() => _NickNameTextFormFieldState();
 }
 
-class _PasswordTextFormFieldState extends State<PasswordTextFormField> {
+class _NickNameTextFormFieldState extends State<NickNameTextFormField> {
 
-  FocusNode _passwordFocus = new FocusNode();
+  FocusNode _NickNameFocus = new FocusNode();
 
   @override
   Widget build(BuildContext context) {
@@ -28,15 +28,14 @@ class _PasswordTextFormFieldState extends State<PasswordTextFormField> {
         children: [
           const SizedBox(height: medium_gap,),
           TextFormField(
-            decoration: textFormDecoration("비밀번호"),
-            obscureText:true,
-            keyboardType: TextInputType.visiblePassword,
-            focusNode: _passwordFocus,
+            decoration: textFormDecoration("닉네임"),
+            keyboardType: TextInputType.text,
+            focusNode: _NickNameFocus,
             autovalidateMode : AutovalidateMode.onUserInteraction ,
-            validator: (value) => CheckValidate().validatePassword(_passwordFocus, value!),
+            validator: (value) => CheckValidate().validateNickName(_NickNameFocus, value!),
             onSaved: (value) {
               setState(()
-              {PasswordTextFormField.password = value!;}
+              {NickNameTextFormField.nickName = value!;}
               );
             },
           )

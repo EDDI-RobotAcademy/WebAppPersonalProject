@@ -24,6 +24,18 @@ class CheckValidate {
       return null;
     }
   }
+
+  String? validateNickName(FocusNode focusNode, String value) {
+    if(value.isEmpty) {
+      focusNode.requestFocus();
+      return '닉네임을 입력하세요';
+    } else if(!value.isValidNickName()) {
+      focusNode.requestFocus();
+      return '해당 닉네임은 사용 할 수 없습니다.';
+    } else {
+      return null;
+    }
+  }
 }
 
 
@@ -45,4 +57,11 @@ extension InputValidate on String {
     return passwordRegExp.hasMatch(this);
   }
 
+  // 비밀번호 양식 영어,한국어,숫자 2자리 ~ 10 자리
+  bool isValidNickName() {
+    final passwordRegExp = RegExp(
+        r"^[a-zA-Z0-9ㄱ-ㅎㅏ-ㅣ가-힣]{2,10}$");
+
+    return passwordRegExp.hasMatch(this);
+  }
 }
