@@ -20,7 +20,7 @@ class MyApp extends StatelessWidget {
         scaffoldBackgroundColor: ColorPicker.defaultBackground,
       ),
 
-      initialRoute: "/sign_in",
+      initialRoute: "/todos-main",
 
     );
 
