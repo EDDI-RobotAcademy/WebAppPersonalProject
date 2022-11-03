@@ -26,7 +26,7 @@
                 <v-btn text large outlined style="font-size: 13px"
                        class="mt-1 ml-4" color="teal lighten-1"
                        @click="checkDuplicateEmail"
-                       :disabled="!emailPass">
+                       :disabled="!emailButtonCheck">
                   이메일<br/>중복 확인
                 </v-btn>
               </v-layout>
@@ -50,14 +50,14 @@
                        class="mt-1 ml-4" color="teal lighten-1"
                        @click="checkDuplicateNickname"
 
-                       :disabled="!nicknamePass">
+                       :disabled="!nicknameButtonCheck">
                   닉네임<br/>중복 확인
                 </v-btn>
               </v-layout>
             </div>
 
             <v-btn type="submit" block x-large rounded
-                   class="mt-6" color="green lighten-1" :disabled="(emailPass & nicknamePass) == false">
+                   class="mt-6" color="green lighten-1" :disabled="(signInCheckEmailPassValue & signInCheckNicknamePassValue) == false">
               가입하기
             </v-btn>
             <br/>
@@ -91,6 +91,11 @@ export default {
       nickName: "",
       emailPass: false,
       nicknamePass: false,
+      emailButtonCheck: false,
+      nicknameButtonCheck: false,
+      signInCheckEmailPassValue: false,
+      signInCheckNicknamePassValue: false,
+
       email_rule: [
         v => !!v || '이메일을 입력해주세요.',
         v => {
@@ -138,13 +143,13 @@ export default {
           /^(([^<>()[\]\\.,;:\s@]+(\.[^<>()[\]\\.,;:\s@]+)*)|(.+))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
       );
       if (emailValid) {
-        this.emailPass = true
+        this.emailButtonCheck = true
       }
     },
     nicknameValidation(){
-      this.nicknamePass = true
+      this.nicknameButtonCheck = true
     },
-    checkDuplicateEmail: function () {
+    checkDuplicateEmail: function() {
       const emailValid = this.email.match(
           /^(([^<>()[\]\\.,;:\s@]+(\.[^<>()[\]\\.,;:\s@]+)*)|(.+))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
       );
@@ -152,15 +157,23 @@ export default {
       if (emailValid) {
         const {email} = this
         this.checkDuplicateEmailToSpring({email})
-        console.log(this.$store.state.emailPassValue)
-        this.emailPass = true
+        if (!this.$store.state.emailPassValue) {
+          this.signInCheckEmailPassValue = false;
+        } else {
+          this.signInCheckEmailPassValue = true;
+        }
       }
 
     },
     checkDuplicateNickname(){
       const {nickName} = this
       this.checkDuplicateNicknameToSpring({nickName})
-      this.nicknamePass = true
+
+      if (this.$store.state.nicknamePassValue) {
+        this.signInCheckNicknamePassValue = true;
+      } else {
+        this.signInCheckNicknamePassValue = false;
+      }
     },
   }
 
