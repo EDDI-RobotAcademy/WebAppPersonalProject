@@ -9,31 +9,15 @@
             />
           </router-link>
         </div>
-        <br/>
         <div class="text-center px-12 py-16 mt-5">
           <v-form @submit.prevent="onSubmit" ref="form">
             <div class="text-h5 font-weight-black mb-10">
               버킷리스트에 오신걸 환영합니다!
 
             </div>
-            <v-divider style="size: 20px"></v-divider>
+            <v-divider></v-divider>
             <br/>
             <br/>
-
-            <div class="d-flex">
-              <v-text-field v-model="nickName" label="닉네임" type="text" :disabled="false" required outlined/>
-            </div>
-
-            <div class="d-flex">
-              <v-text-field v-model="password" label="비밀번호" type="password"
-                            :rules="password_rule" :disabled="false" required outlined/>
-            </div>
-
-            <div class="d-flex">
-              <v-text-field v-model="password_confirm" label="비밀번호 확인" type="password"
-                            :rules="password_confirm_rule" :disabled="false" required outlined/>
-            </div>
-
             <div class="d-flex">
               <v-layout>
                 <v-text-field v-model="email" label="이메일" @change="emailValidation"
@@ -48,10 +32,40 @@
               </v-layout>
             </div>
 
+            <div class="d-flex">
+              <v-text-field v-model="password" label="비밀번호" type="password"
+                            :rules="password_rule" :disabled="false" required outlined/>
+            </div>
+
+            <div class="d-flex">
+              <v-text-field v-model="password_confirm" label="비밀번호 확인" type="password"
+                            :rules="password_confirm_rule" :disabled="false" required outlined/>
+            </div>
+
+            <div class="d-flex">
+              <v-layout>
+                <v-text-field v-model="nickName" label="닉네임" @change="nicknameValidation" :disabled="false" :rules="nickname_rule" required outlined/>
+
+                <v-btn text large outlined style="font-size: 13px"
+                       class="mt-1 ml-4" color="teal lighten-1"
+                       @click="checkDuplicateNickname"
+
+                       :disabled="!nicknamePass">
+                  닉네임<br/>중복 확인
+                </v-btn>
+              </v-layout>
+            </div>
+
             <v-btn type="submit" block x-large rounded
-                   class="mt-6" color="green lighten-1" :disabled="emailPass">
+                   class="mt-6" color="green lighten-1" :disabled="(emailPass & nicknamePass) == false">
               가입하기
             </v-btn>
+            <br/>
+            <v-divider></v-divider>
+            <br/>
+            <div>
+              <h5>이미 회원이신가요?<a href="/signIn" class="textLink">로그인</a></h5>
+            </div>
           </v-form>
         </div>
 
@@ -62,7 +76,7 @@
 
 <script>
 import LogoComponent from "@/components/common/LogoComponent";
-import {mapActions} from "vuex";
+import {mapActions, mapState} from "vuex";
 
 export default {
   name: "SignUpForm",
@@ -75,7 +89,8 @@ export default {
       password: "",
       password_confirm: "",
       nickName: "",
-      emailPass: true,
+      emailPass: false,
+      nicknamePass: false,
       email_rule: [
         v => !!v || '이메일을 입력해주세요.',
         v => {
@@ -85,6 +100,7 @@ export default {
         }
       ],
       password_rule: [
+          v => !!v || '비밀번호를 입력해주세요',
         v => this.state === 'ins' ? !!v || '패스워드는 필수 입력사항입니다.' : true,
         v => !(v && v.length >= 30) || '패스워드는 30자 이상 입력할 수 없습니다.',
       ],
@@ -93,9 +109,20 @@ export default {
         v => !(v && v.length >= 30) || '패스워드는 30자 이상 입력할 수 없습니다.',
         v => v === this.password || '패스워드가 일치하지 않습니다.'
       ],
+      nickname_rule:[
+        v => !!v || '닉네임을 입력해주세요.'
+      ]
     }
   },
   methods: {
+    ...mapActions([
+      'checkDuplicateEmailToSpring',
+      'checkDuplicateNicknameToSpring'
+    ]),
+    ...mapState([
+      'emailPassValue',
+      'nicknamePassValue'
+    ]),
     onSubmit() {
       if (this.$refs.form.validate()) {
         const {email, password, nickName} = this
@@ -103,6 +130,8 @@ export default {
       } else {
         alert('올바른 정보를 입력하세요!')
       }
+
+
     },
     emailValidation() {
       const emailValid = this.email.match(
@@ -112,11 +141,9 @@ export default {
         this.emailPass = true
       }
     },
-
-    ...mapActions([
-      'checkDuplicateEmailToSpring'
-    ]),
-
+    nicknameValidation(){
+      this.nicknamePass = true
+    },
     checkDuplicateEmail: function () {
       const emailValid = this.email.match(
           /^(([^<>()[\]\\.,;:\s@]+(\.[^<>()[\]\\.,;:\s@]+)*)|(.+))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
@@ -125,8 +152,15 @@ export default {
       if (emailValid) {
         const {email} = this
         this.checkDuplicateEmailToSpring({email})
-        this.emailPass = this.$store.state.emailPassValue;
+        console.log(this.$store.state.emailPassValue)
+        this.emailPass = true
       }
+
+    },
+    checkDuplicateNickname(){
+      const {nickName} = this
+      this.checkDuplicateNicknameToSpring({nickName})
+      this.nicknamePass = true
     },
   }
 
@@ -138,5 +172,10 @@ export default {
   width: 170px;
   margin-top: 50px;
   margin-bottom: 30px;
+}
+
+.textLink{
+  text-decoration: none;
+  color: purple;
 }
 </style>
