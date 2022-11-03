@@ -149,34 +149,37 @@ export default {
     nicknameValidation(){
       this.nicknameButtonCheck = true
     },
-    checkDuplicateEmail: function() {
+    checkDuplicateEmail: async function() {
       const emailValid = this.email.match(
           /^(([^<>()[\]\\.,;:\s@]+(\.[^<>()[\]\\.,;:\s@]+)*)|(.+))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
       );
 
       if (emailValid) {
         const {email} = this
-        this.checkDuplicateEmailToSpring({email})
-        if (!this.$store.state.emailPassValue) {
-          this.signInCheckEmailPassValue = false;
-        } else {
-          this.signInCheckEmailPassValue = true;
-        }
-      }
+        await this.checkDuplicateEmailToSpring({email})
 
+        if (!this.$store.state.emailPassValue) {
+          this.signInCheckEmailPassValue = false
+        }else{
+          this.signInCheckEmailPassValue = true
+        }
+        console.log("이메일 중복체크 결과값(SignInForm): " + this.signInCheckEmailPassValue)
+
+      }
     },
-    checkDuplicateNickname(){
+
+    async checkDuplicateNickname(){
       const {nickName} = this
-      this.checkDuplicateNicknameToSpring({nickName})
+      await this.checkDuplicateNicknameToSpring({nickName})
+      console.log("닉네임 중복체크 결과값2(SignInForm)2: "+this.signInCheckNicknamePassValue)
 
       if (this.$store.state.nicknamePassValue) {
-        this.signInCheckNicknamePassValue = true;
-      } else {
-        this.signInCheckNicknamePassValue = false;
+        this.signInCheckNicknamePassValue = true
+      }else{
+        this.signInCheckNicknamePassValue = false
       }
     },
   }
-
 }
 </script>
 
