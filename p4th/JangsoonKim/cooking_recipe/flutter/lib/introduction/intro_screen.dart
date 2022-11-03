@@ -73,6 +73,6 @@ void onDone(context) async{
   final prefs = await SharedPreferences.getInstance();
   await prefs.setBool('ON_BOARDING', false);
   Navigator.of(context).pushReplacement(
-      MaterialPageRoute(builder: (context) => const LoginScreen())
+      MaterialPageRoute(builder: (context) => LoginScreen())
   );
 }
