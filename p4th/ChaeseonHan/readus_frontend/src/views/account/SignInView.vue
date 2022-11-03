@@ -19,7 +19,7 @@ export default {
   }, // data
 
   mounted() {
-    if (this.$store.state.isAuthenticated != false) {
+    if (this.$store.state.isAuthenticated !== false) {
       this.isLogin = true
     } else {
       this.isLogin = false
@@ -41,6 +41,7 @@ export default {
                 this.$cookies.set("user", res.data, 3600);
                 localStorage.setItem("userInfo", JSON.stringify(res.data))
                 this.isLogin = true
+                console.log(this.$store.state.isAuthenticated)
                 this.$router.push("/")
               } else {
                 alert("아이디 혹은 비밀번호가 존재하지 않거나 틀렸습니다!")
