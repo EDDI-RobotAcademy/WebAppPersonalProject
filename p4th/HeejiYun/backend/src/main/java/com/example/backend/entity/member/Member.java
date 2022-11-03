@@ -39,6 +39,17 @@ public class Member {
                 .findFirst();
     }
 
+    public boolean isRightPassword(String plainToCheck) {
+        final Optional<Authentication> maybeBasicAuth = findBasicAuthentication();
+
+        if (maybeBasicAuth.isPresent()) {
+            final BasicAuthentication auth = (BasicAuthentication) maybeBasicAuth.get();
+            return auth.isRightPassword(plainToCheck);
+        }
+
+        return false;
+    }
+
 }
 
 
