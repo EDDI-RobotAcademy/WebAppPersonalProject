@@ -29,6 +29,18 @@ public class MemberController {
     }
 
     /**
+     * 닉네임 중복 검사 Controller 메서드
+     * @param nickname
+     * @return
+     */
+    @PostMapping("/check-nickname/{nickname}")
+    public Boolean nicknameValidation(@PathVariable("nickname") String nickname) {
+        log.info("emailValidation(): " + nickname);
+
+        return service.nicknameValidation(nickname);
+    }
+
+    /**
      * 회원 가입 Controller
      * @param form
      * @return
