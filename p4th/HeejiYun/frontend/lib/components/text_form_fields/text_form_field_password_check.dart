@@ -2,19 +2,18 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:frontend/components/sign_up_form.dart';
 
-import '../utility/size.dart';
-import '../utility/validate.dart';
+import '../../utility/size.dart';
 
-class TextFormFieldPassword extends StatefulWidget {
-  const TextFormFieldPassword({Key? key}) : super(key: key);
+class TextFormFieldPasswordCheck extends StatefulWidget {
+  const TextFormFieldPasswordCheck({Key? key}) : super(key: key);
 
   @override
-  State<TextFormFieldPassword> createState() => _TextFormFieldPasswordState();
+  State<TextFormFieldPasswordCheck> createState() => _TextFormFieldPasswordCheckState();
 }
 
-class _TextFormFieldPasswordState extends State<TextFormFieldPassword> {
+class _TextFormFieldPasswordCheckState extends State<TextFormFieldPasswordCheck> {
 
-  FocusNode _passwordFocus = FocusNode();
+  FocusNode _passwordCheckFocus = FocusNode();
 
   @override
   Widget build(BuildContext context) {
@@ -22,16 +21,13 @@ class _TextFormFieldPasswordState extends State<TextFormFieldPassword> {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Text("비밀번호"),
+        Text("비밀번호 확인"),
         const SizedBox(height: small_gap,),
         TextFormField(
-          focusNode: _passwordFocus,
+          focusNode: _passwordCheckFocus,
           obscureText: true,
-          validator: (value) => CheckValidate().validatePassword(_passwordFocus, value!),
+          validator: (value) => value != form?.password ? "비밀번호가 일치하지 않습니다.": null,
           autovalidateMode: AutovalidateMode.onUserInteraction,
-          onChanged: (text) {
-            form?.password = text;
-          },
           decoration: InputDecoration(
             hintText: "Enter password",
             enabledBorder:
