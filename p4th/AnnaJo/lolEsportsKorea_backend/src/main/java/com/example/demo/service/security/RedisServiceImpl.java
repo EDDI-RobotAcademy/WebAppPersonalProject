@@ -1,5 +1,6 @@
 package com.example.demo.service.security;
 
+import com.example.demo.service.member.MemberService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.data.redis.core.ValueOperations;
@@ -9,7 +10,7 @@ import java.time.Duration;
 
 @Service
 @RequiredArgsConstructor
-public class RedisServiceImpl {
+public class RedisServiceImpl implements RedisService{
 
     private final StringRedisTemplate redisTemplate;
 
