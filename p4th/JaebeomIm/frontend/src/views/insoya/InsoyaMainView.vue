@@ -20,12 +20,12 @@
     <div>
       <v-menu offset-y>
         <template v-slot:activator="{ on }">
-          <v-btn color="orange darken-1" class="white--text ma-5" v-on="on">
-          직업게시판
+          <v-btn color="orange darken-1" class="white--text" v-on="on">
+        직업게시판
           </v-btn>
         </template>
         <v-list>
-          <v-list-item v-for="(dropItem, index) in classes" :key="index" link>
+          <v-list-item v-for="(dropItem, index) in classes" :key="index" :to="dropItem.route">
             <v-list-item-title>
               {{ dropItem.title }}
             </v-list-item-title>
@@ -65,19 +65,19 @@ export default {
       ],
 
       classes: [
-        { title: '전사' },
-        { title: '마법사' },
-        { title: '궁수' },
-        { title: '도적' },
-        { title: '해적' },
+        { title: '전사', name:'WarriorBoardListView', route:'/warrior-board' },
+        { title: '마법사', name:'MageBoardListView', route:'/mage-board' },
+        { title: '궁수', name:'ArcherBoardListView', route:'/archer-board'  },
+        { title: '도적', name:'ThiefBoardListView', route:'/thief-board'  },
+        { title: '해적', name:'PirateBoardListView', route:'/pirate-board' },
       ]
     }
   },
   methods: {
     onSubmit (payload) {
-      const { memberName, major } = payload
+      const { memberName } = payload
       axios.post('http://localhost:7777/32th/vue2spring/receive-test',
-          { memberName, major })
+          { memberName })
           .then(() => {
             alert('전송 요청 완료')
           })

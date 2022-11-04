@@ -169,6 +169,15 @@ export default {
             })
     },
     // eslint-disable-next-line no-empty-pattern
+    requestDeleteQuestionBoardToSpring ({ }, boardNo) {
+        console.log('requestDeleteQuestionBoardToSpring()')
+
+        return axios.delete(`http://localhost:7777/insoya/jpa/board/question/${boardNo}`)
+            .then(() => {
+                alert('삭제 성공')
+            })
+    },
+    // eslint-disable-next-line no-empty-pattern
     requestBoardModifyToSpring ({ }, payload) {
         console.log('requestBoardModifyToSpring()')
 
@@ -187,6 +196,18 @@ export default {
         const { title, content, boardNo, writer, regDate } = payload
 
         return axios.put(`http://localhost:7777/insoya/jpa/board/free/${boardNo}`,
+            { title, content, writer, regDate })
+            .then(() => {
+                alert('수정 성공')
+            })
+    },
+    // eslint-disable-next-line no-empty-pattern
+    requestQuestionBoardModifyToSpring ({ }, payload) {
+        console.log('requestQuestionBoardModifyToSpring()')
+
+        const { title, content, boardNo, writer, regDate } = payload
+
+        return axios.put(`http://localhost:7777/insoya/jpa/board/question/${boardNo}`,
             { title, content, writer, regDate })
             .then(() => {
                 alert('수정 성공')

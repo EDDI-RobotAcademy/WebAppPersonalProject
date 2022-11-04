@@ -46,6 +46,13 @@ import InsoyaSignInView from "@/views/insoya/Views/account/InsoyaSignInView";
 import InsoyaSignUpView from "@/views/insoya/Views/account/InsoyaSignUpView";
 import QuestionBoardListView from "@/views/insoya/Views/QuestionBoardView/QuestionBoardListView";
 import QuestionBoardRegisterView from "@/views/insoya/Views/QuestionBoardView/QuestionBoardRegisterView";
+import WarriorBoardListView from "@/views/insoya/Views/ClassBoardView/WarriorBoardListView";
+import ArcherBoardListView from "@/views/insoya/Views/ClassBoardView/ArcherBoardListView";
+import MageBoardListView from "@/views/insoya/Views/ClassBoardView/MageBoardListView";
+import PirateBoardListView from "@/views/insoya/Views/ClassBoardView/PirateBoardListView";
+import ThiefBoardListView from "@/views/insoya/Views/ClassBoardView/ThiefBoardListView";
+import QuestionBoardReadView from "@/views/insoya/Views/QuestionBoardView/QuestionBoardReadView";
+import QuestionBoardModifyView from "@/views/insoya/Views/QuestionBoardView/QuestionBoardModifyView";
 
 Vue.use(VueRouter)
 
@@ -252,10 +259,30 @@ const routes = [
     }
   },
   {
+    path: '/insoya-question-read/:boardNo',
+    name: 'QuestionBoardReadView',
+    components: {
+      default: QuestionBoardReadView
+    },
+    props: {
+      default: true
+    }
+  },
+  {
     path: '/insoya-free-modify/:boardNo',
     name: 'FreeBoardModifyView',
     components: {
       default: FreeBoardModifyView
+    },
+    props: {
+      default: true
+    }
+  },
+  {
+    path: '/insoya-question-modify/:boardNo',
+    name: 'QuestionBoardModifyView',
+    components: {
+      default: QuestionBoardModifyView
     },
     props: {
       default: true
@@ -272,6 +299,33 @@ const routes = [
     path: '/insoya-sign-up',
     name: 'InsoyaSignUpView',
     component: InsoyaSignUpView
+  },
+
+  {
+    path: '/warrior-board',
+    name: 'WarriorBoardListView',
+    component: WarriorBoardListView
+  },
+
+  {
+    path: '/archer-board',
+    name: 'ArcherBoardListView',
+    component: ArcherBoardListView
+  },
+  {
+    path: '/mage-board',
+    name: 'MageBoardListView',
+    component: MageBoardListView
+  },
+  {
+    path: '/pirate-board',
+    name: 'PirateBoardListView',
+    component: PirateBoardListView
+  },
+  {
+    path: '/thief-board',
+    name: 'ThiefBoardListView',
+    component: ThiefBoardListView
   },
 
 ]
