@@ -1,7 +1,7 @@
 <template>
   <v-container>
-    <v-layout>
-      <div class="category_menu" align="center">
+    <v-layout justify-center>
+      <div class="category_menu">
         <button-component :btnValues="btnKinds" class="mx-2"/>
       </div>
       <!--    <v-btn-->
@@ -19,7 +19,7 @@
 
 <script>
 
-import ButtonComponent from "@/components/common/account/ButtonComponent";
+import ButtonComponent from "@/components/common/ButtonComponent";
 
 export default {
   name: "CategoryComponent",

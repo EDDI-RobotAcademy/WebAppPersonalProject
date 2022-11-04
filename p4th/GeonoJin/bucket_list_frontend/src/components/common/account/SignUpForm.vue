@@ -163,7 +163,6 @@ export default {
         }else{
           this.signInCheckEmailPassValue = true
         }
-        console.log("이메일 중복체크 결과값(SignInForm): " + this.signInCheckEmailPassValue)
 
       }
     },
@@ -171,7 +170,6 @@ export default {
     async checkDuplicateNickname(){
       const {nickName} = this
       await this.checkDuplicateNicknameToSpring({nickName})
-      console.log("닉네임 중복체크 결과값2(SignInForm)2: "+this.signInCheckNicknamePassValue)
 
       if (this.$store.state.nicknamePassValue) {
         this.signInCheckNicknamePassValue = true

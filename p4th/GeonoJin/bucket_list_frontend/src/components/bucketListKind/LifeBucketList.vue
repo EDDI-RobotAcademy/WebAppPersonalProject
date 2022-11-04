@@ -10,7 +10,7 @@
 <script>
 import HeaderComponent from "@/components/header/HeaderComponent";
 export default {
-  name: "LifeBucketListView",
+  name: "LifeBucketList",
   components: {HeaderComponent}
 }
 </script>
