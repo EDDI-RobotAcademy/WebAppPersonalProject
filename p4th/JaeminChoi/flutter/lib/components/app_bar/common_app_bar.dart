@@ -42,12 +42,7 @@ class _CommonAppBarState extends State<CommonAppBar> {
     return AppBar(
       elevation: 0,
       backgroundColor: ColorStyle.defaultBackground,
-      leading:
-      IconButton(
-        icon: const Icon(Icons.menu),
-        onPressed: () {  },),
-      title:
-      InkWell(
+      title: InkWell(
         onTap: () {Navigator.pushNamed(context, "/main_page");},
         child: Ink(
           height: 80,
@@ -60,13 +55,11 @@ class _CommonAppBarState extends State<CommonAppBar> {
         ),
       ),
       centerTitle: true,
-      actions: userInfo != null ?
-      [
+      actions: userInfo != null ? [
         IconButton(
             icon: const Icon(Icons.house_outlined),
             onPressed: (){},)
-      ] :
-      [
+      ] : [
         IconButton(
             onPressed: (){},
             icon: const Icon(Icons.login))
