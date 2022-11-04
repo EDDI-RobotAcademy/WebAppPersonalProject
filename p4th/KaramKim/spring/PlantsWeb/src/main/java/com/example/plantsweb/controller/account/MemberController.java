@@ -1,5 +1,6 @@
 package com.example.plantsweb.controller.account;
 
+import com.example.plantsweb.controller.account.form.MemberLoginForm;
 import com.example.plantsweb.controller.account.form.MemberRegisterForm;
 import com.example.plantsweb.service.account.MemberService;
 import lombok.extern.slf4j.Slf4j;
@@ -27,5 +28,12 @@ public class MemberController {
         log.info("signUp: " + form);
 
         return service.signUp(form.toMemberRegisterRequest());
+    }
+
+    @PostMapping("/sign-in")
+    public String signIn(@RequestBody MemberLoginForm form) {
+        log.info("signIn: " + form);
+
+        return service.signIn(form.toLoginRequest());
     }
 }

@@ -7,4 +7,5 @@ public interface MemberService {
 
     Boolean emailValidation(String email);
     Boolean signUp(MemberRegisterRequest request);
+    String signIn(MemberLoginRequest request);
 }
