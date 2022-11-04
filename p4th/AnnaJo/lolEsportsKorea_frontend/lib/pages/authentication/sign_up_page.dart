@@ -1,8 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:lol_esports_korea_app/api/authentication/spring_nickname_validation_api.dart';
 import 'package:lol_esports_korea_app/components/authentication/user.dart';
 import 'package:lol_esports_korea_app/pages/authentication/sign_in_page.dart';
 
+import '../../api/authentication/globals_success_check.dart';
+import '../../api/authentication/spring_email_validation_api.dart';
+import '../../api/authentication/spring_sign_up_api.dart';
 import '../../components/authentication/accept/accept_box.dart';
+import '../../utility/common_alert_dialog.dart';
 import '../../utility/size.dart';
 import '../../components/app_bar/common_top_app_bar.dart';
 
@@ -243,13 +248,31 @@ class _SignUpPageState extends State<SignUpPage> {
                   child: ElevatedButton(
                     onPressed: () {
                       if (_formKey.currentState!.validate()) {
-                        // -> Spring Api
-                        Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) => const SignInPage()));
-                      } else {
-                        return;
+                        //E-mail 중복 검사 실행
+                        SpringEmailValidationApi().emailValidation(user.email);
+                        if (GlobalsSuccessCheck.isEmailCheck) {
+
+                          // 닉네임 중복 검사 실행
+                          SpringNicknameValidationApi().nicknameValidation(user.nickname);
+                          if (GlobalsSuccessCheck.isNicknameCheck) {
+                            SpringSignUpApi().signUp(UserSignUpRequest(
+                                user.email, user.password, user.nickname));
+
+                            // 회원가입 완료 후 로그인 페이지로 이동
+                            if (GlobalsSuccessCheck.isSignUpCheck) {
+                              _signUpSuccessShowDialog();
+                              Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (context) =>
+                                          const SignInPage()));
+                            }
+                          } else {
+                            _nicknameOverlapShowDialog();
+                          }
+                        } else {
+                          _emailOverlapShowDialog();
+                        }
                       }
                     },
                     child: const Text(
@@ -266,5 +289,36 @@ class _SignUpPageState extends State<SignUpPage> {
         ),
       ),
     );
+  }
+
+  /// 이메일 중복 alertDialog
+  void _emailOverlapShowDialog() {
+    showDialog(
+        context: context,
+        barrierDismissible: false,
+        builder: (BuildContext context) {
+          return CommonAlertDialog(title: "⚠", content: '중복된 이메일입니다.');
+        });
+  }
+
+  /// 닉네임 중복 alertDialog
+  void _nicknameOverlapShowDialog() {
+    showDialog(
+        context: context,
+        barrierDismissible: false,
+        builder: (BuildContext context) {
+          return CommonAlertDialog(title: "⚠", content: '중복된 닉네임입니다.');
+        });
+  }
+
+  /// 회원 가입 축하 alertDialog
+  void _signUpSuccessShowDialog() {
+    showDialog(
+        context: context,
+        barrierDismissible: false,
+        builder: (BuildContext context) {
+          return CommonAlertDialog(
+              title: "🎉", content: '가입을 축하합니다! \n 로그인 화면으로 이동합니다.');
+        });
   }
 }
