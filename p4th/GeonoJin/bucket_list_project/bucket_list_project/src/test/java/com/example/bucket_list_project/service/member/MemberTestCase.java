@@ -50,4 +50,14 @@ public class MemberTestCase {
         System.out.println(duplicateCheck);
 
     }
+
+    @Test
+    public void getMemberNickname() {
+        MemberSignInRequest request = new MemberSignInRequest("sss@sss.com", "sss");
+
+        String token = service.signIn(request);
+        String nickName = service.findCurrentUserNickName(token);
+
+        System.out.println(nickName);
+    }
 }

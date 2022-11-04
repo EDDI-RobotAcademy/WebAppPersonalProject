@@ -10,6 +10,7 @@ public interface MemberService {
 
     String signIn(MemberSignInRequest signInRequest);
 
-
     Boolean nicknameDoubleCheck(String nickName);
+
+    String findCurrentUserNickName(String currentUserValue);
 }
