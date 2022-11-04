@@ -37,7 +37,7 @@
 <script>
 
 export default {
-  name: "LogInForm",
+  name: "SignInForm",
   data() {
     return {
       email: "",
