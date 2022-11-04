@@ -44,8 +44,8 @@ export default {
     ButtonComponent,
     LogoComponent,
   },
-  props:{
-    nicknameValue:{
+  props: {
+    nicknameValue: {
       type: String
     }
   },
@@ -60,14 +60,20 @@ export default {
         {iconName: 'mdi-magnify', route: '/search'},
         {iconName: 'mdi-account-circle-outline'},
       ],
-      loginStateCheckVal: this.$store.state.isAuthenticated,
+      loginStateCheckVal: false
     }
+  },
+  mounted() {
+    this.loginStateCheckVal = this.$store.state.currentLoginUserCheck
+    console.log("로그인 상태: " + this.loginStateCheckVal)
   },
   methods: {
     ...mapState([
       'isAuthenticated',
+      'currentLoginUserCheck'
     ]),
   },
+
 }
 </script>
 

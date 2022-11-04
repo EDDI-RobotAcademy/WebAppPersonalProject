@@ -3,5 +3,6 @@ export default {
     isAuthenticated: false,
     currentUserNickname: null,
     nicknamePassValue: false,
+    currentLoginUserCheck: false,
 
 }

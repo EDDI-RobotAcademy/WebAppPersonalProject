@@ -16,7 +16,7 @@
               </v-btn>
             </template>
             <template>
-              <v-list width="180px" height="180px" >
+              <v-list width="180px" height="180px">
                 <v-list-item>
                   <v-list-item-title>
                     <a href="/myPage"
@@ -24,13 +24,21 @@
                     ><h5>{{ nickName }}</h5></a>
                   </v-list-item-title>
                 </v-list-item>
-
-                <v-list-item
-                    v-for="(btnItem, index) in btnItems" :key="index"
-                    style="background-color: darkgray"
-                >
-                  <v-list-item-title>
-                    <h4>{{ btnItem.btnName }}</h4>
+                <hr color="black">
+                <v-list-item>
+                  <v-list-item-title align="center">
+                    <div style="margin-bottom: 10px; margin-top: 5px">
+                      <v-btn color="white" rounded elevation="0">
+                        <h4>마이버킷</h4>
+                      </v-btn>
+                    </div>
+                    <div>
+                      <v-btn color="white" rounded elevation="0"
+                             @click="signOut"
+                      >
+                        <h4>로그아웃</h4>
+                      </v-btn>
+                    </div>
                   </v-list-item-title>
                 </v-list-item>
               </v-list>
@@ -62,16 +70,19 @@ export default {
     btnValues: {
       type: Array
     },
-    nickName:{
+    nickName: {
       type: String
     }
   },
-  data() {
-    return {
-      btnItems: [
-        {btnName: "마이버킷"},
-        {btnName: "로그아웃"},
-      ],
+  methods: {
+    signOut() {
+      if (localStorage.getItem('userInfo') == null) {
+        alert("이미 로그아웃 되었습니다.");
+      } else {
+        localStorage.removeItem("userInfo");
+        alert("로그아웃 되었습니다.")
+        history.go(0)
+      }
     }
   },
 }

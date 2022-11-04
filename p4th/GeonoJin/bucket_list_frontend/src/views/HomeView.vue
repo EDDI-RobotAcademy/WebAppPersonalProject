@@ -14,17 +14,18 @@ Vue.use(cookies);
 export default {
   name: 'HomeView',
   components: {AllBucketList},
-  data(){
-    return{
+  data() {
+    return {
       nicknameValue: ''
     }
   },
-  async mounted() {
-    this.nicknameValue = await this.$store.state.currentUserNickname
+  mounted() {
+    this.nicknameValue = this.$store.state.currentUserNickname
+    console.log("닉네임: "+this.nicknameValue)
   },
-  methods:{
+  methods: {
     ...mapState([
-        'currentUserNickname'
+      'currentUserNickname'
     ])
   }
 }
