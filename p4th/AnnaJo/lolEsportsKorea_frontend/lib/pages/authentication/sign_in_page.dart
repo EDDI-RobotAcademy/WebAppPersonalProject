@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:lol_esports_korea_app/api/authentication/globals_success_check.dart';
 import 'package:lol_esports_korea_app/components/authentication/user.dart';
 import 'package:lol_esports_korea_app/pages/authentication/sign_up_page.dart';
 import 'package:lol_esports_korea_app/pages/home_page.dart';
 
 import '../../api/authentication/spring_sign_in_api.dart';
+import '../../utility/common_alert_dialog.dart';
 import '../../utility/size.dart';
 import '../../components/app_bar/common_top_app_bar.dart';
 
@@ -128,14 +130,21 @@ class _SignInPageState extends State<SignInPage> {
                   child: ElevatedButton(
                     onPressed: () {
                       if (_formKey.currentState!.validate()) {
-                        SpringSignInApi()
-                            .login(UserLoginRequest(user.email, user.password));
-                        Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) => const HomePage()));
-                      } else {
-                        return;
+                        //로그인 맵핑 요청
+                        SpringSignInApi().signIn(
+                            UserSignInRequest(user.email, user.password));
+
+                        // 로그인 성공 체크 후 홈화면 이동
+                        if (GlobalsSuccessCheck.isSignInCheck) {
+                          _signInSuccessShowDialog();
+                          Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => const HomePage()));
+                        } else {
+                          _signInFailShowDialog();
+                          return;
+                        }
                       }
                     },
                     child: const Text(
@@ -171,5 +180,27 @@ class _SignInPageState extends State<SignInPage> {
         ),
       ),
     );
+  }
+
+  /// 로그인 실패 alertDialog
+  void _signInFailShowDialog() {
+    showDialog(
+        context: context,
+        barrierDismissible: false,
+        builder: (BuildContext context) {
+          return CommonAlertDialog(
+              title: "⚠️", content: '이메일 혹은 패스워드가 잘 못되었습니다.');
+        });
+  }
+
+  /// 로그인 성공 alertDialog
+  void _signInSuccessShowDialog() {
+    showDialog(
+        context: context,
+        barrierDismissible: false,
+        builder: (BuildContext context) {
+          return CommonAlertDialog(
+              title: "🎉️", content: '환영합니다🥰 \n 홈으로 이동합니다.');
+        });
   }
 }
