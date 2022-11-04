@@ -1,10 +1,7 @@
 package kr.eddi.demo.entity;
 
 
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.NoArgsConstructor;
-import lombok.ToString;
+import lombok.*;
 
 import javax.persistence.*;
 
@@ -16,11 +13,14 @@ import javax.persistence.*;
 public class MemberProfile {
 
     @Id
+    @Getter
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id = null;
 
+    @Getter
     private String nickName;
 
+    @Getter
     private String biography;
 
     @OneToOne(fetch = FetchType.LAZY)

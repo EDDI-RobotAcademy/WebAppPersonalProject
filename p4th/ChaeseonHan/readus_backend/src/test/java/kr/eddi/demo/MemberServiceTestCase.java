@@ -37,8 +37,8 @@ public class MemberServiceTestCase {
 
     @Test
     void loginProfile() {
-        MemberProfile memberProfile = service.getSignInMemberProfile("usertokenhere");
-        System.out.println(memberProfile);
+        String nickName = service.getSignInMemberNickName("c0c90caa-0477-4524-81a5-918414c10f26");
+        System.out.println("nickname: " + nickName);
     }
 
 }

@@ -10,5 +10,5 @@ public interface MemberService {
     Boolean signUp(MemberRegisterRequest request);
     Boolean emailValidation(String email);
     String signIn(MemberLoginRequest request);
-    MemberProfile getSignInMemberProfile(String signInUserToken);
+    String getSignInMemberNickName(String signInUserToken);
 }

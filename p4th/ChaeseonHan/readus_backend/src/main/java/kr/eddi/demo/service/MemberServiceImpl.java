@@ -76,15 +76,15 @@ public class MemberServiceImpl implements MemberService{
     }
 
     @Override
-    public MemberProfile getSignInMemberProfile(String signInUserToken) {
+    public String getSignInMemberNickName(String signInUserToken) {
 
         String userToken = signInUserToken;
         Long memberId = redisService.getValueByKey(userToken);
 
         Optional<ReadUsMember> maybeMember = memberRepository.findById(memberId);
         ReadUsMember member = maybeMember.get();
-        return member.getProfile();
-
+        String nickName = member.getProfile().getNickName();
+        return nickName;
     }
 
 
