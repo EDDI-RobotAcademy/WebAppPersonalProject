@@ -2,18 +2,19 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:frontend/components/sign_up_form.dart';
 
-import '../utility/size.dart';
-import '../utility/validate.dart';
+import '../../utility/size.dart';
+import '../../utility/validate.dart';
 
-class TextFormFieldNickname extends StatefulWidget {
-  const TextFormFieldNickname({Key? key}) : super(key: key);
+class TextFormFieldEmail extends StatefulWidget {
+  const TextFormFieldEmail({Key? key}) : super(key: key);
 
   @override
-  State<TextFormFieldNickname> createState() => _TextFormFieldNicknameState();
+  State<TextFormFieldEmail> createState() => _TextFormFieldEmailState();
 }
 
-class _TextFormFieldNicknameState extends State<TextFormFieldNickname> {
-  FocusNode _nicknameFocus = FocusNode();
+class _TextFormFieldEmailState extends State<TextFormFieldEmail> {
+
+  FocusNode _emailFocus = FocusNode();
 
   @override
   Widget build(BuildContext context) {
@@ -21,17 +22,18 @@ class _TextFormFieldNicknameState extends State<TextFormFieldNickname> {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Text("닉네임"),
+        Text("이메일"),
         const SizedBox(height: small_gap,),
         TextFormField(
-          focusNode: _nicknameFocus,
-          validator: (value) => CheckValidate().validateNickname(_nicknameFocus, value!),
+          focusNode: _emailFocus,
+          validator: (value) => CheckValidate().validateEmail(_emailFocus, value!),
           autovalidateMode: AutovalidateMode.onUserInteraction,
           onChanged: (text) {
-            form?.nickname = text;
+            form?.email = text;
+            form?.emailPass = false;
           },
           decoration: InputDecoration(
-            hintText: "Enter nickname",
+            hintText: "Enter email",
             enabledBorder:
             OutlineInputBorder(borderRadius: BorderRadius.circular(20)),
             focusedBorder:

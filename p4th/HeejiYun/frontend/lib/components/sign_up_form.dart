@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:frontend/components/text_form_field_email.dart';
-import 'package:frontend/components/text_form_field_nickname.dart';
-import 'package:frontend/components/text_form_field_password.dart';
-import 'package:frontend/components/text_form_field_password_check.dart';
+import 'package:frontend/components/custom_alert_dialog.dart';
+import 'package:frontend/components/text_form_fields/text_form_field_email.dart';
+import 'package:frontend/components/text_form_fields/text_form_field_nickname.dart';
+import 'package:frontend/components/text_form_fields/text_form_field_password.dart';
+import 'package:frontend/components/text_form_fields/text_form_field_password_check.dart';
 
 import '../api/spring_member_api.dart';
 import '../utility/size.dart';
@@ -20,7 +21,9 @@ class SignUpFormState extends State<SignUpForm> {
   String password = '';
   String nickname = '';
 
-  bool tmpEmailPass = true;
+  bool? emailPass;
+  bool? nicknamePass;
+  bool? signUpSuccess;
 
   @override
   Widget build(BuildContext context) {
@@ -33,11 +36,16 @@ class SignUpFormState extends State<SignUpForm> {
             const TextFormFieldEmail(),
             const SizedBox(height: medium_gap,),
             TextButton(
-              onPressed: () {
-                SpringMemberApi().emailCheck( email );
-                showEmailPassDialog(context);
+              onPressed: () async {
+                emailPass = await SpringMemberApi().emailCheck( email );
+                debugPrint("emailPass: " + emailPass.toString());
 
-              }, child: const Text("이메일 중복 확인",),
+                if(emailPass == true) {
+                  showResultDialog(context, "이메일 중복 확인", "사용 가능한 이메일입니다.");
+                  } else {
+                  showResultDialog(context, "이메일 중복 확인", "중복 되는 이메일입니다.");
+                }
+              }, child: const Text("이메일 중복 확인"),
             ),
             const SizedBox(height: medium_gap,),
             const TextFormFieldPassword(),
@@ -47,17 +55,33 @@ class SignUpFormState extends State<SignUpForm> {
             const TextFormFieldNickname(),
             const SizedBox(height: medium_gap,),
             TextButton(
-              onPressed: () {
-                SpringMemberApi().nicknameCheck(nickname);
-              }, child: const Text("닉네임 중복 확인",),
+              onPressed: () async {
+                nicknamePass = await SpringMemberApi().nicknameCheck(nickname);
+                debugPrint("emailPass: " + emailPass.toString());
+
+                if(nicknamePass == true) {
+                  showResultDialog(context, "닉네임 중복 확인", "사용 가능한 닉네임입니다.");
+                } else {
+                  showResultDialog(context, "닉네임 중복 확인", "중복 되는 닉네임입니다.");
+                }
+              }, child: const Text("닉네임 중복 확인"),
             ),
             const SizedBox(height: medium_gap,),
             TextButton(
-              onPressed: () {
-                SpringMemberApi().signUp(MemberSignUpRequest(email, password, nickname));
-
+              onPressed: () async {
                 if (_formKey.currentState!.validate()) {
-                  Navigator.pushNamed(context, "/home");
+                  if(emailPass == true && nicknamePass == true) {
+                    signUpSuccess = await SpringMemberApi().signUp(MemberSignUpRequest(email, password, nickname));
+                    if(signUpSuccess == true) {
+                      Navigator.pushNamed(context, "/sign-up-complete");
+                    }
+                  } else if(emailPass == true && nicknamePass != true) {
+                    showResultDialog(context, "유효하지 않은 값 확인", "닉네임 중복 여부를 확인하세요!");
+                  } else if(emailPass != true && nicknamePass == true) {
+                    showResultDialog(context, "유효하지 않은 값 확인", "이메일 중복 여부를 확인하세요!");
+                  } else {
+                    showResultDialog(context, "유효하지 않은 값 확인", "이메일, 닉네임 중복 여부를 확인하세요!");
+                  }
                 }
               },
               child: const Text("회원가입 하기"),
@@ -66,22 +90,11 @@ class SignUpFormState extends State<SignUpForm> {
         )
     );
   }
-  // AlertDialog 테스트
-  void showEmailPassDialog(BuildContext context) {
-    if(tmpEmailPass) {
-      showDialog<String>(
+
+  void showResultDialog(BuildContext context, String title, String alertMsg) {
+      showDialog(
         context: context,
-        builder: (BuildContext context) => AlertDialog(
-          title: const Text('이메일 중복 확인'),
-          content: const Text('회원 가입 가능한 이메일입니다.'),
-          actions: <Widget>[
-            TextButton(
-              onPressed: () => Navigator.pop(context, 'OK'),
-              child: const Text('확인')
-            )
-          ]
-        )
+        builder: (BuildContext context) => CustomAlertDialog(title: title, alertMsg: alertMsg)
       );
-    }
   }
 }
