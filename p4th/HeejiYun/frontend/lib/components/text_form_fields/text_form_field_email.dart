@@ -2,19 +2,19 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:frontend/components/sign_up_form.dart';
 
-import '../utility/size.dart';
-import '../utility/validate.dart';
+import '../../utility/size.dart';
+import '../../utility/validate.dart';
 
-class TextFormFieldPassword extends StatefulWidget {
-  const TextFormFieldPassword({Key? key}) : super(key: key);
+class TextFormFieldEmail extends StatefulWidget {
+  const TextFormFieldEmail({Key? key}) : super(key: key);
 
   @override
-  State<TextFormFieldPassword> createState() => _TextFormFieldPasswordState();
+  State<TextFormFieldEmail> createState() => _TextFormFieldEmailState();
 }
 
-class _TextFormFieldPasswordState extends State<TextFormFieldPassword> {
+class _TextFormFieldEmailState extends State<TextFormFieldEmail> {
 
-  FocusNode _passwordFocus = FocusNode();
+  FocusNode _emailFocus = FocusNode();
 
   @override
   Widget build(BuildContext context) {
@@ -22,18 +22,18 @@ class _TextFormFieldPasswordState extends State<TextFormFieldPassword> {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Text("비밀번호"),
+        Text("이메일"),
         const SizedBox(height: small_gap,),
         TextFormField(
-          focusNode: _passwordFocus,
-          obscureText: true,
-          validator: (value) => CheckValidate().validatePassword(_passwordFocus, value!),
+          focusNode: _emailFocus,
+          validator: (value) => CheckValidate().validateEmail(_emailFocus, value!),
           autovalidateMode: AutovalidateMode.onUserInteraction,
           onChanged: (text) {
-            form?.password = text;
+            form?.email = text;
+            form?.emailPass = false;
           },
           decoration: InputDecoration(
-            hintText: "Enter password",
+            hintText: "Enter email",
             enabledBorder:
             OutlineInputBorder(borderRadius: BorderRadius.circular(20)),
             focusedBorder:

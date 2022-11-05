@@ -2,18 +2,18 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:frontend/components/sign_up_form.dart';
 
-import '../utility/size.dart';
-import '../utility/validate.dart';
+import '../../utility/size.dart';
 
-class TextFormFieldNickname extends StatefulWidget {
-  const TextFormFieldNickname({Key? key}) : super(key: key);
+class TextFormFieldPasswordCheck extends StatefulWidget {
+  const TextFormFieldPasswordCheck({Key? key}) : super(key: key);
 
   @override
-  State<TextFormFieldNickname> createState() => _TextFormFieldNicknameState();
+  State<TextFormFieldPasswordCheck> createState() => _TextFormFieldPasswordCheckState();
 }
 
-class _TextFormFieldNicknameState extends State<TextFormFieldNickname> {
-  FocusNode _nicknameFocus = FocusNode();
+class _TextFormFieldPasswordCheckState extends State<TextFormFieldPasswordCheck> {
+
+  FocusNode _passwordCheckFocus = FocusNode();
 
   @override
   Widget build(BuildContext context) {
@@ -21,17 +21,15 @@ class _TextFormFieldNicknameState extends State<TextFormFieldNickname> {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Text("닉네임"),
+        Text("비밀번호 확인"),
         const SizedBox(height: small_gap,),
         TextFormField(
-          focusNode: _nicknameFocus,
-          validator: (value) => CheckValidate().validateNickname(_nicknameFocus, value!),
+          focusNode: _passwordCheckFocus,
+          obscureText: true,
+          validator: (value) => value != form?.password ? "비밀번호가 일치하지 않습니다.": null,
           autovalidateMode: AutovalidateMode.onUserInteraction,
-          onChanged: (text) {
-            form?.nickname = text;
-          },
           decoration: InputDecoration(
-            hintText: "Enter nickname",
+            hintText: "Enter password",
             enabledBorder:
             OutlineInputBorder(borderRadius: BorderRadius.circular(20)),
             focusedBorder:
