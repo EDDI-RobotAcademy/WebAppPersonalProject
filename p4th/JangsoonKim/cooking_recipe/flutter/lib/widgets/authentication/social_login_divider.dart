@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 
-import '../../components/custom_divider.dart';
+import '../../widgets/custom_divider.dart';
 
 class SocialLoginDivider extends StatelessWidget {
+
   const SocialLoginDivider({Key? key}) : super(key: key);
 
   @override
