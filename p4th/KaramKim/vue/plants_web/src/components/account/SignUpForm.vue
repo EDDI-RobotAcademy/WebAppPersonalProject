@@ -27,6 +27,9 @@
                               :rules="password_confirm_rule" :disabled="false" color="light-green darken-3" required/>
               </div>
               <div class="d-flex">
+                <v-text-field outlined v-model="name" label="이름" :disabled="false" color="light-green darken-3" required/>
+              </div>
+              <div class="d-flex">
                 <v-text-field outlined v-model="zipcode" label="우편번호" :disabled="true" color="light-green darken-3" required/>
                 <v-btn text x-large outlined style="font-size: 13px"
                        class="mt-1 ml-5" color="light-green darken-3"
@@ -59,6 +62,7 @@
 <script>
 
 
+
 import axios from "axios";
 
 export default {
@@ -68,6 +72,7 @@ export default {
       email: "",
       password: "",
       password_confirm: "",
+      name: "",
       city: '',
       street: '',
       addressDetail: '',
@@ -96,8 +101,8 @@ export default {
   methods: {
     onSubmit () {
       if (this.$refs.form.validate()) {
-        const { email, password, city, street, addressDetail, zipcode } = this
-        this.$emit("submit", { email, password, city, street, addressDetail, zipcode })
+        const { email, password, name, city, street, addressDetail, zipcode } = this
+        this.$emit("submit", { email, password, name, city, street, addressDetail, zipcode })
       } else {
         alert('올바른 정보를 입력하세요!')
       }
@@ -116,7 +121,7 @@ export default {
       );
       if (emailValid) {
         const {email} = this
-        axios.post(`http://localhost:7777/58th/member/check-email/${email}`)
+        axios.post(`http://localhost:7777/plants/member/check-email/${email}`)
             .then((res) => {
               if (res.data) {
                 alert("사용 가능한 이메일입니다!")
@@ -152,8 +157,6 @@ export default {
         }
       }).open()
     }
-
-
   }
 }
 </script>
