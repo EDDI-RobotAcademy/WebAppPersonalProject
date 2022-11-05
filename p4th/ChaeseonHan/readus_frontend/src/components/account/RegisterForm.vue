@@ -1,5 +1,5 @@
 <template>
-  <div class="grey lighten-5" style="font-family: Arial">
+  <div style="font-family: Arial">
     <v-row justify="center">
       <v-col cols="auto" style="padding-bottom: 90px">
         <v-card width="460">
@@ -11,7 +11,7 @@
                 <v-text-field v-model="email" label="이메일*" @change="emailValidation"
                               :rules="email_rule" :disabled="false" required/>
                 <v-btn text large outlined style="font-size: 13px"
-                       class="mt-3 ml-5" color="light-green darken-2"
+                       class="mt-3 ml-5" color="#356859"
                        @click="checkDuplicateEmail"
                        :disabled="!emailPass">
                   이메일 <br/>중복 확인
@@ -26,12 +26,12 @@
                               :rules="password_confirm_rule" :disabled="false" required/>
               </div>
               <div class="d-flex">
-                <v-text-field v-model="nickname" label="닉네임" type="nickName"
+                <v-text-field v-model="nickName" label="닉네임" type="nickName"
                               :rules="nickname_rule" :disabled="false" required/>
               </div>
 
               <v-btn type="submit" block x-large rounded
-                     class="mt-6" color="light-green darken-2" :disabled="(this.$store.state.unDuplicateEmailPass && passwordPass) == false">
+                     class="mt-6" color="#356859" :disabled="(this.$store.state.unDuplicateEmailPass && passwordPass) == false">
                 가입하기
               </v-btn>
 
@@ -54,7 +54,7 @@ export default {
       email: "",
       password: "",
       password_confirm: "",
-      nickname: "",
+      nickName: "",
       emailPass: false,
       passwordPass: false,
 

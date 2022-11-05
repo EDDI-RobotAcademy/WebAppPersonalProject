@@ -17,15 +17,19 @@ export default {
       isLogin: false,
     }
   }, // data
+
   mounted() {
-    if (this.$store.state.isAuthenticated != false) {
+    if (this.$store.state.isAuthenticated !== false) {
       this.isLogin = true
     } else {
       this.isLogin = false
     }
   }, // mounted
+
   methods: {
+
     ...mapActions([ 'requestSignInToSpring' ]),
+
     async onSubmit(payload) {
       if (!this.isLogin) {
         const { email, password } = payload
@@ -37,6 +41,7 @@ export default {
                 this.$cookies.set("user", res.data, 3600);
                 localStorage.setItem("userInfo", JSON.stringify(res.data))
                 this.isLogin = true
+                console.log(this.$store.state.isAuthenticated)
                 this.$router.push("/")
               } else {
                 alert("아이디 혹은 비밀번호가 존재하지 않거나 틀렸습니다!")
@@ -48,8 +53,9 @@ export default {
       } else {
         alert("이미 로그인 되어 있습니다!")
       }
-    }
-  }, //methods
+    }, // onSubmit
+
+  }, // methods
 }
 </script>
 
