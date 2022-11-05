@@ -64,6 +64,30 @@ public class MemberServiceImpl implements MemberService{
         return true;
     }
 
+    @Override
+    public String signIn(MemberSigninRequest request) {
+        String email = request.getEmail();
+        Optional<Member> maybeMember = memberRepository.findByEmail(email);
 
+        if (maybeMember.isPresent()) {
+            Member member = maybeMember.get();
 
+            log.info("member email: " + member.getEmail());
+            log.info("request email: " + request.getEmail());
+            log.info("request password: " + request.getPassword());
+
+            if (!member.isRightPassword(request.getPassword())) {
+                throw new RuntimeException("잘못된 패스워드입니다.");
+            }
+
+            UUID userToken = UUID.randomUUID();
+
+            redisService.deleteByKey(userToken.toString());
+            redisService.setKeyAndValue(userToken.toString(), member.getId());
+
+            return userToken.toString();
+        }
+
+        throw new RuntimeException("가입된 사용자가 아닙니다.");
+    }
 }

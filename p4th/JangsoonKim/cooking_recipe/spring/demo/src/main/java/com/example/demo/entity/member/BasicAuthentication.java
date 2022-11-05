@@ -27,5 +27,8 @@ public class BasicAuthentication extends Authentication{
         this.password = password;
     }
 
+    public boolean isRightPassword(String plainToCheck) {
+        return EncryptionUtil.checkValidation(plainToCheck, password);
+    }
 
 }

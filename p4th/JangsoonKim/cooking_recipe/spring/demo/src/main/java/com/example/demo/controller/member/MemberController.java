@@ -38,4 +38,11 @@ public class MemberController {
         return service.signUp(request);
     }
 
+    @PostMapping("/sign-in")
+    public String signIn(@RequestBody MemberSigninRequest request) {
+        log.info("signIn: " + request);
+
+        return service.signIn(request);
+    }
+
 }

@@ -9,5 +9,5 @@ public interface MemberService {
     Boolean emailValidation(String email);
     Boolean nicknameValidation(String nickname);
 
-
+    String signIn(MemberSigninRequest request);
 }
