@@ -1,5 +1,6 @@
 package com.example.look_lend_backend.controller.member;
 
+import com.example.look_lend_backend.controller.member.form.MemberLoginForm;
 import com.example.look_lend_backend.controller.member.form.MemberRegisterForm;
 import com.example.look_lend_backend.service.member.MemberService;
 import lombok.extern.slf4j.Slf4j;
@@ -29,5 +30,13 @@ public class MemberController {
 
         return service.emailValidation(email);
     }
+
+    @PostMapping("/sign-in")
+    public String signIn(@RequestBody MemberLoginForm form) {
+        log.info("signIn:" + form);
+
+        return service.signIn(form.toLoginRequest());
+    }
+
 
 }
