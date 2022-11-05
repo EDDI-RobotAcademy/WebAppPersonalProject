@@ -11,8 +11,6 @@ import '../../utilities/spring_api.dart';
 import '../../widgets/rounded_button.dart';
 
 class LoginForm extends StatefulWidget {
-
-
   LoginForm({Key? key}) : super(key: key);
 
   @override
@@ -31,11 +29,11 @@ class LoginFormState extends State<LoginForm> {
     Size size = MediaQuery.of(context).size;
     return Background(
         child: Form(
-          key: _formKey,
-          child: ListView(
-            children: [Column(
-      mainAxisAlignment: MainAxisAlignment.center,
-      children: <Widget>[
+      key: _formKey,
+      child: ListView(children: [
+        Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: <Widget>[
             const Text(
               "로그인",
               style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
@@ -55,25 +53,25 @@ class LoginFormState extends State<LoginForm> {
               onChanged: (value) {},
               hinText: "비밀번호",
             ),
-            SizedBox(height: size.height * 0.03,),
+            SizedBox(
+              height: size.height * 0.03,
+            ),
             RoundedButton(
               text: "로그인",
               onPressed: () {
-                if  (_formKey.currentState!.validate()){
-                  SpringApi().login(UserLoginRequest(email, password));
-                  UserLoginResponse? response;
-                  print(response?.success);
+                if (_formKey.currentState!.validate()) {
+                  Future<UserLoginResponse> future =
+                      SpringApi().login(UserLoginRequest(email, password));
 
-                  if(response?.success == true){
-
-                  Navigator.of(context).push(
-                    MaterialPageRoute(builder: (context){
+                  future.then((UserLoginResponse) {
+                    Navigator.of(context)
+                        .push(MaterialPageRoute(builder: (context) {
                       return HomeScreen();
-                    })
-                  );}
-                  else{
+                      //경로수정 or 로그인 완료 모달 띄울 예정..?
+                    }));
+                  }).catchError((error) {
                     print("로그인실패");
-                  }
+                  });
                 }
               },
               color: Colors.orange,
@@ -91,14 +89,15 @@ class LoginFormState extends State<LoginForm> {
                 ),
                 GestureDetector(
                   onTap: () {
-                    Navigator.push(context, MaterialPageRoute(builder: (context) {
+                    Navigator.push(context,
+                        MaterialPageRoute(builder: (context) {
                       return SignupScreen();
                     }));
                   },
                   child: const Text(
                     "이메일 회원가입",
-                    style:
-                        TextStyle(color: Colors.black, fontWeight: FontWeight.w600),
+                    style: TextStyle(
+                        color: Colors.black, fontWeight: FontWeight.w600),
                   ),
                 )
               ],
@@ -117,14 +116,9 @@ class LoginFormState extends State<LoginForm> {
                 )
               ],
             ),
-      ],
-    ),]
-          ),
-        ));
+          ],
+        ),
+      ]),
+    ));
   }
 }
-
-
-
-
-
