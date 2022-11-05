@@ -1,40 +1,32 @@
 <template>
-  <v-container>
-    <header-component/>
-    <br/><br/>
-    <div align="center">
-      <h3>전체</h3>
-    </div>
-    <br/><br/><br/>
-
-    <v-layout justify-center>
-      <bucket-content-component
-          :cards="cards"
-      />
-    </v-layout>
-  </v-container>
+  <all-bucket-list :nicknameValue="nicknameValue"/>
 </template>
 
 <script>
 
-import HeaderComponent from "@/components/header/HeaderComponent";
-import BucketContentComponent from "@/components/common/account/BucketContentComponent";
+import cookies from 'vue-cookies';
+import Vue from 'vue';
+import AllBucketList from "@/components/bucketListKind/AllBucketList";
+import {mapState} from "vuex";
+
+Vue.use(cookies);
 
 export default {
   name: 'HomeView',
-  components: {
-    BucketContentComponent,
-    HeaderComponent,
-  },
-  data(){
-    return{
-      cards: [
-        { title: 'Pre-fab homes', src: 'https://cdn.vuetifyjs.com/images/cards/house.jpg', flex: 12, route:'/signIn' ,count:0},
-        { title: 'Favorite road trips', src: 'https://cdn.vuetifyjs.com/images/cards/road.jpg', flex: 6, count:0 },
-        { title: 'Best airlines', src: 'https://cdn.vuetifyjs.com/images/cards/plane.jpg', flex: 6, count:0 },
-
-      ],
+  components: {AllBucketList},
+  data() {
+    return {
+      nicknameValue: ''
     }
+  },
+  mounted() {
+    this.nicknameValue = this.$store.state.currentUserNickname
+    console.log("닉네임: "+this.nicknameValue)
+  },
+  methods: {
+    ...mapState([
+      'currentUserNickname'
+    ])
   }
 }
 </script>

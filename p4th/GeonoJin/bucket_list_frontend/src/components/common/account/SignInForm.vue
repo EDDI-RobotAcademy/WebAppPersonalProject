@@ -27,7 +27,7 @@
           </div>
 
           <v-btn type="submit" block x-large rounded color="green lighten-2"
-                 class="mt-6"  :disabled="false">
+                 class="mt-6" :disabled="false">
             로그인
           </v-btn>
           <br/>
@@ -48,11 +48,11 @@ import LogoComponent from "@/components/common/LogoComponent";
 
 export default {
   name: "SignInForm",
-  components:{
+  components: {
     LogoComponent
   },
-  data(){
-    return{
+  data() {
+    return {
       email: "",
       password: "",
       email_rule: [
@@ -70,10 +70,10 @@ export default {
     }
   },
   methods: {
-    onSubmit () {
-      const { email, password } = this
-      this.$emit("submit", { email, password })
-    }
+    onSubmit() {
+      const {email, password} = this
+      this.$emit("submit", {email, password})
+    },
   }
 }
 </script>
@@ -84,8 +84,9 @@ export default {
   margin-top: 80px;
   margin-bottom: 50px;
 }
- .textLink{
-   text-decoration: none;
-   color: purple;
- }
+
+.textLink {
+  text-decoration: none;
+  color: purple;
+}
 </style>

@@ -1,0 +1,49 @@
+<template>
+  <v-container>
+    <header-component :nicknameValue="nicknameValue"/>
+    <br/><br/>
+    <div align="center">
+      <h3>전체</h3>
+    </div>
+    <br/><br/>
+    <hr>
+    <br/>
+
+    <v-layout justify-center>
+      <bucket-content-component
+          :cards="cards"
+      />
+    </v-layout>
+  </v-container>
+</template>
+
+<script>
+import BucketContentComponent from "@/components/common/BucketContentComponent";
+import HeaderComponent from "@/components/header/HeaderComponent";
+
+export default {
+  name: "AllBucketList",
+  components: {
+    BucketContentComponent,
+    HeaderComponent,
+  },
+  props:{
+    nicknameValue:{
+      type: String
+    }
+  },
+  data(){
+    return{
+      cards: [
+        { title: 'Pre-fab homes', src: 'https://cdn.vuetifyjs.com/images/cards/house.jpg', flex: 12, route:'/signIn' ,count:0},
+        { title: 'Favorite road trips', src: 'https://cdn.vuetifyjs.com/images/cards/road.jpg', flex: 6, count:0 },
+        { title: 'Best airlines', src: 'https://cdn.vuetifyjs.com/images/cards/plane.jpg', flex: 6, count:0 },
+      ],
+    }
+  },
+}
+</script>
+
+<style scoped>
+
+</style>

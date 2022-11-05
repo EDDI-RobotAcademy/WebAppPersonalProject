@@ -19,6 +19,7 @@ public class MemberController {
     @PostMapping("/check-email/{email}")
     public Boolean emailValidation(@PathVariable("email") String email) {
         log.info("emailValidation(): " + email);
+        log.info("이메일 전달하는 값" + memberService.emailValidation(email));
 
         return memberService.emailValidation(email);
     }
@@ -37,11 +38,19 @@ public class MemberController {
         return memberService.signIn(signInForm.toMemberSignInRequest());
     }
 
-    @PostMapping ("/ckeck-nickname/{nickName}")
+    @PostMapping ("/check-nickname/{nickName}")
     public Boolean NicknameDoubleCheck(@PathVariable("nickName") String nickName) {
         log.info("NicknameDoubleCheck: " + nickName);
+        log.info("닉네임 전달하는 값" + memberService.nicknameDoubleCheck(nickName));
 
         return memberService.nicknameDoubleCheck(nickName);
+    }
+
+    @PostMapping("/get-current-user-nickname/{currentUserValue}")
+    public String currentUserNicknameCheck(@PathVariable("currentUserValue") String currentUserValue) {
+        log.info("currentUserNicknameCheck : " + currentUserValue);
+
+        return memberService.findCurrentUserNickName(currentUserValue);
     }
 }
 

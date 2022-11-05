@@ -85,4 +85,18 @@ public class MemberServiceImpl implements MemberService {
 
         return true;
     }
+
+    @Override
+    public String findCurrentUserNickName(String currentUserValue) {
+        Long currentUserId = redisService.getValueByKey(currentUserValue);
+
+        Optional<MemberInfo> maybeMemberId = memberRepository.findById(currentUserId);
+
+        if (maybeMemberId.isPresent()) {
+            MemberInfo memberNickname = maybeMemberId.get();
+            return memberNickname.getNickName();
+        }
+
+        return null;
+    }
 }

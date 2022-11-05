@@ -21,6 +21,7 @@ public class MemberInfo {
     @Column(nullable = false)
     private String email;
 
+    @Getter
     @Column(nullable = false)
     private String nickName;
 
