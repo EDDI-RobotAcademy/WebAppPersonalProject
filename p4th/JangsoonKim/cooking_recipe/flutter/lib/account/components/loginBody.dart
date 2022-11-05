@@ -1,3 +1,4 @@
+
 import 'package:demo/account/components/background.dart';
 import 'package:demo/account/components/sns_icon.dart';
 import 'package:demo/account/components/social_login_divider.dart';
@@ -8,11 +9,23 @@ import 'package:demo/account/components/rounded_id_field.dart';
 import 'package:demo/home_screen.dart';
 import 'package:flutter/material.dart';
 
-class LoginBody extends StatelessWidget {
+import '../../api/spring_api.dart';
 
-  final _formKey = GlobalKey<FormState>();
+class LoginBody extends StatefulWidget {
+
 
   LoginBody({Key? key}) : super(key: key);
+
+  @override
+  State<LoginBody> createState() => LoginBodyState();
+}
+
+class LoginBodyState extends State<LoginBody> {
+  String email = '';
+  String nickname = '';
+  String password = '';
+
+  final _formKey = GlobalKey<FormState>();
 
   @override
   Widget build(BuildContext context) {
@@ -48,11 +61,17 @@ class LoginBody extends StatelessWidget {
               text: "로그인",
               onPressed: () {
                 if  (_formKey.currentState!.validate()){
+                  SpringApi().login(UserLoginRequest(email, password));
+                  UserLoginResponse? response;
+                  print(response?.success);
+
+                  if(response?.success == true){
+
                   Navigator.of(context).push(
                     MaterialPageRoute(builder: (context){
                       return HomeScreen();
                     })
-                  );
+                  );}
                 }
               },
               color: Colors.orange,

@@ -1,13 +1,14 @@
+import 'package:demo/account/components/loginBody.dart';
+import 'package:demo/account/components/signupBody.dart';
 import 'package:demo/components/text_field_contanier.dart';
 import 'package:flutter/material.dart';
 
 import '../../validate/check_validate.dart';
 
-class RoundedIdField extends StatelessWidget {
+class RoundedIdField extends StatefulWidget {
   final String hinText;
   final IconData icon;
   final ValueChanged<String> onChanged;
-  final FocusNode _emailFocus = new FocusNode();
 
   RoundedIdField(
       {Key? key,
@@ -17,17 +18,29 @@ class RoundedIdField extends StatelessWidget {
       : super(key: key);
 
   @override
+  State<RoundedIdField> createState() => _RoundedIdFieldState();
+}
+
+class _RoundedIdFieldState extends State<RoundedIdField> {
+  final FocusNode _emailFocus = FocusNode();
+
+  @override
   Widget build(BuildContext context) {
+    SignupBodyState? form = context.findAncestorStateOfType<SignupBodyState>();
+    LoginBodyState? form2 = context.findAncestorStateOfType<LoginBodyState>();
     return TextFieldContanier(
         child: TextFormField(
       validator: (value) => CheckValidate().validateEmail(_emailFocus, value!),
-      onChanged: onChanged,
+      onChanged: (text) {
+        form?.email = text;
+        form2?.email = text;
+      },
       decoration: InputDecoration(
           icon: Icon(
-            icon,
+            widget.icon,
             color: Colors.orange,
           ),
-          hintText: hinText,
+          hintText: widget.hinText,
           border: InputBorder.none),
     ));
   }
