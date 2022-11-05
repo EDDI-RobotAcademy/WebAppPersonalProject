@@ -19,7 +19,7 @@ public abstract class Authentication {
     @Id
     @Getter
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long memberNo = null;
+    private Long id = null;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "member_id")

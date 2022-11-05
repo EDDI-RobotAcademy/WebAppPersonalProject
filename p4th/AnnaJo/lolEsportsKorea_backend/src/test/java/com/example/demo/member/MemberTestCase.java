@@ -1,7 +1,8 @@
 package com.example.demo.member;
 
-import com.example.demo.controller.member.request.MemberRegisterForm;
+import com.example.demo.controller.member.request.MemberLoginForm;
 import com.example.demo.service.member.MemberService;
+import com.example.demo.service.member.request.MemberLoginRequest;
 import com.example.demo.service.member.request.MemberRegisterRequest;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,10 +24,27 @@ public class MemberTestCase {
     }
 
     @Test
+    void nicknameValidation() {
+
+        boolean result = service.nicknameValidation("쿤");
+        System.out.println("result : " + result);
+
+    }
+
+    @Test
     void signUp() {
 
-        MemberRegisterRequest registerRequest = new MemberRegisterRequest("kun@gmail.com", "0426", "쿤");
+        MemberRegisterRequest registerRequest = new MemberRegisterRequest("jokun@gmail.com", "1234", "조쿤");
         boolean result = service.signUp(registerRequest);
+
+        System.out.println("result : " + result);
+    }
+
+    @Test
+    void signIn() {
+
+        MemberLoginRequest memberLoginRequest = new MemberLoginRequest("jokun@gmail.com", "1234");
+        String result = service.signIn(memberLoginRequest);
 
         System.out.println("result : " + result);
     }
