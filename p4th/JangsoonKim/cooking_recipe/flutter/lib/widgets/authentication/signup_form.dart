@@ -1,22 +1,22 @@
-import 'package:demo/account/components/background.dart';
-import 'package:demo/account/components/rounded_id_field.dart';
-import 'package:demo/account/components/rounded_nicknamce_field.dart';
-import 'package:demo/account/components/rounded_password_field.dart';
-import 'package:demo/account/login_screen.dart';
+import 'package:demo/screens/login_screen.dart';
+import 'package:demo/utilities/spring_api.dart';
+import 'package:demo/widgets/authentication/background.dart';
+import 'package:demo/widgets/authentication/rounded_id_field.dart';
+import 'package:demo/widgets/authentication/rounded_nickname_field.dart';
+import 'package:demo/widgets/authentication/rounded_password_field.dart';
 import 'package:flutter/material.dart';
 
-import '../../api/spring_api.dart';
-import '../../components/rounded_button.dart';
+import '../../widgets/rounded_button.dart';
 
-class SignupBody extends StatefulWidget {
+class SignupForm extends StatefulWidget {
 
-  SignupBody({Key? key}) : super(key: key);
+  const SignupForm({Key? key}) : super(key: key);
 
   @override
-  State<SignupBody> createState() => SignupBodyState();
+  State<SignupForm> createState() => SignupFormState();
 }
 
-class SignupBodyState extends State<SignupBody> {
+class SignupFormState extends State<SignupForm> {
   String email = '';
   String nickname = '';
   String password = '';
@@ -111,7 +111,7 @@ class SignupBodyState extends State<SignupBody> {
                   SpringApi().signUp(MemberSignUpRequest(email, password, nickname));
                   Navigator.of(context)
                       .push(MaterialPageRoute(builder: (context) {
-                    return LoginScreen();
+                    return const LoginScreen();
                   }));
                 }
               },

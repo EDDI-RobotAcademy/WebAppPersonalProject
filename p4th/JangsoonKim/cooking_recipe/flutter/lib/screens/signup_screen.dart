@@ -1,6 +1,5 @@
-import 'package:demo/account/components/signupBody.dart';
+import 'package:demo/widgets/authentication/signup_form.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 
 class SignupScreen extends StatelessWidget {
   const SignupScreen({Key? key}) : super(key: key);
@@ -30,7 +29,7 @@ class SignupScreen extends StatelessWidget {
             onTap: (){
               FocusScope.of(context).unfocus();
             },
-            child: SignupBody()),
+            child: const SignupForm()),
     );
   }
 }

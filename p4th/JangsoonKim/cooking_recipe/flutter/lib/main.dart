@@ -1,8 +1,8 @@
-import 'package:demo/account/login_screen.dart';
+import 'package:demo/screens/login_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'introduction/intro_screen.dart';
+import 'screens/intro_screen.dart';
 
 
 bool show = true;

@@ -1,6 +1,6 @@
-import 'package:demo/account/components/background.dart';
-import 'package:demo/account/components/loginBody.dart';
 import 'package:flutter/material.dart';
+
+import '../widgets/authentication/login_form.dart';
 
 class LoginScreen extends StatelessWidget {
 
@@ -13,7 +13,7 @@ class LoginScreen extends StatelessWidget {
         onTap: (){
           FocusScope.of(context).unfocus();
         },
-          child: LoginBody()),
+          child: LoginForm()),
     );
   }
 }

@@ -56,10 +56,9 @@ class SpringApi {
 
     return json.decode(response.body);
   }
-  Future<bool?> login(UserLoginRequest request) async {
+  Future<UserLoginResponse?> login(UserLoginRequest request) async {
 
-    debugPrint(request.email);
-    debugPrint(request.password);
+    debugPrint("로그인 이메일: "+request.email);
 
     var response = await http.post(
       Uri.http(httpUri, '/member/sign-in'),
@@ -70,10 +69,10 @@ class SpringApi {
     );
     if (response.statusCode == 200) {
       debugPrint("통신 확인");
-      return true;
+      return UserLoginResponse(true);
 
     } else{
-      return false;
+      return UserLoginResponse(false);
     }
   }
 }

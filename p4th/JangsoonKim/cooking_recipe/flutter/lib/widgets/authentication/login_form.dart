@@ -1,26 +1,25 @@
-
-import 'package:demo/account/components/background.dart';
-import 'package:demo/account/components/sns_icon.dart';
-import 'package:demo/account/components/social_login_divider.dart';
-import 'package:demo/components/rounded_button.dart';
-import 'package:demo/account/components/rounded_password_field.dart';
-import 'package:demo/account/signup_screen.dart';
-import 'package:demo/account/components/rounded_id_field.dart';
-import 'package:demo/home_screen.dart';
+import 'package:demo/screens/signup_screen.dart';
+import 'package:demo/screens/home_screen.dart';
+import 'package:demo/widgets/authentication/background.dart';
+import 'package:demo/widgets/authentication/rounded_id_field.dart';
+import 'package:demo/widgets/authentication/rounded_password_field.dart';
+import 'package:demo/widgets/authentication/sns_icon.dart';
+import 'package:demo/widgets/authentication/social_login_divider.dart';
 import 'package:flutter/material.dart';
 
-import '../../api/spring_api.dart';
+import '../../utilities/spring_api.dart';
+import '../../widgets/rounded_button.dart';
 
-class LoginBody extends StatefulWidget {
+class LoginForm extends StatefulWidget {
 
 
-  LoginBody({Key? key}) : super(key: key);
+  LoginForm({Key? key}) : super(key: key);
 
   @override
-  State<LoginBody> createState() => LoginBodyState();
+  State<LoginForm> createState() => LoginFormState();
 }
 
-class LoginBodyState extends State<LoginBody> {
+class LoginFormState extends State<LoginForm> {
   String email = '';
   String nickname = '';
   String password = '';
@@ -72,6 +71,9 @@ class LoginBodyState extends State<LoginBody> {
                       return HomeScreen();
                     })
                   );}
+                  else{
+                    print("로그인실패");
+                  }
                 }
               },
               color: Colors.orange,

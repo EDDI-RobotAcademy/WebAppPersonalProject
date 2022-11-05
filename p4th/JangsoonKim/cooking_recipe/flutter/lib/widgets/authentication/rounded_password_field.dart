@@ -1,15 +1,15 @@
-import 'package:demo/account/components/signupBody.dart';
+import 'package:demo/widgets/authentication/signup_form.dart';
 import 'package:flutter/material.dart';
 
-import '../../components/text_field_contanier.dart';
-import '../../validate/check_validate.dart';
-import 'loginBody.dart';
+import '../../utilities/check_validate.dart';
+import '../../widgets/text_field_contanier.dart';
+import 'login_form.dart';
 
 class RoundedPasswordField extends StatefulWidget {
   final ValueChanged<String> onChanged;
   final String hinText;
 
-  RoundedPasswordField({Key? key, required this.onChanged, required this.hinText})
+  const RoundedPasswordField({Key? key, required this.onChanged, required this.hinText})
       : super(key: key);
 
   @override
@@ -21,23 +21,23 @@ class _RoundedPasswordFieldState extends State<RoundedPasswordField> {
 
   @override
   Widget build(BuildContext context) {
-    SignupBodyState? form = context.findAncestorStateOfType<SignupBodyState>();
-    LoginBodyState? form2 = context.findAncestorStateOfType<LoginBodyState>();
+    SignupFormState? signupForm = context.findAncestorStateOfType<SignupFormState>();
+    LoginFormState? loginForm = context.findAncestorStateOfType<LoginFormState>();
     return TextFieldContanier(
         child: TextFormField(
           validator: (value) => CheckValidate().validatePassword(_passwordFocus, value!),
           onChanged: (text) {
-            form?.password = text;
-            form2?.password = text;
+            signupForm?.password = text;
+            loginForm?.password = text;
           },
           obscureText: true,
           decoration: InputDecoration(
               hintText: widget.hinText,
-              icon: Icon(
+              icon: const Icon(
                 Icons.lock,
                 color: Colors.orange,
               ),
-              suffixIcon: Icon(
+              suffixIcon: const Icon(
                 Icons.visibility,
                 color: Colors.orange,
               ),

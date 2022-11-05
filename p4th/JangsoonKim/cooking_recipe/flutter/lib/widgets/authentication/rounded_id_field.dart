@@ -1,9 +1,9 @@
-import 'package:demo/account/components/loginBody.dart';
-import 'package:demo/account/components/signupBody.dart';
-import 'package:demo/components/text_field_contanier.dart';
+import 'package:demo/widgets/authentication/signup_form.dart';
 import 'package:flutter/material.dart';
 
-import '../../validate/check_validate.dart';
+import '../../utilities/check_validate.dart';
+import '../../widgets/text_field_contanier.dart';
+import 'login_form.dart';
 
 class RoundedIdField extends StatefulWidget {
   final String hinText;
@@ -26,14 +26,14 @@ class _RoundedIdFieldState extends State<RoundedIdField> {
 
   @override
   Widget build(BuildContext context) {
-    SignupBodyState? form = context.findAncestorStateOfType<SignupBodyState>();
-    LoginBodyState? form2 = context.findAncestorStateOfType<LoginBodyState>();
+    SignupFormState? signup = context.findAncestorStateOfType<SignupFormState>();
+    LoginFormState? login = context.findAncestorStateOfType<LoginFormState>();
     return TextFieldContanier(
         child: TextFormField(
       validator: (value) => CheckValidate().validateEmail(_emailFocus, value!),
       onChanged: (text) {
-        form?.email = text;
-        form2?.email = text;
+        signup?.email = text;
+        login?.email = text;
       },
       decoration: InputDecoration(
           icon: Icon(
