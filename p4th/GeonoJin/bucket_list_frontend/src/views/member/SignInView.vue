@@ -11,7 +11,7 @@ import SignInForm from "@/components/common/account/SignInForm";
 import axios from "axios";
 import cookies from 'vue-cookies';
 import Vue from 'vue';
-import {mapActions, mapState} from "vuex";
+import {mapState} from "vuex";
 
 Vue.use(cookies);
 
@@ -32,9 +32,7 @@ export default {
   //   }
   // },
   methods: {
-    ...mapActions([
-      'requestCurrentUserNickNameFromSpring'
-    ]),
+
     ...mapState([
       'isAuthenticated'
     ]),
@@ -44,24 +42,17 @@ export default {
 
         await axios.post("http://localhost:7777/member/sign-in", {email, password})
             .then((res) => {
-              if (localStorage.getItem('userInfo') == null && localStorage.getItem('userInfo') != res.data) {
+              if (localStorage.getItem('userInfo') == null) {
 
                 alert("로그인 성공!")
 
                 this.$store.state.isAuthenticated = true
-                console.log("isAuthenticated값: " + this.$store.state.isAuthenticated)
 
-                // this.$cookies.set("user", res.data, 3600);
+                this.$cookies.set("user", res.data, 3600);
                 localStorage.setItem("userInfo", JSON.stringify(res.data))
-
-                console.log(this.$store.state.currentLoginUserCheck)
 
                 this.$store.state.currentLoginUserCheck = true
 
-                const currentUserValue = res.data
-                console.log(currentUserValue)
-
-                this.requestCurrentUserNickNameFromSpring({currentUserValue})
                 this.$router.push("/home")
               } else {
                 alert("아이디 혹은 비밀번호가 존재하지 않거나 틀렸습니다!")
