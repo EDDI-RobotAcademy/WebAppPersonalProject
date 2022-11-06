@@ -21,7 +21,7 @@ export default {
   },
   mounted() {
     this.nicknameValue = this.$store.state.currentUserNickname
-    console.log("닉네임: "+this.nicknameValue)
+    console.log("닉네임: " + this.nicknameValue)
   },
   methods: {
     ...mapState([

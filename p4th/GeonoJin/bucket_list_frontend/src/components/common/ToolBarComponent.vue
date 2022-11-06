@@ -65,6 +65,10 @@ export default {
   },
   mounted() {
     this.loginStateCheckVal = this.$store.state.currentLoginUserCheck
+
+    if (localStorage.getItem('userInfo') != null){
+      this.loginStateCheckVal = true
+    }
     console.log("로그인 상태: " + this.loginStateCheckVal)
   },
   methods: {
