@@ -110,6 +110,7 @@ class _SignInPageState extends State<SignInPage> {
                               value!.isEmpty ? "password is Empty" : null,
                           style: const TextStyle(
                               fontSize: 20, color: Colors.white),
+                          obscureText : true,
                           decoration: const InputDecoration(
                               hintText: "Please enter Password",
                               hintStyle:
