@@ -20,17 +20,6 @@ export default {
   components: {
     SignInForm
   },
-  data() {
-    return {
-    }
-  },
-  // mounted() {
-  //   if (this.$store.state.isAuthenticated != false) {
-  //     this.isLogin = true;
-  //   } else {
-  //     this.isLogin = false;
-  //   }
-  // },
   methods: {
 
     ...mapState([

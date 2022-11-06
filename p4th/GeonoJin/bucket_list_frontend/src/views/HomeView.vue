@@ -24,7 +24,6 @@ export default {
 
     const currentUserValue = localStorage.getItem('userInfo');
 
-
     if (currentUserValue != null) {
       replacedUserValue = currentUserValue.replaceAll("\"", "")
       await this.requestCurrentUserNickNameFromSpring({replacedUserValue});
