@@ -10,6 +10,8 @@ class HttpService {
   static var resSignUp;
   static var resSignIn;
   static var reqList;
+  static var reqDeleteBoard;
+  static var reqChangeStatus;
 
   //회원가입 로그인
   emailValidation(String email) async {
@@ -56,7 +58,6 @@ class HttpService {
 
   //투두리스트
   requestListFromSpring() async {
-
     try {
       reqList = await http.get(
         Uri.http(httpUri, '/todos/list'),
@@ -64,6 +65,37 @@ class HttpService {
       );
 
     } catch (e) {
+      debugPrint(e.toString());
+    }
+  }
+  requestListDeleteFromSpring(int boardNo) async {
+    var data = {'boardNo': boardNo};
+    var body = json.encode(data);
+
+    try{
+      reqDeleteBoard = await http.delete(
+        Uri.http(httpUri, '/todos/$boardNo'),
+        headers: {"Content-Type": "application/json"},
+        body: body,
+      );
+
+    }catch (e){
+      debugPrint(e.toString());
+    }
+  }
+  requestListChangeStatusFromSpring(int boardNo) async {
+    var data = {'boardNo': boardNo};
+    var body = json.encode(data);
+
+    debugPrint(body.toString());
+    try{
+      reqChangeStatus = await http.put(
+        Uri.http(httpUri, '/todos/change-status/$boardNo'),
+        headers: {"Content-Type": "application/json"},
+        body: body,
+      );
+
+    }catch (e){
       debugPrint(e.toString());
     }
   }
