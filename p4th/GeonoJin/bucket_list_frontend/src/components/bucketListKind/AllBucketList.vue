@@ -1,7 +1,7 @@
 <template>
   <v-container>
     <header-component :nicknameValue="nicknameValue"/>
-    <br/><br/>
+    <br/>
     <div align="center">
       <h3>전체</h3>
     </div>

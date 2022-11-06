@@ -52,9 +52,8 @@ export default {
   data() {
     return {
       btnValues: [
-        {iconName: 'mdi-magnify'},
-        {name: '로그인', route: '/signIn'},
-        {name: '회원가입', route: '/signUp'},
+        {iconName: 'mdi-magnify', route: '/search'},
+        {iconName: 'mdi-menu'},
       ],
       loginBtnValues: [
         {iconName: 'mdi-magnify', route: '/search'},
@@ -64,12 +63,9 @@ export default {
     }
   },
   mounted() {
-    this.loginStateCheckVal = this.$store.state.currentLoginUserCheck
-
     if (localStorage.getItem('userInfo') != null){
       this.loginStateCheckVal = true
     }
-    console.log("로그인 상태: " + this.loginStateCheckVal)
   },
   methods: {
     ...mapState([
