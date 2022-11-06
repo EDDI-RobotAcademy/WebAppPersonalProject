@@ -1,6 +1,6 @@
 <template>
   <v-container class="headerFrom">
-    <tool-bar-component :nicknameValue="nicknameValue"/>
+    <tool-bar-component/>
     <br/>
     <v-divider></v-divider>
     <category-component/>
@@ -18,11 +18,6 @@ export default {
     ToolBarComponent,
     CategoryComponent
   },
-  props:{
-    nicknameValue: {
-      type: String
-    }
-  }
 }
 </script>
 

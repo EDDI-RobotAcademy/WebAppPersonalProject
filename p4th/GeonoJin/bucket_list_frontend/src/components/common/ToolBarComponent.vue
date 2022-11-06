@@ -36,18 +36,13 @@
 <script>
 import LogoComponent from "@/components/common/LogoComponent";
 import ButtonComponent from "@/components/common/ButtonComponent";
-import {mapState} from "vuex";
+import {mapActions, mapState} from "vuex";
 
 export default {
   name: "ToolBarComponent",
   components: {
     ButtonComponent,
     LogoComponent,
-  },
-  props: {
-    nicknameValue: {
-      type: String
-    }
   },
   data() {
     return {
@@ -59,20 +54,37 @@ export default {
         {iconName: 'mdi-magnify', route: '/search'},
         {iconName: 'mdi-account-circle-outline'},
       ],
-      loginStateCheckVal: false
+      loginStateCheckVal: false,
+      nicknameValue: ''
     }
   },
-  mounted() {
-    if (localStorage.getItem('userInfo') != null){
+  async mounted() {
+
+    let replacedUserValue
+
+    const currentUserValue = localStorage.getItem('userInfo');
+
+    if (currentUserValue != null) {
+      replacedUserValue = currentUserValue.replaceAll("\"", "")
+      await this.requestCurrentUserNickNameFromSpring({replacedUserValue});
+      this.nicknameValue = this.$store.state.currentUserNickname
+    }
+
+    if (localStorage.getItem('userInfo') != null) {
       this.loginStateCheckVal = true
     }
   },
   methods: {
     ...mapState([
       'isAuthenticated',
-      'currentLoginUserCheck'
+      'currentLoginUserCheck',
+      'currentUserNickname'
+    ]),
+    ...mapActions([
+      'requestCurrentUserNickNameFromSpring'
     ]),
   },
+
 
 }
 </script>

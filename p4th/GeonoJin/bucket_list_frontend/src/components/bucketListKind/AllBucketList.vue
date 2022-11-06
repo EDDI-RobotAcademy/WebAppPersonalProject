@@ -1,6 +1,6 @@
 <template>
   <v-container>
-    <header-component :nicknameValue="nicknameValue"/>
+    <header-component/>
     <br/>
     <div align="center">
       <h3>전체</h3>
@@ -26,11 +26,6 @@ export default {
   components: {
     BucketContentComponent,
     HeaderComponent,
-  },
-  props:{
-    nicknameValue:{
-      type: String
-    }
   },
   data(){
     return{
