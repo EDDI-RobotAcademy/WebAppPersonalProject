@@ -25,8 +25,30 @@ public class TodosController {
     }
 
     @GetMapping("/register")
-    public void registerMytodos(@RequestBody TodosRequest todosRequest) {
-        log.info("우선 포스트맨");
+    public void registerMyTodo(@RequestBody TodosRequest todosRequest) {
+        log.info("우선 포스트맨으로 저장되나 테스트");
         service.register(todosRequest);
     }
+
+    @DeleteMapping("/{boardNo}")
+    public void deleteMyTodo (@PathVariable("boardNo") Long boardNo) {
+        log.info("deleteMyTodo()");
+
+        service.remove(boardNo);
+    }
+
+    @PutMapping("/change-status/{boardNo}")
+    public Todos changeStatus (@PathVariable("boardNo") Long boardNo) {
+        return service.changeStatus(boardNo);
+    }
+
+//    @PutMapping("/{boardNo}")
+//    public Todos modifyMyTodo (@PathVariable("boardNo") Long boardNo, @RequestBody Todos todos) {
+//        log.info("modifyMyTodo()");
+//
+//        todos.setBoardNo(boardNo);
+//        service.modify(todos);
+//
+//        return todos;
+//    }
 }

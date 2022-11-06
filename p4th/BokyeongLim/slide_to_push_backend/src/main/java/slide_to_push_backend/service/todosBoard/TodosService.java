@@ -9,8 +9,7 @@ public interface TodosService {
 
     public List<Todos> list();
     public void register(TodosRequest todosRequest);
-
-//    public Board read(Long boardNo);
-//    public void modify(Board board);
-//    public void remove(Long boardNo);
+    public Todos changeStatus (Long boardNo);
+    public void modify(Todos todos);
+    public void remove(Long boardNo);
 }
