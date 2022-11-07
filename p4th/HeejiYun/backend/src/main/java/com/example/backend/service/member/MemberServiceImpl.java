@@ -76,7 +76,9 @@ public class MemberServiceImpl implements MemberService{
             log.info("request password: " + request.getPassword());
 
             if (!member.isRightPassword(request.getPassword())) {
-                throw new RuntimeException("잘못된 패스워드 입니다.");
+                log.info("패스워드 오류");
+                return "2";
+                // throw new RuntimeException("잘못된 패스워드 입니다.");
             }
 
             UUID userToken = UUID.randomUUID();
@@ -86,8 +88,9 @@ public class MemberServiceImpl implements MemberService{
 
             return userToken.toString();
         }
-
-        throw new RuntimeException("가입된 사용자가 아닙니다.");
+        log.info("가입된 사용자 아님");
+        return "1";
+        // throw new RuntimeException("가입된 사용자가 아닙니다.");
     }
 
 }
