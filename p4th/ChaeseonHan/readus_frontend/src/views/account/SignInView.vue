@@ -28,9 +28,9 @@ export default {
 
   methods: {
 
-    ...mapActions([ 'requestSignInToSpring' ]),
+    ...mapActions([ "requestLoggedInUserProfileToSpring" ]),
 
-    async onSubmit(payload) {
+    onSubmit(payload) {
       if (!this.isLogin) {
         const { email, password } = payload
         axios.post("http://localhost:7776/member/login", { email, password })
@@ -42,6 +42,8 @@ export default {
                 localStorage.setItem("userInfo", JSON.stringify(res.data))
                 this.isLogin = true
                 console.log(this.$store.state.isAuthenticated)
+                let userToken = this.$cookies.get("user")
+                this.requestLoggedInUserProfileToSpring({ userToken })
                 this.$router.push("/")
               } else {
                 alert("아이디 혹은 비밀번호가 존재하지 않거나 틀렸습니다!")
