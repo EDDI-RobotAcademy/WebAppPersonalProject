@@ -21,9 +21,6 @@ class MyApp extends StatelessWidget {
         title: 'Look Style',
         debugShowCheckedModeBanner: false,
         theme: ThemeData(
-          // fontFamily: 'jua',
-          splashColor: Colors.transparent,
-          highlightColor: Colors.transparent,
         ),
         home: SignInPage(),
         getPages: [
