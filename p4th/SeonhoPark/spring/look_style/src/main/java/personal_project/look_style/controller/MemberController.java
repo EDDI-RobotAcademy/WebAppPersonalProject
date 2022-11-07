@@ -37,4 +37,11 @@ public class MemberController {
 
         return service.signUp(form.toMemberSignUpRequest());
     }
+
+    @PostMapping("/sign-in")
+    public String memberSignIn(@RequestBody MemberSignInForm form) {
+        log.info("memberSignIn : " + form);
+
+        return service.signIn(form.toSignInRequest());
+    }
 }
