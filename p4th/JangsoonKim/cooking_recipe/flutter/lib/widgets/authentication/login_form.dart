@@ -65,7 +65,7 @@ class LoginFormState extends State<LoginForm> {
 
                   future.then((UserLoginResponse) {
                     Navigator.of(context)
-                        .push(MaterialPageRoute(builder: (context) {
+                        .pushReplacement(MaterialPageRoute(builder: (context) {
                       return HomeScreen();
                       //경로수정 or 로그인 완료 모달 띄울 예정..?
                     }));

@@ -5,7 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 
 class SpringApi {
-  static const String httpUri = '172.30.1.31:7777';
+정  static const String httpUri = '172.30.1.3:7777';
 
   Future<bool?> emailDuplicate(String email) async {
     var data = {'email': email};
@@ -68,7 +68,7 @@ class SpringApi {
   }
 
   Future<UserLoginResponse> login(UserLoginRequest request) async {
-    debugPrint("로그인 이메일: " + request.email);
+    debugPrint('로그인 이메일: ' + request.email);
 
     var response = await http.post(
       Uri.http(httpUri, '/member/sign-in'),
