@@ -26,10 +26,14 @@
         </v-text-field>
       </v-col>
 
-      <!-- 회원 메뉴 -->
-     <v-col>
-        <member-menu-component :nick-name="this.nickName" :is-login="this.isLogin"/>
+      <!-- 로그인 여부에 따른 회원 정보 메뉴 bar -->
+     <v-col v-if="this.$store.state.isAuthenticated">
+        <member-menu-component :nick-name="this.$store.state.nickName" :is-login="true" />
       </v-col>
+      <v-col v-else>
+        <member-menu-component :nick-name="this.nickName" :is-login="false" />
+      </v-col>
+
     </v-row>
 
 
@@ -37,20 +41,21 @@
 </template>
 
 <script>
-import MemberMenuComponent from "@/components/Header/MemberMenuComponent";
+
+import memberMenuComponent from "@/components/Header/MemberMenuComponent";
+
 export default {
   name: "AppBarComponent",
-  components: {MemberMenuComponent},
-  props: {
-    nickName: String,
-    isLogin: Boolean,
-  },
+  components: {memberMenuComponent },
+
   data() {
     return {
+      nickName : "방문자",
       links: [
         { text: '서재', name: 'HomeView', route: '/' },
         { text: '커뮤니티', name: 'SignIn', route: '/sign-in' },
       ],
+
     }
   },
 
