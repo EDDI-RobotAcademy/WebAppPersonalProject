@@ -1,12 +1,12 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:frontend/components/sign_up_form.dart';
 
 import '../../utility/size.dart';
 import '../../utility/validate.dart';
 
 class TextFormFieldPassword extends StatefulWidget {
-  const TextFormFieldPassword({Key? key}) : super(key: key);
+  const TextFormFieldPassword({Key? key, required this.controller}) : super(key: key);
+  final TextEditingController controller;
 
   @override
   State<TextFormFieldPassword> createState() => _TextFormFieldPasswordState();
@@ -18,20 +18,17 @@ class _TextFormFieldPasswordState extends State<TextFormFieldPassword> {
 
   @override
   Widget build(BuildContext context) {
-    SignUpFormState? form = context.findAncestorStateOfType<SignUpFormState>();
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Text("비밀번호"),
         const SizedBox(height: small_gap,),
         TextFormField(
+          controller: widget.controller,
           focusNode: _passwordFocus,
           obscureText: true,
           validator: (value) => CheckValidate().validatePassword(_passwordFocus, value!),
           autovalidateMode: AutovalidateMode.onUserInteraction,
-          onChanged: (text) {
-            form?.password = text;
-          },
           decoration: InputDecoration(
             hintText: "Enter password",
             enabledBorder:

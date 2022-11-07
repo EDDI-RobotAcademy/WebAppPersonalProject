@@ -6,7 +6,8 @@ import '../../utility/size.dart';
 import '../../utility/validate.dart';
 
 class TextFormFieldNickname extends StatefulWidget {
-  const TextFormFieldNickname({Key? key}) : super(key: key);
+  const TextFormFieldNickname({Key? key, required this.controller}) : super(key: key);
+  final TextEditingController controller;
 
   @override
   State<TextFormFieldNickname> createState() => _TextFormFieldNicknameState();
@@ -25,10 +26,10 @@ class _TextFormFieldNicknameState extends State<TextFormFieldNickname> {
         const SizedBox(height: small_gap,),
         TextFormField(
           focusNode: _nicknameFocus,
+          controller: widget.controller,
           validator: (value) => CheckValidate().validateNickname(_nicknameFocus, value!),
           autovalidateMode: AutovalidateMode.onUserInteraction,
           onChanged: (text) {
-            form?.nickname = text;
             form?.nicknamePass = false;
           },
           decoration: InputDecoration(
