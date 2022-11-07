@@ -21,7 +21,7 @@
                   <v-list-item-title>
                     <a href="/myPage"
                        style="text-decoration: none; color: black"
-                    ><h5>{{ nickName }}</h5></a>
+                    ><h5>{{ nickName }}<v-icon style="margin-bottom: 5px">mdi-home</v-icon></h5></a>
                   </v-list-item-title>
                 </v-list-item>
                 <hr color="black">

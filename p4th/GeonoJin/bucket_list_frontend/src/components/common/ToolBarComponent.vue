@@ -3,7 +3,7 @@
     <v-layout justify-center>
       <v-toolbar dense flat>
         <v-toolbar-title>
-          <a href="/">
+          <a href="/home">
             <logo-component
                 class="logo"
             />
@@ -68,6 +68,9 @@ export default {
       replacedUserValue = currentUserValue.replaceAll("\"", "")
       await this.requestCurrentUserNickNameFromSpring({replacedUserValue});
       this.nicknameValue = this.$store.state.currentUserNickname
+
+    } else {
+      this.$store.state.currentLoginUserCheck = false
     }
 
     if (localStorage.getItem('userInfo') != null) {
@@ -76,7 +79,6 @@ export default {
   },
   methods: {
     ...mapState([
-      'isAuthenticated',
       'currentLoginUserCheck',
       'currentUserNickname'
     ]),

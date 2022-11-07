@@ -1,8 +1,7 @@
 import {
     CHECK_DUPLICATE_EMAIL_TO_SPRING,
     CHECK_DUPLICATE_NICKNAME_TO_SPRING,
-    REQUEST_CURRENT_USER_NICKNAME_FROM_SPRING
-    // REQUEST_LOGIN_STATE_TO_SPRING
+    REQUEST_CURRENT_USER_NICKNAME_FROM_SPRING,
 } from './mutation-types'
 
 // import axios from "axios";
@@ -70,6 +69,18 @@ export default {
             })
             .catch((res) => {
                 console.log(res.data)
+            });
+    },
+    async requestChangeNicknameToSpring(payload) {
+        const {changeNickname} = payload
+        console.log(changeNickname)
+
+        axios.post(`http://localhost:7777/member/changeNickname/${changeNickname}`)
+            .then(() => {
+                alert("닉네임 수정 완료")
+            })
+            .catch((error) => {
+                alert(error)
             });
     },
 }
