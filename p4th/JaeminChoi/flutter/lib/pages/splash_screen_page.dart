@@ -1,5 +1,6 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
+import 'package:leaing_helper/utility/decorations/color.dart';
 
 class SplashScreenPage extends StatefulWidget{
   const SplashScreenPage({Key? key}) : super(key :key);
@@ -28,7 +29,7 @@ class _SplashScreenPageState extends State<SplashScreenPage>{
   Widget build(BuildContext context) {
     return Scaffold(
       body: Container(
-        color: Colors.black,
+        color: ColorStyle.defaultBlack,
         child: const Center(child: Image(image: AssetImage("assets/images/splashLogo.png"),))
       ),
     );

@@ -30,7 +30,7 @@ TextStyle welcomeTextStyleBlack(){
 
 TextStyle welcomeTextStyleYellow(){
   return const TextStyle(
-    color: ColorStyle.defaultButton,
+    color: ColorStyle.focusedTextForm,
     fontFamily: 'Cafe24Danjunghae',
     fontSize: 35,
     fontWeight: FontWeight.bold

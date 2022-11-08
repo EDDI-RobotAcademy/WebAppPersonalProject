@@ -1,11 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:leaing_helper/components/Forms/sign_in_form.dart';
-import 'package:leaing_helper/utility/decorations/buttonStyle.dart';
 import 'package:leaing_helper/utility/decorations/color.dart';
-
-import '../components/text_btn_box.dart';
-import '../utility/size.dart';
 
 class SignInPage extends StatelessWidget {
   const SignInPage({Key? key}) : super(key: key);
@@ -29,7 +25,7 @@ class SignInPage extends StatelessWidget {
                       child:Text("Not a member ? ", style: TextStyle(color: Colors.black , fontSize: 10), textAlign: TextAlign.right,) ,),
                     SizedBox(
                       width: 150,
-                      child:Text(" join now", style: TextStyle(color: ColorStyle.defaultButton , fontSize: 10), textAlign: TextAlign.left,) ,),
+                      child:Text(" join now", style: TextStyle(color: ColorStyle.focusedTextForm , fontSize: 10), textAlign: TextAlign.left,) ,),
                   ],
                 ),
               ],

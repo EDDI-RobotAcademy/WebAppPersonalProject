@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:leaing_helper/utility/decorations/color.dart';
 
+import '../../utility/size.dart';
+
 class CommonAppBar extends StatefulWidget implements PreferredSizeWidget {
   const CommonAppBar({Key? key, required this.appBar}) : super(key: key);
 
@@ -41,15 +43,15 @@ class _CommonAppBarState extends State<CommonAppBar> {
   Widget build(BuildContext context) {
     return AppBar(
       elevation: 0,
-      backgroundColor: ColorStyle.defaultBackground,
+      backgroundColor: ColorStyle.defaultBlack,
       title: InkWell(
         onTap: () {Navigator.pushNamed(context, "/main_page");},
         child: Ink(
-          height: 80,
-          width: 80,
+          height: xlarge_gap,
+          width: xlarge_gap,
           decoration: const BoxDecoration(
             image: DecorationImage(
-                image:  AssetImage("assets/images/CharacterWhiteVer.png"),
+                image:  AssetImage("assets/images/basicLogo.png"),
                 fit: BoxFit.cover),
           ),
         ),
