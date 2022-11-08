@@ -12,6 +12,7 @@ class HttpService {
   static var reqList;
   static var reqDeleteBoard;
   static var reqChangeStatus;
+  static var resRegisterTodos;
 
   //회원가입 로그인
   emailValidation(String email) async {
@@ -96,6 +97,22 @@ class HttpService {
       );
 
     }catch (e){
+      debugPrint(e.toString());
+    }
+  }
+  requestRegisterTodos(String content, String selectedDate) async{
+    var data = {'content': content, 'isFinished': false, 'selectedDate': selectedDate,};
+    var body = json.encode(data);
+
+    debugPrint(body.toString());
+
+    try {
+      resRegisterTodos = await http.post(
+        Uri.http(httpUri, '/todos/register'),
+        headers: {"Content-Type": "application/json"},
+        body: body,
+      );
+    } catch (e) {
       debugPrint(e.toString());
     }
   }

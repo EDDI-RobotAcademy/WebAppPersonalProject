@@ -1,7 +1,10 @@
 
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
+import 'package:slide_to_push_frontend/api/http_service_api.dart';
 import 'package:slide_to_push_frontend/components/date_picker_controller.dart';
 import 'package:slide_to_push_frontend/components/inputs/text_field_common.dart';
 import 'package:slide_to_push_frontend/utility/size.dart';
@@ -27,6 +30,23 @@ class _RegisterTodoFormState extends State<RegisterTodoForm> {
   void dispose() {
     todosController.dispose();
     super.dispose();
+  }
+
+  saveRegisterTodoInfo() async{
+    await HttpService().requestRegisterTodos(
+        todosController.text,
+        DateFormat('yyyy-MM-dd')
+            .format(Get.find<DatePickerController>()
+            .selectedDate.value)
+            .toString()
+    );
+
+    if(HttpService.resRegisterTodos.statusCode == 200) {
+      debugPrint("등록됨");
+      todosController.clear();
+    }else {
+      todosController.clear();
+    }
   }
 
   @override
@@ -65,6 +85,7 @@ class _RegisterTodoFormState extends State<RegisterTodoForm> {
             SizedBox(height: medium_gap,),
             ElevatedButton(
               onPressed:(){
+                saveRegisterTodoInfo();
                 formKey.currentState?.save();
               },
               child:Text("등록", style: TextStyle(color: Colors.white,)),
