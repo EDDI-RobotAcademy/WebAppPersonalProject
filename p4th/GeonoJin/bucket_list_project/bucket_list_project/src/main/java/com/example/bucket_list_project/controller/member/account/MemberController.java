@@ -1,8 +1,8 @@
-package com.example.bucket_list_project.controller.member;
+package com.example.bucket_list_project.controller.member.account;
 
 import com.example.bucket_list_project.controller.member.form.MemberSignInForm;
 import com.example.bucket_list_project.controller.member.form.MemberSignUpForm;
-import com.example.bucket_list_project.service.member.MemberService;
+import com.example.bucket_list_project.service.member.account.MemberService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -19,7 +19,6 @@ public class MemberController {
     @PostMapping("/check-email/{email}")
     public Boolean emailValidation(@PathVariable("email") String email) {
         log.info("emailValidation(): " + email);
-        log.info("이메일 전달하는 값" + memberService.emailValidation(email));
 
         return memberService.emailValidation(email);
     }
@@ -41,16 +40,15 @@ public class MemberController {
     @PostMapping ("/check-nickname/{nickName}")
     public Boolean NicknameDoubleCheck(@PathVariable("nickName") String nickName) {
         log.info("NicknameDoubleCheck: " + nickName);
-        log.info("닉네임 전달하는 값" + memberService.nicknameDoubleCheck(nickName));
 
         return memberService.nicknameDoubleCheck(nickName);
     }
 
-    @PostMapping("/get-current-user-nickname/{currentUserValue}")
-    public String currentUserNicknameCheck(@PathVariable("currentUserValue") String currentUserValue) {
-        log.info("currentUserNicknameCheck : " + currentUserValue);
+    @PostMapping("/get-current-user-nickname/{replacedUserValue}")
+    public String currentUserNicknameCheck(@PathVariable("replacedUserValue") String replacedUserValue) {
+        log.info("currentUserNicknameCheck: " + replacedUserValue);
 
-        return memberService.findCurrentUserNickName(currentUserValue);
+        return memberService.findCurrentUserNickName(replacedUserValue);
     }
 }
 

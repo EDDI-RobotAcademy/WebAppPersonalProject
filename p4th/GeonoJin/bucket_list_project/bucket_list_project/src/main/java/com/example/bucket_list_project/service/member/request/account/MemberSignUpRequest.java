@@ -1,4 +1,4 @@
-package com.example.bucket_list_project.service.member.request;
+package com.example.bucket_list_project.service.member.request.account;
 
 import com.example.bucket_list_project.entity.member.MemberInfo;
 import lombok.Getter;
