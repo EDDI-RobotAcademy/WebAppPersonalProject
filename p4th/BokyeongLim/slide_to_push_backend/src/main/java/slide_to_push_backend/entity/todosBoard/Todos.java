@@ -18,5 +18,5 @@ public class Todos {
 
     private Boolean isFinished;
 
-//    private Date date;
+    private Date selectedDate;
 }
