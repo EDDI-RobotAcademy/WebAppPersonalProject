@@ -1,6 +1,5 @@
 package kr.eddi.demo;
 
-import kr.eddi.demo.entity.MemberProfile;
 import kr.eddi.demo.service.MemberServiceImpl;
 import kr.eddi.demo.service.request.MemberLoginRequest;
 import kr.eddi.demo.service.request.MemberRegisterRequest;
@@ -37,7 +36,7 @@ public class MemberServiceTestCase {
 
     @Test
     void loginProfile() {
-        String nickName = service.getSignInMemberNickName("c0c90caa-0477-4524-81a5-918414c10f26");
+        String nickName = service.getSignInMemberNickName("");
         System.out.println("nickname: " + nickName);
     }
 

@@ -3,7 +3,6 @@ package kr.eddi.demo.service;
 
 import kr.eddi.demo.entity.Authentication;
 import kr.eddi.demo.entity.BasicAuthentication;
-import kr.eddi.demo.entity.MemberProfile;
 import kr.eddi.demo.entity.ReadUsMember;
 import kr.eddi.demo.repository.AuthenticationRepository;
 import kr.eddi.demo.repository.MemberRepository;
@@ -83,8 +82,8 @@ public class MemberServiceImpl implements MemberService{
 
         Optional<ReadUsMember> maybeMember = memberRepository.findById(memberId);
         ReadUsMember member = maybeMember.get();
-        String nickName = member.getProfile().getNickName();
-        return nickName;
+        return member.getNickName();
+
     }
 
 

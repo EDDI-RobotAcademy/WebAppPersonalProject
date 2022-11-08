@@ -1,10 +1,7 @@
 package kr.eddi.demo.service;
 
-import kr.eddi.demo.entity.MemberProfile;
 import kr.eddi.demo.service.request.MemberLoginRequest;
 import kr.eddi.demo.service.request.MemberRegisterRequest;
-
-import java.util.UUID;
 
 public interface MemberService {
     Boolean signUp(MemberRegisterRequest request);

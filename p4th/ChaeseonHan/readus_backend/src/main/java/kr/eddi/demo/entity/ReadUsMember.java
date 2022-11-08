@@ -5,11 +5,11 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.UpdateTimestamp;
 
 import javax.persistence.*;
-import java.util.HashSet;
-import java.util.Optional;
-import java.util.Set;
+import java.util.*;
 
 @Entity
 @Builder
@@ -27,16 +27,31 @@ public class ReadUsMember {
     private String email;
 
     @Getter
-    @OneToOne(mappedBy = "member", fetch = FetchType.LAZY, cascade = CascadeType.PERSIST)
-    private MemberProfile profile;
+    @Column(nullable = false)
+    private String nickName;
+
+    @Getter
+    @Column(length = 200)
+    private String biography;
+
+    @CreationTimestamp
+    private Date createdDate;
 
     @OneToMany(mappedBy = "member", fetch = FetchType.LAZY)
     private Set<Authentication> authentications = new HashSet<>();
 
-    public ReadUsMember(String email, MemberProfile profile) {
+    public ReadUsMember(String email, String nickName, String biography) {
         this.email = email;
-        this.profile = profile;
-        profile.setMember(this);
+        this.nickName = nickName;
+        this.biography = biography;
+    }
+
+    public void modifyNickname(String nickName) {
+        this.nickName = nickName;
+    }
+
+    public void modifyBiography(String biography) {
+        this.biography = biography;
     }
 
 
