@@ -14,20 +14,12 @@ public class BoardWriteRequest {
 
     public final String category;
     public final String title;
-    public final String content;
+    public final String contents;
 
     public final String memberEmail;
 
     public CommunityBoard toCommunityboard(ReadUsMember member) {
-        CommunityBoard communityBoard = CommunityBoard.builder()
-                .category(this.category)
-                .title(this.title)
-                .content(this.content)
-                .writer(member.getNickName())
-                .readUsMember(member)
-                .build();
-
-        return communityBoard;
+        return new CommunityBoard(category, title, contents, member);
     }
 
 }

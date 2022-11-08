@@ -9,6 +9,7 @@ import kr.eddi.demo.service.request.BoardWriteRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.transaction.Transactional;
 import java.util.Optional;
 
 
@@ -23,13 +24,15 @@ public class BoardServiceImpl implements BoardService{
 
 
     @Override
+    @Transactional
     public Boolean write(BoardWriteRequest boardWriteRequest) {
 
         Optional<ReadUsMember> maybeMember = memberRepository.findByEmail(boardWriteRequest.getMemberEmail());
 
-        if(!maybeMember.isEmpty()) {
+        if(maybeMember.isPresent()) {
             ReadUsMember member = maybeMember.get();
             CommunityBoard board = boardWriteRequest.toCommunityboard(member);
+            board.updateBoardToMember();
             boardRepository.save(board);
             return true;
         } else {

@@ -9,8 +9,6 @@ import javax.persistence.*;
 import java.util.Date;
 
 @Entity
-@ToString
-@Builder
 @AllArgsConstructor
 @NoArgsConstructor
 public class CommunityBoard {
@@ -29,8 +27,8 @@ public class CommunityBoard {
     @Column(length = 32, nullable = false)
     private String writer;
 
-    @Lob
-    private String content;
+    @Column
+    private String contents;
 
     @CreationTimestamp
     private Date createdDate;
@@ -38,13 +36,25 @@ public class CommunityBoard {
     @UpdateTimestamp
     private Date updatedDate;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "user_id")
-    private ReadUsMember readUsMember;
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "member_id")
+    private ReadUsMember member_id;
 
-    public void modifyBoard(String title, String content) {
+    public CommunityBoard(String category, String title, String contents, ReadUsMember member) {
+        this.category = category;
         this.title = title;
-        this.content = content;
+        this.contents = contents;
+        this.writer = member.getNickName();
+        this.member_id = member;
+    }
+
+    public void updateBoardToMember() {
+        this.member_id.updateCommunityBoard(this);
+    }
+
+    public void modifyBoard(String title, String contents) {
+        this.title = title;
+        this.contents = contents;
     }
 
 }

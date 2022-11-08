@@ -12,7 +12,6 @@ import javax.persistence.*;
 import java.util.*;
 
 @Entity
-@Builder
 @NoArgsConstructor
 @AllArgsConstructor
 public class ReadUsMember {
@@ -40,10 +39,17 @@ public class ReadUsMember {
     @OneToMany(mappedBy = "member", fetch = FetchType.LAZY)
     private Set<Authentication> authentications = new HashSet<>();
 
+    @OneToMany(mappedBy = "member_id", fetch = FetchType.LAZY)
+    private List<CommunityBoard> boards = new ArrayList<>();
+
     public ReadUsMember(String email, String nickName, String biography) {
         this.email = email;
         this.nickName = nickName;
         this.biography = biography;
+    }
+
+    public void updateCommunityBoard(CommunityBoard communityBoard) {
+        boards.add(communityBoard);
     }
 
     public void modifyNickname(String nickName) {

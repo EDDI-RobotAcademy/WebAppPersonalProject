@@ -14,7 +14,7 @@ public class BoardServiceTestCase {
 
     @Test
     void writeBoardTest() {
-        BoardWriteRequest boardWriteRequest = new BoardWriteRequest("정보", "안녕하세요", "새 도서 출간되었습니다!", "test@gmail.com");
+        BoardWriteRequest boardWriteRequest = new BoardWriteRequest("정보", "이건되잖아요?!!?!?", "한글", "test123@gmail.com");
         Boolean isItOk = service.write(boardWriteRequest);
         System.out.println("answer: " + isItOk);
     }
