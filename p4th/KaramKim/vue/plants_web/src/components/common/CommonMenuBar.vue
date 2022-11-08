@@ -16,8 +16,6 @@
           </router-link>
         </v-toolbar-title>
         <v-spacer></v-spacer>
-
-        <!-- 비로그인 사용자용, v-if 추후 구현 필요-->
         <div style="height: 120px;" v-if="checkUserInfo == null">
           <router-link style="text-decoration: none;" to="/sign-in">
             <span class="grey--text mr-3" style="font-size: 13px">로그인</span>
@@ -27,39 +25,36 @@
             <span class="grey--text" style="font-size: 13px">회원가입</span>
           </router-link>
         </div>
-
-        <!-- 로그인 사용자용, v-if 추후 구현 필요 -->
         <div style="height: 120px;" v-if="checkUserInfo != null">
           <router-link style="text-decoration: none;" to="/my-page">
             <span class="grey--text mr-3" style="font-size: 13px">나의 정보</span>
           </router-link>
-
           <router-link @click.native="logout" style="text-decoration: none;" to="/">
             <span class="grey--text" style="font-size: 13px" >로그아웃</span>
           </router-link>
         </div>
+        <template v-slot:extension>
+          <v-container>
+            <v-row no-gutters>
+              <v-col class="col-12 col-sm-4">
+                <router-link style="text-decoration: none; font-weight: bold" to="/search">
+                  <p class="light-green--text text--darken-3" align="center">식물 검색</p>
+                </router-link>
+              </v-col>
+              <v-col class="col-12 col-sm-4">
+                <router-link style="text-decoration: none; font-weight: bold" to="/my-plant">
+                  <p class="light-green--text text--darken-3" align="center">나의 식물</p>
+                </router-link>
+              </v-col>
+              <v-col class="col-12 col-sm-4">
+                <router-link style="text-decoration: none; font-weight: bold" to="/question-board">
+                  <p class="light-green--text text--darken-3" align="center">질문게시판</p>
+                </router-link>
+              </v-col>
+            </v-row>
+          </v-container>
+        </template>
       </v-app-bar>
-
-    <!-- 추후 페이지 연결 구현 예정 -->
-    <v-container>
-      <v-row no-gutters>
-        <v-col class="col-12 col-sm-4">
-          <router-link style="text-decoration: none; font-weight: bold" to="/search">
-            <p class="light-green--text text--darken-3" align="center">식물 검색</p>
-          </router-link>
-        </v-col>
-        <v-col class="col-12 col-sm-4">
-          <router-link style="text-decoration: none; font-weight: bold" to="/my-plant">
-            <p class="light-green--text text--darken-3" align="center">나의 식물</p>
-          </router-link>
-        </v-col>
-        <v-col class="col-12 col-sm-4">
-          <router-link style="text-decoration: none; font-weight: bold" to="/question-board">
-            <p class="light-green--text text--darken-3" align="center">질문게시판</p>
-          </router-link>
-        </v-col>
-      </v-row>
-    </v-container>
     <v-divider></v-divider>
   </div>
 </template>
