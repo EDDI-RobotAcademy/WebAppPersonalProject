@@ -10,6 +10,7 @@ class PasswordTextFormField extends StatefulWidget {
 
   static String password = '';
   final double widthSize;
+
   @override
   State<PasswordTextFormField> createState() => _PasswordTextFormFieldState();
 }
@@ -26,9 +27,8 @@ class _PasswordTextFormFieldState extends State<PasswordTextFormField> {
         crossAxisAlignment: CrossAxisAlignment.center,
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          const SizedBox(height: medium_gap,),
           TextFormField(
-            decoration: textFormDecoration("비밀번호"),
+            decoration: textFormDecoration("Password"),
             obscureText:true,
             keyboardType: TextInputType.visiblePassword,
             focusNode: _passwordFocus,

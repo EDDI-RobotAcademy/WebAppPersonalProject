@@ -13,6 +13,7 @@ class EmailTextFormField extends StatefulWidget {
   static String email = '';
   final double widthSize;
 
+
   @override
   State<EmailTextFormField> createState() => _EmailTextFormFieldState();
 }
@@ -26,12 +27,11 @@ class _EmailTextFormFieldState extends State<EmailTextFormField> {
       return Container(
         width: widget.widthSize,
         child: Column(
-          crossAxisAlignment: CrossAxisAlignment.center,
-          mainAxisAlignment: MainAxisAlignment.center,
+          crossAxisAlignment: CrossAxisAlignment.start,
+          mainAxisAlignment: MainAxisAlignment.start,
           children: [
-            const SizedBox(height: medium_gap,),
             TextFormField(
-              decoration: textFormDecoration("이메일"),
+              decoration: textFormDecoration("Enter your email"),
               keyboardType: TextInputType.emailAddress,
               focusNode: _emailFocus,
               autovalidateMode : AutovalidateMode.onUserInteraction ,
