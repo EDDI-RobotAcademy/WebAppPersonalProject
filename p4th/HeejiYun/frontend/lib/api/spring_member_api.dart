@@ -64,7 +64,7 @@ class SpringMemberApi {
     return json.decode(response.body);
   }
 
-  Future<String?> signIn (MemberSignInRequest request) async {
+  Future<SignInResponse> signIn (MemberSignInRequest request) async {
     var data = { 'email': request.email, 'password': request.password };
     var body = json.encode(data);
 
@@ -80,25 +80,21 @@ class SpringMemberApi {
 
     if (response.statusCode == 200) {
       debugPrint("통신 확인");
+      debugPrint(response.body);
+
+      return SignInResponse(response.body);
+    } else {
+      debugPrint("통신 실패");
+      return SignInResponse("로그인 실패");
     }
-
-    debugPrint(response.body);
-
-    return json.decode(response.body);
   }
 }
-/*
+
 class SignInResponse {
-  String userToken;
+  var userToken;
 
   SignInResponse(this.userToken);
-
-  factory SignInResponse.fromJson(Map<String, dynamic> json) {
-    return SignInResponse(json['userToken']);
-  }
 }
-* */
-
 
 class MemberSignUpRequest {
   String email;
