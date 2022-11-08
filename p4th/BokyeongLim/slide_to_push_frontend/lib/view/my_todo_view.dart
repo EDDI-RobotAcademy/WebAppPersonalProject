@@ -2,10 +2,11 @@ import 'package:flutter/material.dart';
 
 import 'package:slide_to_push_frontend/utility/color.dart';
 import '../components/todos_list.dart';
+import '../utility/routes.dart';
 import '../utility/size.dart';
 
 class MyTodoView extends StatelessWidget {
-  const MyTodoView({Key? key}) : super(key: key);
+  MyTodoView({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -20,8 +21,8 @@ class MyTodoView extends StatelessWidget {
               Icons.edit,
             ),
             backgroundColor: ColorPicker.defaultBlack,
-            onPressed: (){},
-          ),
+            onPressed: () {Navigator.of(context).pushNamed(Routes.registerTodo);}
+          )
         ),
       ),
       appBar: AppBar(
@@ -63,10 +64,6 @@ class MyTodoView extends StatelessWidget {
                   child:Text("TODAY", style: TextStyle(color: Colors.white),), color: ColorPicker.defaultBlack,),
                 TodosList(),
                 SizedBox(height: 2.5, child: Container(color: ColorPicker.defaultBlack),),
-                TextButton(
-                  onPressed: (){  },
-                  child: Text('클릭해서 통신확인', style:TextStyle(color: ColorPicker.subTextButton, fontSize: 18)),
-                ),
               ],
             ),
           )
