@@ -71,11 +71,15 @@ export default {
                 console.log(res.data)
             });
     },
-    async requestChangeNicknameToSpring(payload) {
-        const {changeNickname} = payload
-        console.log(changeNickname)
+    // eslint-disable-next-line no-empty-pattern
+    async requestChangeNicknameToSpring( { } ,payload) {
 
-        axios.post(`http://localhost:7777/member/changeNickname/${changeNickname}`)
+        const {nickName, currentUserToken} = payload
+
+        console.log(nickName, currentUserToken)
+
+        axios.post("http://localhost:7777/member/set/changeNickname",
+            {nickName, currentUserToken})
             .then(() => {
                 alert("닉네임 수정 완료")
             })

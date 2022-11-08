@@ -69,6 +69,7 @@ export default {
     return {
       nickName: '',
       signInCheckNicknamePassValue: false,
+      currentUserToken: ''
     }
   },
   methods: {
@@ -80,8 +81,8 @@ export default {
     ]),
     onSubmit() {
       if (this.$refs.form.validate()) {
-        const {nickName} = this
-        this.$emit("submit", {nickName})
+        const {nickName, currentUserToken} = this
+        this.$emit("submit", {nickName, currentUserToken})
       } else {
         alert("닉네임을 입력하세요")
       }
@@ -91,7 +92,12 @@ export default {
       await this.checkDuplicateNicknameToSpring({nickName})
 
       if (this.$store.state.nicknamePassValue) {
+        const userToken = localStorage.getItem('userInfo')
+        const replacedUserValue = userToken.replaceAll("\"", "")
+
+        this.currentUserToken = replacedUserValue
         this.signInCheckNicknamePassValue = true
+
       } else {
         this.signInCheckNicknamePassValue = false
       }

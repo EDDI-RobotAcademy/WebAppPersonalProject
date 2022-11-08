@@ -16,15 +16,19 @@ export default {
     ...mapActions([
       'requestChangeNicknameToSpring'
     ]),
-    onSubmit(payload){
-      const {nickName} = payload
-      console.log(nickName)
+    async onSubmit(payload){
+
+      const {nickName, currentUserToken} = payload
+      console.log("1"+nickName, currentUserToken)
 
       if (nickName == null || nickName == '' || nickName == ' ') {
         alert("정확한 닉네임을 입력해주세요")
       } else {
-        this.requestChangeNicknameToSpring({nickName})
-        this.$router.push({name: 'MyPageView'})
+        const {nickName} = payload
+        console.log("2"+nickName, currentUserToken)
+
+        await this.requestChangeNicknameToSpring({nickName, currentUserToken})
+        await this.$router.push({name: 'HomeView'})
       }
     }
   }
