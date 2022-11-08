@@ -1,6 +1,7 @@
 package com.example.demo.controller.member;
 
 
+import com.example.demo.controller.member.form.MemberRegisterForm;
 import com.example.demo.service.member.MemberService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,6 +22,13 @@ public class MemberController {
         log.info("emailValidation(): " + email);
 
         return service.emailValidation(email);
+    }
+
+    @PostMapping("/sign-up")
+    public Boolean signUp(@RequestBody MemberRegisterForm form) {
+        log.info("SignUpForm: " + form);
+
+        return service.signUp(form.toMemberRegisterRequest());
     }
 
 }
