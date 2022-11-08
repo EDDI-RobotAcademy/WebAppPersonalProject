@@ -24,10 +24,10 @@
       <div><router-link :to="{ name: 'QuestionBoardListView' }"><v-btn color="purple darken-1" class="white--text ma-5">질문게시판</v-btn></router-link></div>
     </v-flex>
     <v-flex class="orange white--text">
-      <div><router-link :to="{ name: 'TradeBoardView' }"><v-btn color="purple darken-1" class="white--text ma-5">사고팔고게시판</v-btn></router-link></div>
+      <div><router-link :to="{ name: 'TradeBoardListView' }"><v-btn color="purple darken-1" class="white--text ma-5">사고팔고게시판</v-btn></router-link></div>
     </v-flex>
     <v-flex class="red white--text">
-      <div><router-link :to="{ name: 'GradeUpBoardView' }"><v-btn color="purple darken-1" class="white--text ma-5">등업게시판</v-btn></router-link></div>
+      <div><router-link :to="{ name: 'GradeUpBoardListView' }"><v-btn color="purple darken-1" class="white--text ma-5">등업게시판</v-btn></router-link></div>
     </v-flex>
     <v-flex class="yellow white--text">
       <div><router-link :to="{ name: 'InsoyaMainView' }"><v-btn color="purple darken-1" class="white--text ma-5">인소야메인</v-btn></router-link></div>

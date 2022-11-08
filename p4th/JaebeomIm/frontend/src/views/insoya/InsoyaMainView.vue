@@ -36,9 +36,9 @@
 
     <v-btn class="indigo white--text" color="orange darken-1"><router-link :to="{ name: 'QuestionBoardListView' }">질문게시판</router-link></v-btn><br/><br/>
 
-    <v-btn class="indigo white--text" color="orange darken-1"><router-link :to="{ name: 'TradeBoardView' }">사고팔고게시판</router-link></v-btn><br/><br/>
+    <v-btn class="indigo white--text" color="orange darken-1"><router-link :to="{ name: 'TradeBoardListView' }">사고팔고게시판</router-link></v-btn><br/><br/>
 
-    <v-btn class="indigo white--text" color="orange darken-1"><router-link :to="{ name: 'GradeUpBoardView' }">등업게시판</router-link></v-btn><br/><br/>
+    <v-btn class="indigo white--text" color="orange darken-1"><router-link :to="{ name: 'GradeUpBoardListView' }">등업게시판</router-link></v-btn><br/><br/>
 
   </v-container>
 </template>

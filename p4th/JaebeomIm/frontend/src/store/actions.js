@@ -9,7 +9,10 @@ import {
     REQUEST_PRODUCT_FROM_SPRING,
     REQUEST_FREE_BOARD_LIST_FROM_SPRING,
     REQUEST_FREE_BOARD_FROM_SPRING,
-    REQUEST_QUESTION_BOARD_FROM_SPRING, REQUEST_QUESTION_BOARD_LIST_FROM_SPRING,
+    REQUEST_QUESTION_BOARD_FROM_SPRING,
+    REQUEST_QUESTION_BOARD_LIST_FROM_SPRING,
+    REQUEST_TRADE_BOARD_LIST_FROM_SPRING,
+    REQUEST_TRADE_BOARD_FROM_SPRING,
 } from './mutation-types'
 
 // npm install axios --save-dev
@@ -93,6 +96,16 @@ export default {
                 commit(REQUEST_QUESTION_BOARD_LIST_FROM_SPRING, res.data)
             })
     },
+
+    requestTradeBoardListFromSpring ({ commit }) {
+        console.log('requestTradeBoardListFromSpring()')
+
+        return axios.get('http://localhost:7777/insoya/jpa/board/trade/list')
+            .then((res) => {
+                commit(REQUEST_TRADE_BOARD_LIST_FROM_SPRING, res.data)
+            })
+    },
+
     requestBoardFromSpring ({ commit }, boardNo) {
         console.log('requestBoardFromSpring()')
 
@@ -117,6 +130,18 @@ export default {
                 commit(REQUEST_QUESTION_BOARD_FROM_SPRING, res.data)
             })
     },
+
+    requestTradeBoardFromSpring ({ commit }, boardNo) {
+        console.log('requestTradeBoardFromSpring()')
+
+        return axios.get(`http://localhost:7777/insoya/jpa/board/trade/${boardNo}`)
+            .then((res) => {
+                commit(REQUEST_TRADE_BOARD_FROM_SPRING, res.data)
+            })
+    },
+
+
+
     // eslint-disable-next-line no-empty-pattern
     requestCreateBoardContentsToSpring ({ }, payload) {
         console.log('requestCreateBoardContentsToSpring()')
@@ -150,6 +175,20 @@ export default {
                 alert('게시물 등록 성공')
             })
     },
+
+    // eslint-disable-next-line no-empty-pattern
+    requestCreateTradeBoardContentsToSpring ({ }, payload) {
+        console.log('requestCreateTradeBoardContentsToSpring()')
+
+        const { title, content, writer } = payload
+        return axios.post('http://localhost:7777/insoya/jpa/board/trade/register',
+            { title, content, writer })
+            .then(() => {
+                alert('게시물 등록 성공')
+            })
+    },
+
+
     // eslint-disable-next-line no-empty-pattern
     requestDeleteBoardToSpring ({ }, boardNo) {
         console.log('requestDeleteBoardToSpring()')
@@ -177,6 +216,17 @@ export default {
                 alert('삭제 성공')
             })
     },
+
+    // eslint-disable-next-line no-empty-pattern
+    requestDeleteTradeBoardToSpring ({ }, boardNo) {
+        console.log('requestDeleteTradeBoardToSpring()')
+
+        return axios.delete(`http://localhost:7777/insoya/jpa/board/trade/${boardNo}`)
+            .then(() => {
+                alert('삭제 성공')
+            })
+    },
+
     // eslint-disable-next-line no-empty-pattern
     requestBoardModifyToSpring ({ }, payload) {
         console.log('requestBoardModifyToSpring()')
@@ -208,6 +258,19 @@ export default {
         const { title, content, boardNo, writer, regDate } = payload
 
         return axios.put(`http://localhost:7777/insoya/jpa/board/question/${boardNo}`,
+            { title, content, writer, regDate })
+            .then(() => {
+                alert('수정 성공')
+            })
+    },
+
+    // eslint-disable-next-line no-empty-pattern
+    requestTradeBoardModifyToSpring ({ }, payload) {
+        console.log('requestTradeBoardModifyToSpring()')
+
+        const { title, content, boardNo, writer, regDate } = payload
+
+        return axios.put(`http://localhost:7777/insoya/jpa/board/trade/${boardNo}`,
             { title, content, writer, regDate })
             .then(() => {
                 alert('수정 성공')
