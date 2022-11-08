@@ -9,12 +9,17 @@
                 로그인
               </div>
               <div class="d-flex">
-                <v-text-field v-model="email" label="이메일" color="light-green darken-3"
-                              :rules="email_rule" outlined clearable/>
+                <common-text-field
+                  v-model="email"
+                  label="이메일"
+                  :rules="email_rule"/>
               </div>
               <div class="d-flex">
-                <v-text-field v-model="password" label="비밀번호" type="password" color="light-green darken-3"
-                              :rules="password_rule" outlined clearable/>
+                <common-text-field
+                    v-model="password"
+                    label="비밀번호"
+                    type="password"
+                    :rules="password_rule"/>
               </div>
               <common-button
                 block
