@@ -46,14 +46,8 @@ class _SignInFormState extends State<SignInForm> {
                   style: welcomeTextStyleYellow(),
                   textAlign: TextAlign.left,)),
             const SizedBox(height: xmedium_gap),
-            SizedBox(
-                width: double.infinity,
-                child: Text("Email" , style: defaultTextFieldTextStyle(),textAlign: TextAlign.left,)),
-            const EmailTextFormField(widthSize: large_container_width),
+            const EmailTextFormField(widthSize: large_container_width , usedPosition: "signIn",),
             const SizedBox(height: medium_gap),
-            SizedBox(
-                width: double.infinity,
-                child: Text("password" , style: defaultTextFieldTextStyle(),textAlign: TextAlign.left,)),
             const PasswordTextFormField(widthSize: large_container_width),
             const SizedBox(height: large_gap),
             const SizedBox(

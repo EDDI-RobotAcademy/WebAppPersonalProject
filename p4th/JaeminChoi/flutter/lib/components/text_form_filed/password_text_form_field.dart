@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import '../../utility/decorations/text_form_decoration.dart';
+import '../../utility/decorations/text_style.dart';
 import '../../utility/validation/form_validate.dart';
 import '../../utility/size.dart';
 
@@ -27,6 +28,10 @@ class _PasswordTextFormFieldState extends State<PasswordTextFormField> {
         crossAxisAlignment: CrossAxisAlignment.center,
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
+          SizedBox(
+              width: double.infinity,
+              child: Text("Password" , style: defaultTextFieldTextStyle(),textAlign: TextAlign.left,)),
+          const SizedBox(height: 7,),
           TextFormField(
             decoration: textFormDecoration("Password"),
             obscureText:true,

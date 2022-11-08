@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import '../../utility/decorations/text_form_decoration.dart';
+import '../../utility/decorations/text_style.dart';
 import '../../utility/validation/form_validate.dart';
 import '../../utility/size.dart';
 
@@ -26,9 +27,12 @@ class _NickNameTextFormFieldState extends State<NickNameTextFormField> {
         crossAxisAlignment: CrossAxisAlignment.center,
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          const SizedBox(height: medium_gap,),
+          SizedBox(
+              width: double.infinity,
+              child: Text("Nick name" , style: defaultTextFieldTextStyle(),textAlign: TextAlign.left,)),
+          const SizedBox(height: 7,),
           TextFormField(
-            decoration: textFormDecoration("닉네임"),
+            decoration: textFormDecoration("NickName"),
             keyboardType: TextInputType.text,
             focusNode: _NickNameFocus,
             autovalidateMode : AutovalidateMode.onUserInteraction ,
