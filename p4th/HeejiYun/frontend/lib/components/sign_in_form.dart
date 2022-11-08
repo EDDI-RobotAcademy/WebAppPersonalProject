@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:frontend/components/text_form_fields/text_form_field_email.dart';
 import 'package:frontend/components/text_form_fields/text_form_field_password.dart';
 
@@ -15,7 +16,10 @@ class SignInForm extends StatefulWidget {
 }
 
 class _SignInFormState extends State<SignInForm> {
-  late String? signInResponse;
+  static FlutterSecureStorage storage = FlutterSecureStorage();
+  dynamic userInfo = '';
+
+  late SignInResponse signInResponse;
 
   late String email;
   late String password;
@@ -31,8 +35,18 @@ class _SignInFormState extends State<SignInForm> {
     passwordController.addListener(() {
       password = passwordController.text;
     }) ;
+    
+    WidgetsBinding.instance?.addPostFrameCallback((_) {
+      _asyncMethod();
+    });
     super.initState();
   }
+
+  _asyncMethod() async {
+    userInfo = await storage.read(key: 'login');
+    debugPrint(userInfo);
+  }
+
 
   @override
   void dispose() {
@@ -55,17 +69,29 @@ class _SignInFormState extends State<SignInForm> {
             const SizedBox(height: medium_gap,),
             TextButton(
               onPressed: () async {
-                if (_formKey.currentState!.validate()) {
+                if (_formKey.currentState!.validate() && userInfo == null) {
                   signInResponse = await SpringMemberApi().signIn(MemberSignInRequest(email, password));
-                  if(signInResponse == null) {
-                    showResultDialog(context, "로그인 실패!", "로그인 실패");
+                  if(signInResponse.userToken.toString() == "1") {
+                    showResultDialog(context, "로그인 실패!", "가입된 사용자 아님");
+                  } else if (signInResponse.userToken.toString() == "2") {
+                    showResultDialog(context, "로그인 실패!", "일치하지 않는 패스워드");
                   } else {
+                    storage.write(key: 'login', value: signInResponse.userToken.toString());
                     Navigator.pushNamed(context, "/home");
                   }
+                } else if(userInfo != null){
+                  showResultDialog(context, "로그인 실패!", "이미 로그인 중입니다.");
                 }
               },
               child: const Text("로그인"),
-            )
+            ),
+            TextButton(
+              onPressed: () async {
+                await storage.deleteAll();
+                userInfo = await storage.read(key: 'login');
+              },
+              child: const Text("storage 삭제(임시)")
+            ),
           ],
         )
     );
