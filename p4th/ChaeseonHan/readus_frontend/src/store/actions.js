@@ -1,4 +1,4 @@
-import {REQUEST_EMAIL_PASS_CHECK, REQUEST_LOGGED_IN_USER_PROFILE} from './mutation-types'
+import {REQUEST_BESTSELLER_LIST, REQUEST_EMAIL_PASS_CHECK, REQUEST_LOGGED_IN_USER_PROFILE} from './mutation-types'
 
 import axios from 'axios'
 import Vue from 'vue';
@@ -58,7 +58,20 @@ export default {
             }).catch((error) => {
                 console.log(error)
             })
-    }
+    },
+
+    requestBestSellerListToAladin ( { commit } ) {
+        console.log()
+
+        return axios.get('http://www.aladin.co.kr/ttb/api/ItemList.aspx?ttbkey=ttbmdmodina341559002&QueryType=Bestseller&MaxResults=10&start=1&SearchTarget=Book&output=js&Version=20131101')
+            .then((res) => {
+                commit(REQUEST_BESTSELLER_LIST, res.data)
+            }).catch((error) => {
+                console.log(error)
+            })
+    },
+
+
 
 
 }
