@@ -9,6 +9,9 @@ import slide_to_push_backend.entity.todosBoard.Todos;
 import slide_to_push_backend.repository.todosBoard.TodosRepository;
 
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
@@ -26,8 +29,14 @@ public class TodosServiceImpl implements TodosService{
     }
 
     @Override
-    public void register(TodosRequest todosRequest) {
+    public void register(TodosRequest todosRequest) throws ParseException {
         Todos todos = new Todos();
+
+        //전달받은 날짜 형변환 String > Date
+        SimpleDateFormat changeDateType = new SimpleDateFormat("yyyy-MM-dd");
+        Date selectedDate = changeDateType.parse(todosRequest.getSelectedDate());
+
+        todos.setSelectedDate(selectedDate);
         todos.setContent(todosRequest.getContent());
         todos.setIsFinished(todosRequest.getIsFinished());
 
