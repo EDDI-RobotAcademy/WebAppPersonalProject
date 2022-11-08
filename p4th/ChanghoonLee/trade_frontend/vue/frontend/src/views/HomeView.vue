@@ -1,15 +1,26 @@
 <template>
-  <hello-world />
+  <v-container>
+      <TopMenubarForm/>
+      <toolbar-form/>
+  </v-container>
 </template>
 
 <script>
-  import HelloWorld from '../components/HelloWorld'
 
-  export default {
-    name: 'Home',
+import ToolbarForm from "@/components/toolbar/ToolbarForm";
+export default {
+  name: 'HomeView',
 
-    components: {
-      HelloWorld,
-    },
+  components: {
+    ToolbarForm
+  },
+  data() {
+    return {
+
+    }
+  },
+  methods: {
+
   }
+}
 </script>
