@@ -16,15 +16,22 @@
                 <v-text-field v-model="password" label="비밀번호" type="password" color="light-green darken-3"
                               :rules="password_rule" outlined clearable/>
               </div>
-              <v-btn type="submit" block x-large color="light-green"
-                     class="mt-1 font-weight-bold white--text" :disabled="false">
-                로그인
-              </v-btn>
+              <common-button
+                block
+                x-large
+                btn-name="로그인"
+                type="submit"
+                color="light-green"
+                class="mt-1 white--text"
+                :disabled="false"/>
               <router-link to="/sign-up" style="text-decoration: none">
-              <v-btn type="submit" block x-large color="white"
-                     class="mt-6 font-weight-bold light-green--text" :disabled="false">
-                회원가입
-              </v-btn>
+                <common-button
+                  block
+                  x-large
+                  btn-name="회원가입"
+                  color="white"
+                  class="mt-6 light-green--text"
+                  :disabled="false"/>
               </router-link>
             </v-form>
           </v-card-text>

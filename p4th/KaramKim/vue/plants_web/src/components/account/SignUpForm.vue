@@ -31,12 +31,16 @@
               </div>
               <div class="d-flex">
                 <v-text-field outlined v-model="zipcode" label="우편번호" :disabled="true" color="light-green darken-3" required/>
-                <v-btn text x-large outlined style="font-size: 13px"
-                       class="mt-1 ml-5" color="light-green darken-3"
-                       @click="callDaumAddressApi"
-                       :disabled="false">
-                  주소 확인
-                </v-btn>
+                <common-button
+                  text
+                  x-large
+                  outlined
+                  btn-name="주소 확인"
+                  style="font-size: 13px"
+                  color="light-green darken-3"
+                  class="mt-1 ml-5"
+                  @click="callDaumAddressApi"
+                  :disabled="false"/>
               </div>
               <div class="d-flex">
                 <v-text-field outlined v-model="city" label="도시" :disabled="true" color="light-green darken-3" required/>
@@ -47,10 +51,14 @@
               <div class="d-flex">
                 <v-text-field outlined v-model="addressDetail" label="상세 주소" :disabled="false" color="light-green darken-3" required/>
               </div>
-              <v-btn type="submit" block x-large
-                     class="mt-1 font-weight-bold white--text" color="light-green" :disabled="(emailPass & streetPass) == false">
-                가입하기
-              </v-btn>
+              <common-button
+                block
+                x-large
+                btn-name="가입하기"
+                type="submit"
+                color="light-green"
+                class="mt-1 white--text"
+                :disabled="(emailPass & streetPass) == false"/>
             </v-form>
           </v-card-text>
         </v-card>

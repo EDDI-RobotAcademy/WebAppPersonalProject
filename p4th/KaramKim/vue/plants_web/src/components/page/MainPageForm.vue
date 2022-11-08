@@ -17,13 +17,18 @@
         </v-col>
       </v-row>
     </div>
-    <div class="subsciption" align="center">
+    <div align="center">
       <p>함께하는 식물을 등록해주세요.</p>
     </div>
-    <div align="center" class="btn mt-10 mb-10">
-      <v-btn @click="registerPlants" rounded x-large class="light-green--text text--darken-3" color="white" width="300px">
-        <span>식물 등록하기</span>
-      </v-btn>
+    <div align="center" class="btn">
+      <common-button
+        rounded
+        x-large
+        btn-name="나의 식물 등록하기"
+        color="white"
+        class="light-green--text text--darken-3"
+        width="300px"
+        @click="registerPlants"/>
     </div>
   </div>
 </template>
@@ -53,10 +58,7 @@ export default {
 
 <style scoped>
 .btn {
-  padding-bottom: 100px;
-}
-.subsciption {
-  padding-top: 100px;
+  padding: 100px;
 }
 
 
