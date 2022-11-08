@@ -52,7 +52,14 @@ class SignupFormState extends State<SignupForm> {
                 ),
                 onPressed: () {
                   _formKey.currentState?.save();
-                  SpringApi().emailDuplicate(email);
+                  Future<bool?> future = SpringApi().emailDuplicate(email);
+                  print(bool);
+                  future.then((bool) {
+                    print("사용가능한 이메일");
+                  }).catchError((error) {
+                    print("사용불가 이메일");
+                    //임시
+                  });
                 },
                 child: const Text(
                   "이메일 중복 확인",
@@ -95,7 +102,13 @@ class SignupFormState extends State<SignupForm> {
                 ),
                 onPressed: () {
                   _formKey.currentState?.save();
-                  SpringApi().nicknameDuplicate(nickname);
+                  Future<bool?> future = SpringApi().nicknameDuplicate(nickname);
+                  future.then((bool) {
+                    print("사용가능한 닉네임");
+                  }).catchError((error) {
+                    print("사용불가한 닉네임");
+                    //임시
+                  });
                 },
                 child: const Text(
                   "닉네임 중복 확인",
@@ -108,7 +121,7 @@ class SignupFormState extends State<SignupForm> {
               text: "회원가입",
               onPressed: () {
                 if (_formKey.currentState!.validate()) {
-                  SpringApi().signUp(MemberSignUpRequest(email, password, nickname));
+                  SpringApi().signUp(UserSignUpRequest(email, password, nickname));
                   Navigator.of(context)
                       .push(MaterialPageRoute(builder: (context) {
                     return const LoginScreen();
