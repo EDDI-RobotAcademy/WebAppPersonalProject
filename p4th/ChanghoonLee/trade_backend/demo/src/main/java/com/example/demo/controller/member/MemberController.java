@@ -1,6 +1,7 @@
 package com.example.demo.controller.member;
 
 
+import com.example.demo.controller.member.form.MemberLoginForm;
 import com.example.demo.controller.member.form.MemberRegisterForm;
 import com.example.demo.service.member.MemberService;
 import lombok.extern.slf4j.Slf4j;
@@ -29,6 +30,13 @@ public class MemberController {
         log.info("SignUpForm: " + form);
 
         return service.signUp(form.toMemberRegisterRequest());
+    }
+
+    @PostMapping("/sign-in")
+    public String signIn(@RequestBody MemberLoginForm form) {
+        log.info("LoginForm: " + form);
+
+        return service.signIn(form.toLoginRequest());
     }
 
 }
