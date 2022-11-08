@@ -4,15 +4,6 @@
       <div class="category_menu">
         <button-component :btnValues="btnKinds" class="mx-2"/>
       </div>
-      <!--    <v-btn-->
-      <!--        v-for="(btnKind, index) in btnKinds" :key="index" :to="btnKind.route"-->
-      <!--        class="mx-2"-->
-      <!--        depressed-->
-      <!--        rounded-->
-      <!--        color="white"-->
-      <!--    >-->
-      <!--      {{ btnKind.name }}-->
-      <!--    </v-btn>-->
     </v-layout>
   </v-container>
 </template>

@@ -1,7 +1,6 @@
 <template>
-  <all-bucket-list :nicknameValue="nicknameValue"/>
+  <all-bucket-list/>
 </template>
-
 <script>
 
 import cookies from 'vue-cookies';
@@ -14,19 +13,11 @@ Vue.use(cookies);
 export default {
   name: 'HomeView',
   components: {AllBucketList},
-  data() {
-    return {
-      nicknameValue: ''
-    }
-  },
-  mounted() {
-    this.nicknameValue = this.$store.state.currentUserNickname
-    console.log("닉네임: "+this.nicknameValue)
-  },
+
   methods: {
     ...mapState([
       'currentUserNickname'
-    ])
+    ]),
   }
 }
 </script>

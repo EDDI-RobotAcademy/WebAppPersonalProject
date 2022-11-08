@@ -1,12 +1,13 @@
-package com.example.bucket_list_project.service.member;
+package com.example.bucket_list_project.service.member.account;
 
 import com.example.bucket_list_project.entity.member.Authentication;
 import com.example.bucket_list_project.entity.member.BasicAuthentication;
 import com.example.bucket_list_project.entity.member.MemberInfo;
 import com.example.bucket_list_project.repository.member.AuthenticationRepository;
 import com.example.bucket_list_project.repository.member.MemberRepository;
-import com.example.bucket_list_project.service.member.request.MemberSignInRequest;
-import com.example.bucket_list_project.service.member.request.MemberSignUpRequest;
+import com.example.bucket_list_project.service.member.request.account.MemberSignInRequest;
+import com.example.bucket_list_project.service.member.request.account.MemberSignUpRequest;
+import com.example.bucket_list_project.service.member.request.accountSet.ReplaceNicknameRequest;
 import com.example.bucket_list_project.service.member.security.RedisService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -41,6 +42,7 @@ public class MemberServiceImpl implements MemberService {
 
     @Override
     public Boolean signUp(MemberSignUpRequest signUpRequest) {
+
         final MemberInfo member = signUpRequest.toMemberInfo();
         memberRepository.save(member);
 
@@ -69,6 +71,7 @@ public class MemberServiceImpl implements MemberService {
             redisService.deleteByKey(userToken.toString());
             redisService.setKeyAndValue(userToken.toString(), memberInfo.getId());
 
+
             return userToken.toString();
         }
 
@@ -87,8 +90,8 @@ public class MemberServiceImpl implements MemberService {
     }
 
     @Override
-    public String findCurrentUserNickName(String currentUserValue) {
-        Long currentUserId = redisService.getValueByKey(currentUserValue);
+    public String findCurrentUserNickName(String replacedUserValue) {
+        Long currentUserId = redisService.getValueByKey(replacedUserValue);
 
         Optional<MemberInfo> maybeMemberId = memberRepository.findById(currentUserId);
 

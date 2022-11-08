@@ -1,8 +1,7 @@
 import {
     CHECK_DUPLICATE_EMAIL_TO_SPRING,
     CHECK_DUPLICATE_NICKNAME_TO_SPRING,
-    REQUEST_CURRENT_USER_NICKNAME_FROM_SPRING
-    // REQUEST_LOGIN_STATE_TO_SPRING
+    REQUEST_CURRENT_USER_NICKNAME_FROM_SPRING,
 } from './mutation-types'
 
 // import axios from "axios";
@@ -21,11 +20,9 @@ export default {
                 if (res.data) {
                     alert("사용 가능한 이메일입니다.")
                     commit(CHECK_DUPLICATE_EMAIL_TO_SPRING, res.data);
-                    console.log("이메일 중복체크 결과값(사용가능)(actions -> res.data: " + res.data)
                 } else {
                     alert("중복된 이메일입니다.")
                     commit(CHECK_DUPLICATE_EMAIL_TO_SPRING, res.data);
-                    console.log("이메일 중복체크 결과값(중복)(actions -> res.data: " + res.data)
                 }
             })
     },
@@ -38,12 +35,10 @@ export default {
                 if (res.data) {
                     alert("사용 가능한 닉네임입니다.")
                     commit(CHECK_DUPLICATE_NICKNAME_TO_SPRING, res.data);
-                    console.log(" 닉네임 중복체크 결과값(사용가능)(actions -> res.data: " + res.data)
 
                 } else {
                     alert("사용중인 닉네임입니다.")
                     commit(CHECK_DUPLICATE_NICKNAME_TO_SPRING, res.data);
-                    console.log(" 닉네임 중복체크 결과값(중복)(actions -> res.data: " + res.data)
                 }
             })
     },
@@ -66,15 +61,30 @@ export default {
     },
     async requestCurrentUserNickNameFromSpring({commit}, payload) {
 
-        const {currentUserValue} = payload
+        const {replacedUserValue} = payload
 
-        await axios.post(`http://localhost:7777/member/get-current-user-nickname/${currentUserValue}`)
+        await axios.post(`http://localhost:7777/member/get-current-user-nickname/${replacedUserValue}`)
             .then((res) => {
                 commit(REQUEST_CURRENT_USER_NICKNAME_FROM_SPRING, res.data)
-                console.log("닉네임: " + res.data)
             })
             .catch((res) => {
                 console.log(res.data)
+            });
+    },
+    // eslint-disable-next-line no-empty-pattern
+    async requestChangeNicknameToSpring( { } ,payload) {
+
+        const {nickName, currentUserToken} = payload
+
+        console.log(nickName, currentUserToken)
+
+        axios.post("http://localhost:7777/member/set/changeNickname",
+            {nickName, currentUserToken})
+            .then(() => {
+                alert("닉네임 수정 완료")
+            })
+            .catch((error) => {
+                alert(error)
             });
     },
 }

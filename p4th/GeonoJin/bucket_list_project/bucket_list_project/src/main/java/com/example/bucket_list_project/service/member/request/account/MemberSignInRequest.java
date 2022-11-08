@@ -1,4 +1,4 @@
-package com.example.bucket_list_project.service.member.request;
+package com.example.bucket_list_project.service.member.request.account;
 
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;

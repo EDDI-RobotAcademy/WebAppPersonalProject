@@ -21,13 +21,14 @@
                   <v-list-item-title>
                     <a href="/myPage"
                        style="text-decoration: none; color: black"
-                    ><h5>{{ nickName }}</h5></a>
+                    ><h5>{{ nickName }}<v-icon style="margin-bottom: 5px">mdi-home</v-icon></h5></a>
                   </v-list-item-title>
                 </v-list-item>
                 <hr color="black">
                 <v-list-item>
                   <v-list-item-title align="center">
-                    <div style="margin-bottom: 10px; margin-top: 5px">
+                    <div style="margin-bottom: 10px; margin-top: 5px"
+                    >
                       <v-btn color="white" rounded elevation="0">
                         <h4>마이버킷</h4>
                       </v-btn>
@@ -44,8 +45,41 @@
               </v-list>
             </template>
           </v-menu>
-
         </div>
+
+        <div v-else-if="btnValue.iconName == 'mdi-menu'">
+          <v-menu offset-y>
+            <template v-slot:activator="{ on, attrs }">
+              <v-btn color="white" rounded elevation="0" :to="btnValue.route"
+                     v-bind="attrs"
+                     v-on="on">
+                <div>
+                  {{ btnValue.name }}
+                  <v-icon>{{ btnValue.iconName }}</v-icon>
+                </div>
+              </v-btn>
+            </template>
+            <template>
+              <v-list width="auto" height="auto">
+                <v-list-item>
+                  <v-list-item-title align="center">
+                    <div style="margin-bottom: 10px; margin-top: 5px">
+                      <v-btn color="white" rounded elevation="0" to="/signIn">
+                        <h4>로그인</h4>
+                      </v-btn>
+                    </div>
+                    <div>
+                      <v-btn color="white" rounded elevation="0" to="/signUp">
+                        <h4>회원가입</h4>
+                      </v-btn>
+                    </div>
+                  </v-list-item-title>
+                </v-list-item>
+              </v-list>
+            </template>
+          </v-menu>
+        </div>
+
         <div v-else>
           <v-btn color="white" rounded elevation="0" :to="btnValue.route">
             <div>
@@ -78,6 +112,7 @@ export default {
     signOut() {
       if (localStorage.getItem('userInfo') == null) {
         alert("이미 로그아웃 되었습니다.");
+        this.$router.push({name: 'HomeView'})
       } else {
         localStorage.removeItem("userInfo");
         alert("로그아웃 되었습니다.")

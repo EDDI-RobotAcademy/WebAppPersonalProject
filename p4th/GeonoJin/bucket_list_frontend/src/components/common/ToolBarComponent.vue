@@ -3,7 +3,7 @@
     <v-layout justify-center>
       <v-toolbar dense flat>
         <v-toolbar-title>
-          <a href="/">
+          <a href="/home">
             <logo-component
                 class="logo"
             />
@@ -36,7 +36,7 @@
 <script>
 import LogoComponent from "@/components/common/LogoComponent";
 import ButtonComponent from "@/components/common/ButtonComponent";
-import {mapState} from "vuex";
+import {mapActions, mapState} from "vuex";
 
 export default {
   name: "ToolBarComponent",
@@ -44,35 +44,49 @@ export default {
     ButtonComponent,
     LogoComponent,
   },
-  props: {
-    nicknameValue: {
-      type: String
-    }
-  },
   data() {
     return {
       btnValues: [
-        {iconName: 'mdi-magnify'},
-        {name: '로그인', route: '/signIn'},
-        {name: '회원가입', route: '/signUp'},
+        {iconName: 'mdi-magnify', route: '/search'},
+        {iconName: 'mdi-menu'},
       ],
       loginBtnValues: [
         {iconName: 'mdi-magnify', route: '/search'},
         {iconName: 'mdi-account-circle-outline'},
       ],
-      loginStateCheckVal: false
+      loginStateCheckVal: false,
+      nicknameValue: ''
     }
   },
-  mounted() {
-    this.loginStateCheckVal = this.$store.state.currentLoginUserCheck
-    console.log("로그인 상태: " + this.loginStateCheckVal)
+  async mounted() {
+
+    let replacedUserValue
+
+    const currentUserValue = localStorage.getItem('userInfo');
+
+    if (currentUserValue != null) {
+      replacedUserValue = currentUserValue.replaceAll("\"", "")
+      await this.requestCurrentUserNickNameFromSpring({replacedUserValue});
+      this.nicknameValue = this.$store.state.currentUserNickname
+
+    } else {
+      this.$store.state.currentLoginUserCheck = false
+    }
+
+    if (localStorage.getItem('userInfo') != null) {
+      this.loginStateCheckVal = true
+    }
   },
   methods: {
     ...mapState([
-      'isAuthenticated',
-      'currentLoginUserCheck'
+      'currentLoginUserCheck',
+      'currentUserNickname'
+    ]),
+    ...mapActions([
+      'requestCurrentUserNickNameFromSpring'
     ]),
   },
+
 
 }
 </script>

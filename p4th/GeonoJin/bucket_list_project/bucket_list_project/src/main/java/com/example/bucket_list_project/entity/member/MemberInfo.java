@@ -1,5 +1,6 @@
 package com.example.bucket_list_project.entity.member;
 
+import lombok.Data;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
@@ -9,6 +10,7 @@ import java.util.Optional;
 import java.util.Set;
 
 @Entity
+@Data
 @NoArgsConstructor
 public class MemberInfo {
 

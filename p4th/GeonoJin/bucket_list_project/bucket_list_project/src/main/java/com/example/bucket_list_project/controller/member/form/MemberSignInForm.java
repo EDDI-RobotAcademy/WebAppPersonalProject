@@ -1,7 +1,7 @@
 package com.example.bucket_list_project.controller.member.form;
 
 
-import com.example.bucket_list_project.service.member.request.MemberSignInRequest;
+import com.example.bucket_list_project.service.member.request.account.MemberSignInRequest;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
