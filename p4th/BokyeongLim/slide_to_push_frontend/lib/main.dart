@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:slide_to_push_frontend/utility/color.dart';
 import 'package:slide_to_push_frontend/utility/routes.dart';
 
@@ -14,6 +15,15 @@ class MyApp extends StatelessWidget {
 
     return MaterialApp(
       title: 'Slide to Push',
+      localizationsDelegates: [
+        GlobalMaterialLocalizations.delegate,
+        GlobalWidgetsLocalizations.delegate,
+        GlobalCupertinoLocalizations.delegate,
+      ],
+      supportedLocales: [
+        const Locale('en', 'US'),
+        const Locale('ko', 'KO'),
+      ],
       routes: Routes.routes,
       theme: ThemeData(
         fontFamily: 'AppleSDGothicNeo',
