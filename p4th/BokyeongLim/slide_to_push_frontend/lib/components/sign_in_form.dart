@@ -1,6 +1,3 @@
-import 'dart:convert';
-
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:slide_to_push_frontend/api/http_service_api.dart';
@@ -8,7 +5,7 @@ import 'package:slide_to_push_frontend/api/states/sign_in_info.dart';
 
 import 'package:slide_to_push_frontend/components/inputs/text_field_email.dart';
 import 'package:slide_to_push_frontend/components/inputs/text_field_password.dart';
-import 'package:slide_to_push_frontend/components/test_view.dart';
+import 'package:slide_to_push_frontend/view/my_todo_view.dart';
 
 import 'package:slide_to_push_frontend/utility/buttons.dart';
 import 'package:slide_to_push_frontend/utility/routes.dart';
@@ -84,7 +81,7 @@ class _SignInFormState extends State<SignInForm> {
       Navigator.pushReplacement<void, void>(
         context,
         MaterialPageRoute<void>(
-          builder: (BuildContext context) => TestHomeView(account: accountInfo),
+          builder: (BuildContext context) => MyTodoView(),
         ),
       );
     } else {
