@@ -7,6 +7,7 @@ import slide_to_push_backend.controller.todosBoard.request.TodosRequest;
 import slide_to_push_backend.entity.todosBoard.Todos;
 import slide_to_push_backend.service.todosBoard.TodosService;
 
+import java.text.ParseException;
 import java.util.List;
 
 @Slf4j
@@ -24,9 +25,9 @@ public class TodosController {
         return service.list();
     }
 
-    @GetMapping("/register")
-    public void registerMyTodo(@RequestBody TodosRequest todosRequest) {
-        log.info("우선 포스트맨으로 저장되나 테스트");
+    @PostMapping("/register")
+    public void registerMyTodo(@RequestBody TodosRequest todosRequest) throws ParseException {
+        log.info(todosRequest.toString());
         service.register(todosRequest);
     }
 
