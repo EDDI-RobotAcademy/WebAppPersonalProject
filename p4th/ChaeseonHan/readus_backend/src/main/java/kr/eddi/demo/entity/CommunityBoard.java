@@ -10,6 +10,7 @@ import java.util.Date;
 
 @Entity
 @ToString
+@Builder
 @AllArgsConstructor
 @NoArgsConstructor
 public class CommunityBoard {
@@ -40,13 +41,6 @@ public class CommunityBoard {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id")
     private ReadUsMember readUsMember;
-
-    public CommunityBoard(String category, String title, String content) {
-        this.category = category;
-        this.title = title;
-        this.content = content;
-        this.writer = readUsMember.getNickName();
-    }
 
     public void modifyBoard(String title, String content) {
         this.title = title;
