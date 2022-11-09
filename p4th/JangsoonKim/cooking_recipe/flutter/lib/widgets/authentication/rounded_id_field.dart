@@ -31,6 +31,7 @@ class _RoundedIdFieldState extends State<RoundedIdField> {
     return TextFieldContanier(
         child: TextFormField(
       validator: (value) => CheckValidate().validateEmail(_emailFocus, value!),
+      autovalidateMode: AutovalidateMode.onUserInteraction,
       onChanged: (text) {
         signup?.email = text;
         login?.email = text;

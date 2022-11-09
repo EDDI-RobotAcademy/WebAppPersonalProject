@@ -26,6 +26,7 @@ class SignupFormState extends State<SignupForm> {
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
+가
     return Form(
       key: _formKey,
       child: Background(
@@ -98,7 +99,7 @@ class SignupFormState extends State<SignupForm> {
                   style: TextStyle(color: Colors.grey[700]),
                 ),
                 RoundedNicknameField(
-                    hinText: "3~10자 사이, 한글, 영문", onChanged: (value) {}),
+                    hinText: '한글, 영문 포함 3자이상 10자', onChanged: (value) {}),
               ],
             ),
             ClipRRect(
@@ -168,7 +169,7 @@ class SignupFormState extends State<SignupForm> {
             actions: [
               CupertinoDialogAction(
                 isDefaultAction: true,
-                child: Text("확인"),
+                child: const Text("확인"),
                 onPressed: () {
                   Navigator.pop(context);
                 },

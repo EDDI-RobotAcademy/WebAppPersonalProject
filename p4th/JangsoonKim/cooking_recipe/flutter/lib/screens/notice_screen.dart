@@ -1,3 +1,4 @@
+import 'package:demo/widgets/custom_appbar.dart';
 import 'package:flutter/material.dart';
 
 import '../widgets/drawer/custom_drawer.dart';
@@ -8,14 +9,8 @@ class NoticeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      endDrawer: CustomDrawer(),
-      appBar: AppBar(
-        backgroundColor: Colors.transparent,
-        elevation: 0.0,
-        foregroundColor: Colors.black,
-        title: Text('EZ.COOK'),
-        centerTitle: false,
-      ),
+      endDrawer: const CustomDrawer(),
+      appBar: customAppbar(),
       body: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [

@@ -14,7 +14,7 @@ class SocialLoginDivider extends StatelessWidget {
       width: size.width * 0.8,
       child: Row(
         children: <Widget>[
-          CustomDivider(),
+          customDivider(),
           const Padding(
             padding: EdgeInsets.symmetric(horizontal: 10),
             child: Text(
@@ -23,7 +23,7 @@ class SocialLoginDivider extends StatelessWidget {
               TextStyle(color: Colors.orange, fontWeight: FontWeight.w600),
             ),
           ),
-          CustomDivider()
+          customDivider()
         ],
       ),
     );

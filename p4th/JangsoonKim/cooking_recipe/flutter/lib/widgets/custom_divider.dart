@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-Expanded CustomDivider() {
+Expanded customDivider() {
   return const Expanded(
       child: Divider(
         color: Colors.black,

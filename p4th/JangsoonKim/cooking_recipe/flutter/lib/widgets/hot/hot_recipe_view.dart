@@ -1,3 +1,4 @@
+import 'package:demo/app_theme.dart';
 import 'package:demo/model/tmp_hot_recipe.dart';
 import 'package:flutter/material.dart';
 
@@ -46,7 +47,7 @@ class _HotRecipeViewState extends State<HotRecipeView> {
                             Expanded(
                               child: Container(
                                 decoration: const BoxDecoration(
-                                  color: Color(0xFFEEF1F3),
+                                  color: AppTheme.chalk,
                                   borderRadius: BorderRadius.all(
                                       Radius.circular(16.0)),
                                 ),

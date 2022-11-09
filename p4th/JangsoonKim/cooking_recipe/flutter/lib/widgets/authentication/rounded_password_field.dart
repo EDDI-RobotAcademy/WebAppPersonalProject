@@ -14,10 +14,18 @@ class RoundedPasswordField extends StatefulWidget {
 
   @override
   State<RoundedPasswordField> createState() => _RoundedPasswordFieldState();
+
 }
 
 class _RoundedPasswordFieldState extends State<RoundedPasswordField> {
   final FocusNode _passwordFocus = FocusNode();
+  bool? _passwordVisible;
+
+  @override
+  void initState() {
+    super.initState();
+    _passwordVisible = false;
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -26,20 +34,28 @@ class _RoundedPasswordFieldState extends State<RoundedPasswordField> {
     return TextFieldContanier(
         child: TextFormField(
           validator: (value) => CheckValidate().validatePassword(_passwordFocus, value!),
+          autovalidateMode: AutovalidateMode.onUserInteraction,
           onChanged: (text) {
             signupForm?.password = text;
             loginForm?.password = text;
           },
-          obscureText: true,
+          obscureText: !_passwordVisible!,
           decoration: InputDecoration(
               hintText: widget.hinText,
               icon: const Icon(
                 Icons.lock,
                 color: Colors.orange,
               ),
-              suffixIcon: const Icon(
-                Icons.visibility,
-                color: Colors.orange,
+              suffixIcon: IconButton(
+                icon: Icon(
+                  _passwordVisible! ? Icons.visibility : Icons.visibility_off,
+                  color: Colors.orange,
+                ),
+                onPressed: () {
+                  setState(() {
+                    _passwordVisible = !_passwordVisible!;
+                  });
+                },
               ),
               border: InputBorder.none
           ),

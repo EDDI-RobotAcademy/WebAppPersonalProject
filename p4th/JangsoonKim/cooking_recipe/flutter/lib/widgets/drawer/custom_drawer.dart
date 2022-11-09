@@ -1,8 +1,8 @@
 import 'package:demo/screens/event_screen.dart';
 import 'package:demo/screens/favorite_list_screen.dart';
-import 'package:demo/screens/home_screen.dart';
 import 'package:demo/screens/notice_screen.dart';
 import 'package:demo/widgets/drawer/drawer_header.dart';
+import 'package:demo/widgets/screen_controller.dart';
 import 'package:flutter/material.dart';
 
 import '../../screens/profile_screen.dart';
@@ -25,89 +25,89 @@ class CustomDrawer extends StatelessWidget {
                 height: size.height * 0.05,
               ),
               CustomDrawerHeader(),
-              Divider(
+              const Divider(
                 color: Colors.black54,
               ),
               const SizedBox(
                 height: 40,
               ),
               ListTile(
-                leading: Icon(
+                leading: const Icon(
                   Icons.home_outlined,
                   size: 28,
                 ),
-                title: Text('홈'),
-                trailing: Icon(Icons.arrow_forward_ios_outlined,
+                title: const Text('홈'),
+                trailing: const Icon(Icons.arrow_forward_ios_outlined,
                 size: 28,),
                 onTap: () {
                   Navigator.of(context)
                       .pushReplacement(MaterialPageRoute(builder: (context) {
-                    return HomeScreen();
+                    return const ScreenController();
                   }));
                 },
               ),
               SizedBox(height: size.height * 0.01,),
               ListTile(
-                leading: Icon(
+                leading: const Icon(
                   Icons.favorite_outline,
                   size: 28,
                 ),
-                title: Text('찜 목록'),
-                trailing: Icon(Icons.arrow_forward_ios_outlined),
+                title: const Text('찜 목록'),
+                trailing: const Icon(Icons.arrow_forward_ios_outlined),
                 onTap: () {
                   Navigator.of(context)
                       .push(MaterialPageRoute(builder: (context) {
-                    return FavoriteListScreen();
+                    return const FavoriteListScreen();
                   }));
                 },
               ),
               SizedBox(height: size.height * 0.01,),
               ListTile(
-                leading: Icon(
+                leading: const Icon(
                   Icons.person_outlined,
                   size: 28,
                 ),
-                title: Text('마이페이지'),
-                trailing: Icon(Icons.arrow_forward_ios_outlined),
+                title: const Text('마이페이지'),
+                trailing: const Icon(Icons.arrow_forward_ios_outlined),
                 onTap: () {
                   Navigator.of(context)
                       .push(MaterialPageRoute(builder: (context) {
-                    return ProfileScreen();
+                    return const ProfileScreen();
                   }));
                 },
               ),
               SizedBox(height: size.height * 0.01,),
               ListTile(
-                leading: Icon(
+                leading: const Icon(
                   Icons.campaign_outlined,
                   size: 28,
                 ),
-                title: Text('공지사항'),
+                title: const Text('공지사항'),
                 trailing: Icon(Icons.arrow_forward_ios_outlined),
                 onTap: () {
                   Navigator.of(context)
                       .push(MaterialPageRoute(builder: (context) {
-                    return NoticeScreen();
+                    return const NoticeScreen();
                   }));
                 },
               ),
               SizedBox(height: size.height * 0.01,),
               ListTile(
-                leading: Icon(
+                leading: const Icon(
                   Icons.calendar_today_outlined,
                   size: 28,
                 ),
-                title: Text('이벤트'),
-                trailing: Icon(Icons.arrow_forward_ios_outlined),
+                title: const Text('이벤트'),
+                trailing: const Icon(Icons.arrow_forward_ios_outlined),
                 onTap: () {
                   Navigator.of(context)
                       .push(MaterialPageRoute(builder: (context) {
-                    return EventScreen();
+                    return const EventScreen();
                   }));
                 },
               ),
               SizedBox(height: size.height * 0.01,),
-              Divider(
+              const Divider(
                 color: Colors.black54,
               )
             ],

@@ -10,9 +10,9 @@ class SearchScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       endDrawer: CustomDrawer(),
-      appBar: CustomAppbar(),
+      appBar: customAppbar(),
       body: Column(
-        children: [
+        children: const [
           Text("검색페이지"),
         ],
       ),
