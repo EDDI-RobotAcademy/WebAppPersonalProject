@@ -1,13 +1,5 @@
 export default {
-    buyBoards: [],
-    buyBoard: {},
 
-    freeBoards: [],
-    freeBoard: {},
+    checkDuplicateEmail: false
 
-    reportBoards: [],
-    reportBoard: {},
-
-    sellBoards: [],
-    sellBoard: {},
 }

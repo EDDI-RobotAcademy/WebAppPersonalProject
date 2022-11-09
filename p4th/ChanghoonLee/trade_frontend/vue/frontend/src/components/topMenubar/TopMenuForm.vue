@@ -8,7 +8,7 @@
       </v-toolbar-title>
 
       <v-spacer></v-spacer>
-      <router-link to="/">
+      <router-link to="/sign-up">
         <v-btn class="grey white--text" rounded depressed small>
           회원가입
         </v-btn>
