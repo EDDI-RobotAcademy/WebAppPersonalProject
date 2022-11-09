@@ -47,8 +47,6 @@ const routes = [
     component: DiaryBoardListView
   },
 
-
-
 ]
 
 const router = new VueRouter({

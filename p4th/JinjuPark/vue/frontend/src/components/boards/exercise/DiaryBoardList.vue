@@ -2,7 +2,11 @@
   <v-container>
     <v-row>
       <v-col>
-        <!--        게시판-->
+        <!--        게시판
+        1) boardListview는 각각 운동일기, 자유, 질문게시판 3개 구성 -> 각각 page = "diary" 등 정보 전달
+        if page = diary명 <common-board-list> 쓰는데 : contents = "diaryBoards"
+
+        -->
         <common-board-list
             board-title= "운동 일기"
             icon-name="mdi-headphones"
@@ -44,16 +48,10 @@ export default {
     }
   },
   methods:{
-  search(){
-// 여기서 emit?
-  }
   }
 
 }
 </script>
 
 <style scoped>
-/*v-card {*/
-/*  white-space: nowrap;*/
-/*}*/
 </style>
