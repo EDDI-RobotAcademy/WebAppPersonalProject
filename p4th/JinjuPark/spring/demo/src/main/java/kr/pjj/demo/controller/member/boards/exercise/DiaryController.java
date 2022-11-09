@@ -1,5 +1,6 @@
 package kr.pjj.demo.controller.member.boards.exercise;
 
+import kr.pjj.demo.controller.member.boards.exercise.request.DiaryRequest;
 import kr.pjj.demo.entity.boards.exercise.Diary;
 import kr.pjj.demo.service.boards.exercise.DiaryService;
 import lombok.extern.slf4j.Slf4j;
@@ -32,4 +33,10 @@ class DiaryController {
         }
     }
 
+    @PostMapping("/register")
+    public void diaryRegister (@RequestBody DiaryRequest diaryRequest) {
+        log.info("다이어리 게시글 등록");
+
+        service.register(diaryRequest);
+    }
 }
