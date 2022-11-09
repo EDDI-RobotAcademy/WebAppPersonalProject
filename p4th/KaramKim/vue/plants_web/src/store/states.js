@@ -1,6 +1,6 @@
 export default {
-
-    isAuthenticated: false
-
+    isAuthenticated: false,
+    checkUserInfo: false,
+    isLogin: false,
 
 }
