@@ -1,8 +1,8 @@
-package kr.eddi.demo.entity.service.jpa.member.request;
+package kr.eddi.demo.entity.service.member.request;
 
 
-import kr.eddi.demo.entity.jpa.member.JpaMember;
-import kr.eddi.demo.entity.jpa.member.MemberProfile;
+import kr.eddi.demo.entity.member.JpaMember;
+import kr.eddi.demo.entity.member.MemberProfile;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import lombok.ToString;
@@ -10,8 +10,8 @@ import lombok.ToString;
 @Getter
 @ToString
 @RequiredArgsConstructor
-public class MemberRegisterRequest {
 
+public class MemberRegisterRequest {
     private final String email;
 
     private final String password;
@@ -26,8 +26,5 @@ public class MemberRegisterRequest {
                 MemberProfile.of(city, street, addressDetail, zipcode)
         );
     }
-
-
-
 
 }

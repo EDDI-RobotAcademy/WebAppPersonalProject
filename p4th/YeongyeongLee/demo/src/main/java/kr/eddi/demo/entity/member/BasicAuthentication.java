@@ -1,4 +1,4 @@
-package kr.eddi.demo.entity.jpa.member;
+package kr.eddi.demo.entity.member;
 
 
 import kr.eddi.demo.utilty.encrypt.EncryptionUtil;
@@ -6,6 +6,7 @@ import kr.eddi.demo.utilty.password.PasswordHashConverter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
+
 import javax.persistence.*;
 
 @Entity
@@ -13,6 +14,7 @@ import javax.persistence.*;
 @NoArgsConstructor
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)
 @DiscriminatorValue(Authentication.BASIC_AUTH)
+
 
 public class BasicAuthentication extends Authentication {
 
@@ -29,12 +31,5 @@ public class BasicAuthentication extends Authentication {
     public boolean isRightPassword(String plainToCheck) {
         return EncryptionUtil.checkValidation(plainToCheck, password);
     }
-
-
-
-
-
-
-
 
 }

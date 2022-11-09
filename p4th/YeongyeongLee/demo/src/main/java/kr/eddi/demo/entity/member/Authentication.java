@@ -1,4 +1,4 @@
-package kr.eddi.demo.entity.jpa.member;
+package kr.eddi.demo.entity.member;
 
 
 import lombok.Getter;
@@ -7,15 +7,16 @@ import lombok.ToString;
 
 import javax.persistence.*;
 
-
 @Entity
 @ToString(exclude = "member")
 @NoArgsConstructor
+
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)
 @DiscriminatorColumn(name = "authentication_type")
 
-
 public class Authentication {
+
+
 
     public static final String BASIC_AUTH = "BASIC";
 
@@ -35,7 +36,6 @@ public class Authentication {
         this.member = member;
         this.authenticationType = authenticationType;
     }
-
 
 
 }

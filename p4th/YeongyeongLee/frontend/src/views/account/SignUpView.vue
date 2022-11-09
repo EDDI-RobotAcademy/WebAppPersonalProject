@@ -1,6 +1,6 @@
 <template>
   <v-container>
-    <SignUpForm @submit="onSubmit"/>
+    <sign-up-form @submit="onSubmit"/>
   </v-container>
 </template>
 

@@ -1,15 +1,14 @@
-package kr.eddi.demo.entity.jpa.member;
+package kr.eddi.demo.entity.member;
+
 
 
 import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
-
 import javax.persistence.*;
 
 @Entity
 @AllArgsConstructor
 @NoArgsConstructor
-
 
 public class MemberProfile {
 
@@ -36,13 +35,4 @@ public class MemberProfile {
     public void setMember (JpaMember member) {
         this.member = member;
     }
-
-
-
-
-
-
-
-
-
 }

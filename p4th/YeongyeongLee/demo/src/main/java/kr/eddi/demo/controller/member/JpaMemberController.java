@@ -1,14 +1,11 @@
-package kr.eddi.demo.controller.jpa.member;
+package kr.eddi.demo.controller.member;
 
-
-import kr.eddi.demo.controller.jpa.member.from.MemberLoginForm;
-import kr.eddi.demo.controller.jpa.member.from.MemberRegisterForm;
-import kr.eddi.demo.entity.service.jpa.member.JpaMemberService;
+import kr.eddi.demo.controller.member.from.MemberLoginForm;
+import kr.eddi.demo.controller.member.from.MemberRegisterForm;
+import kr.eddi.demo.entity.service.member.JpaMemberService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.List;
 
 @Slf4j
 @RestController
@@ -41,7 +38,5 @@ public class JpaMemberController {
         return service.signIn(form.toLoginRequest());
     }
 
-
-
-
 }
+
