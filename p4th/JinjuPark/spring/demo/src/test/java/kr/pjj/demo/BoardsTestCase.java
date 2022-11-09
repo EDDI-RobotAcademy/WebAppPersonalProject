@@ -6,6 +6,8 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
+import java.util.List;
+
 @SpringBootTest
 public class BoardsTestCase {
 
@@ -19,4 +21,10 @@ public class BoardsTestCase {
         diaryRepository.save(diary);
     }
 
+    @Test
+    void findDiaryList () {
+        List<Diary> diaryList = diaryRepository.findByTitleContainingOrWriterContainingOrContentContaining("wow", "wow", "wow");
+
+        System.out.println(diaryList);
+    }
 }

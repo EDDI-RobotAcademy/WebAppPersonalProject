@@ -12,6 +12,7 @@ import org.springframework.stereotype.Service;
 import java.util.Arrays;
 import java.util.List;
 
+
 @Slf4j
 @Service
 public class DiaryServiceImpl implements DiaryService{
@@ -22,6 +23,9 @@ public class DiaryServiceImpl implements DiaryService{
     @Autowired
     RedisService redisService;
 
+    @Autowired
+    MemberRepository memberRepository;
+
     @Override
     public List<Diary> list() {
         List<Diary> totalDiary ;
@@ -31,5 +35,15 @@ public class DiaryServiceImpl implements DiaryService{
 
         return repository.findAll(Sort.by(Sort.Direction.DESC, "boardNo"));
     }
+
+    @Override
+    public List<Diary> search(String keyword) {
+        List<Diary> searchDiary ;
+        searchDiary= repository.findByTitleContainingOrWriterContainingOrContentContaining(keyword, keyword, keyword);
+
+        log.info("다이어리 리스트 검색 메소드 실행"+ Arrays.toString(new List[]{searchDiary}) );
+        return repository.findByTitleContainingOrWriterContainingOrContentContaining(keyword, keyword, keyword);
+    }
+
 
 }

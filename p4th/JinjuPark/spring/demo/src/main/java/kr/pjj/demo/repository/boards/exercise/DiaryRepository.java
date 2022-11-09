@@ -8,5 +8,6 @@ import java.util.List;
 
 
 public interface DiaryRepository extends JpaRepository<Diary, Long> {
+    List<Diary> findByTitleContainingOrWriterContainingOrContentContaining(String title, String writer, String content);
 
 }

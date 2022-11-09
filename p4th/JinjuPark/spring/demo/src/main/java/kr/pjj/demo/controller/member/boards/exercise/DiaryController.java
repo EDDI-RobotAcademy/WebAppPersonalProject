@@ -18,9 +18,18 @@ class DiaryController {
     private DiaryService service;
 
     @GetMapping("/list")
-    public List<Diary> diaryList () {
-        // 기본 리스트 조회
-       return service.list();
+    public List<Diary> diaryList (String keyword) {
+        // 기본 리스트 조회+ 키워드 있으면 검색해서 전달
+
+        if (keyword == null){
+            log.info("다이어리 리스트 조회 메소드 실행");
+            return service.list();
+
+        } else {
+            log.info("다이어리 리스트 검색 메소드 실행"+ keyword);
+            return service.search(keyword);
+
+        }
     }
 
 }
