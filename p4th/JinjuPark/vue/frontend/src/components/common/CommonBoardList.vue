@@ -31,7 +31,7 @@
           :label="searchLabel"
           @click:append="search"
       ></v-text-field>&nbsp;
-      <common-button-white btn-name="글쓰기" icon-name="mdi-pencil"/>
+      <common-button-white btn-name="글쓰기" icon-name="mdi-pencil" @click="register"/>
     </v-card-title>
 
 <!--     게시판 -->
@@ -87,6 +87,14 @@ export default {
       const keyword = this.$refs.keyword.value
       this.requestDiaryBoardListFromSpring(keyword)
     },
+    register() {
+      if(window.localStorage.getItem('userInfo') != null){
+        this.$router.push({name: 'DiaryBoardRegisterView'})
+      } else {
+       alert("게시글 작성을 위해 로그인해주세요.")
+        this.$router.push({name: 'SignInView'})
+      }
+    }
   }
 }
 </script>

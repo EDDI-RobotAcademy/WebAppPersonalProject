@@ -20,4 +20,26 @@ export default {
             })
     },
 
+    // eslint-disable-next-line no-empty-pattern
+    requestCreateDiaryBoardContentsToSpring ({ }, payload) {
+        console.log('운동일기 게시물 등록()')
+
+        const { title, category, authority, content, writerToken} = payload
+        return axios.post('http://localhost:7777/hometwang/boards/diary/register',
+            { title, category, authority, content, writerToken})
+            .then(() => {
+                alert('게시물 등록 성공')
+            })
+    },
+
+    requestLoginUserFromSpring({commit}, payload) {
+        console.log("로그인 유저 정보 가져오기")
+
+       // const {} = payload
+        return axios.post('http://localhost:7777/hometwang/member/login-user', payload)
+            .then((res) => {
+                commit(REQUEST_LOGIN_USER_FROM_SPRING, res.data)
+                console.log("로그인한 회원정보 가져옴: " + res.data)
+            })
+    },
 }
