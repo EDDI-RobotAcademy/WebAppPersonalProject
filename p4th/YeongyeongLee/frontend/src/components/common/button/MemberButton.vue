@@ -15,12 +15,11 @@
 
   </div>
 
-
 </template>
 
 <script>
 export default {
-  name: "MemberButtonView"
+  name: "MemberButton"
 }
 </script>
 

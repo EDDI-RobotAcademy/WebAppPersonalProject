@@ -77,6 +77,7 @@ import axios from "axios";
 
 export default {
   name: "SignUpForm",
+
   data () {
     return {
       email: "",
@@ -178,6 +179,10 @@ export default {
       }).open()
     }
   }
+
+
+
+
 }
 </script>
 
