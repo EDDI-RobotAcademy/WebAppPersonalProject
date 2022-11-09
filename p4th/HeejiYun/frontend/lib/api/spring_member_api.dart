@@ -4,14 +4,15 @@ import 'package:flutter/cupertino.dart';
 import 'package:http/http.dart' as http;
 
 class SpringMemberApi {
-  static const String httpUri = '192.168.1.102:7779';
+  static const String httpUriHome = '192.168.1.102:7779';
+  static const String httpUriTmp = '192.168.0.15:7779';
 
   Future<bool?> emailCheck ( String email ) async {
     var data = { 'email': email };
     var body = json.encode(data);
 
     var response = await http.post(
-      Uri.http(httpUri, '/member/check-email/$email'),
+      Uri.http(httpUriHome, '/member/check-email/$email'),
       headers: {"Content-Type": "application/json"},
       body: body,
     );
@@ -29,7 +30,7 @@ class SpringMemberApi {
     var body = json.encode(data);
 
     var response = await http.post(
-      Uri.http(httpUri, '/member/check-nickname/$nickname'),
+      Uri.http(httpUriHome, '/member/check-nickname/$nickname'),
       headers: {"Content-Type": "application/json"},
       body: body,
     );
@@ -51,7 +52,7 @@ class SpringMemberApi {
     debugPrint(body);
 
     var response = await http.post(
-      Uri.http(httpUri, '/member/sign-up'),
+      Uri.http(httpUriHome, '/member/sign-up'),
       headers: {"Content-Type": "application/json"},
       body: body,
     );
@@ -63,7 +64,7 @@ class SpringMemberApi {
     return json.decode(response.body);
   }
 
-  Future<UserLoginResponse> login (UserLoginRequest request) async {
+  Future<SignInResponse> signIn (MemberSignInRequest request) async {
     var data = { 'email': request.email, 'password': request.password };
     var body = json.encode(data);
 
@@ -72,17 +73,27 @@ class SpringMemberApi {
     debugPrint(body);
 
     var response = await http.post(
-      Uri.http(httpUri, '/member/sign-up'),
+      Uri.http(httpUriHome, '/member/sign-in'),
       headers: {"Content-Type": "application/json"},
       body: body,
     );
 
     if (response.statusCode == 200) {
       debugPrint("통신 확인");
-    }
+      debugPrint(response.body);
 
-    return UserLoginResponse(true);
+      return SignInResponse(response.body);
+    } else {
+      debugPrint("통신 실패");
+      return SignInResponse("로그인 실패");
+    }
   }
+}
+
+class SignInResponse {
+  var userToken;
+
+  SignInResponse(this.userToken);
 }
 
 class MemberSignUpRequest {
@@ -93,15 +104,9 @@ class MemberSignUpRequest {
   MemberSignUpRequest(this.email, this.password, this.nickname);
 }
 
-class UserLoginResponse {
-  bool? success;
-
-  UserLoginResponse(this.success);
-}
-
-class UserLoginRequest {
+class MemberSignInRequest {
   String email;
   String password;
 
-  UserLoginRequest(this.email, this.password);
+  MemberSignInRequest(this.email, this.password);
 }

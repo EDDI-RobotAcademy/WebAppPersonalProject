@@ -5,8 +5,8 @@ import 'package:frontend/components/text_form_fields/text_form_field_nickname.da
 import 'package:frontend/components/text_form_fields/text_form_field_password.dart';
 import 'package:frontend/components/text_form_fields/text_form_field_password_check.dart';
 
-import '../api/spring_member_api.dart';
-import '../utility/size.dart';
+import '../../api/spring_member_api.dart';
+import '../../utility/size.dart';
 
 class SignUpForm extends StatefulWidget {
   const SignUpForm({Key? key}) : super(key: key);
@@ -17,13 +17,39 @@ class SignUpForm extends StatefulWidget {
 
 class SignUpFormState extends State<SignUpForm> {
 
-  String email = '';
-  String password = '';
-  String nickname = '';
+  late String email;
+  late String password;
+  late String nickname;
+
+  late TextEditingController emailController = TextEditingController();
+  late TextEditingController passwordController = TextEditingController();
+  late TextEditingController nicknameController = TextEditingController();
 
   bool? emailPass;
   bool? nicknamePass;
   bool? signUpSuccess;
+
+  @override
+  void initState() {
+    emailController.addListener(() {
+      email = emailController.text;
+    });
+    passwordController.addListener(() {
+      password = passwordController.text;
+    });
+    nicknameController.addListener(() {
+      nickname = nicknameController.text;
+    });
+    super.initState();
+  }
+
+  @override
+  void dispose() {
+    emailController.dispose();
+    passwordController.dispose();
+    nicknameController.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -33,7 +59,7 @@ class SignUpFormState extends State<SignUpForm> {
         key: _formKey,
         child: Column(
           children: [
-            const TextFormFieldEmail(),
+            TextFormFieldEmail(controller: emailController,),
             const SizedBox(height: medium_gap,),
             TextButton(
               onPressed: () async {
@@ -45,25 +71,30 @@ class SignUpFormState extends State<SignUpForm> {
                   } else {
                   showResultDialog(context, "이메일 중복 확인", "중복 되는 이메일입니다.");
                 }
+                TextFormFieldEmail.emailFocus.unfocus();
+
               }, child: const Text("이메일 중복 확인"),
             ),
             const SizedBox(height: medium_gap,),
-            const TextFormFieldPassword(),
+            TextFormFieldPassword(controller: passwordController,),
             const SizedBox(height: medium_gap,),
             const TextFormFieldPasswordCheck(),
             const SizedBox(height: medium_gap,),
-            const TextFormFieldNickname(),
+            TextFormFieldNickname(controller: nicknameController,),
             const SizedBox(height: medium_gap,),
             TextButton(
               onPressed: () async {
                 nicknamePass = await SpringMemberApi().nicknameCheck(nickname);
-                debugPrint("emailPass: " + emailPass.toString());
+                debugPrint("nicknamePass: " + nicknamePass.toString());
 
                 if(nicknamePass == true) {
                   showResultDialog(context, "닉네임 중복 확인", "사용 가능한 닉네임입니다.");
                 } else {
                   showResultDialog(context, "닉네임 중복 확인", "중복 되는 닉네임입니다.");
                 }
+
+                TextFormFieldNickname.nicknameFocus.unfocus();
+
               }, child: const Text("닉네임 중복 확인"),
             ),
             const SizedBox(height: medium_gap,),

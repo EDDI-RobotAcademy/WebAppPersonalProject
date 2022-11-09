@@ -1,19 +1,20 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:frontend/components/sign_up_form.dart';
+import 'package:frontend/components/forms/sign_up_form.dart';
 
 import '../../utility/size.dart';
 import '../../utility/validate.dart';
 
 class TextFormFieldNickname extends StatefulWidget {
-  const TextFormFieldNickname({Key? key}) : super(key: key);
+  const TextFormFieldNickname({Key? key, required this.controller}) : super(key: key);
+  final TextEditingController controller;
+  static FocusNode nicknameFocus = FocusNode();
 
   @override
   State<TextFormFieldNickname> createState() => _TextFormFieldNicknameState();
 }
 
 class _TextFormFieldNicknameState extends State<TextFormFieldNickname> {
-  FocusNode _nicknameFocus = FocusNode();
 
   @override
   Widget build(BuildContext context) {
@@ -24,11 +25,12 @@ class _TextFormFieldNicknameState extends State<TextFormFieldNickname> {
         Text("닉네임"),
         const SizedBox(height: small_gap,),
         TextFormField(
-          focusNode: _nicknameFocus,
-          validator: (value) => CheckValidate().validateNickname(_nicknameFocus, value!),
+          focusNode: TextFormFieldNickname.nicknameFocus,
+          controller: widget.controller,
+          validator: (value) => CheckValidate().
+          validateNickname(TextFormFieldNickname.nicknameFocus, value!),
           autovalidateMode: AutovalidateMode.onUserInteraction,
           onChanged: (text) {
-            form?.nickname = text;
             form?.nicknamePass = false;
           },
           decoration: InputDecoration(

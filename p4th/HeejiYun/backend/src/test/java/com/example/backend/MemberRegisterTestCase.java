@@ -27,7 +27,7 @@ public class MemberRegisterTestCase {
     @Test
     void memberRegisterTest () {
         MemberRegisterRequest testMemberReq =
-                new MemberRegisterRequest("test2@gmail.com", "Test1!", "훈이");
+                new MemberRegisterRequest("test5@gmail.com", "test5", "정숙");
 
         System.out.println("register result: " + memberService.signUp(testMemberReq));
     }
