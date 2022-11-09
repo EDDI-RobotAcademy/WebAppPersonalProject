@@ -1,13 +1,13 @@
 <template>
   <v-container>
     <v-row>
-
       <!-- 카테고리 메뉴 -->
       <v-col>
         <v-app-bar elevation="0" color="#356859">
+          <v-img class="mr-5" width="100px" src="@/assets/rdLogo/rEADuS.png" @click="backToMain"/>
           <v-btn
               class="
-              px-2
+              mx-1
               col-4
               white--text
               justify-center"
@@ -22,7 +22,7 @@
 
       <!-- 검색바 -->
       <v-col>
-        <v-text-field placeholder="search" color="#9ecdbe" append-icon="mdi-magnify">
+        <v-text-field class="mx-4" placeholder="검색어를 입력하세요" color="#9ecdbe" append-icon="mdi-magnify">
         </v-text-field>
       </v-col>
 
@@ -46,33 +46,26 @@ import memberMenuComponent from "@/components/Header/MemberMenuComponent";
 
 export default {
   name: "AppBarComponent",
-  components: {memberMenuComponent },
-
+  components: { memberMenuComponent },
   data() {
     return {
       nickName : "방문자",
       links: [
-        { text: '서재', name: 'HomeView', route: '/' },
-        { text: '커뮤니티', name: 'SignIn', route: '/sign-in' },
+        { text: '서재', name: 'CommunityView', route: '/community' },
+        { text: '커뮤니티', name: 'CommunityView', route: '/community' },
       ],
-
     }
-  },
-
+  }, // data
 
   methods: {
+    backToMain() {
+      this.$router.push("/")
+    }
 
   }
 }
 </script>
 
 <style scoped>
-
-.green--app-bar {
-  background-color: #356859;
-  color: white;
-  elevation: 0;
-}
-
 
 </style>
