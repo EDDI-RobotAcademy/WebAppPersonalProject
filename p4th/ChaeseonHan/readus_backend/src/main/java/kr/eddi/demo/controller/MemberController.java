@@ -42,11 +42,12 @@ public class MemberController {
         return service.signIn(form.toMemberLoginRequest());
     }
 
-    @PostMapping("/login-user-profile")
-    public MemberProfile loginUserProfile(String userToken) {
+    @PostMapping("/login-user-nickname/{userToken}")
+    public String loginUserProfile(@PathVariable("userToken") String userToken) {
         log.info("nowMemberProfile()");
-        log.info("userToken" + userToken);
 
-        return service.getSignInMemberProfile(userToken);
+        String userNickname = service.getSignInMemberNickName(userToken);
+
+        return userNickname;
     }
 }

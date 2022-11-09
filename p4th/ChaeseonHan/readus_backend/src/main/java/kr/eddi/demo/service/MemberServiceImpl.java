@@ -3,7 +3,6 @@ package kr.eddi.demo.service;
 
 import kr.eddi.demo.entity.Authentication;
 import kr.eddi.demo.entity.BasicAuthentication;
-import kr.eddi.demo.entity.MemberProfile;
 import kr.eddi.demo.entity.ReadUsMember;
 import kr.eddi.demo.repository.AuthenticationRepository;
 import kr.eddi.demo.repository.MemberRepository;
@@ -76,14 +75,14 @@ public class MemberServiceImpl implements MemberService{
     }
 
     @Override
-    public MemberProfile getSignInMemberProfile(String signInUserToken) {
+    public String getSignInMemberNickName(String signInUserToken) {
 
         String userToken = signInUserToken;
         Long memberId = redisService.getValueByKey(userToken);
 
         Optional<ReadUsMember> maybeMember = memberRepository.findById(memberId);
         ReadUsMember member = maybeMember.get();
-        return member.getProfile();
+        return member.getNickName();
 
     }
 

@@ -14,13 +14,27 @@
         </v-btn>
       </template>
 
-      <v-list style="background-color: #356859">
-        <v-list-item class="white--text" v-for="(item, index) in memberMenuItems" :key="index" :to="item.route">
+      <!-- 로그인시 -->
+
+      <v-list v-if="isLogin" style="background-color: #356859">
+        <v-list-item class="white--text" v-for="(item, index) in yesSignInItems" :key="index" :to="item.route">
           <v-list-item-title class="text-center">
             {{ item.text }}
           </v-list-item-title>
         </v-list-item>
       </v-list>
+
+      <!-- 비로그인시 -->
+
+      <v-list v-else style="background-color: #356859">
+        <v-list-item class="white--text" v-for="(item, index) in nonSignInItems" :key="index" :to="item.route">
+          <v-list-item-title class="text-center">
+            {{ item.text }}
+          </v-list-item-title>
+        </v-list-item>
+      </v-list>
+
+
     </v-menu>
   </v-app-bar>
 </template>
@@ -32,18 +46,9 @@ export default {
     nickName: String,
     isLogin: Boolean,
   },
-  mounted() {
-    if (this.isLogin == true) {
-      this.memberMenuItems = this.yesSignInItems
-    } else {
-      this.memberMenuItems = this.nonSignInItems
-    }
-  },
+
   data() {
     return {
-      memberMenuItems: [
-
-      ],
 
       yesSignInItems: [
         { text: '마이페이지', name: 'SignIn', route: '/sign-in' },

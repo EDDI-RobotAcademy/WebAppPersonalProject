@@ -1,6 +1,7 @@
 export default {
     isAuthenticated: false,
     unDuplicateEmailPass: false,
-    loggedInUserProfile: {},
+    nickName: '',
+    aladinBestSeller: [],
 
 }

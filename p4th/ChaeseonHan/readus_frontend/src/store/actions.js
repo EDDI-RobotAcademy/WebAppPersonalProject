@@ -1,4 +1,4 @@
-import {REQUEST_EMAIL_PASS_CHECK, REQUEST_LOGGED_IN_USER_PROFILE} from './mutation-types'
+import {REQUEST_BESTSELLER_LIST, REQUEST_EMAIL_PASS_CHECK, REQUEST_LOGGED_IN_USER_PROFILE} from './mutation-types'
 
 import axios from 'axios'
 import Vue from 'vue';
@@ -50,7 +50,7 @@ export default {
         console.log('requestLoggedInUserProfileToSpring')
 
         const { userToken } = payload
-        return axios.post('http://localhost:7776/member/login-user-profile', { userToken })
+        return axios.post(`http://localhost:7776/member/login-user-nickname/${userToken}`, { userToken })
             .then((res) => {
                 if(res.data) {
                     commit(REQUEST_LOGGED_IN_USER_PROFILE, res.data)
@@ -58,7 +58,20 @@ export default {
             }).catch((error) => {
                 console.log(error)
             })
-    }
+    },
+
+    requestBestSellerListToAladin ( { commit } ) {
+        console.log("requestBestSellerListToAladin")
+
+        return axios.get('https://cors-anywhere.herokuapp.com/https://www.aladin.co.kr/ttb/api/ItemList.aspx?ttbkey=[ttb키]&QueryType=Bestseller&MaxResults=10&start=1&SearchTarget=Book&output=js&Version=20131101')
+            .then((res) => {
+                commit(REQUEST_BESTSELLER_LIST, res.data.item)
+            }).catch((error) => {
+                console.log(error)
+            })
+    },
+
+
 
 
 }

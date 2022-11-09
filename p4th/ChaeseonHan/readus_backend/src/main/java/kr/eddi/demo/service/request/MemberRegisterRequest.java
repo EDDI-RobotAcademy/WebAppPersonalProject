@@ -1,9 +1,7 @@
 package kr.eddi.demo.service.request;
 
 
-import kr.eddi.demo.entity.MemberProfile;
 import kr.eddi.demo.entity.ReadUsMember;
-import lombok.Data;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import lombok.ToString;
@@ -24,19 +22,15 @@ public class MemberRegisterRequest {
 
     public ReadUsMember toMember() {
 
-        MemberProfile profile = new MemberProfile();
-
         if (nicKName == null || nicKName.length() == 0) {
 
             log.info("nickname is null or length is 0");
 
             return new ReadUsMember(
                     this.email,
-                    profile.builder()
-                            .nickName(this.email)
-                            .biography(this.biography)
-                            .build()
-                    );
+                    this.email,
+                    this.biography
+            );
         }
 
 
@@ -44,9 +38,8 @@ public class MemberRegisterRequest {
 
         return new ReadUsMember(
                 this.email,
-                profile.builder()
-                        .nickName(this.nicKName)
-                        .biography(this.biography)
-                        .build());
+                this.nicKName,
+                this.biography
+        );
     }
 }
