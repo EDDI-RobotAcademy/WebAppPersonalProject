@@ -31,12 +31,13 @@ public class Diary {
     private String authority;
 
     @Column(length = 32, nullable = true)
-    private Long views;
+    private Integer views;
 
     @Column(length = 32, nullable = true)
-    private Long likes;
+    private Integer likes;
 
     @Lob
+    @Column
     private String content;
 
     @CreationTimestamp
