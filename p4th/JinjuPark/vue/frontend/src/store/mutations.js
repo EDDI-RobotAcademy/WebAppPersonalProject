@@ -8,4 +8,12 @@ export default {
         state.diaryBoards = passingData
     },
 
+    [IS_AUTHENTICATED] (state, passingData) {
+        state.isAuthenticated = passingData
+    },
+
+    [USER_LOGIN_CHECK] (state, passingData) {
+        state.userLoginCheck = passingData
+    },
+
 }
