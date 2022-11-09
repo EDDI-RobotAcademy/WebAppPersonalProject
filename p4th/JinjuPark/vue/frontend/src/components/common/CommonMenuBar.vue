@@ -11,7 +11,7 @@
       </v-btn>
     </v-toolbar-items>
 
-    <v-toolbar-items v-else>>
+    <v-toolbar-items v-else>
       <v-btn
           class="blue lighten-1 white--text"
           elevation="0"

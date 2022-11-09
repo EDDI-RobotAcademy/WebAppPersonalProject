@@ -6,6 +6,7 @@ import SignUpView from "@/views/account/SignUpView";
 import MainHomeBoardView from "@/components/common/CommonMainMenuTemplate";
 import BoardTestView from "@/views/board/BoardTestView";
 import HomeView from "@/views/HomeView";
+import DiaryBoardListView from "@/views/boards/exercise/DiaryBoardListView";
 
 Vue.use(VueRouter)
 
@@ -40,7 +41,11 @@ const routes = [
     name: 'BoardTest',
     component: BoardTestView
   },
-
+  {
+    path: '/diary-board-list',
+    name: 'DiaryBoardListView',
+    component: DiaryBoardListView
+  },
 
 ]
 
