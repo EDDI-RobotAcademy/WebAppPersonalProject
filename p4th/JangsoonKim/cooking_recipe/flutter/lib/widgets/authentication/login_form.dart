@@ -5,6 +5,8 @@ import 'package:demo/widgets/authentication/rounded_id_field.dart';
 import 'package:demo/widgets/authentication/rounded_password_field.dart';
 import 'package:demo/widgets/authentication/sns_icon.dart';
 import 'package:demo/widgets/authentication/social_login_divider.dart';
+import 'package:demo/widgets/screen_controller.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 import '../../utilities/spring_api.dart';
@@ -66,10 +68,10 @@ class LoginFormState extends State<LoginForm> {
                   future.then((UserLoginResponse) {
                     Navigator.of(context)
                         .pushReplacement(MaterialPageRoute(builder: (context) {
-                      return HomeScreen();
-                      //경로수정 or 로그인 완료 모달 띄울 예정..?
+                      return const ScreenController();
                     }));
                   }).catchError((error) {
+                    _showDialog(title: "로그인 실패", content: "등록되지 않은 아이디이거나 아이디 또는 비밀번호를 잘못 입력했습니다.");
                     print("로그인실패");
                   });
                 }
@@ -108,7 +110,8 @@ class LoginFormState extends State<LoginForm> {
               children: <Widget>[
                 SnsIcon(
                   iconSrc: "assets/icons/sns/naver_login_btn1.png",
-                  press: () {},
+                  press: () {
+                  },
                 ),
                 SnsIcon(
                   iconSrc: "assets/icons/sns/apple_login_btn1.png",
@@ -120,5 +123,22 @@ class LoginFormState extends State<LoginForm> {
         ),
       ]),
     ));
+  }
+  void _showDialog({String? title, String? content}){
+    showCupertinoDialog(context: context, builder: (context){
+      return CupertinoAlertDialog(
+        title: Text(title!),
+        content: Text(content!),
+        actions: [
+          CupertinoDialogAction(
+            isDefaultAction: true,
+            child: Text("확인"),
+            onPressed: (){
+              Navigator.pop(context);
+            },
+          )
+        ],
+      );
+    });
   }
 }
