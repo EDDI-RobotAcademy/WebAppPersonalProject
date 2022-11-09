@@ -22,7 +22,16 @@
       <v-icon>{{iconName}}</v-icon>
       {{boardSubTitle}}
       <v-spacer></v-spacer>
-      <common-button-white btn-name="글쓰기" icon-name="mdi-pencil" @click="register"/>
+      <v-text-field
+          v-model= "keyword"
+          ref="keyword"
+          append-icon="mdi-magnify"
+          hide-details
+          single-line
+          :label="searchLabel"
+          @click:append="search"
+      ></v-text-field>&nbsp;
+      <common-button-white btn-name="글쓰기" icon-name="mdi-pencil"/>
     </v-card-title>
 
 <!--     게시판 -->
@@ -41,6 +50,7 @@
 </template>
 
 <script>
+import {mapActions} from "vuex";
 
 export default {
   name: "CommonBoardList",
@@ -58,6 +68,7 @@ export default {
 
   data() {
     return {
+      keyword: "",
       headerTitle: [
         {text: '번호', value: 'boardNo', width: "10%", align: "center"},
         {text: '카테고리', value: 'category', width: "15%", align: "center"},
@@ -69,6 +80,13 @@ export default {
     }
   },
   methods: {
+    ...mapActions([
+      'requestDiaryBoardListFromSpring'
+    ]),
+    search() {
+      const keyword = this.$refs.keyword.value
+      this.requestDiaryBoardListFromSpring(keyword)
+    },
   }
 }
 </script>
