@@ -2,11 +2,12 @@ import 'dart:convert';
 
 import 'package:flutter/cupertino.dart';
 import 'package:http/http.dart' as http;
+import 'package:leaing_helper/api/GlobalsSuccessCheck.dart';
 
 class SpringValidateApi{
   static const String httpUri = '192.168.0.8:7777';
 
-  emailValidate(String email) async {
+  Future<UserValidateResponse> emailValidate(String email) async {
     var data = {'email' : email};
     var body = json.encode(data);
 
@@ -19,10 +20,14 @@ class SpringValidateApi{
       body: body,
     );
 
+    if (response.statusCode == 200) {
+      debugPrint("통신 확인");
+    }
+
     return UserValidateResponse(true);
   }
 
-  nickNameValidate(String nickName) async {
+  Future<UserValidateResponse> nickNameValidate(String nickName) async {
     var data = {'nickName' : nickName };
     var body = json.encode(data);
 
@@ -35,7 +40,15 @@ class SpringValidateApi{
       body: body,
     );
 
-    return UserValidateResponse(true);
+    if (response.statusCode == 200) {
+      debugPrint("통신 확인");
+      GlobalsSuccessCheck.isNicknameCheck = true;
+      return UserValidateResponse(true);
+    }else{
+      debugPrint("실패");
+      return UserValidateResponse(false);
+    }
+
   }
 }
 

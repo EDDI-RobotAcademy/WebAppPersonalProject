@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import '../../utility/decorations/text_form_decoration.dart';
+import '../../utility/decorations/text_style.dart';
 import '../../utility/validation/form_validate.dart';
 import '../../utility/size.dart';
 
@@ -10,6 +11,7 @@ class PasswordTextFormField extends StatefulWidget {
 
   static String password = '';
   final double widthSize;
+
   @override
   State<PasswordTextFormField> createState() => _PasswordTextFormFieldState();
 }
@@ -26,9 +28,12 @@ class _PasswordTextFormFieldState extends State<PasswordTextFormField> {
         crossAxisAlignment: CrossAxisAlignment.center,
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          const SizedBox(height: medium_gap,),
+          SizedBox(
+              width: double.infinity,
+              child: Text("Password" , style: defaultTextFieldTextStyle(),textAlign: TextAlign.left,)),
+          const SizedBox(height: 7,),
           TextFormField(
-            decoration: textFormDecoration("비밀번호"),
+            decoration: textFormDecoration("Password"),
             obscureText:true,
             keyboardType: TextInputType.visiblePassword,
             focusNode: _passwordFocus,

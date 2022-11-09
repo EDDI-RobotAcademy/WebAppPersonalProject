@@ -1,5 +1,9 @@
 import 'package:flutter/material.dart';
 
+import '../../api/GlobalsSuccessCheck.dart';
+import '../../api/spring_validate_api.dart';
+
+
 class CheckValidate {
   String? validateEmail(FocusNode focusNode, String value) {
     if(value.isEmpty) {
@@ -10,6 +14,24 @@ class CheckValidate {
       return '유효하지 않은 이메일 형식입니다.';
     } else {
       return null;
+    }
+  }
+
+  String? validateEmailInSignUp(FocusNode focusNode, String value) {
+    if(value.isEmpty) {
+      focusNode.requestFocus();
+      return '이메일을 입력하세요';
+    } else if(!value.isValidEmail()) {
+      focusNode.requestFocus();
+      return '유효하지 않은 이메일 형식입니다.';
+    } else {
+      SpringValidateApi().emailValidate(value);
+      if(!GlobalsSuccessCheck.isEmailCheck){
+        focusNode.requestFocus();
+        return '해당 이메일은 누군가 이미 사용 중입니다.';
+      }else{
+        return null;
+      }
     }
   }
 
@@ -33,7 +55,13 @@ class CheckValidate {
       focusNode.requestFocus();
       return '해당 닉네임은 사용 할 수 없습니다.';
     } else {
-      return null;
+      SpringValidateApi().nickNameValidate(value);
+      if(!GlobalsSuccessCheck.isNicknameCheck){
+        focusNode.requestFocus();
+        return '해당 닉네임은 누군가 이미 사용 중입니다.';
+      }else{
+        return null;
+      }
     }
   }
 }

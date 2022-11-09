@@ -3,9 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:leaing_helper/components/Forms/sign_in_form.dart';
 import 'package:leaing_helper/utility/decorations/color.dart';
 
-import '../components/text_btn_box.dart';
-import '../utility/size.dart';
-
 class SignInPage extends StatelessWidget {
   const SignInPage({Key? key}) : super(key: key);
 
@@ -15,16 +12,24 @@ class SignInPage extends StatelessWidget {
       resizeToAvoidBottomInset: false,
       body: SafeArea(
         child: Container(
+            padding: const EdgeInsets.only(left: 50),
             width: double.infinity,
-            padding: const EdgeInsets.all(30),
             child: Column(
-              children: const [
-                SizedBox(height: xmedium_gap),
-                SignInForm(),
-                TextBtnBoxRouter(text: "회원 가입",router: "/sign_up_page",)
+              children: <Widget>[
+                const SignInForm(),
+                const SizedBox(height: 30,),
+                Row(
+                  children: const [
+                    SizedBox(
+                      width: 150,
+                      child:Text("Not a member ? ", style: TextStyle(color: Colors.black , fontSize: 10), textAlign: TextAlign.right,) ,),
+                    SizedBox(
+                      width: 150,
+                      child:Text(" join now", style: TextStyle(color: ColorStyle.focusedTextForm , fontSize: 10), textAlign: TextAlign.left,) ,),
+                  ],
+                ),
               ],
-            )
-        ),
+            )),
       ),
     );
   }
