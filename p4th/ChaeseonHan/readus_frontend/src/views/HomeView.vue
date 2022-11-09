@@ -1,15 +1,17 @@
 <template>
-  <div>
-    <h2>안녕하세요</h2>
-  </div>
+  <v-container>
+    <book-list/>
+  </v-container>
 </template>
 
 <script>
 // @ is an alias to /src
 
-  export default {
+import BookList from "@/components/main/BookList";
+export default {
     name: 'HomeView',
     components: {
+      BookList,
     },
   }
 </script>

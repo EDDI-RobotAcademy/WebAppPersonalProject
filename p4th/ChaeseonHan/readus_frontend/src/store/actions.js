@@ -61,11 +61,11 @@ export default {
     },
 
     requestBestSellerListToAladin ( { commit } ) {
-        console.log()
+        console.log("requestBestSellerListToAladin")
 
-        return axios.get('http://www.aladin.co.kr/ttb/api/ItemList.aspx?ttbkey=ttbmdmodina341559002&QueryType=Bestseller&MaxResults=10&start=1&SearchTarget=Book&output=js&Version=20131101')
+        return axios.get('https://cors-anywhere.herokuapp.com/https://www.aladin.co.kr/ttb/api/ItemList.aspx?ttbkey=[ttb키]&QueryType=Bestseller&MaxResults=10&start=1&SearchTarget=Book&output=js&Version=20131101')
             .then((res) => {
-                commit(REQUEST_BESTSELLER_LIST, res.data)
+                commit(REQUEST_BESTSELLER_LIST, res.data.item)
             }).catch((error) => {
                 console.log(error)
             })
