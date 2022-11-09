@@ -1,6 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:frontend/components/sign_up_form.dart';
+import 'package:frontend/components/forms/sign_up_form.dart';
 
 import '../../utility/size.dart';
 import '../../utility/validate.dart';
@@ -8,13 +8,13 @@ import '../../utility/validate.dart';
 class TextFormFieldEmail extends StatefulWidget {
   const TextFormFieldEmail({Key? key, required this.controller}) : super(key: key);
   final TextEditingController controller;
+  static FocusNode emailFocus = FocusNode();
 
   @override
   State<TextFormFieldEmail> createState() => _TextFormFieldEmailState();
 }
 
 class _TextFormFieldEmailState extends State<TextFormFieldEmail> {
-  FocusNode _emailFocus = FocusNode();
 
   @override
   Widget build(BuildContext context) {
@@ -26,8 +26,9 @@ class _TextFormFieldEmailState extends State<TextFormFieldEmail> {
         const SizedBox(height: small_gap,),
         TextFormField(
           controller: widget.controller,
-          focusNode: _emailFocus,
-          validator: (value) => CheckValidate().validateEmail(_emailFocus, value!),
+          focusNode: TextFormFieldEmail.emailFocus,
+          validator: (value) => CheckValidate().
+          validateEmail(TextFormFieldEmail.emailFocus, value!),
           autovalidateMode: AutovalidateMode.onUserInteraction,
           onChanged: (text) {
             form?.emailPass = false;

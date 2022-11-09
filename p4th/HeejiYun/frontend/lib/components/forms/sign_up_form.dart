@@ -5,8 +5,8 @@ import 'package:frontend/components/text_form_fields/text_form_field_nickname.da
 import 'package:frontend/components/text_form_fields/text_form_field_password.dart';
 import 'package:frontend/components/text_form_fields/text_form_field_password_check.dart';
 
-import '../api/spring_member_api.dart';
-import '../utility/size.dart';
+import '../../api/spring_member_api.dart';
+import '../../utility/size.dart';
 
 class SignUpForm extends StatefulWidget {
   const SignUpForm({Key? key}) : super(key: key);
@@ -71,6 +71,8 @@ class SignUpFormState extends State<SignUpForm> {
                   } else {
                   showResultDialog(context, "이메일 중복 확인", "중복 되는 이메일입니다.");
                 }
+                TextFormFieldEmail.emailFocus.unfocus();
+
               }, child: const Text("이메일 중복 확인"),
             ),
             const SizedBox(height: medium_gap,),
@@ -83,13 +85,16 @@ class SignUpFormState extends State<SignUpForm> {
             TextButton(
               onPressed: () async {
                 nicknamePass = await SpringMemberApi().nicknameCheck(nickname);
-                debugPrint("emailPass: " + emailPass.toString());
+                debugPrint("nicknamePass: " + nicknamePass.toString());
 
                 if(nicknamePass == true) {
                   showResultDialog(context, "닉네임 중복 확인", "사용 가능한 닉네임입니다.");
                 } else {
                   showResultDialog(context, "닉네임 중복 확인", "중복 되는 닉네임입니다.");
                 }
+
+                TextFormFieldNickname.nicknameFocus.unfocus();
+
               }, child: const Text("닉네임 중복 확인"),
             ),
             const SizedBox(height: medium_gap,),
