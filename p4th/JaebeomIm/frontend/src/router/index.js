@@ -57,6 +57,9 @@ import TradeBoardRegisterView from "@/views/insoya/Views/TradeBoardView/TradeBoa
 import TradeBoardReadView from "@/views/insoya/Views/TradeBoardView/TradeBoardReadView";
 import TradeBoardModifyView from "@/views/insoya/Views/TradeBoardView/TradeBoardModifyView";
 import GradeUpBoardListView from "@/views/insoya/Views/GradeUpBoardView/GradeUpBoardListView";
+import GradeUpBoardRegisterView from "@/views/insoya/Views/GradeUpBoardView/GradeUpBoardRegisterView";
+import GradeUpBoardModifyView from "@/views/insoya/Views/GradeUpBoardView/GradeUpBoardModifyView";
+import GradeUpBoardReadView from "@/views/insoya/Views/GradeUpBoardView/GradeUpBoardReadView";
 
 Vue.use(VueRouter)
 
@@ -260,6 +263,12 @@ const routes = [
   },
 
   {
+    path: '/insoya-grade-up-board-register',
+    name: 'GradeUpBoardRegisterView',
+    component: GradeUpBoardRegisterView
+  },
+
+  {
     path: '/insoya-free-read/:boardNo',
     name: 'FreeBoardReadView',
     components: {
@@ -289,6 +298,18 @@ const routes = [
       default: true
     }
   },
+
+  {
+    path: '/insoya-grade-up-read/:boardNo',
+    name: 'GradeUpBoardReadView',
+    components: {
+      default: GradeUpBoardReadView
+    },
+    props: {
+      default: true
+    }
+  },
+
   {
     path: '/insoya-free-modify/:boardNo',
     name: 'FreeBoardModifyView',
@@ -315,6 +336,17 @@ const routes = [
     name: 'TradeBoardModifyView',
     components: {
       default: TradeBoardModifyView
+    },
+    props: {
+      default: true
+    }
+  },
+
+  {
+    path: '/insoya-grade-up-modify/:boardNo',
+    name: 'GradeUpBoardModifyView',
+    components: {
+      default: GradeUpBoardModifyView
     },
     props: {
       default: true

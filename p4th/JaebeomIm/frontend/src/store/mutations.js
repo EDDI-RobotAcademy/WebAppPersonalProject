@@ -11,7 +11,10 @@ import {
     REQUEST_FREE_BOARD_LIST_FROM_SPRING,
     REQUEST_FREE_BOARD_FROM_SPRING,
     REQUEST_QUESTION_BOARD_LIST_FROM_SPRING,
-    REQUEST_QUESTION_BOARD_FROM_SPRING, REQUEST_TRADE_BOARD_LIST_FROM_SPRING, REQUEST_TRADE_BOARD_FROM_SPRING,
+    REQUEST_QUESTION_BOARD_FROM_SPRING,
+    REQUEST_TRADE_BOARD_LIST_FROM_SPRING,
+    REQUEST_TRADE_BOARD_FROM_SPRING,
+    REQUEST_GRADE_UP_BOARD_LIST_FROM_SPRING, REQUEST_GRADE_UP_BOARD_FROM_SPRING,
 } from './mutation-types'
 
 export default {
@@ -64,6 +67,16 @@ export default {
     [REQUEST_TRADE_BOARD_FROM_SPRING] (state, passingData) {
         state.tradeBoard = passingData
     },
+
+    [REQUEST_GRADE_UP_BOARD_LIST_FROM_SPRING] (state, passingData) {
+        state.gradeUpBoards = passingData
+    },
+
+    [REQUEST_GRADE_UP_BOARD_FROM_SPRING] (state, passingData) {
+        state.gradeUpBoard = passingData
+    },
+
+
 
 
 }

@@ -12,7 +12,7 @@ import {
     REQUEST_QUESTION_BOARD_FROM_SPRING,
     REQUEST_QUESTION_BOARD_LIST_FROM_SPRING,
     REQUEST_TRADE_BOARD_LIST_FROM_SPRING,
-    REQUEST_TRADE_BOARD_FROM_SPRING,
+    REQUEST_TRADE_BOARD_FROM_SPRING, REQUEST_GRADE_UP_BOARD_LIST_FROM_SPRING, REQUEST_GRADE_UP_BOARD_FROM_SPRING,
 } from './mutation-types'
 
 // npm install axios --save-dev
@@ -106,6 +106,15 @@ export default {
             })
     },
 
+    requestGradeUpBoardListFromSpring ({ commit }) {
+        console.log('requestGradeUpBoardListFromSpring()')
+
+        return axios.get('http://localhost:7777/insoya/jpa/board/grade-up/list')
+            .then((res) => {
+                commit(REQUEST_GRADE_UP_BOARD_LIST_FROM_SPRING, res.data)
+            })
+    },
+
     requestBoardFromSpring ({ commit }, boardNo) {
         console.log('requestBoardFromSpring()')
 
@@ -139,6 +148,16 @@ export default {
                 commit(REQUEST_TRADE_BOARD_FROM_SPRING, res.data)
             })
     },
+
+    requestGradeUpBoardFromSpring ({ commit }, boardNo) {
+        console.log('requestGradeUpBoardFromSpring()')
+
+        return axios.get(`http://localhost:7777/insoya/jpa/board/grade-up/${boardNo}`)
+            .then((res) => {
+                commit(REQUEST_GRADE_UP_BOARD_FROM_SPRING, res.data)
+            })
+    },
+
 
 
 
@@ -188,6 +207,18 @@ export default {
             })
     },
 
+    // eslint-disable-next-line no-empty-pattern
+    requestCreateGradeUpBoardContentsToSpring ({ }, payload) {
+        console.log('requestCreateGradeUpBoardContentsToSpring()')
+
+        const { title, content, writer } = payload
+        return axios.post('http://localhost:7777/insoya/jpa/board/grade-up/register',
+            { title, content, writer })
+            .then(() => {
+                alert('게시물 등록 성공')
+            })
+    },
+
 
     // eslint-disable-next-line no-empty-pattern
     requestDeleteBoardToSpring ({ }, boardNo) {
@@ -222,6 +253,16 @@ export default {
         console.log('requestDeleteTradeBoardToSpring()')
 
         return axios.delete(`http://localhost:7777/insoya/jpa/board/trade/${boardNo}`)
+            .then(() => {
+                alert('삭제 성공')
+            })
+    },
+
+    // eslint-disable-next-line no-empty-pattern
+    requestDeleteGradeUpBoardToSpring ({ }, boardNo) {
+        console.log('requestDeleteGradeUpBoardToSpring()')
+
+        return axios.delete(`http://localhost:7777/insoya/jpa/board/grade-up/${boardNo}`)
             .then(() => {
                 alert('삭제 성공')
             })
@@ -276,6 +317,20 @@ export default {
                 alert('수정 성공')
             })
     },
+
+    // eslint-disable-next-line no-empty-pattern
+    requestGradeUpBoardModifyToSpring ({ }, payload) {
+        console.log('requestGradeUpBoardModifyToSpring()')
+
+        const { title, content, boardNo, writer, regDate } = payload
+
+        return axios.put(`http://localhost:7777/insoya/jpa/board/grade-up/${boardNo}`,
+            { title, content, writer, regDate })
+            .then(() => {
+                alert('수정 성공')
+            })
+    },
+
     requestProductListFromSpring ({ commit }) {
         console.log('requestProductListFromSpring()')
 

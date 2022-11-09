@@ -17,6 +17,9 @@ export default {
     tradeBoards: [],
     tradeBoard: {},
 
+    gradeUpBoards: [],
+    gradeUpBoard: {},
+
     products: [],
     product: {},
 
