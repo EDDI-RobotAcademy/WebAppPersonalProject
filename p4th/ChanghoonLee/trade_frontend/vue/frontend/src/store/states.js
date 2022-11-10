@@ -1,5 +1,7 @@
 export default {
 
-    checkDuplicateEmail: false
+    checkDuplicateEmail: false,
+    isAuthenticated: false,
+
 
 }

@@ -13,7 +13,7 @@
           회원가입
         </v-btn>
       </router-link>&nbsp;
-      <router-link to="/">
+      <router-link to="/sign-in">
         <v-btn class="grey white--text" rounded depressed small>
           로그인
         </v-btn>

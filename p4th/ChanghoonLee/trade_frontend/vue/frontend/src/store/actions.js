@@ -33,7 +33,7 @@ export default {
             .then((res) => {
                 if(res.data) {
                     alert("회원가입이 완료되었습니다!")
-                    router.push({name: 'home'})
+                    router.push({name: 'SignInView'})
                 } else {
                     alert("잘못된 입력입니다.")
                 }
