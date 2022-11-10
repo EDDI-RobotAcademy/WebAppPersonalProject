@@ -1,4 +1,4 @@
-package kr.eddi.LeaningHelper.form;
+package kr.eddi.LeaningHelper.form.memberForm;
 
 import kr.eddi.LeaningHelper.request.member.MemberSignUpRequest;
 import lombok.Getter;

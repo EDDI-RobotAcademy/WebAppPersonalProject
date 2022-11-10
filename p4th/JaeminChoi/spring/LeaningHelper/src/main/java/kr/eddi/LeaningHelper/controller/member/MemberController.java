@@ -1,7 +1,7 @@
-package kr.eddi.LeaningHelper.controller.Member;
+package kr.eddi.LeaningHelper.controller.member;
 
-import kr.eddi.LeaningHelper.form.MemberSignInForm;
-import kr.eddi.LeaningHelper.form.MemberSignUpForm;
+import kr.eddi.LeaningHelper.form.memberForm.MemberSignInForm;
+import kr.eddi.LeaningHelper.form.memberForm.MemberSignUpForm;
 import kr.eddi.LeaningHelper.service.member.MemberService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
