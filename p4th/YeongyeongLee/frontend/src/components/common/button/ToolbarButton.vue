@@ -50,30 +50,26 @@
     <v-spacer></v-spacer>
 
 
-
-
   </div>
 </template>
-
 
 <script>
 export default {
   name: "ToolbarView",
-
   data() {
     return {
 
 
       nav_drawer: false,
       links: [
-        {icon: 'mdi-home', text: 'Home', name: 'home', route: 'HomeView'},
-        {icon: 'mdi-google-maps', text: '국내', name: 'board-list-view', route: '/board-list-view'},
-        {icon: 'mdi-google-maps', text: '아시아', name: 'board-list-view', route: '/board-list-view'},
-        {icon: 'mdi-google-maps', text: '아프리카', name: 'board-list-view', route: '/board-list-view'},
-        {icon: 'mdi-google-maps', text: '유럽', name: 'board-list-view', route: '/board-list-view'},
-        {icon: 'mdi-google-maps', text: '남아메리카', name: 'board-list-view', route: '/board-list-view'},
-        {icon: 'mdi-google-maps', text: '북아메리카', name: 'board-list-view', route: '/board-list-view'},
-        {icon: 'mdi-google-maps', text: '오세아니아', name: 'board-list-view', route: '/board-list-view'},
+        {icon: 'mdi-home', text: 'Home', name: 'home', route: '/main-page'},
+        {icon: 'mdi-google-maps', text: '국내', name: 'korean-board-view', route: '/korean-board-view'},
+        {icon: 'mdi-google-maps', text: '아시아', name: 'asia-board-view', route: '/asia-board-view'},
+        {icon: 'mdi-google-maps', text: '아프리카', name: 'africa-board-view', route: '/africa-board-view'},
+        {icon: 'mdi-google-maps', text: '유럽', name: 'europe-board-view', route: '/europe-board-view'},
+        {icon: 'mdi-google-maps', text: '남아메리카', name: 'south-america-bord-view', route: '/south-america-bord-view'},
+        {icon: 'mdi-google-maps', text: '북아메리카', name: 'north-america-bord-view', route: '/north-america-bord-view'},
+        {icon: 'mdi-google-maps', text: '오세아니아', name: 'oceania-bord-view', route: '/oceania-bord-view'},
 
 
       ],
@@ -88,9 +84,6 @@ export default {
   }
 
 }
-
-
-
 </script>
 
 <style scoped>
