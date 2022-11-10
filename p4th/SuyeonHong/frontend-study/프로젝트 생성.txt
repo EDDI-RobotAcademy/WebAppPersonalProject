@@ -1,0 +1,1 @@
+frontend 복습을 진행하기 위해 초기 frontend-study 프로젝트 디렉토리 만들기
