@@ -17,12 +17,13 @@ class _SettingPageState extends State<SettingPage> {
   static const storage = FlutterSecureStorage();
   dynamic userInfo = '';
 
+  /// 로그아웃 후 Dialog 띄우기
   logout() async {
     await storage.delete(key: 'signIn');
     _signOutSuccessShowDialog();
   }
 
-  // 로그인 중인지 체크
+  /// 로그인 중인지 체크
   checkUserState() async {
     userInfo = await storage.read(key: 'signIn');
     if (userInfo == null) {
