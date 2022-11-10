@@ -3,13 +3,11 @@ package kr.eddi.demo.controller;
 
 import kr.eddi.demo.controller.form.MemberLoginForm;
 import kr.eddi.demo.controller.form.MemberRegisterForm;
-import kr.eddi.demo.entity.MemberProfile;
+import kr.eddi.demo.entity.ReadUsMember;
 import kr.eddi.demo.service.MemberServiceImpl;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.UUID;
 
 @Slf4j
 @RestController
@@ -43,11 +41,9 @@ public class MemberController {
     }
 
     @PostMapping("/login-user-nickname/{userToken}")
-    public String loginUserProfile(@PathVariable("userToken") String userToken) {
+    public ReadUsMember loginUserProfile(@PathVariable("userToken") String userToken) {
         log.info("nowMemberProfile()");
 
-        String userNickname = service.getSignInMemberNickName(userToken);
-
-        return userNickname;
+        return service.getSignInMemberProfile(userToken);
     }
 }
