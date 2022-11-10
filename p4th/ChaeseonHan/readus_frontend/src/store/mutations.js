@@ -7,7 +7,7 @@ export default {
     },
 
     [REQUEST_LOGGED_IN_USER_PROFILE] (state, passingData) {
-        state.nickName = passingData
+        state.loginUserProfile = passingData
     },
 
     [REQUEST_BESTSELLER_LIST] (state, passingData) {
