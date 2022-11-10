@@ -3,11 +3,13 @@ import 'package:flutter/material.dart';
 class CommonAlertDialog extends StatelessWidget {
   final String title;
   final String content;
+  final VoidCallback onCustomButtonPressed;
 
-  CommonAlertDialog({
-    required this.title,
-    required this.content,
-  });
+  CommonAlertDialog(
+      {required this.title,
+      required this.content,
+      required this.onCustomButtonPressed,
+      });
 
   @override
   Widget build(BuildContext context) {
@@ -19,7 +21,7 @@ class CommonAlertDialog extends StatelessWidget {
         TextButton(
           child: const Text("OK"),
           onPressed: () {
-            Navigator.of(context).pop();
+            onCustomButtonPressed.call();
           },
         ),
       ],

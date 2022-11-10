@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:lol_esports_korea_app/api/authentication/globals_success_check.dart';
-import 'package:lol_esports_korea_app/components/authentication/user.dart';
+import 'package:lol_esports_korea_app/pages/authentication/sign_out_page.dart';
 import 'package:lol_esports_korea_app/pages/authentication/sign_up_page.dart';
 import 'package:lol_esports_korea_app/pages/home_page.dart';
 
@@ -18,7 +19,55 @@ class SignInPage extends StatefulWidget {
 
 class _SignInPageState extends State<SignInPage> {
   final _formKey = GlobalKey<FormState>();
-  User user = User("", "", "");
+  var emailController = TextEditingController();
+  var passwordController = TextEditingController();
+
+  static const storage = FlutterSecureStorage();
+  dynamic memberInfo = '';
+
+  @override
+  void initState() {
+    super.initState();
+
+    // 비동기로 flutter secure storage 정보를 불러오는 작업
+    WidgetsBinding.instance?.addPostFrameCallback((_) {
+      _asyncMethod();
+    });
+  }
+
+  _asyncMethod() async {
+    memberInfo = await storage.read(key: 'signIn');
+
+    //member 정보가 있을 시 이동할 페이지
+    if (memberInfo != null) {
+      Navigator.push(context,
+          MaterialPageRoute(builder: (context) => const HomePage()));
+    } else {
+      debugPrint('로그인이 필요합니다');
+    }
+  }
+
+  // 로그인 버튼 누르면 실행
+  signInAction() async {
+    MemberSignInRequest memberSignInRequest =
+        MemberSignInRequest(emailController.text, passwordController.text);
+
+    await SpringHttpApi().signInApi(memberSignInRequest);
+
+    if (SpringHttpApi.signInResponse.statusCode == 200) {
+      var val = SpringHttpApi.signInResponse.body;
+
+      await storage.write(
+        key: 'signIn',
+        value: val.toString(),
+      );
+      _signInSuccessShowDialog();
+      debugPrint('접속 성공!');
+    } else {
+      _signInFailShowDialog();
+      debugPrint('error');
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -62,10 +111,7 @@ class _SignInPageState extends State<SignInPage> {
                         ),
                       ),
                       TextFormField(
-                          controller: TextEditingController(text: user.email),
-                          onChanged: (val) {
-                            user.email = val;
-                          },
+                          controller: emailController,
                           validator: (value) {
                             value!.isEmpty ? "E-mail is Empty" : null;
                             if (!RegExp(
@@ -101,16 +147,12 @@ class _SignInPageState extends State<SignInPage> {
                         ),
                       ),
                       TextFormField(
-                          controller:
-                              TextEditingController(text: user.password),
-                          onChanged: (val) {
-                            user.password = val;
-                          },
+                          controller: passwordController,
                           validator: (value) =>
                               value!.isEmpty ? "password is Empty" : null,
                           style: const TextStyle(
                               fontSize: 20, color: Colors.white),
-                          obscureText : true,
+                          obscureText: true,
                           decoration: const InputDecoration(
                               hintText: "Please enter Password",
                               hintStyle:
@@ -132,20 +174,8 @@ class _SignInPageState extends State<SignInPage> {
                     onPressed: () {
                       if (_formKey.currentState!.validate()) {
                         //로그인 맵핑 요청
-                        SpringSignInApi().signIn(
-                            UserSignInRequest(user.email, user.password));
-
-                        // 로그인 성공 체크 후 홈화면 이동
-                        if (GlobalsSuccessCheck.isSignInCheck) {
-                          _signInSuccessShowDialog();
-                          Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                  builder: (context) => const HomePage()));
-                        } else {
-                          _signInFailShowDialog();
-                          return;
-                        }
+                        signInAction();
+                        _asyncMethod();
                       }
                     },
                     child: const Text(
@@ -190,7 +220,12 @@ class _SignInPageState extends State<SignInPage> {
         barrierDismissible: false,
         builder: (BuildContext context) {
           return CommonAlertDialog(
-              title: "⚠️", content: '이메일 혹은 패스워드가 잘 못되었습니다.');
+            title: "⚠️",
+            content: '이메일 혹은 패스워드가 잘 못되었습니다.',
+            onCustomButtonPressed: () {
+              Navigator.of(context).pop();
+            },
+          );
         });
   }
 
@@ -201,7 +236,14 @@ class _SignInPageState extends State<SignInPage> {
         barrierDismissible: false,
         builder: (BuildContext context) {
           return CommonAlertDialog(
-              title: "🎉️", content: '환영합니다🥰 \n 홈으로 이동합니다.');
+              title: "🎉️",
+              content: '환영합니다🥰 \n 홈으로 이동합니다.',
+              onCustomButtonPressed: () {
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) => const HomePage()));
+              });
         });
   }
 }
