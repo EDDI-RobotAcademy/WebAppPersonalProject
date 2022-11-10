@@ -71,7 +71,21 @@ export default {
             })
     },
 
+    // eslint-disable-next-line no-empty-pattern
+    requestWriteBoardToSpring ( { }, payload ) {
+        console.log("requestWriteBoardToSpring")
+        const { category, title, contents, memberEmail } = payload
 
+        return axios.post('http://localhost:7776/board/write/', {category, title, contents, memberEmail})
+            .then((res) => {
+                if(res.data == true) {
+                    alert("게시글이 등록되었습니다!")
+                } else {
+                    alert("알 수 없는 오류입니다!")
+                }
+            }).catch((error) => {
+                console.log(error.message)
+            })
 
-
+    }
 }
