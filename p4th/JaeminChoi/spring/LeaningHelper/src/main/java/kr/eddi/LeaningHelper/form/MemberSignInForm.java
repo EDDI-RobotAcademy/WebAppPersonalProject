@@ -6,11 +6,11 @@ import lombok.Data;
 @Data
 public class MemberSignInForm {
 
-    private String id;
-    private String pw;
+    private String email;
+    private String password;
 
 
     public MemberSignInRequest toMemberSignInRequest () {
-        return new MemberSignInRequest(id , pw);
+        return new MemberSignInRequest(email , password);
     }
 }

@@ -25,12 +25,12 @@ class LeaningHelperApplicationTests {
 	MemberAuthRepository memberAuthRepository;
 
 	@Test
-	void contextLoads() {
-		String ID = "Test1@test1.com";
-		String PW = "123";
+	void checkSignUp() {
+		String email = "Test@test.com";
+		String password = "test123!";
 
 		Member member = Member.builder()
-				.id(ID)
+				.email(email)
 				.nickName("testMember")
 				.build();
 		memberRepository.save(member);
@@ -44,7 +44,7 @@ class LeaningHelperApplicationTests {
 
 
 		final MemberBasicAuth auth = new MemberBasicAuth(member,
-				MemberAuth.BASIC_AUTH, PW);
+				MemberAuth.BASIC_AUTH, password);
 
 		memberAuthRepository.save(auth);
 

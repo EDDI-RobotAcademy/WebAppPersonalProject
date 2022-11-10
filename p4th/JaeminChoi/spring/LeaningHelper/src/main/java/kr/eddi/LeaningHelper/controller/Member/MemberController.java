@@ -15,9 +15,9 @@ public class MemberController {
 
     @Autowired
     private MemberService service;
-    @PostMapping("/sing-in")
-    public String memberSinIn(@RequestBody MemberSignInForm memberSignInForm){
-        log.info("memberSinIn(): " + memberSignInForm);
+    @PostMapping("/sign-in")
+    public String memberSignIn(@RequestBody MemberSignInForm memberSignInForm){
+        log.info("memberSignIn(): " + memberSignInForm);
 
         return service.signIn(memberSignInForm.toMemberSignInRequest());
     }
