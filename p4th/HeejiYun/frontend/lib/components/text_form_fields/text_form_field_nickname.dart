@@ -28,7 +28,7 @@ class _TextFormFieldNicknameState extends State<TextFormFieldNickname> {
           focusNode: TextFormFieldNickname.nicknameFocus,
           controller: widget.controller,
           validator: (value) => CheckValidate().
-          validateNickname(TextFormFieldNickname.nicknameFocus, value!),
+          validateNickname(value!),
           autovalidateMode: AutovalidateMode.onUserInteraction,
           onChanged: (text) {
             form?.nicknamePass = false;
