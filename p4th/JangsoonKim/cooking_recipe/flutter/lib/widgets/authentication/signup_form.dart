@@ -26,7 +26,7 @@ class SignupFormState extends State<SignupForm> {
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
-가
+
     return Form(
       key: _formKey,
       child: Background(

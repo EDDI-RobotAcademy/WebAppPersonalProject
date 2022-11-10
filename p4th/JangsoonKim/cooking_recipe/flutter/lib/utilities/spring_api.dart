@@ -104,7 +104,6 @@ class SpringApi {
     prefs.clear();
     Get.off(() => const LoginScreen());
   }
-
 }
 
 class UserSignUpRequest {
