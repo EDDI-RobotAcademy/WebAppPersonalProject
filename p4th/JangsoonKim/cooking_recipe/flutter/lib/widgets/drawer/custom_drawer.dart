@@ -1,6 +1,7 @@
 import 'package:demo/screens/event_screen.dart';
 import 'package:demo/screens/favorite_list_screen.dart';
 import 'package:demo/screens/notice_screen.dart';
+import 'package:demo/utilities/spring_api.dart';
 import 'package:demo/widgets/drawer/drawer_header.dart';
 import 'package:demo/widgets/screen_controller.dart';
 import 'package:flutter/material.dart';
@@ -109,7 +110,8 @@ class CustomDrawer extends StatelessWidget {
               SizedBox(height: size.height * 0.01,),
               const Divider(
                 color: Colors.black54,
-              )
+              ),
+              TextButton(onPressed: (){SpringApi.logOut();}, child: Text("로그아웃"))
             ],
           ),
         ),
