@@ -27,7 +27,7 @@ public class CommunityBoard {
     @Column(length = 32, nullable = false)
     private String writer;
 
-    @Column
+    @Column(columnDefinition = "LONGTEXT")
     private String contents;
 
     @CreationTimestamp
