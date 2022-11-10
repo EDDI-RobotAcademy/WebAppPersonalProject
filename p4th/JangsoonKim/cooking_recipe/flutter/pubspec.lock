@@ -156,6 +156,13 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "1.8.0"
+  multiple_images_picker:
+    dependency: "direct main"
+    description:
+      name: multiple_images_picker
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "1.0.1"
   path:
     dependency: transitive
     description:

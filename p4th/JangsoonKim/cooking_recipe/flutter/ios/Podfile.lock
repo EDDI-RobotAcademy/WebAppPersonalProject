@@ -1,26 +1,41 @@
 PODS:
+  - BSGridCollectionViewLayout (1.2.5)
+  - BSImagePicker (2.10.3):
+    - BSGridCollectionViewLayout (= 1.2.5)
+    - BSImageView (= 1.0.3)
+  - BSImageView (1.0.3)
   - Flutter (1.0.0)
-  - flutter_secure_storage (3.3.1):
+  - multiple_images_picker (1.0.00):
+    - BSImagePicker (~> 2.10.3)
     - Flutter
   - shared_preferences_ios (0.0.1):
     - Flutter
 
 DEPENDENCIES:
   - Flutter (from `Flutter`)
-  - flutter_secure_storage (from `.symlinks/plugins/flutter_secure_storage/ios`)
+  - multiple_images_picker (from `.symlinks/plugins/multiple_images_picker/ios`)
   - shared_preferences_ios (from `.symlinks/plugins/shared_preferences_ios/ios`)
+
+SPEC REPOS:
+  trunk:
+    - BSGridCollectionViewLayout
+    - BSImagePicker
+    - BSImageView
 
 EXTERNAL SOURCES:
   Flutter:
     :path: Flutter
-  flutter_secure_storage:
-    :path: ".symlinks/plugins/flutter_secure_storage/ios"
+  multiple_images_picker:
+    :path: ".symlinks/plugins/multiple_images_picker/ios"
   shared_preferences_ios:
     :path: ".symlinks/plugins/shared_preferences_ios/ios"
 
 SPEC CHECKSUMS:
+  BSGridCollectionViewLayout: 333dcb457a5a3bdd9212607ab5756553dcfe06cb
+  BSImagePicker: 07404254f2fcdaf5a2eb403c0f8c337267ce8738
+  BSImageView: a149459433a2687157d034c78e059d30ac7f2544
   Flutter: f04841e97a9d0b0a8025694d0796dd46242b2854
-  flutter_secure_storage: 7953c38a04c3fdbb00571bcd87d8e3b5ceb9daec
+  multiple_images_picker: c57bdc05801e244c110040889e84851a56e140fd
   shared_preferences_ios: 548a61f8053b9b8a49ac19c1ffbc8b92c50d68ad
 
 PODFILE CHECKSUM: ef19549a9bc3046e7bb7d2fab4d021637c0c58a3
