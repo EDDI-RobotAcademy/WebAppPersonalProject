@@ -53,10 +53,21 @@ public class MemberServiceImpl implements MemberService{
     }
 
     @Override
-    public Boolean emailValidation(String id) {
-        Optional<Member> maybeMember = memberRepository.findById(id);
+    public Boolean emailValidation(String email) {
+        Optional<Member> maybeMember = memberRepository.findById(email);
 
         if (maybeMember.isPresent()) {
+            return false;
+        }
+
+        return true;
+    }
+
+    @Override
+    public Boolean nickNameValidation(String nickName) {
+        Optional<Member> maybeMemberNickName = memberRepository.findByNickName(nickName);
+
+        if (maybeMemberNickName.isPresent()) {
             return false;
         }
 

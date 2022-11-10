@@ -29,4 +29,22 @@ public class MemberController {
         return service.memberSignUp(memberSignUpForm.toMemberRegisterRequest());
     }
 
+    @PostMapping("/check-email/{email}")
+    public Boolean emailValidation(@PathVariable("email")  String email) {
+        log.info("emailValidation(): " + email);
+        String tmp = service.emailValidation(email).toString();
+
+        log.info(tmp);
+        return service.emailValidation(email);
+    }
+
+    @PostMapping("/check-email/{nickName}")
+    public Boolean nickNameValidation(@PathVariable("nickName")  String nickName) {
+        log.info("nickNameValidation(): " + nickName);
+        String tmp = service.nickNameValidation(nickName).toString();
+
+        log.info(tmp);
+        return service.nickNameValidation(nickName);
+    }
+
 }
