@@ -1,6 +1,7 @@
 package kr.eddi.LeaningHelper.controller.Member;
 
 import kr.eddi.LeaningHelper.form.MemberSignInForm;
+import kr.eddi.LeaningHelper.form.MemberSignUpForm;
 import kr.eddi.LeaningHelper.service.member.MemberService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,6 +20,13 @@ public class MemberController {
         log.info("memberSinIn(): " + memberSignInForm);
 
         return service.signIn(memberSignInForm.toMemberSignInRequest());
+    }
+
+    @PostMapping("/sign-up")
+    public boolean memberSignUp(@RequestBody MemberSignUpForm memberSignUpForm){
+        log.info("memberSignUp()" + memberSignUpForm);
+
+        return service.memberSignUp(memberSignUpForm.toMemberRegisterRequest());
     }
 
 }
