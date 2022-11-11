@@ -49,6 +49,7 @@ class SpringApi {
     }
   }
 
+
   Future<bool?> signUp(UserSignUpRequest request) async {
     debugPrint(request.email);
     debugPrint(request.password);
@@ -83,7 +84,11 @@ class SpringApi {
     );
     if (response.statusCode == 200) {
       debugPrint("통신 확인");
-      any.setString("userData", response.body);
+      print(response.body);
+      Map<String, dynamic> jsonData = jsonDecode(response.body);
+      any.setString("userData", jsonData['userToken']);
+      any.setString("userEmail", jsonData['memberEmail']);
+      any.setString("userNickname", jsonData['memberNickname']);
       Get.off(() => const ScreenController());
       return UserLoginResponse(true);
     } else {
@@ -126,3 +131,4 @@ class UserLoginRequest {
 
   UserLoginRequest(this.email, this.password);
 }
+
