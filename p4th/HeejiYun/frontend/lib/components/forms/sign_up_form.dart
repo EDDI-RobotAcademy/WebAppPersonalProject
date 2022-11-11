@@ -48,6 +48,9 @@ class SignUpFormState extends State<SignUpForm> {
     emailController.dispose();
     passwordController.dispose();
     nicknameController.dispose();
+    TextFormFieldEmail.emailFocus.dispose();
+    TextFormFieldPassword.passwordFocus.dispose();
+    TextFormFieldNickname.nicknameFocus.dispose();
     super.dispose();
   }
 

@@ -27,8 +27,7 @@ class _TextFormFieldEmailState extends State<TextFormFieldEmail> {
         TextFormField(
           controller: widget.controller,
           focusNode: TextFormFieldEmail.emailFocus,
-          validator: (value) => CheckValidate().
-          validateEmail(TextFormFieldEmail.emailFocus, value!),
+          validator: (value) => CheckValidate().validateEmail(value!),
           autovalidateMode: AutovalidateMode.onUserInteraction,
           onChanged: (text) {
             form?.emailPass = false;

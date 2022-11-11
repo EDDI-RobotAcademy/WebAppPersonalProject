@@ -19,9 +19,10 @@ class SpringMemberApi {
 
     if (response.statusCode == 200) {
       debugPrint("통신 확인");
+      return json.decode(response.body);
+    } else {
+      throw Exception("통신 실패");
     }
-
-    return json.decode(response.body);
 
   }
 
@@ -37,9 +38,10 @@ class SpringMemberApi {
 
     if (response.statusCode == 200) {
       debugPrint("통신 확인");
+      return json.decode(response.body);
+    } else {
+      throw Exception("통신 실패");
     }
-
-    return json.decode(response.body);
   }
 
   Future<bool?> signUp (MemberSignUpRequest request) async {
@@ -59,9 +61,10 @@ class SpringMemberApi {
 
     if (response.statusCode == 200) {
       debugPrint("통신 확인");
+      return json.decode(response.body);
+    } else {
+      throw Exception("통신 실패");
     }
-
-    return json.decode(response.body);
   }
 
   Future<SignInResponse> signIn (MemberSignInRequest request) async {
@@ -84,8 +87,7 @@ class SpringMemberApi {
 
       return SignInResponse(response.body);
     } else {
-      debugPrint("통신 실패");
-      return SignInResponse("로그인 실패");
+      throw Exception("통신 실패");
     }
   }
 }
