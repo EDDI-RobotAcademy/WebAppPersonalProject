@@ -33,6 +33,7 @@ public class ReadUsMember {
     @Column(length = 200)
     private String biography;
 
+    @Getter
     @CreationTimestamp
     private Date createdDate;
 
