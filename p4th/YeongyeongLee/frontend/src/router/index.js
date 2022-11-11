@@ -13,11 +13,12 @@ import NorthAmericaBoardView from "@/views/country/NorthAmericaBoardView";
 import SouthAmericaBoardView from "@/views/country/SouthAmericaBoardView";
 import OceaniaBoardView from "@/views/country/OceaniaBoardView";
 
-import JpaBoardListView from "@/views/boards/BoardListView";
-import JpaBoardRegisterView from "@/views/boards/BoardRegisterView";
-import JpaBoardReadView from "@/views/boards/BoardReadView";
-import JpaBoardModifyView from "@/views/boards/BoardModifyView";
+import JpaBoardListView from "@/views/boards/JpaBoardListView";
+import JpaBoardRegisterView from "@/views/boards/JpaBoardRegisterView";
+import JpaBoardReadView from "@/views/boards/JpaBoardReadView";
+import JpaBoardModifyView from "@/views/boards/JpaBoardModifyView";
 import ToolbarButton from "@/components/common/button/ToolbarButton";
+
 
 
 
@@ -123,7 +124,6 @@ const routes = [
     name: 'toolbar-button',
     component: ToolbarButton
   },
-
 
 
 
