@@ -1,11 +1,13 @@
 <template>
-  <v-row class="mb-3">
-    <v-col>
-      <v-btn class="mr-2" small v-for="item in category" :key="item.index">
-        {{ item.title }}
-      </v-btn>
-    </v-col>
-  </v-row>
+  <v-container>
+    <v-row>
+      <v-col>
+        <v-btn class="mr-2" outlined small v-for="item in category" :key="item.index">
+          {{ item.title }}
+        </v-btn>
+      </v-col>
+    </v-row>
+  </v-container>
 </template>
 
 <script>

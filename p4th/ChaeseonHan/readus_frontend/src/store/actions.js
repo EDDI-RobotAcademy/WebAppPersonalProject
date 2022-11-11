@@ -87,5 +87,16 @@ export default {
                 console.log(error.message)
             })
 
-    }
+    },
+
+    requestAllCommunityBoardListTOSpring( { commit } ) {
+        console.log("requestAllCommunityBoardListTOSpring()")
+
+        return axios.get('http://localhost:7776/board/list-temporary')
+            .then((res) => {
+                commit(REQUEST_COMMUNITY_MAIN_BOARD_LIST, res.data)
+            }).catch((error) => {
+                console.log(error.message)
+            })
+    },
 }
