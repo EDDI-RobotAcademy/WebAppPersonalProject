@@ -13,6 +13,8 @@ public class MemberRegisterRequest {
 
     private final String email;
     private final String password;
+    private final String username;
+    private final String nickname;
 
     private final String city;
     private final String street;
@@ -21,7 +23,7 @@ public class MemberRegisterRequest {
 
     public Member toMember() {
         return new Member(
-                email,
+                email,username,nickname,
                 MemberProfile.of(city, street, addressDetail, zipcode)
         );
     }

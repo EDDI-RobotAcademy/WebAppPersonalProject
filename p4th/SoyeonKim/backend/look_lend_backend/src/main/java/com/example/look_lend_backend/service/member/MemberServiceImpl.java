@@ -53,16 +53,26 @@ public class MemberServiceImpl implements MemberService{
     }
 
     @Override
+    public Boolean nickNameValidation(String nickname) {
+        Optional<Member> maybeMember = memberRepository.findByNickname(nickname);
+
+        if (maybeMember.isPresent()) {
+            return false;
+        }
+        return true;
+    }
+
+    @Override
     public String signIn(MemberLoginRequest request) {
         String email = request.getEmail();
         Optional<Member> maybeMember = memberRepository.findByEmail(email);
 
         if (maybeMember.isPresent()) {
             Member member = maybeMember.get();
-
+/*
             log.info("member email: " + member.getEmail());
             log.info("request email: " + request.getEmail());
-            log.info("request password: " + request.getPassword());
+            log.info("request password: " + request.getPassword());*/
 
             if (!member.isRightPassword(request.getPassword())) {
                 throw new RuntimeException("패스워드가 잘못되었습니다!");
