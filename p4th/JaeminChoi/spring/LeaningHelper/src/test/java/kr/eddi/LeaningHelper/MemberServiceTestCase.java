@@ -14,7 +14,7 @@ public class MemberServiceTestCase {
 
     @Test
     void checkId(){
-        String ID = "Test1@test1.com";
+        String ID = "Test@test.com";
         boolean outcome = service.emailValidation(ID);
 
         System.out.println("결과 : " + outcome );
@@ -22,8 +22,7 @@ public class MemberServiceTestCase {
 
     @Test
     void checkSignIn(){
-        MemberSignInRequest memberSignInTestRequest = new MemberSignInRequest("Test1@test1.com" , "123");
-        String ID = "Test1@test1.com";
+        MemberSignInRequest memberSignInTestRequest = new MemberSignInRequest("Test@test.com" , "test123!");
 
         String outcome = service.signIn(memberSignInTestRequest);
 

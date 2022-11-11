@@ -8,16 +8,16 @@ import lombok.ToString;
 @Data
 @ToString
 @RequiredArgsConstructor
-public class MemberRegisterRequest {
-    private final String id;
-    private final String pw;
+public class MemberSignUpRequest {
+    private final String email;
+    private final String password;
     private final String nickName;
 
 
 
     public Member toMember () {
         return new Member(
-                id,
+                email,
                 nickName
         );
     }

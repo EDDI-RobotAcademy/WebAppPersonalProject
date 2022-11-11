@@ -1,13 +1,14 @@
 package kr.eddi.LeaningHelper.service.member;
 
-import kr.eddi.LeaningHelper.request.member.MemberRegisterRequest;
+import kr.eddi.LeaningHelper.request.member.MemberSignUpRequest;
 import kr.eddi.LeaningHelper.request.member.MemberSignInRequest;
-import org.springframework.stereotype.Service;
 
 public interface MemberService {
-    public Boolean memberRegister(MemberRegisterRequest memberRegisterRequest);
+    public Boolean memberSignUp(MemberSignUpRequest memberSignUpRequest);
 
-    public Boolean emailValidation(String id);
+    public Boolean emailValidation(String email);
+
+    public Boolean nickNameValidation(String nickName);
 
     public String signIn(MemberSignInRequest memberSignInRequest);
 

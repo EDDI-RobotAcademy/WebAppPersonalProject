@@ -21,8 +21,8 @@ public class Member {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long memberNo;
 
-    @Column(name = "member_id",length = 30,nullable = false)
-    private String id;
+    @Column(name = "member_email",length = 30,nullable = false)
+    private String email;
 
     @Column(length = 64,nullable = false)
     private String nickName;
@@ -36,8 +36,8 @@ public class Member {
     @OneToOne(mappedBy = "member", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private MemberProfile profile;
 
-    public Member(String id, String nickName){
-        this.id = id;
+    public Member(String email, String nickName){
+        this.email = email;
         this.nickName = nickName;
     }
 

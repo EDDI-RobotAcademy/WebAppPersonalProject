@@ -11,8 +11,8 @@ import lombok.ToString;
 @RequiredArgsConstructor
 public class MemberSignInRequest {
 
-    private final String id;
-    private final String pw;
+    private final String email;
+    private final String password;
 
 
 }

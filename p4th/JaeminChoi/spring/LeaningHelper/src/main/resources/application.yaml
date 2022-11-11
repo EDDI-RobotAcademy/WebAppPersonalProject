@@ -1,9 +1,9 @@
 server:
-  port: 7777
+  port: 7776
 
 spring:
   datasource:
-    url: jdbc:mysql://localhost:3306/LeaningHelper_db?allowpublickeyretrieval=true&usessl=false&serverTimezone=UTC
+    url: jdbc:mysql://localhost:3306/LearningHelper_db?allowpublickeyretrieval=true&usessl=false&serverTimezone=UTC
     username: eddi
     password: eddi@123
     driver-class-name: com.mysql.cj.jdbc.Driver
