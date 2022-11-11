@@ -4,5 +4,6 @@ export default {
     loginUserProfile: [],
     aladinBestSeller: [],
     communityMainBoardList: [],
+    communityBoard: {},
 
 }

@@ -36,6 +36,16 @@ const routes = [
     name: 'BoardWriteView',
     component: BoardWriteView
   },
+  {
+    path: '/community/read',
+    name: 'BoardReadView',
+    components:{
+      default: BoardReadView
+    },
+    props: {
+      default: true
+    }
+  },
 
 ]
 

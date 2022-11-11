@@ -28,10 +28,10 @@
           </td>
 
           <td align="left">
-<!--            <router-link :to="{ name: 'ProductBoardReadView',
-            params: { boardNo : board.boardNo.toString() }}">-->
+            <a href class="a" :to="{ name: 'BoardReadView',
+                                params: { boardNo : board.boardNo.toString() }}">
               {{ board.title }}
-<!--            </router-link>-->
+            </a>
           </td>
 
           <td align="center">
@@ -47,15 +47,16 @@
     </div>
     
 
-<!--    <v-pagination
-        class="elevation-0"
-        color="#356859"
-        total-visible="6"
-        v-model="pageNumber"
-        :value="currentPageNumber"
-        :length="numOfPages"/>-->
+<!-- 밑 버튼 -->
+
     <div class="d-flex justify-end">
-      <v-btn small outlined class="mt-3" @click="toWrite"> 글쓰기 </v-btn>
+<!--      <v-pagination
+          class="mt-1"
+          color="#356859"
+          total-visible="6"
+          :value="1"
+          :length="9"/>-->
+      <v-btn small outlined class="mt-3" color="#356859" @click="toWrite"> 글쓰기 </v-btn>
     </div>
   </v-container>
 </template>
@@ -63,7 +64,7 @@
 <script>
 import CommonCommunityCategoryButtons from "@/components/common/CommonCommunityCategoryButtons";
 export default {
-  name: "BoardList",
+  name: "CommonBoardList",
   components: {CommonCommunityCategoryButtons},
   props: {
     boardList: {
@@ -106,6 +107,26 @@ export default {
 }
 .greentop tr:hover td{
   color: #23463b
+}
+
+
+
+a:link {
+  color : #000000;
+  text-decoration: none;
+}
+a:visited {
+  color : #53a48e;
+  text-decoration: none;
+}
+a:hover {
+  color : #356859;
+  text-decoration: underline;
+  font-weight: bold;
+}
+a:active {
+  color : #356859;
+  text-decoration: none;
 }
 
 
