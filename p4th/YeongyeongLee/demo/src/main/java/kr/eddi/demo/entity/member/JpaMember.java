@@ -1,21 +1,18 @@
-package kr.eddi.demo.entity.jpa.member;
+package kr.eddi.demo.entity.member;
 
 
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
+
 import javax.persistence.*;
 import java.util.HashSet;
 import java.util.Optional;
 import java.util.Set;
-
-
 @Entity
 @NoArgsConstructor
-
-
-
 public class JpaMember {
+
     @Id
     @Getter
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -54,11 +51,4 @@ public class JpaMember {
                 .filter(auth -> auth instanceof BasicAuthentication)
                 .findFirst();
     }
-
-
-
-
-
-
-
 }

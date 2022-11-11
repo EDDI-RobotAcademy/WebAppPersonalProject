@@ -1,7 +1,7 @@
 package kr.eddi.demo.utilty.encrypt;
 
-import kr.eddi.demo.utilty.encrypt.exception.UnableToGenerateHash;
 
+import kr.eddi.demo.utilty.encrypt.exception.UnableToGenerateHash;
 import javax.crypto.SecretKeyFactory;
 import javax.crypto.spec.PBEKeySpec;
 import java.math.BigInteger;
@@ -84,7 +84,4 @@ public class EncryptionUtil {
         }
         return bytes;
     }
-
-
-
 }

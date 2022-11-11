@@ -1,18 +1,16 @@
-package kr.eddi.demo.entity.service.jpa.member;
+package kr.eddi.demo.entity.service.member;
 
-
-import kr.eddi.demo.entity.jpa.member.Authentication;
-import kr.eddi.demo.entity.jpa.member.BasicAuthentication;
-import kr.eddi.demo.entity.jpa.member.JpaMember;
+import kr.eddi.demo.entity.member.Authentication;
+import kr.eddi.demo.entity.member.BasicAuthentication;
+import kr.eddi.demo.entity.member.JpaMember;
 import kr.eddi.demo.entity.repository.member.AuthenticationRepository;
 import kr.eddi.demo.entity.repository.member.MemberRepository;
-import kr.eddi.demo.entity.service.jpa.member.request.MemberLoginRequest;
-import kr.eddi.demo.entity.service.jpa.member.request.MemberRegisterRequest;
+import kr.eddi.demo.entity.service.member.request.MemberLoginRequest;
+import kr.eddi.demo.entity.service.member.request.MemberRegisterRequest;
 import kr.eddi.demo.entity.service.security.RedisService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
 
 import java.util.Optional;
 import java.util.UUID;
@@ -79,9 +77,3 @@ public class JpaMemberServicelmpl implements JpaMemberService  {
     }
 
 }
-
-
-
-
-
-

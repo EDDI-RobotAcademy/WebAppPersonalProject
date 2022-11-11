@@ -1,5 +1,5 @@
 <template>
-  <div class="grey lighten-4" style="font-family: Arial">
+  <div class="grey lighten-4" style="font-family:Arial">
     <v-row justify="center">
       <v-col cols="auto" style="padding-bottom: 20px">
         <v-card width="600">
@@ -33,28 +33,28 @@
   </div>
 </template>
 
-
 <script>
 export default {
   name: "LoginForm",
+
   data(){
-  return {
-    email: "",
-    password: "",
-    email_rule: [
-      v => !!v || '이메일을 입력해주세요.',
-      v => {
-        const replaceV = v.replace(/(\s*)/g, '')
-        const pattern = /^(([^<>()[\]\\.,;:\s@]+(\.[^<>()[\]\\.,;:\s@]+)*)|(.+))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
-        return pattern.test(replaceV) || '이메일 형식을 입력하세요.'
-      }
-    ],
-    password_rule: [
-      v => this.state === 'ins' ? !!v || '패스워드는 필수 입력사항입니다.' : true,
-      v => !(v && v.length >= 30) || '패스워드는 30자 이상 입력할 수 없습니다.',
-    ],
-  }
-},
+    return {
+      email: "",
+      password: "",
+      email_rule: [
+        v => !!v || '이메일을 입력해주세요.',
+        v => {
+          const replaceV = v.replace(/(\s*)/g, '')
+          const pattern = /^(([^<>()[\]\\.,;:\s@]+(\.[^<>()[\]\\.,;:\s@]+)*)|(.+))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
+          return pattern.test(replaceV) || '이메일 형식을 입력하세요.'
+        }
+      ],
+      password_rule: [
+        v => this.state === 'ins' ? !!v || '패스워드는 필수 입력사항입니다.' : true,
+        v => !(v && v.length >= 30) || '패스워드는 30자 이상 입력할 수 없습니다.',
+      ],
+    }
+  },
 
   methods:{
 
@@ -66,8 +66,9 @@ export default {
 
   }
 
-}
 
+
+}
 </script>
 
 <style scoped>

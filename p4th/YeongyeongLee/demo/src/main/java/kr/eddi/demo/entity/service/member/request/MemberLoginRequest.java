@@ -1,4 +1,4 @@
-package kr.eddi.demo.entity.service.jpa.member.request;
+package kr.eddi.demo.entity.service.member.request;
 
 
 import lombok.Getter;
@@ -13,6 +13,5 @@ public class MemberLoginRequest {
 
     private final String email;
     private final String password;
-
 
 }

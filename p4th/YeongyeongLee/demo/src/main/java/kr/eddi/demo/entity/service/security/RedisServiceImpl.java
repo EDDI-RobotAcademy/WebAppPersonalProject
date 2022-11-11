@@ -1,17 +1,18 @@
 package kr.eddi.demo.entity.service.security;
 
-
 import lombok.RequiredArgsConstructor;
-import org.springframework.stereotype.Service;
 import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.data.redis.core.ValueOperations;
+import org.springframework.stereotype.Service;
 
 import java.time.Duration;
 
 @Service
 @RequiredArgsConstructor
 
-public class RedisServiceImpl  implements RedisService  {
+public class RedisServiceImpl implements RedisService{
+
+
 
     private final StringRedisTemplate redisTemplate;
 
@@ -40,8 +41,6 @@ public class RedisServiceImpl  implements RedisService  {
     public boolean isRefreshTokenExists(String token) {
         return getValueByKey(token) != null;
     }
-
-
 
 
 

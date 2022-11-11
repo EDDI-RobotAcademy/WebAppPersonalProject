@@ -1,7 +1,7 @@
-package kr.eddi.demo.controller.jpa.member.from;
+package kr.eddi.demo.controller.member.from;
 
 
-import kr.eddi.demo.entity.service.jpa.member.request.MemberRegisterRequest;
+import kr.eddi.demo.entity.service.member.request.MemberRegisterRequest;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -11,9 +11,7 @@ import lombok.ToString;
 @Setter
 @ToString
 @NoArgsConstructor
-
 public class MemberRegisterForm {
-
 
     private String email;
     private String password;
@@ -25,11 +23,4 @@ public class MemberRegisterForm {
     public MemberRegisterRequest toMemberRegisterRequest () {
         return new MemberRegisterRequest(email, password, city, street, addressDetail, zipcode);
     }
-
-
-
-
-
-
-
 }

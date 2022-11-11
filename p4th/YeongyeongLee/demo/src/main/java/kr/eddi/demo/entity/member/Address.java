@@ -1,4 +1,4 @@
-package kr.eddi.demo.entity.jpa.member;
+package kr.eddi.demo.entity.member;
 
 
 import lombok.AllArgsConstructor;
@@ -12,7 +12,6 @@ import javax.persistence.Embeddable;
 @Embeddable
 @NoArgsConstructor
 @AllArgsConstructor
-
 public class Address {
 
     @Column(nullable = false)
@@ -30,7 +29,4 @@ public class Address {
     public static Address of(String city, String street, String addressDetail, String zipcode) {
         return new Address(city, street, addressDetail, zipcode);
     }
-
-
-
 }
