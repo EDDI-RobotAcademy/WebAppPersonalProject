@@ -1,5 +1,6 @@
 <template>
   <v-container>
+    <common-community-category-buttons/>
     <div>
       <table style="height: min-content" class="greentop">
 
@@ -17,28 +18,28 @@
           </td>
         </tr>
 
-        <tr v-else v-for="community_board in boardList" :key="community_board.boardNo">
+        <tr v-else v-for="board in boardList" :key="board.boardNo">
           <td align="center">
-            {{ community_board.boardNo }}
+            {{ board.boardNo }}
           </td>
 
           <td align="center">
-            {{ community_board.title }}
+            {{ board.category }}
           </td>
 
           <td align="left">
 <!--            <router-link :to="{ name: 'ProductBoardReadView',
             params: { boardNo : board.boardNo.toString() }}">-->
-              {{ community_board.title }}
+              {{ board.title }}
 <!--            </router-link>-->
           </td>
 
           <td align="center">
-            {{ community_board.writer }}
+            {{ board.writer }}
           </td>
 
           <td align="center">
-            {{ community_board.createdDate }}
+            {{ board.createdDate }}
           </td>
         </tr>
 
@@ -60,8 +61,10 @@
 </template>
 
 <script>
+import CommonCommunityCategoryButtons from "@/components/common/CommonCommunityCategoryButtons";
 export default {
   name: "BoardList",
+  components: {CommonCommunityCategoryButtons},
   props: {
     boardList: {
       type: Array,
