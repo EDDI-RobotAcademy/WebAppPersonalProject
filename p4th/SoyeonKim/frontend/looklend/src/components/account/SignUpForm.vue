@@ -24,6 +24,25 @@
                 <v-text-field v-model="password_confirm" label="비밀번호 확인" type="password"
                               :rules="password_confirm_rule" :disabled="false" required/>
               </div>
+
+              <!--이름 닉네임 추가-->
+              <div class="d-flex">
+                <v-text-field v-model="username" label="이름" :disabled="false" required/>
+              </div>
+
+              <div class="d-flex">
+                <v-text-field v-model="nickname" label="닉네임" type="nickname"
+                              :rules="nickname_rule" :disabled="false" required/>
+                <v-btn text large outlined style="font-size: 13px"
+                       class="mt-3 ml-5" color="teal lighten-1"
+                       @click="checkDuplicateNickName">
+<!--
+                       :disabled="!nicknamePass">
+-->
+                  닉네임 <br/>중복 확인
+                </v-btn>
+              </div>
+
               <div class="d-flex">
                 <v-text-field v-model="city" label="도시" :disabled="true" required/>
               </div>
@@ -64,11 +83,14 @@ export default {
       email: "",
       password: "",
       password_confirm: "",
+      username: "",
+      nickname: "",
       city: '',
       street: '',
       addressDetail: '',
       zipcode: '',
       emailPass: false,
+      nicknamePass: false,
       streetPass: false,
       email_rule: [
         v => !!v || '이메일을 입력해주세요.',
@@ -87,13 +109,16 @@ export default {
         v => !(v && v.length >= 30) || '패스워드는 30자 이상 입력할 수 없습니다.',
         v => v === this.password || '패스워드가 일치하지 않습니다.'
       ],
+      nickname_rule: [
+        v => !(v && v.length >= 10) || '닉네임은 10자 이상 입력할 수 없습니다.',
+      ],
     }
   },
   methods: {
     onSubmit () {
       if (this.$refs.form.validate()) {
-        const { email, password, city, street, addressDetail, zipcode } = this
-        this.$emit("submit", { email, password, city, street, addressDetail, zipcode })
+        const { email, password, username, nickname, city, street, addressDetail, zipcode } = this
+        this.$emit("submit", { email, password, username, nickname, city, street, addressDetail, zipcode })
       } else {
         alert('올바른 정보를 입력하세요!')
       }
@@ -120,6 +145,24 @@ export default {
               } else {
                 alert("중복된 이메일입니다!")
                 this.emailPass = false
+              }
+            })
+      }
+    },
+    checkDuplicateNickName () {
+      const nicknameValid = this.nickname.match(
+          /^[a-zA-Z0-9ㄱ-ㅎㅏ-ㅣ가-힣]{1,10}$/
+      );
+      if (nicknameValid) {
+        const {nickname} = this
+        axios.post(`http://localhost:7777/member/check-nickname/${nickname}`)
+            .then((res) => {
+              if (res.data) {
+                alert("사용 가능한 닉네임입니다!")
+                this.nicknamePass = true
+              } else {
+                alert("중복된 닉네임입니다!")
+                this.nicknamePass = false
               }
             })
       }

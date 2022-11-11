@@ -14,10 +14,10 @@ export default {
   components: {SignUpForm},
   methods: {
     onSubmit (payload) {
-      const { email, password, city, street, addressDetail, zipcode } = payload;
+      const { email, password, username, nickname, city, street, addressDetail, zipcode } = payload;
 
       axios.post("http://localhost:7777/member/sign-up", {
-        email, password, city, street, addressDetail, zipcode
+        email, password, username, nickname, city, street, addressDetail, zipcode
       })
           .then((res) => {
             alert("회원 가입 완료!" + res)
