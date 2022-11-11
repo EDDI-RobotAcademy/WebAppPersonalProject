@@ -8,6 +8,8 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Map;
+
 @Slf4j
 @RestController
 @RequestMapping("/member")
@@ -39,7 +41,7 @@ public class MemberController {
     }
 
     @PostMapping("/sign-in")
-    public String signIn(@RequestBody MemberSigninRequest request) {
+    public Map<String, String> signIn(@RequestBody MemberSigninRequest request) {
         log.info("signIn: " + request);
 
         return service.signIn(request);

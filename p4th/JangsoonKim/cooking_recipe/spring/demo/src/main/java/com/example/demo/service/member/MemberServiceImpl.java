@@ -12,6 +12,8 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Optional;
 import java.util.UUID;
 
@@ -65,7 +67,7 @@ public class MemberServiceImpl implements MemberService{
     }
 
     @Override
-    public String signIn(MemberSigninRequest request) {
+    public Map<String, String> signIn(MemberSigninRequest request) {
         String email = request.getEmail();
         Optional<Member> maybeMember = memberRepository.findByEmail(email);
 
@@ -84,10 +86,15 @@ public class MemberServiceImpl implements MemberService{
 
             redisService.deleteByKey(userToken.toString());
             redisService.setKeyAndValue(userToken.toString(), member.getId());
+            Map<String, String> userData = new HashMap<>();
+            userData.put("userToken", userToken.toString());
+            userData.put("memberEmail", member.getEmail());
+            userData.put("memberNickname", member.getNickname());
 
-            return userToken.toString();
+            return userData;
         }
 
         throw new RuntimeException("가입된 사용자가 아닙니다.");
     }
+
 }
