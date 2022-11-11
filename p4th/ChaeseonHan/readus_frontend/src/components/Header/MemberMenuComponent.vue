@@ -16,10 +16,15 @@
 
       <!-- 로그인시 -->
 
-      <v-list v-if="isLogin" style="background-color: #356859">
-        <v-list-item class="white--text" v-for="(item, index) in yesSignInItems" :key="index" :to="item.route">
+      <v-list v-if="isLogin" style="background-color: #356859" class="text-center">
+        <v-list-item class="white--text" :to="signInMyPage.route">
           <v-list-item-title class="text-center">
-            {{ item.text }}
+            {{ signInMyPage.text }}
+          </v-list-item-title>
+        </v-list-item>
+        <v-list-item class="white--text" @click="logOut">
+          <v-list-item-title class="text-center">
+            로그아웃
           </v-list-item-title>
         </v-list-item>
       </v-list>
@@ -33,7 +38,6 @@
           </v-list-item-title>
         </v-list-item>
       </v-list>
-
 
     </v-menu>
   </v-app-bar>
@@ -50,10 +54,10 @@ export default {
   data() {
     return {
 
-      yesSignInItems: [
-        { text: '마이페이지', name: 'SignIn', route: '/sign-in' },
-        { text: '로그아웃', name: 'SignUp', route: '/sign-up'}
-      ],
+      signInMyPage: {
+        text: '마이페이지',
+        name: 'SignIn',
+        route: '/sign-in' },
 
       nonSignInItems: [
         { text: '로그인', name: 'SignIn', route: '/sign-in' },
@@ -62,6 +66,16 @@ export default {
 
     }
   },
+
+  methods: {
+    logOut() {
+      this.$store.state.isAuthenticated = false
+      this.$store.state.loginUserProfile = []
+      this.$cookies.remove("user")
+      alert("로그아웃 되었습니다!")
+      this.$router.push("/")
+    }
+  }
 }
 </script>
 
