@@ -6,8 +6,10 @@
           <v-card color="grey lighten-5">
             <v-card-text class="text-subtitle-2 text-center px-12 py-8">
               <v-form @submit.prevent="onSubmit" ref="form">
+
                 <div class="d-flex justify-end text-sm-caption">
                   * 는 필수 입력 사항입니다.</div>
+
                 <div class="d-flex">
                   <v-select
                       background-color="white"
@@ -28,6 +30,7 @@
                       @change="this.titleValidation"
                       :disabled="false"/>
                 </div>
+
                 <div class="d-flex">
                   <v-textarea
                       background-color="white"
@@ -38,6 +41,7 @@
                       height="500px"
                       :disabled="false"/>
                 </div>
+
                 <div class="d-flex justify-center">
                   <v-btn class="mx-1" @click="goBack">
                     {{ "취소" }}
@@ -46,6 +50,7 @@
                     {{ "등록" }}
                   </v-btn>
                 </div>
+
               </v-form>
             </v-card-text>
           </v-card>
