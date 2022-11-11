@@ -20,11 +20,11 @@ class _HomeScreenState extends State<HomeScreen> {
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
     return Container(
-        color: AppTheme.natureWhite, //테마분류 필요
+        color: AppTheme.natureWhite,
         child: Scaffold(
           backgroundColor: Colors.transparent,
-          appBar: CustomAppbar(),
-          endDrawer: CustomDrawer(),
+          appBar: customAppbar(),
+          endDrawer: const CustomDrawer(),
           body:
           Column(
             children: <Widget>[

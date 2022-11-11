@@ -1,7 +1,9 @@
+import 'package:demo/app_theme.dart';
 import 'package:flutter/material.dart';
 
 import '../../model/tmp_hot_recipe.dart';
 import 'hot_recipe_view.dart';
+
 
 class HotRecipeListView extends StatefulWidget {
   const HotRecipeListView({Key? key, this.callBack}) : super(key: key);
@@ -21,6 +23,12 @@ class _HotRecipeListViewState extends State<HotRecipeListView>
     animationController = AnimationController(
         vsync: this, duration: const Duration(milliseconds: 2000));
     super.initState();
+  }
+
+  @override
+  dispose(){
+    animationController?.dispose();
+    super.dispose();
   }
 
   Future<bool> getData() async {
@@ -43,7 +51,8 @@ class _HotRecipeListViewState extends State<HotRecipeListView>
                 fontWeight: FontWeight.w600,
                 fontSize: 22,
                 letterSpacing: 0.27,
-                color: Color(0xFF17262A)),
+                color: AppTheme.indiaInk
+            ),
           ),),
         const SizedBox( height: 16,),
         Padding(

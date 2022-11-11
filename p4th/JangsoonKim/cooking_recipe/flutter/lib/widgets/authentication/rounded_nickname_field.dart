@@ -26,6 +26,7 @@ class _RoundedNicknameFieldState extends State<RoundedNicknameField> {
         child: TextFormField(
       validator: (value) =>
           CheckValidate().validateNickName(_nickNameFocus, value!),
+          autovalidateMode: AutovalidateMode.onUserInteraction,
           onChanged: (text) {
             signupForm?.nickname = text;
           },

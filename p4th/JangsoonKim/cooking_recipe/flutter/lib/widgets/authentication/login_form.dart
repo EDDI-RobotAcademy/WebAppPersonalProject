@@ -1,11 +1,9 @@
 import 'package:demo/screens/signup_screen.dart';
-import 'package:demo/screens/home_screen.dart';
 import 'package:demo/widgets/authentication/background.dart';
 import 'package:demo/widgets/authentication/rounded_id_field.dart';
 import 'package:demo/widgets/authentication/rounded_password_field.dart';
 import 'package:demo/widgets/authentication/sns_icon.dart';
 import 'package:demo/widgets/authentication/social_login_divider.dart';
-import 'package:demo/widgets/screen_controller.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
@@ -13,7 +11,7 @@ import '../../utilities/spring_api.dart';
 import '../../widgets/rounded_button.dart';
 
 class LoginForm extends StatefulWidget {
-  LoginForm({Key? key}) : super(key: key);
+  const LoginForm({Key? key}) : super(key: key);
 
   @override
   State<LoginForm> createState() => LoginFormState();
@@ -66,10 +64,7 @@ class LoginFormState extends State<LoginForm> {
                       SpringApi().login(UserLoginRequest(email, password));
 
                   future.then((UserLoginResponse) {
-                    Navigator.of(context)
-                        .pushReplacement(MaterialPageRoute(builder: (context) {
-                      return const ScreenController();
-                    }));
+                    print("로그인 성공");
                   }).catchError((error) {
                     _showDialog(title: "로그인 실패", content: "등록되지 않은 아이디이거나 아이디 또는 비밀번호를 잘못 입력했습니다.");
                     print("로그인실패");
@@ -93,7 +88,7 @@ class LoginFormState extends State<LoginForm> {
                   onTap: () {
                     Navigator.push(context,
                         MaterialPageRoute(builder: (context) {
-                      return SignupScreen();
+                      return const SignupScreen();
                     }));
                   },
                   child: const Text(
@@ -104,7 +99,7 @@ class LoginFormState extends State<LoginForm> {
                 )
               ],
             ),
-            SocialLoginDivider(),
+            const SocialLoginDivider(),
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: <Widget>[
@@ -132,7 +127,7 @@ class LoginFormState extends State<LoginForm> {
         actions: [
           CupertinoDialogAction(
             isDefaultAction: true,
-            child: Text("확인"),
+            child: const Text("확인"),
             onPressed: (){
               Navigator.pop(context);
             },

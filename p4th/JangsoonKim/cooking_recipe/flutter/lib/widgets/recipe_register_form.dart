@@ -12,7 +12,7 @@ class _RecipeRegisterFormState extends State<RecipeRegisterForm> {
   Widget build(BuildContext context) {
     return Form(
         child: Column(
-      children: <Widget>[
+      children: const <Widget>[
         Text('레시피 작성폼')
       ],
     ));

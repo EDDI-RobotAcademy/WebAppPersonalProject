@@ -1,11 +1,15 @@
 import 'dart:convert';
 
+import 'package:demo/screens/login_screen.dart';
+import 'package:demo/widgets/screen_controller.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
+import 'package:shared_preferences/shared_preferences.dart';
+import 'package:get/get.dart';
 
 class SpringApi {
-정  static const String httpUri = '172.30.1.3:7777';
+  static const String httpUrl = '172.30.1.3:7777';
 
   Future<bool?> emailDuplicate(String email) async {
     var data = {'email': email};
@@ -14,7 +18,7 @@ class SpringApi {
     debugPrint(email);
 
     var response = await http.post(
-      Uri.http(httpUri, 'member/user-email/$email'),
+      Uri.http(httpUrl, 'member/user-email/$email'),
       headers: {"Content-Type": "application/json"},
       body: body,
     );
@@ -33,7 +37,7 @@ class SpringApi {
     debugPrint(nickname);
 
     var response = await http.post(
-      Uri.http(httpUri, 'member/user-nickname/$nickname'),
+      Uri.http(httpUrl, 'member/user-nickname/$nickname'),
       headers: {"Content-Type": "application/json"},
       body: body,
     );
@@ -51,7 +55,7 @@ class SpringApi {
     debugPrint(request.nickname);
 
     var response = await http.post(
-      Uri.http(httpUri, '/member/sign-up'),
+      Uri.http(httpUrl, '/member/sign-up'),
       headers: {"Content-Type": "application/json"},
       body: json.encode({
         'email': request.email,
@@ -70,17 +74,35 @@ class SpringApi {
   Future<UserLoginResponse> login(UserLoginRequest request) async {
     debugPrint('로그인 이메일: ' + request.email);
 
+    var any = await SharedPreferences.getInstance();
+
     var response = await http.post(
-      Uri.http(httpUri, '/member/sign-in'),
+      Uri.http(httpUrl, '/member/sign-in'),
       headers: {"Content-Type": "application/json"},
       body: json.encode({'email': request.email, 'password': request.password}),
     );
     if (response.statusCode == 200) {
       debugPrint("통신 확인");
+      any.setString("userData", response.body);
+      Get.off(() => const ScreenController());
       return UserLoginResponse(true);
     } else {
       throw ("error");
     }
+  }
+  Future<bool> tryAutoLogin()async{
+    var any = await SharedPreferences.getInstance();
+    if(!any.containsKey("userData")){
+      return false;
+    }
+    else{
+      return true;
+    }
+  }
+  static logOut() async {
+    final prefs = await SharedPreferences.getInstance();
+    prefs.clear();
+    Get.off(() => const LoginScreen());
   }
 }
 

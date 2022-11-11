@@ -70,7 +70,7 @@ class _ScreenControllerState extends State<ScreenController> {
         ],
         currentIndex: _selectedIndex,
         fixedColor: AppTheme.indiaInk,
-        selectedLabelStyle: TextStyle(fontWeight: FontWeight.w400),
+        selectedLabelStyle: const TextStyle(fontWeight: FontWeight.w400),
         type: BottomNavigationBarType.fixed,
         onTap: _onItemTapped,
       ),
