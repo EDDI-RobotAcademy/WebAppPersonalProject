@@ -48,9 +48,6 @@
               {{ board.contents }}
             </v-card-text>
 
-<!--            v-if="board.member_id.id == this.$store.state.loginUserProfile.id"-->
-
-
             <!-- 작성자 버튼 -->
             <div class="d-flex justify-end px-12 py-5" v-if="board.member_id.id == this.$store.state.loginUserProfile.id">
               <v-btn color="#356859" class="mr-1" outlined small> 수정 </v-btn>
