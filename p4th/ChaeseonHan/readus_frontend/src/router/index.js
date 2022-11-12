@@ -49,7 +49,7 @@ const routes = [
     name: 'ReviewCategory',
     component: ReviewCategoryView
   },
-    
+
 
     //게시글 기능
   { path: '/community/write',
@@ -57,7 +57,7 @@ const routes = [
     component: BoardWriteView
   },
   {
-    path: '/community/read',
+    path: '/community/read/:boardNo',
     name: 'BoardReadView',
     components:{
       default: BoardReadView
