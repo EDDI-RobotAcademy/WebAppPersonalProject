@@ -7,7 +7,7 @@
             <!-- 제목 -->
             <v-card-text class="px-12 py-5">
               <div style="font-size: large" class="d-flex font-weight-bold">
-                {{ board.title}}
+                {{ board.title }}
               </div>
             </v-card-text>
 
@@ -21,7 +21,7 @@
                         <td class="pr-4">
                           <v-icon small class="pr-1">
                             mdi-account-edit </v-icon>
-                          {{ board.writer }}
+                          {{ board.writer }} ( {{ board.member_id.email}} )
                         </td>
                         <td>
                           <v-icon small class="pr-1">
@@ -42,9 +42,20 @@
               </v-card-text>
             </v-card>
 
+            <!-- 본문 -->
+
             <v-card-text class="px-12 py-9">
               {{ board.contents }}
             </v-card-text>
+
+<!--            v-if="board.member_id.id == this.$store.state.loginUserProfile.id"-->
+
+
+            <!-- 작성자 버튼 -->
+            <div class="d-flex justify-end px-12 py-5" v-if="board.member_id.id == this.$store.state.loginUserProfile.id">
+              <v-btn color="#356859" class="mr-1" outlined small> 수정 </v-btn>
+              <v-btn color="#356859" outlined small> 삭제 </v-btn>
+            </div>
           </v-card>
         </v-col>
       </v-row>
@@ -64,13 +75,8 @@ export default {
   data() {
     return {
       testBoard: {
-        boardNo: "1",
-        title: "안녕하세요",
-        contents: "흐아아아아압",
-        writer: "젤리",
-        updatedDate: "2022.10.23",
-        comment: ["1", "2"]
-      }
+        comment: []
+      },
     }
   }
 }

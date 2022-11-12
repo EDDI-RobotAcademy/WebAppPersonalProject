@@ -28,10 +28,10 @@
           </td>
 
           <td align="left">
-            <a href class="a" :to="{ name: 'BoardReadView',
+            <router-link class="a" :to="{ name: 'BoardReadView',
                                 params: { boardNo : board.boardNo.toString() }}">
               {{ board.title }}
-            </a>
+            </router-link>
           </td>
 
           <td align="center">
