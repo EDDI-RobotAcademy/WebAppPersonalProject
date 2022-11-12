@@ -2,7 +2,7 @@
   <div style="font-family: Arial">
     <v-row justify="center">
       <v-col cols="auto" style="padding-bottom: 90px">
-        <v-card width="460">
+        <v-card elevation="0" width="460">
           <v-card-text class="text-center px-12 py-16">
             <v-form @submit.prevent="onSubmit" ref="form">
               <div class="text-h4 font-weight-black mb-10">회원가입</div>
@@ -30,7 +30,7 @@
                               :rules="nickname_rule" :disabled="false" required/>
               </div>
 
-              <v-btn type="submit" block x-large rounded
+              <v-btn type="submit" block x-large rounded elevation="0"
                      class="mt-6" color="#356859" :disabled="(this.$store.state.unDuplicateEmailPass && passwordPass) == false">
                 가입하기
               </v-btn>
