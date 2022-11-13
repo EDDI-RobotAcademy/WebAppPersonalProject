@@ -1,5 +1,6 @@
 package com.example.backend.entity.board;
 
+import com.example.backend.entity.member.Member;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.hibernate.annotations.CreationTimestamp;
@@ -28,6 +29,10 @@ public class Board {
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "board_category_id")
     private BoardCategory boardCategory;
+
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "member_id")
+    private Member member;
 
     @CreationTimestamp
     private Date regDate;

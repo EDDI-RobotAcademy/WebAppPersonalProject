@@ -10,4 +10,6 @@ public interface BoardRepository extends JpaRepository<Board, Long> {
 
     @Query("select b from Board b join b.boardCategory tb where tb.categoryId = :categoryId")
     List<Board> findAllBoardsByCategoryId(Long categoryId);
+
+
 }

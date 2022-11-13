@@ -16,10 +16,11 @@ public class BoardCategory {
     @Column(name = "board_category_id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long categoryId;
+
     @Column(name = "category_name")
     private String categoryName;
 
-    @OneToMany(mappedBy = "boardCategory", fetch = FetchType.EAGER)
+    @OneToMany(mappedBy = "boardCategory", fetch = FetchType.LAZY)
     private List<Board> boards = new ArrayList<>();
 
     public BoardCategory (String categoryName) {
