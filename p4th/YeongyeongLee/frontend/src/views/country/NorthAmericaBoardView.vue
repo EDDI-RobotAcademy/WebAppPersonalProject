@@ -41,7 +41,7 @@ import ToolbarButton from "@/components/common/button/ToolbarButton";
 import FooterView from "@/views/mainpage/FooterView";
 
 import {mapActions, mapState} from "vuex";
-import JpaBoardList from "@/components/boards/BoardList";
+import JpaBoardList from "@/components/boards/JpaBoardList";
 import MemberButton from "@/components/common/button/MemberButton";
 
 
