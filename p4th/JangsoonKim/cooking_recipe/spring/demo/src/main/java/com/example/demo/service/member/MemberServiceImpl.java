@@ -6,11 +6,13 @@ import com.example.demo.entity.member.Member;
 import com.example.demo.repository.member.AuthenticationRepository;
 import com.example.demo.repository.member.MemberRepository;
 import com.example.demo.security.RedisService;
+import com.example.demo.service.member.request.MemberNicknameModifyRequest;
 import com.example.demo.service.member.request.MemberRegisterRequest;
 import com.example.demo.service.member.request.MemberSigninRequest;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.RequestBody;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -19,7 +21,7 @@ import java.util.UUID;
 
 @Slf4j
 @Service
-public class MemberServiceImpl implements MemberService{
+public class MemberServiceImpl implements MemberService {
 
     @Autowired
     private MemberRepository memberRepository;
@@ -97,4 +99,58 @@ public class MemberServiceImpl implements MemberService{
         throw new RuntimeException("가입된 사용자가 아닙니다.");
     }
 
+    @Override
+    public Boolean modifyNickname(MemberNicknameModifyRequest request) {
+        String email = request.getEmail();
+        Optional<Member> maybeMember = memberRepository.findByEmail(email);
+
+        if (maybeMember.isPresent()) {
+            final Member member = request.toMember();
+            member.setId(maybeMember.get().getId());
+
+            memberRepository.save(member);
+        }
+        return true;
+    }
+
+    @Override
+    public Boolean modifyPassword(@RequestBody MemberRegisterRequest request) {
+        String email = request.getEmail();
+        Optional<Member> maybeMember = memberRepository.findByEmail(email);
+
+        if (maybeMember.isPresent()) {
+            final Member member = request.toMember();
+            member.setId(maybeMember.get().getId());
+            Long memberId = maybeMember.get().getId();
+
+            final Optional<Authentication> maybeAuth = authenticationRepository.findByMemberId(memberId);
+            if (maybeAuth.isPresent()) {
+                maybeAuth.get().getId();
+                authenticationRepository.deleteById(maybeAuth.get().getId());
+
+                final BasicAuthentication auth = new BasicAuthentication(member,
+                        Authentication.BASIC_AUTH, request.getPassword());
+
+                authenticationRepository.save(auth);
+            }
+        }
+        return true;
+    }
+
+    @Override
+    public Boolean removeAccount(String email) {
+        Optional<Member> maybeMember = memberRepository.findByEmail(email);
+
+        if (maybeMember.isPresent()) {
+            Long memberId = maybeMember.get().getId();
+
+            final Optional<Authentication> maybeAuth = authenticationRepository.findByMemberId(memberId);
+            if (maybeAuth.isPresent()) {
+                maybeAuth.get().getId();
+                authenticationRepository.deleteById(maybeAuth.get().getId());
+                memberRepository.deleteById(memberId);
+            }
+        }
+        return true;
+    }
 }

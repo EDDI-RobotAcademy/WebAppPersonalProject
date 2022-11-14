@@ -2,6 +2,7 @@ package com.example.demo.entity.member;
 
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 import javax.persistence.*;
 import java.util.HashSet;
@@ -14,6 +15,7 @@ public class Member {
 
     @Id
     @Getter
+    @Setter
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long Id;
 
@@ -45,6 +47,8 @@ public class Member {
         if (maybeBasicAuth.isPresent()) {
             final BasicAuthentication auth = (BasicAuthentication) maybeBasicAuth.get();
             return auth.isRightPassword(plainToCheck);
+
+            //고민중..
         }
         return false;
     }
