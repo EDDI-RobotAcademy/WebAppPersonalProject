@@ -15,7 +15,7 @@ public class MemberTestCase {
 
     @Test
     void memberSignUpTest() {
-        MemberRegisterRequest registerRequest = new MemberRegisterRequest("test@naver.com", "test1","부천시","몰라로","555동555호","00000");
+        MemberRegisterRequest registerRequest = new MemberRegisterRequest("test@naver.com", "test1","홍길동","땡떙이","부천시","몰라로","555동555호","00000");
         service.signUp(registerRequest);
     }
 
@@ -29,6 +29,12 @@ public class MemberTestCase {
     void emailValidationTest() {
         boolean emailCheck = service.emailValidation("test@naver.com");
         System.out.println("이메일 중복 체크: " + emailCheck);
+    }
+
+    @Test
+    void nicknameValidationTest() {
+        boolean nicknameCheck = service.nickNameValidation("김떙땡");
+        System.out.println("닉네임 중복 체크: " + nicknameCheck);
     }
 
 

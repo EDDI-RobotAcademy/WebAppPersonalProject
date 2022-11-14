@@ -31,6 +31,13 @@ public class MemberController {
         return service.emailValidation(email);
     }
 
+    @PostMapping("/check-nickname/{nickname}")
+    public Boolean nicknameValidation(@PathVariable("nickname") String nickname) {
+        log.info("nicknameValidation(): " + nickname);
+
+        return service.nickNameValidation(nickname);
+    }
+
     @PostMapping("/sign-in")
     public String signIn(@RequestBody MemberLoginForm form) {
         log.info("signIn:" + form);
