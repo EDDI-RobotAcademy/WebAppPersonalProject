@@ -1,4 +1,4 @@
-,leagueTitle,year,date,time,gameState,gameTitle,homeTeam,homeTeamScore,awayTeamScore,awayTeam
+,league_title,year,date,time,game_state,game_title,home_team,home_team_score,away_team_score,away_team
 0,리그 오브 레전드 월드 챔피언십,2022,10월 01일 (토),05:00,종료,플레이인,Fnatic,1,0,DetonatioN FocusMe
 1,리그 오브 레전드 월드 챔피언십,2022,10월 01일 (토),06:00,종료,플레이인,Evil Geniuses,1,0,LOUD
 2,리그 오브 레전드 월드 챔피언십,2022,10월 01일 (토),07:00,종료,플레이인,Saigon Buffalo,1,0,Isurus Gaming
