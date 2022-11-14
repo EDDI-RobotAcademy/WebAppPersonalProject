@@ -14,7 +14,7 @@ class AcceptCheck extends StatelessWidget {
         child: Column(
           children: [
             Container(
-              height: 180,
+              height: 160,
               decoration: BoxDecoration(
                 border: Border.all(color: Colors.white),
                 borderRadius: BorderRadius.circular(20),

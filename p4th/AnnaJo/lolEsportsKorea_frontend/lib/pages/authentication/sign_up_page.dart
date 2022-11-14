@@ -19,8 +19,9 @@ class SignUpPage extends StatefulWidget {
 }
 
 class _SignUpPageState extends State<SignUpPage> {
-  final _formKey = GlobalKey<FormState>();
   User user = User("", "", "");
+  final _formKey = GlobalKey<FormState>();
+  final TextEditingController _passwordController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -34,7 +35,7 @@ class _SignUpPageState extends State<SignUpPage> {
           child: Column(
             children: [
               Container(
-                height: 580,
+                height: 610,
                 width: MediaQuery.of(context).size.width,
                 decoration: const BoxDecoration(
                     color: Color(0xff23124b),
@@ -128,17 +129,61 @@ class _SignUpPageState extends State<SignUpPage> {
                             const SizedBox(width: large_gap),
                             Flexible(
                               child: TextFormField(
-                                controller:
-                                    TextEditingController(text: user.password),
-                                onChanged: (val) {
-                                  user.password = val;
-                                },
+                                controller : _passwordController,
                                 validator: (value) =>
                                     value!.isEmpty ? "Password is Empty" : null,
                                 style: const TextStyle(
                                     fontSize: 20, color: Colors.white),
+                                obscureText : true,
                                 decoration: InputDecoration(
                                   hintText: "Please enter Password",
+                                  hintStyle: const TextStyle(
+                                      color: Colors.grey, fontSize: 15),
+                                  enabledBorder: OutlineInputBorder(
+                                      borderRadius: BorderRadius.circular(20),
+                                      borderSide: const BorderSide(
+                                          color: Colors.white)),
+                                  focusedBorder: OutlineInputBorder(
+                                      borderRadius: BorderRadius.circular(20),
+                                      borderSide: const BorderSide(
+                                          color: Colors.white)),
+                                  errorBorder: OutlineInputBorder(
+                                      borderRadius: BorderRadius.circular(20),
+                                      borderSide: const BorderSide(
+                                          color: Colors.white)),
+                                  focusedErrorBorder: OutlineInputBorder(
+                                      borderRadius: BorderRadius.circular(20),
+                                      borderSide: const BorderSide(
+                                          color: Colors.white)),
+                                ),
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                      Expanded(
+                        child: Row(
+                          children: [
+                            const SizedBox(width: 140),
+                            Flexible(
+                              child: TextFormField(
+                                controller : TextEditingController(text: user.password),
+                                onChanged: (val) {
+                                  user.password = val;
+                                },
+                                validator: (value) {
+                                  if(value!.isEmpty){
+                                    return "Password is Empty";
+                                  }else if(value != _passwordController.text) {
+                                    return "패스워드가 일치하지 않습니다";
+                                  }
+                                  return null;
+                                },
+                                style: const TextStyle(
+                                    fontSize: 20, color: Colors.white),
+                                obscureText : true,
+                                decoration: InputDecoration(
+                                  hintText: "Check for Password",
                                   hintStyle: const TextStyle(
                                       color: Colors.grey, fontSize: 15),
                                   enabledBorder: OutlineInputBorder(
@@ -242,7 +287,7 @@ class _SignUpPageState extends State<SignUpPage> {
                   ),
                 ),
               ),
-              const SizedBox(height: 30),
+              const SizedBox(height: 14),
               Padding(
                   padding: const EdgeInsets.symmetric(vertical: 16.0),
                   child: ElevatedButton(

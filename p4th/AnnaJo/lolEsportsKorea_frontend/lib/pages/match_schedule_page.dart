@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import '../components/app_bar/common_drawer_menu.dart';
 import '../components/app_bar/common_top_app_bar.dart';
+import '../components/match_schedule_form/match_schedule_form.dart';
 
 class MatchSchedulePage extends StatefulWidget {
   const MatchSchedulePage({Key? key}) : super(key: key);
@@ -22,11 +23,8 @@ class _MatchScheduleState extends State<MatchSchedulePage>{
       ),
       body: Center(
         child: Column(
-          children: const [
-            Text('TODAY',
-            style: TextStyle(
-              color: Colors.black87),
-            ),
+          children: const <Widget>[
+            MatchScheduleForm(),
           ],
         ),
       ),
