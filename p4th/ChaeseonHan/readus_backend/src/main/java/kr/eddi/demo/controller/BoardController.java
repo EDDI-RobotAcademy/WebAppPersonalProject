@@ -1,6 +1,7 @@
 package kr.eddi.demo.controller;
 
 
+import kr.eddi.demo.controller.form.BoardModifyForm;
 import kr.eddi.demo.controller.form.BoardWriteForm;
 import kr.eddi.demo.entity.CommunityBoard;
 import kr.eddi.demo.service.BoardServiceImpl;
@@ -42,5 +43,10 @@ public class BoardController {
     public CommunityBoard read(@PathVariable("boardNo") Long boardNo) {
 
         return service.read(boardNo);
+    }
+
+    @PutMapping("/modify/{boardNo}")
+    public Boolean modifyBoard(@PathVariable("boardNo") Long boardNo, @RequestBody BoardModifyForm modifyForm) {
+        return service.modify(boardNo, modifyForm);
     }
 }

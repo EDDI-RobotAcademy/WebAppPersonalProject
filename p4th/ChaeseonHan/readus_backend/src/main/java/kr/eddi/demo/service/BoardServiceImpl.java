@@ -4,7 +4,7 @@ import kr.eddi.demo.entity.CommunityBoard;
 import kr.eddi.demo.entity.ReadUsMember;
 import kr.eddi.demo.repository.CommunityBoardRepository;
 import kr.eddi.demo.repository.MemberRepository;
-import kr.eddi.demo.service.request.BoardModifyRequest;
+import kr.eddi.demo.controller.form.BoardModifyForm;
 import kr.eddi.demo.service.request.BoardWriteRequest;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -60,8 +60,21 @@ public class BoardServiceImpl implements BoardService{
     }
 
     @Override
-    public Boolean modify(BoardModifyRequest boardModifyRequest) {
-        return null;
+    @Transactional
+    public Boolean modify(Long boardNo, BoardModifyForm boardModifyForm) {
+        Optional<CommunityBoard> maybeBoard = boardRepository.findById(boardNo);
+        if(maybeBoard.equals(Optional.empty())) {
+            log.info("Can't modify board!");
+            return false;
+        }
+
+        CommunityBoard board = maybeBoard.get();
+        board.setCategory(boardModifyForm.category);
+        board.setTitle(boardModifyForm.title);
+        board.setContents(boardModifyForm.contents);
+        board.updateBoardToMember();
+        boardRepository.save(board);
+        return true;
     }
 
     @Override
