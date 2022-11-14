@@ -8,7 +8,7 @@ import lombok.ToString;
 @Getter
 @ToString
 @RequiredArgsConstructor
-public class BoardRequest {
+public class BoardRegisterRequest {
     private final String title;
     private final String writer;
     private final String content;
