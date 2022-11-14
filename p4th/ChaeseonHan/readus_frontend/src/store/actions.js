@@ -87,5 +87,32 @@ export default {
                 console.log(error.message)
             })
 
-    }
+    },
+
+    requestAllCommunityBoardListTOSpring( { commit } ) {
+        console.log("requestAllCommunityBoardListTOSpring()")
+
+        return axios.get('http://localhost:7776/board/list-temporary')
+            .then((res) => {
+                commit(REQUEST_COMMUNITY_MAIN_BOARD_LIST, res.data)
+            }).catch((error) => {
+                console.log(error.message)
+            })
+    },
+
+    requestReadBoardToSpring( {commit}, boardNo ) {
+        console.log("requestReadBoardToSpring()")
+
+        return axios.get(`http://localhost:7776/board/read/${boardNo}`)
+            .then((res) => {
+                if(res.data != null){
+                    commit( REQUEST_BOARD_TO_READ, res.data)
+                } else {
+                    alert("삭제된 게시글입니다!")
+                    window.history.go(-1)
+                }
+            }).catch((error) => {
+                console.log(error.message)
+            })
+    },
 }

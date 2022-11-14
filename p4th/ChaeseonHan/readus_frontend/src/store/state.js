@@ -3,5 +3,7 @@ export default {
     unDuplicateEmailPass: false,
     loginUserProfile: [],
     aladinBestSeller: [],
+    communityMainBoardList: [],
+    communityBoard: {},
 
 }

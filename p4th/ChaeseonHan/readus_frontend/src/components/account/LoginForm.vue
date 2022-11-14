@@ -2,7 +2,7 @@
   <div style="font-family: Arial">
     <v-row justify="center">
       <v-col cols="auto" style="padding-bottom: 90px">
-        <v-card width="460">
+        <v-card elevation="0" width="460">
           <v-card-text class="text-lg-center px-12 py-16">
             <v-form ref="form" @submit.prevent="onSubmit">
               <div class="text-h4 font-weight-black mb-10">로그인</div>
@@ -17,7 +17,7 @@
                               :rules="password_rule" clearable prepend-icon="mdi-lock-outline"/>
               </div>
 
-              <v-btn type="submit" block x-large rounded color="#356859"
+              <v-btn type="submit" block x-large rounded color="#356859" elevation="0"
                      class="mt-6 white--text"  :disabled="false">
                 로그인
               </v-btn>

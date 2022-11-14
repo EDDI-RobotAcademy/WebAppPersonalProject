@@ -9,12 +9,12 @@ import javax.persistence.*;
 import java.util.Date;
 
 @Entity
+@Getter
 @AllArgsConstructor
 @NoArgsConstructor
 public class CommunityBoard {
 
     @Id
-    @Getter
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long boardNo = null;
 

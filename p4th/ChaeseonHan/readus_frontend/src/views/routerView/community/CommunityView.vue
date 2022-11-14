@@ -1,23 +1,26 @@
 <template>
   <v-container>
-    <CommonCommunityCategoryButtons/>
-    <board-list/>
-    <div class="d-flex justify-end">
-      <v-btn class="mt-3" @click="toWrite"> 글쓰기 </v-btn>
-    </div>
+    <!-- TODO: 2022.11.11 후에 pageble 이용해서 수정해야함 -->
+
+    <common-board-list :board-list="this.$store.state.communityMainBoardList"/>
   </v-container>
 </template>
 
 <script>
-import BoardList from "@/components/Board/BoardList";
-import CommonCommunityCategoryButtons from "@/components/common/CommonCommunityCategoryButtons";
+import CommonBoardList from "@/components/common/CommonBoardList";
+import {mapActions} from "vuex";
 export default {
   name: "CommunityView",
-  components: {CommonCommunityCategoryButtons, BoardList},
+  components: { CommonBoardList },
+  computed: {
+  },
+
   methods: {
-    toWrite() {
-      this.$router.push("/community/write")
-    }
+    ...mapActions(['requestAllCommunityBoardListTOSpring'])
+  },
+
+  mounted() {
+    this.requestAllCommunityBoardListTOSpring()
   }
 }
 </script>

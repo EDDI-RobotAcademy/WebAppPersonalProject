@@ -1,7 +1,7 @@
 <template>
   <v-app>
     <header-view/>
-    <v-main>
+    <v-main style="background-color: #f5f5f5">
       <v-container id="scroll-target" class="scroll-y">
         <router-view/>
       </v-container>
