@@ -1,4 +1,9 @@
-import {REQUEST_BESTSELLER_LIST, REQUEST_EMAIL_PASS_CHECK, REQUEST_LOGGED_IN_USER_PROFILE} from './mutation-types'
+import {
+    REQUEST_BESTSELLER_LIST, REQUEST_BOARD_TO_READ,
+    REQUEST_COMMUNITY_MAIN_BOARD_LIST,
+    REQUEST_EMAIL_PASS_CHECK,
+    REQUEST_LOGGED_IN_USER_PROFILE
+} from './mutation-types'
 
 import axios from 'axios'
 import Vue from 'vue';
@@ -63,7 +68,7 @@ export default {
     requestBestSellerListToAladin ( { commit } ) {
         console.log("requestBestSellerListToAladin")
 
-        return axios.get('https://cors-anywhere.herokuapp.com/https://www.aladin.co.kr/ttb/api/ItemList.aspx?ttbkey=[ttb키]&QueryType=Bestseller&MaxResults=10&start=1&SearchTarget=Book&output=js&Version=20131101')
+        return axios.get('https://cors-anywhere.herokuapp.com/https://www.aladin.co.kr/ttb/api/ItemList.aspx?ttbkey=ttbmdmodina341559001&QueryType=Bestseller&Cover=MidBig&MaxResults=7&start=1&SearchTarget=Book&output=js&Version=20131101')
             .then((res) => {
                 commit(REQUEST_BESTSELLER_LIST, res.data.item)
             }).catch((error) => {
@@ -80,6 +85,7 @@ export default {
             .then((res) => {
                 if(res.data == true) {
                     alert("게시글이 등록되었습니다!")
+                    window.history.go(-1)
                 } else {
                     alert("알 수 없는 오류입니다!")
                 }
@@ -106,7 +112,7 @@ export default {
         return axios.get(`http://localhost:7776/board/read/${boardNo}`)
             .then((res) => {
                 if(res.data != null){
-                    commit( REQUEST_BOARD_TO_READ, res.data)
+                    commit(REQUEST_BOARD_TO_READ, res.data)
                 } else {
                     alert("삭제된 게시글입니다!")
                     window.history.go(-1)
@@ -115,4 +121,22 @@ export default {
                 console.log(error.message)
             })
     },
+
+    // eslint-disable-next-line no-empty-pattern
+    requestModifyBoardToSpring({ }, payload) {
+        console.log("requestModifyBoardToSpring()")
+
+        const { boardNo, category, title, contents } = payload
+
+        return axios.put(`http://localhost:7776/board/modify/${boardNo}`, { category, title, contents } )
+            .then((res) => {
+                if(res.data) {
+                    alert("수정 되었습니다!")
+                } else {
+                    alert("오류가 발생했습니다!")
+                }
+            }).catch((error) => {
+                console.log(error.message)
+            })
+    }
 }

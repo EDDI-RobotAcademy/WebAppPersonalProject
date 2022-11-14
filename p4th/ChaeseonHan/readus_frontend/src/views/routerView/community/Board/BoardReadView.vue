@@ -12,7 +12,7 @@ export default {
   components: {BoardReadForm},
   props: {
     boardNo: {
-      type: Number,
+      type: String,
       required: true,
     }
   },

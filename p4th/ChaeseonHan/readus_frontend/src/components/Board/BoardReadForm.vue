@@ -49,10 +49,13 @@
             </v-card-text>
 
             <!-- 작성자 버튼 -->
+
             <div class="d-flex justify-end px-12 py-5" v-if="board.member_id.id == this.$store.state.loginUserProfile.id">
-              <v-btn color="#356859" class="mr-1" outlined small> 수정 </v-btn>
+              <v-btn color="#356859" class="mr-1" outlined small @click="toModify"> 수정 </v-btn>
               <v-btn color="#356859" outlined small> 삭제 </v-btn>
             </div>
+
+
           </v-card>
         </v-col>
       </v-row>
@@ -75,7 +78,15 @@ export default {
         comment: []
       },
     }
-  }
+  },
+  methods: {
+    toModify() {
+      this.$router.push( {
+        name: "BoardModifyView",
+        params: { boardNo : this.board.boardNo.toString() }
+      })
+    }
+  },
 }
 </script>
 
