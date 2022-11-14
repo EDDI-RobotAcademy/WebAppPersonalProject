@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:my_todos/view/sign_in_view.dart';
+import '../view/sign_in_view.dart';
 
 void main() {
   runApp(GetMaterialApp(home: SignInView()));
