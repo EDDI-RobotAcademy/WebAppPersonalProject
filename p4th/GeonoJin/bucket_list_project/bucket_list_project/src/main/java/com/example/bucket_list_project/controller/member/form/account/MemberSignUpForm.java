@@ -1,4 +1,4 @@
-package com.example.bucket_list_project.controller.member.form;
+package com.example.bucket_list_project.controller.member.form.account;
 
 
 import com.example.bucket_list_project.service.member.request.account.MemberSignUpRequest;

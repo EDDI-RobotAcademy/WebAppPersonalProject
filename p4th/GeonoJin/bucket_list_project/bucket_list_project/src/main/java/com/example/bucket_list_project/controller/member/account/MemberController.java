@@ -1,7 +1,7 @@
 package com.example.bucket_list_project.controller.member.account;
 
-import com.example.bucket_list_project.controller.member.form.MemberSignInForm;
-import com.example.bucket_list_project.controller.member.form.MemberSignUpForm;
+import com.example.bucket_list_project.controller.member.form.account.MemberSignInForm;
+import com.example.bucket_list_project.controller.member.form.account.MemberSignUpForm;
 import com.example.bucket_list_project.service.member.account.MemberService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
