@@ -1,6 +1,7 @@
 import 'dart:convert';
 
-import 'package:demo/screens/login_screen.dart';
+import 'package:demo/screens/authentication%20/login_screen.dart';
+import 'package:demo/screens/mypage/mypage_screen.dart';
 import 'package:demo/widgets/screen_controller.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -84,7 +85,6 @@ class SpringApi {
     );
     if (response.statusCode == 200) {
       debugPrint("통신 확인");
-      print(response.body);
       Map<String, dynamic> jsonData = jsonDecode(response.body);
       any.setString("userData", jsonData['userToken']);
       any.setString("userEmail", jsonData['memberEmail']);
@@ -109,6 +109,70 @@ class SpringApi {
     prefs.clear();
     Get.off(() => const LoginScreen());
   }
+
+  Future<bool?> changNickname(ChangeNicknameRequest request) async{
+    debugPrint("닉네임: " + request.nickname);
+    var any = await SharedPreferences.getInstance();
+
+    var response = await http.post(
+      Uri.http(httpUrl, '/member/change-nickname'),
+      headers: {"Content-Type": "application/json"},
+      body: json.encode({'email': request.email, 'nickname': request.nickname}),
+    );
+    
+    debugPrint(request.email);
+    debugPrint(request.nickname);
+
+    if(response.statusCode == 200){
+      debugPrint("통신 확인");
+      any.setString("userNickname", request.nickname);
+      Get.off(() => MypageScreen());
+      return json.decode(response.body);
+    } else{
+      throw("error");
+    }
+  }
+  Future<bool?> changePassword(UserSignUpRequest request) async{
+
+    var response = await http.post(
+      Uri.http(httpUrl, '/member/change-password'),
+      headers: {"Content-Type": "application/json"},
+      body: json.encode({'email': request.email, 'nickname': request.nickname, 'password': request.password}),
+    );
+
+    debugPrint(request.email);
+    debugPrint(request.nickname);
+    debugPrint(request.password);
+
+    if(response.statusCode == 200){
+      debugPrint("통신 확인");
+      Get.off(() => MypageScreen());
+      return json.decode(response.body);
+    } else{
+      throw("error");
+    }
+  }
+
+  Future<bool?> removeAccount(String email) async{
+    var data = {'email': email};
+    var body = json.encode(data);
+
+    debugPrint(email);
+
+    var response = await http.post(
+      Uri.http(httpUrl, 'member/remove-account/$email'),
+      headers: {"Content-Type": "application/json"},
+      body: body,
+    );
+
+    if(response.statusCode == 200){
+      debugPrint("통신 확인");
+      Get.off(() => const LoginScreen());
+      return json.decode(response.body);
+    } else{
+      throw("error");
+    }
+  }
 }
 
 class UserSignUpRequest {
@@ -130,5 +194,12 @@ class UserLoginRequest {
   String password;
 
   UserLoginRequest(this.email, this.password);
+}
+
+class ChangeNicknameRequest{
+  String email;
+  String nickname;
+
+  ChangeNicknameRequest(this.email, this.nickname);
 }
 
