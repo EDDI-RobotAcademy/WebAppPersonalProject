@@ -19,6 +19,8 @@ public class BucketBoardController {
     @Autowired
     private BucketService bucketService;
 
+    @Autowired
+    private ImgFileService imgFileService;
 
     @PostMapping("/register")
     public void bucketRegister (@RequestBody BucketBoardForm bucketBoardForm) {
@@ -26,4 +28,10 @@ public class BucketBoardController {
         bucketService.register(bucketBoardForm.toBucketBoardRequest());
     }
 
+    @PostMapping("/uploadImgFile")
+    public void bucketImageFileUpload(@RequestParam("fileList") MultipartFile multipartFile) throws IOException {
+        log.info("bucketImageFileUpload: "+multipartFile);
+
+        imgFileService.uploadImgFile(multipartFile);
+    }
 }
