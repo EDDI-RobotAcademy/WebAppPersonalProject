@@ -51,7 +51,7 @@
 <script>
 
 
-import NoticeBoardSearchForm2 from "@/views/insoya/Components/NoticeBoardSearchForm2";
+import NoticeBoardSearchForm2 from "@/insoya/Components/NoticeBoardSearchForm2";
 import axios from "axios";
 
 export default {

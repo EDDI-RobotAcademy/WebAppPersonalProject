@@ -20,11 +20,18 @@ export default {
     gradeUpBoards: [],
     gradeUpBoard: {},
 
+    archerBoards: [],
+    archerBoard: {},
+
     products: [],
     product: {},
 
     sensors: [],
     sensor: {},
+
+
+
+
 
     isAuthenticated: false
 }

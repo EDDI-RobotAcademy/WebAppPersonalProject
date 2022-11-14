@@ -34,32 +34,35 @@ import D3SensorTestView from "@/views/d3test/D3SensorTestView";
 
 import SignUpView from "@/views/account/SignUpView";
 import SignInView from "@/views/account/SignInView";
-import InsoyaMainView from "@/views/insoya/InsoyaMainView";
+import InsoyaMainView from "@/insoya/InsoyaMainView";
 
 
-import FreeBoardRegisterView from "@/views/insoya/Views/FreeBoardView/FreeBoardRegisterView";
-import FreeBoardListView from "@/views/insoya/Views/FreeBoardView/FreeBoardListView";
-import FreeBoardReadView from "@/views/insoya/Views/FreeBoardView/FreeBoardReadView";
-import FreeBoardModifyView from "@/views/insoya/Views/FreeBoardView/FreeBoardModifyView";
-import InsoyaSignInView from "@/views/insoya/Views/account/InsoyaSignInView";
-import InsoyaSignUpView from "@/views/insoya/Views/account/InsoyaSignUpView";
-import QuestionBoardListView from "@/views/insoya/Views/QuestionBoardView/QuestionBoardListView";
-import QuestionBoardRegisterView from "@/views/insoya/Views/QuestionBoardView/QuestionBoardRegisterView";
-import WarriorBoardListView from "@/views/insoya/Views/ClassBoardView/WarriorBoardListView";
-import ArcherBoardListView from "@/views/insoya/Views/ClassBoardView/ArcherBoardListView";
-import MageBoardListView from "@/views/insoya/Views/ClassBoardView/MageBoardListView";
-import PirateBoardListView from "@/views/insoya/Views/ClassBoardView/PirateBoardListView";
-import ThiefBoardListView from "@/views/insoya/Views/ClassBoardView/ThiefBoardListView";
-import QuestionBoardReadView from "@/views/insoya/Views/QuestionBoardView/QuestionBoardReadView";
-import QuestionBoardModifyView from "@/views/insoya/Views/QuestionBoardView/QuestionBoardModifyView";
-import TradeBoardListView from "@/views/insoya/Views/TradeBoardView/TradeBoardListView";
-import TradeBoardRegisterView from "@/views/insoya/Views/TradeBoardView/TradeBoardRegisterView";
-import TradeBoardReadView from "@/views/insoya/Views/TradeBoardView/TradeBoardReadView";
-import TradeBoardModifyView from "@/views/insoya/Views/TradeBoardView/TradeBoardModifyView";
-import GradeUpBoardListView from "@/views/insoya/Views/GradeUpBoardView/GradeUpBoardListView";
-import GradeUpBoardRegisterView from "@/views/insoya/Views/GradeUpBoardView/GradeUpBoardRegisterView";
-import GradeUpBoardModifyView from "@/views/insoya/Views/GradeUpBoardView/GradeUpBoardModifyView";
-import GradeUpBoardReadView from "@/views/insoya/Views/GradeUpBoardView/GradeUpBoardReadView";
+import FreeBoardRegisterView from "@/insoya/Views/FreeBoardView/FreeBoardRegisterView";
+import FreeBoardListView from "@/insoya/Views/FreeBoardView/FreeBoardListView";
+import FreeBoardReadView from "@/insoya/Views/FreeBoardView/FreeBoardReadView";
+import FreeBoardModifyView from "@/insoya/Views/FreeBoardView/FreeBoardModifyView";
+import InsoyaSignInView from "@/insoya/Views/account/InsoyaSignInView";
+import InsoyaSignUpView from "@/insoya/Views/account/InsoyaSignUpView";
+import QuestionBoardListView from "@/insoya/Views/QuestionBoardView/QuestionBoardListView";
+import QuestionBoardRegisterView from "@/insoya/Views/QuestionBoardView/QuestionBoardRegisterView";
+import WarriorBoardListView from "@/insoya/Views/ClassBoardView/WarriorBoardListView";
+import ArcherBoardListView from "@/insoya/Views/ClassBoardView/ArcherBoardListView";
+import MageBoardListView from "@/insoya/Views/ClassBoardView/MageBoardListView";
+import PirateBoardListView from "@/insoya/Views/ClassBoardView/PirateBoardListView";
+import ThiefBoardListView from "@/insoya/Views/ClassBoardView/ThiefBoardListView";
+import QuestionBoardReadView from "@/insoya/Views/QuestionBoardView/QuestionBoardReadView";
+import QuestionBoardModifyView from "@/insoya/Views/QuestionBoardView/QuestionBoardModifyView";
+import TradeBoardListView from "@/insoya/Views/TradeBoardView/TradeBoardListView";
+import TradeBoardRegisterView from "@/insoya/Views/TradeBoardView/TradeBoardRegisterView";
+import TradeBoardReadView from "@/insoya/Views/TradeBoardView/TradeBoardReadView";
+import TradeBoardModifyView from "@/insoya/Views/TradeBoardView/TradeBoardModifyView";
+import GradeUpBoardListView from "@/insoya/Views/GradeUpBoardView/GradeUpBoardListView";
+import GradeUpBoardRegisterView from "@/insoya/Views/GradeUpBoardView/GradeUpBoardRegisterView";
+import GradeUpBoardModifyView from "@/insoya/Views/GradeUpBoardView/GradeUpBoardModifyView";
+import GradeUpBoardReadView from "@/insoya/Views/GradeUpBoardView/GradeUpBoardReadView";
+import ArcherBoardRegisterView from "@/insoya/Views/ClassBoardView/ArcherBoardRegisterView";
+import ArcherBoardReadView from "@/insoya/Views/ClassBoardView/ArcherBoardReadView";
+import ArcherBoardModifyView from "@/insoya/Views/ClassBoardView/ArcherBoardModifyView";
 
 Vue.use(VueRouter)
 
@@ -234,6 +237,7 @@ const routes = [
     name: 'GradeUpBoardListView',
     component: GradeUpBoardListView
   },
+
   {
     path: '/insoya-question-board',
     name: 'QuestionBoardListView',
@@ -243,6 +247,11 @@ const routes = [
     path: '/insoya-trade-board',
     name: 'TradeBoardListView',
     component: TradeBoardListView
+  },
+  {
+    path: '/archer-board',
+    name: 'ArcherBoardListView',
+    component: ArcherBoardListView
   },
 
   {
@@ -266,6 +275,12 @@ const routes = [
     path: '/insoya-grade-up-board-register',
     name: 'GradeUpBoardRegisterView',
     component: GradeUpBoardRegisterView
+  },
+
+  {
+    path: '/insoya-archer-board-register',
+    name: 'ArcherBoardRegisterView',
+    component: ArcherBoardRegisterView
   },
 
   {
@@ -304,6 +319,17 @@ const routes = [
     name: 'GradeUpBoardReadView',
     components: {
       default: GradeUpBoardReadView
+    },
+    props: {
+      default: true
+    }
+  },
+
+  {
+    path: '/insoya-archer-read/:boardNo',
+    name: 'ArcherBoardReadView',
+    components: {
+      default: ArcherBoardReadView
     },
     props: {
       default: true
@@ -354,6 +380,17 @@ const routes = [
   },
 
   {
+    path: '/insoya-archer-modify/:boardNo',
+    name: 'ArcherBoardModifyView',
+    components: {
+      default: ArcherBoardModifyView
+    },
+    props: {
+      default: true
+    }
+  },
+
+  {
     path: '/insoya-sign-in',
     name: 'InsoyaSignInView',
     component: InsoyaSignInView
@@ -371,11 +408,7 @@ const routes = [
     component: WarriorBoardListView
   },
 
-  {
-    path: '/archer-board',
-    name: 'ArcherBoardListView',
-    component: ArcherBoardListView
-  },
+
   {
     path: '/mage-board',
     name: 'MageBoardListView',

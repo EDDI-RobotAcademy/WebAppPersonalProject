@@ -7,6 +7,8 @@
     <router-link :to="{ name: 'InsoyaSignUpView' }">회원가입</router-link>
     </v-btn>
 
+    <h2></h2>
+
 <center>
   <v-img src="@/assets/img/maple.jpg" height="100" width="200"></v-img><br/>
   <h2>인소야 닷컴</h2>
@@ -44,7 +46,7 @@
 </template>
 
 <script>
-import NoticeBoardSearchForm from "@/views/insoya/Components/NoticeBoardSearchForm";
+import NoticeBoardSearchForm from "@/insoya/Components/NoticeBoardSearchForm";
 import axios from "axios";
 
 export default {
