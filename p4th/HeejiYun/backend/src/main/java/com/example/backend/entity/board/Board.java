@@ -1,8 +1,7 @@
 package com.example.backend.entity.board;
 
 import com.example.backend.entity.member.Member;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
