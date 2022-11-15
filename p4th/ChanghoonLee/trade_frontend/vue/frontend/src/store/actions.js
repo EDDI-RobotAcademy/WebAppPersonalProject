@@ -1,4 +1,6 @@
 import {
+    REQUEST_BUY_BARAM_FROM_SPRING,
+    REQUEST_BUY_BARAM_LIST_FROM_SPRING,
     REQUEST_CHECK_DUPLICATE_EMAIL_TO_SPRING
 
 } from './mutation-types'
@@ -39,4 +41,14 @@ export default {
                 }
             })
     },
+
+    requestBuyBaramListFromSpring ({ commit }) {
+        console.log('requestBuyBaramListFromSpring()')
+
+        return axios.get('http://localhost:7777/trade-item/boards/buy/baram/list')
+            .then((res) => {
+                commit(REQUEST_BUY_BARAM_LIST_FROM_SPRING, res.data)
+            })
+    },
+
 }

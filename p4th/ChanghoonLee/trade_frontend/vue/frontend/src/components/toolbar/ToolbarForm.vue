@@ -58,7 +58,7 @@ export default {
       ],
       buyItemDrop: [
         { title: '디아블로2', route: '/'},
-        { title: '바람의나라', route: '/'},
+        { title: '바람의나라', route: '/buy-baram-list'},
         { title: '아이온', route: '/'},
         { title: '던전엔파이터', route: '/'},
       ],

@@ -1,4 +1,6 @@
 import {
+    REQUEST_BUY_BARAM_FROM_SPRING,
+    REQUEST_BUY_BARAM_LIST_FROM_SPRING,
     REQUEST_CHECK_DUPLICATE_EMAIL_TO_SPRING
 
 } from './mutation-types'
@@ -6,5 +8,8 @@ import {
 export default {
     [REQUEST_CHECK_DUPLICATE_EMAIL_TO_SPRING] (state, passingData) {
         state.checkDuplicateEmail = passingData
+    },
+    [REQUEST_BUY_BARAM_LIST_FROM_SPRING] (state, passingData) {
+        state.buyBaramBoards = passingData
     },
 }
