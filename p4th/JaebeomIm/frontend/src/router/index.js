@@ -63,6 +63,9 @@ import GradeUpBoardReadView from "@/insoya/Views/GradeUpBoardView/GradeUpBoardRe
 import ArcherBoardRegisterView from "@/insoya/Views/ClassBoardView/ArcherBoardRegisterView";
 import ArcherBoardReadView from "@/insoya/Views/ClassBoardView/ArcherBoardReadView";
 import ArcherBoardModifyView from "@/insoya/Views/ClassBoardView/ArcherBoardModifyView";
+import MageBoardRegisterView from "@/insoya/Views/ClassBoardView/MageBoardRegisterView";
+import MageBoardReadView from "@/insoya/Views/ClassBoardView/MageBoardReadView";
+import MageBoardModifyView from "@/insoya/Views/ClassBoardView/MageBoardModifyView";
 
 Vue.use(VueRouter)
 
@@ -253,6 +256,11 @@ const routes = [
     name: 'ArcherBoardListView',
     component: ArcherBoardListView
   },
+  {
+    path: '/mage-board',
+    name: 'MageBoardListView',
+    component: MageBoardListView
+  },
 
   {
     path: '/insoya-free-board-register',
@@ -281,6 +289,12 @@ const routes = [
     path: '/insoya-archer-board-register',
     name: 'ArcherBoardRegisterView',
     component: ArcherBoardRegisterView
+  },
+
+  {
+    path: '/insoya-mage-board-register',
+    name: 'MageBoardRegisterView',
+    component: MageBoardRegisterView
   },
 
   {
@@ -330,6 +344,17 @@ const routes = [
     name: 'ArcherBoardReadView',
     components: {
       default: ArcherBoardReadView
+    },
+    props: {
+      default: true
+    }
+  },
+
+  {
+    path: '/insoya-mage-read/:boardNo',
+    name: 'MageBoardReadView',
+    components: {
+      default: MageBoardReadView
     },
     props: {
       default: true
@@ -391,6 +416,17 @@ const routes = [
   },
 
   {
+    path: '/insoya-mage-modify/:boardNo',
+    name: 'MageBoardModifyView',
+    components: {
+      default: MageBoardModifyView
+    },
+    props: {
+      default: true
+    }
+  },
+
+  {
     path: '/insoya-sign-in',
     name: 'InsoyaSignInView',
     component: InsoyaSignInView
@@ -409,11 +445,7 @@ const routes = [
   },
 
 
-  {
-    path: '/mage-board',
-    name: 'MageBoardListView',
-    component: MageBoardListView
-  },
+
   {
     path: '/pirate-board',
     name: 'PirateBoardListView',

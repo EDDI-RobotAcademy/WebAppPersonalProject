@@ -17,7 +17,7 @@ import {
     REQUEST_GRADE_UP_BOARD_LIST_FROM_SPRING,
     REQUEST_GRADE_UP_BOARD_FROM_SPRING,
     REQUEST_ARCHER_BOARD_LIST_FROM_SPRING,
-    REQUEST_ARCHER_BOARD_FROM_SPRING,
+    REQUEST_ARCHER_BOARD_FROM_SPRING, REQUEST_MAGE_BOARD_LIST_FROM_SPRING, REQUEST_MAGE_BOARD_FROM_SPRING,
 } from './mutation-types'
 
 export default {
@@ -85,6 +85,14 @@ export default {
 
     [REQUEST_ARCHER_BOARD_FROM_SPRING] (state, passingData) {
         state.archerBoard = passingData
-    }
+    },
+
+    [REQUEST_MAGE_BOARD_LIST_FROM_SPRING] (state, passingData) {
+        state.mageBoards = passingData
+    },
+
+    [REQUEST_MAGE_BOARD_FROM_SPRING] (state, passingData) {
+        state.mageBoard = passingData
+    },
 
 }

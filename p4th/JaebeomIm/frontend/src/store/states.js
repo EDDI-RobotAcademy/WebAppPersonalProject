@@ -23,6 +23,9 @@ export default {
     archerBoards: [],
     archerBoard: {},
 
+    mageBoards: [],
+    mageBoard: {},
+
     products: [],
     product: {},
 

@@ -15,7 +15,10 @@ import {
     REQUEST_TRADE_BOARD_FROM_SPRING,
     REQUEST_GRADE_UP_BOARD_LIST_FROM_SPRING,
     REQUEST_GRADE_UP_BOARD_FROM_SPRING,
-    REQUEST_ARCHER_BOARD_LIST_FROM_SPRING, REQUEST_ARCHER_BOARD_FROM_SPRING,
+    REQUEST_ARCHER_BOARD_LIST_FROM_SPRING,
+    REQUEST_ARCHER_BOARD_FROM_SPRING,
+    REQUEST_MAGE_BOARD_LIST_FROM_SPRING,
+    REQUEST_MAGE_BOARD_FROM_SPRING,
 } from './mutation-types'
 
 // npm install axios --save-dev
@@ -127,6 +130,15 @@ export default {
             })
     },
 
+    requestMageBoardListFromSpring ({ commit }) {
+        console.log('requestMageBoardListFromSpring()')
+
+        return axios.get('http://localhost:7777/insoya/jpa/board/mage/list')
+            .then((res) => {
+                commit(REQUEST_MAGE_BOARD_LIST_FROM_SPRING, res.data)
+            })
+    },
+
     requestBoardFromSpring ({ commit }, boardNo) {
         console.log('requestBoardFromSpring()')
 
@@ -171,11 +183,20 @@ export default {
     },
 
     requestArcherBoardFromSpring ({ commit }, boardNo) {
-        console.log('requestGradeUpBoardFromSpring()')
+        console.log('requestArcherBoardFromSpring()')
 
         return axios.get(`http://localhost:7777/insoya/jpa/board/archer/${boardNo}`)
             .then((res) => {
                 commit(REQUEST_ARCHER_BOARD_FROM_SPRING, res.data)
+            })
+    },
+
+    requestMageBoardFromSpring ({ commit }, boardNo) {
+        console.log('requestMageBoardFromSpring()')
+
+        return axios.get(`http://localhost:7777/insoya/jpa/board/mage/${boardNo}`)
+            .then((res) => {
+                commit(REQUEST_MAGE_BOARD_FROM_SPRING, res.data)
             })
     },
 
@@ -252,6 +273,18 @@ export default {
             })
     },
 
+    // eslint-disable-next-line no-empty-pattern
+    requestCreateMageBoardContentsToSpring ({ }, payload) {
+        console.log('requestCreateMageBoardContentsToSpring()')
+
+        const { title, content, writer } = payload
+        return axios.post('http://localhost:7777/insoya/jpa/board/mage/register',
+            { title, content, writer })
+            .then(() => {
+                alert('게시물 등록 성공')
+            })
+    },
+
 
     // eslint-disable-next-line no-empty-pattern
     requestDeleteBoardToSpring ({ }, boardNo) {
@@ -306,6 +339,16 @@ export default {
         console.log('requestDeleteArcherBoardToSpring()')
 
         return axios.delete(`http://localhost:7777/insoya/jpa/board/archer/${boardNo}`)
+            .then(() => {
+                alert('삭제 성공')
+            })
+    },
+
+    // eslint-disable-next-line no-empty-pattern
+    requestDeleteMageBoardToSpring ({ }, boardNo) {
+        console.log('requestDeleteMageBoardToSpring()')
+
+        return axios.delete(`http://localhost:7777/insoya/jpa/board/mage/${boardNo}`)
             .then(() => {
                 alert('삭제 성공')
             })
@@ -381,6 +424,19 @@ export default {
         const { title, content, boardNo, writer, regDate } = payload
 
         return axios.put(`http://localhost:7777/insoya/jpa/board/archer/${boardNo}`,
+            { title, content, writer, regDate })
+            .then(() => {
+                alert('수정 성공')
+            })
+    },
+
+    // eslint-disable-next-line no-empty-pattern
+    requestMageBoardModifyToSpring ({ }, payload) {
+        console.log('requestArcherBoardModifyToSpring()')
+
+        const { title, content, boardNo, writer, regDate } = payload
+
+        return axios.put(`http://localhost:7777/insoya/jpa/board/mage/${boardNo}`,
             { title, content, writer, regDate })
             .then(() => {
                 alert('수정 성공')
