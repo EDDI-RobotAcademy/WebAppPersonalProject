@@ -45,4 +45,14 @@ public class BuyBaramController {
         buyBaramService.buyBaramRemove(buyBaramNo);
     }
 
+    @PutMapping("/{buyBaramNo}")
+    public BuyBaramBoard buyBaramBoardModify (@PathVariable("buyBaramNo") Long buyBaramNo, @RequestBody BuyBaramBoard buyBaramBoard) {
+        log.info("buyBaramBoardModify()");
+
+        buyBaramBoard.setBuyBaramNo(buyBaramNo);
+        buyBaramService.buyBaramModify(buyBaramBoard);
+
+        return buyBaramBoard;
+    }
+
 }

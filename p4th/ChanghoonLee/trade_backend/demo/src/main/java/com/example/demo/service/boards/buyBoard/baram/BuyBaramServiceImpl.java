@@ -48,5 +48,10 @@ public class BuyBaramServiceImpl implements BuyBaramService{
         buyBaramRepository.deleteById(Long.valueOf(buyBaramNo));
     }
 
+    @Override
+    public void buyBaramModify(BuyBaramBoard buyBaramBoard) {
+        buyBaramRepository.save(buyBaramBoard);
+    }
+
 
 }

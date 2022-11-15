@@ -10,5 +10,6 @@ public interface BuyBaramService {
     public void buyBaramRegister(BoardsRequest boardsRequest);
     public BuyBaramBoard buyBaramRead(Long buyBaramNo);
     public void buyBaramRemove(Long buyBaramNo);
+    public void buyBaramModify(BuyBaramBoard buyBaramBoard);
 
 }
