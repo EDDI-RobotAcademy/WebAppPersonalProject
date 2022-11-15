@@ -66,6 +66,9 @@ import ArcherBoardModifyView from "@/insoya/Views/ClassBoardView/ArcherBoardModi
 import MageBoardRegisterView from "@/insoya/Views/ClassBoardView/MageBoardRegisterView";
 import MageBoardReadView from "@/insoya/Views/ClassBoardView/MageBoardReadView";
 import MageBoardModifyView from "@/insoya/Views/ClassBoardView/MageBoardModifyView";
+import PirateBoardReadView from "@/insoya/Views/ClassBoardView/PirateBoardReadView";
+import PirateBoardModifyView from "@/insoya/Views/ClassBoardView/PirateBoardModifyView";
+import PirateBoardRegisterView from "@/insoya/Views/ClassBoardView/PirateBoardRegisterView";
 
 Vue.use(VueRouter)
 
@@ -261,6 +264,11 @@ const routes = [
     name: 'MageBoardListView',
     component: MageBoardListView
   },
+  {
+    path: '/pirate-board',
+    name: 'PirateBoardListView',
+    component: PirateBoardListView
+  },
 
   {
     path: '/insoya-free-board-register',
@@ -295,6 +303,12 @@ const routes = [
     path: '/insoya-mage-board-register',
     name: 'MageBoardRegisterView',
     component: MageBoardRegisterView
+  },
+
+  {
+    path: '/insoya-pirate-board-register',
+    name: 'PirateBoardRegisterView',
+    component: PirateBoardRegisterView
   },
 
   {
@@ -355,6 +369,17 @@ const routes = [
     name: 'MageBoardReadView',
     components: {
       default: MageBoardReadView
+    },
+    props: {
+      default: true
+    }
+  },
+
+  {
+    path: '/insoya-pirate-read/:boardNo',
+    name: 'PirateBoardReadView',
+    components: {
+      default: PirateBoardReadView
     },
     props: {
       default: true
@@ -427,6 +452,17 @@ const routes = [
   },
 
   {
+    path: '/insoya-pirate-modify/:boardNo',
+    name: 'PirateBoardModifyView',
+    components: {
+      default: PirateBoardModifyView
+    },
+    props: {
+      default: true
+    }
+  },
+
+  {
     path: '/insoya-sign-in',
     name: 'InsoyaSignInView',
     component: InsoyaSignInView
@@ -444,13 +480,6 @@ const routes = [
     component: WarriorBoardListView
   },
 
-
-
-  {
-    path: '/pirate-board',
-    name: 'PirateBoardListView',
-    component: PirateBoardListView
-  },
   {
     path: '/thief-board',
     name: 'ThiefBoardListView',

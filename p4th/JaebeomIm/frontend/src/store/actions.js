@@ -18,7 +18,7 @@ import {
     REQUEST_ARCHER_BOARD_LIST_FROM_SPRING,
     REQUEST_ARCHER_BOARD_FROM_SPRING,
     REQUEST_MAGE_BOARD_LIST_FROM_SPRING,
-    REQUEST_MAGE_BOARD_FROM_SPRING,
+    REQUEST_MAGE_BOARD_FROM_SPRING, REQUEST_PIRATE_BOARD_LIST_FROM_SPRING, REQUEST_PIRATE_BOARD_FROM_SPRING,
 } from './mutation-types'
 
 // npm install axios --save-dev
@@ -139,6 +139,15 @@ export default {
             })
     },
 
+    requestPirateBoardListFromSpring ({ commit }) {
+        console.log('requestPirateBoardListFromSpring()')
+
+        return axios.get('http://localhost:7777/insoya/jpa/board/pirate/list')
+            .then((res) => {
+                commit(REQUEST_PIRATE_BOARD_LIST_FROM_SPRING, res.data)
+            })
+    },
+
     requestBoardFromSpring ({ commit }, boardNo) {
         console.log('requestBoardFromSpring()')
 
@@ -197,6 +206,15 @@ export default {
         return axios.get(`http://localhost:7777/insoya/jpa/board/mage/${boardNo}`)
             .then((res) => {
                 commit(REQUEST_MAGE_BOARD_FROM_SPRING, res.data)
+            })
+    },
+
+    requestPirateBoardFromSpring ({ commit }, boardNo) {
+        console.log('requestPirateBoardFromSpring()')
+
+        return axios.get(`http://localhost:7777/insoya/jpa/board/pirate/${boardNo}`)
+            .then((res) => {
+                commit(REQUEST_PIRATE_BOARD_FROM_SPRING, res.data)
             })
     },
 
@@ -285,6 +303,18 @@ export default {
             })
     },
 
+    // eslint-disable-next-line no-empty-pattern
+    requestCreatePirateBoardContentsToSpring ({ }, payload) {
+        console.log('requestCreatePirateBoardContentsToSpring()')
+
+        const { title, content, writer } = payload
+        return axios.post('http://localhost:7777/insoya/jpa/board/pirate/register',
+            { title, content, writer })
+            .then(() => {
+                alert('게시물 등록 성공')
+            })
+    },
+
 
     // eslint-disable-next-line no-empty-pattern
     requestDeleteBoardToSpring ({ }, boardNo) {
@@ -349,6 +379,16 @@ export default {
         console.log('requestDeleteMageBoardToSpring()')
 
         return axios.delete(`http://localhost:7777/insoya/jpa/board/mage/${boardNo}`)
+            .then(() => {
+                alert('삭제 성공')
+            })
+    },
+
+    // eslint-disable-next-line no-empty-pattern
+    requestDeletePirateBoardToSpring ({ }, boardNo) {
+        console.log('requestDeletePirateBoardToSpring()')
+
+        return axios.delete(`http://localhost:7777/insoya/jpa/board/pirate/${boardNo}`)
             .then(() => {
                 alert('삭제 성공')
             })
@@ -437,6 +477,19 @@ export default {
         const { title, content, boardNo, writer, regDate } = payload
 
         return axios.put(`http://localhost:7777/insoya/jpa/board/mage/${boardNo}`,
+            { title, content, writer, regDate })
+            .then(() => {
+                alert('수정 성공')
+            })
+    },
+
+    // eslint-disable-next-line no-empty-pattern
+    requestPirateBoardModifyToSpring ({ }, payload) {
+        console.log('requestPirateBoardModifyToSpring()')
+
+        const { title, content, boardNo, writer, regDate } = payload
+
+        return axios.put(`http://localhost:7777/insoya/jpa/board/pirate/${boardNo}`,
             { title, content, writer, regDate })
             .then(() => {
                 alert('수정 성공')

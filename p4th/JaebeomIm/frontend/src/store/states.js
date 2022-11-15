@@ -26,6 +26,9 @@ export default {
     mageBoards: [],
     mageBoard: {},
 
+    pirateBoards: [],
+    pirateBoard: {},
+
     products: [],
     product: {},
 
