@@ -1,5 +1,6 @@
 package com.example.demo.controller.boards.buyBoard.baram;
 
+import com.example.demo.controller.boards.boardsRequest.BoardsRequest;
 import com.example.demo.entity.boards.buyBoard.baram.BuyBaramBoard;
 import com.example.demo.service.boards.buyBoard.baram.BuyBaramService;
 import lombok.extern.slf4j.Slf4j;
@@ -21,6 +22,13 @@ public class BuyBaramController {
         log.info("buyBaramBoardList()");
 
         return buyBaramService.buyBaramList();
+    }
+
+    @PostMapping("/register")
+    public void buyBaramBoardRegister (@RequestBody BoardsRequest boardsRequest) {
+        log.info("buyBaramBoardRegister()");
+
+        buyBaramService.buyBaramRegister(boardsRequest);
     }
 
 }
