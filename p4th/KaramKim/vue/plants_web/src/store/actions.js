@@ -22,15 +22,6 @@ export default {
                 commit(REQUEST_QUESTION_BOARD_LIST_FROM_SPRING, res.data)
             })
     },
-    requestCreateBoardContentsToSpring(_, payload) {
-        console.log('requestCreateBoardContentsToSpring()')
-
-        axios.post('http://localhost:7777/plants/question-board/register', payload)
-            .then(() => {
-                alert('게시물 등록 성공')
-            })
-    }
-
 }
 
 
