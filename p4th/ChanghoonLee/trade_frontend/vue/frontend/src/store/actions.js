@@ -85,4 +85,14 @@ export default {
             })
     },
 
+    // eslint-disable-next-line no-empty-pattern
+    requestDeleteBuyBaramToSpring ({ }, buyBaramNo) {
+        console.log('requestDeleteBuyBaramToSpring()')
+
+        return axios.delete(`http://localhost:7777/trade-item/boards/buy/baram/${buyBaramNo}`)
+            .then(() => {
+                alert('삭제 성공')
+            })
+    },
+
 }
