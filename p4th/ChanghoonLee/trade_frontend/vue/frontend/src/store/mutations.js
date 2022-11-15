@@ -12,4 +12,7 @@ export default {
     [REQUEST_BUY_BARAM_LIST_FROM_SPRING] (state, passingData) {
         state.buyBaramBoards = passingData
     },
+    [REQUEST_BUY_BARAM_FROM_SPRING] (state, passingData) {
+        state.buyBaramBoard = passingData
+    },
 }

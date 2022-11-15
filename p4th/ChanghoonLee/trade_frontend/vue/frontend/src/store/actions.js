@@ -51,4 +51,25 @@ export default {
             })
     },
 
+    requestBuyBaramFromSpring ({ commit }, buyBaramNo) {
+        console.log('requestBuyBaramFromSpring()')
+
+        return axios.get(`http://localhost:7777/trade-item/boards/buy/baram/${buyBaramNo}`)
+            .then((res) => {
+                commit(REQUEST_BUY_BARAM_FROM_SPRING, res.data)
+            })
+    },
+
+    //eslint-disable-next-line no-empty-pattern
+    requestCreateBuyBaramContentsToSpring ({ }, payload) {
+        console.log('requestCreateBuyBaramContentsToSpring()')
+
+        const { title, content, writer } = payload
+        return axios.post('http://localhost:7777/trade-item/boards/buy/baram/register',
+            { title, content, writer })
+            .then(() => {
+                alert('게시물 등록 성공')
+            })
+    },
+
 }

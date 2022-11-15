@@ -32,6 +32,11 @@ const routes = [
     name: 'BuyBaramListView',
     component: BuyBaramListView
   },
+  {
+    path: '/buy-baram-register',
+    name: 'BuyBaramRegisterView',
+    component: BuyBaramRegisterView
+  },
 ]
 
 const router = new VueRouter({
