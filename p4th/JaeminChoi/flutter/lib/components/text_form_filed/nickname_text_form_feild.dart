@@ -7,17 +7,31 @@ import '../../utility/size.dart';
 
 
 class NickNameTextFormField extends StatefulWidget {
-  const NickNameTextFormField({Key? key , required this.widthSize}) : super(key: key);
+  const NickNameTextFormField({Key? key , required this.widthSize, required this.controller}) : super(key: key);
 
-  static String nickName = '';
+  final TextEditingController controller;
   final double widthSize;
+
   @override
   State<NickNameTextFormField> createState() => _NickNameTextFormFieldState();
 }
 
 class _NickNameTextFormFieldState extends State<NickNameTextFormField> {
 
-  FocusNode _NickNameFocus = new FocusNode();
+  late FocusNode _NickNameFocus;
+  var controller;
+
+  void initState() {
+    super.initState();
+    controller = widget.controller;
+    _NickNameFocus = FocusNode();
+  }
+
+  @override
+  void dispose() {
+    _NickNameFocus.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -32,6 +46,7 @@ class _NickNameTextFormFieldState extends State<NickNameTextFormField> {
               child: Text("Nick name" , style: defaultTextFieldTextStyle(),textAlign: TextAlign.left,)),
           const SizedBox(height: 7,),
           TextFormField(
+            controller: controller,
             decoration: textFormDecoration("NickName"),
             keyboardType: TextInputType.text,
             focusNode: _NickNameFocus,
@@ -39,7 +54,7 @@ class _NickNameTextFormFieldState extends State<NickNameTextFormField> {
             validator: (value) => CheckValidate().validateNickName(_NickNameFocus, value!),
             onSaved: (value) {
               setState(()
-              {NickNameTextFormField.nickName = value!;}
+              {controller.text = value!;}
               );
             },
           )
