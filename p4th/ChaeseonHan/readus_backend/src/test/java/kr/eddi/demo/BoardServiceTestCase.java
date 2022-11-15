@@ -38,4 +38,10 @@ public class BoardServiceTestCase {
         BoardModifyForm boardModifyForm = new BoardModifyForm("일상", "수정테스트", "과연");
         service.modify(10L, boardModifyForm);
     }
+
+    @Test
+    void deleteBoardTest() {
+        Boolean isDeleted = service.delete(2l);
+        System.out.println("is deleted?: " + isDeleted);
+    }
 }

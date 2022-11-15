@@ -53,6 +53,9 @@ public class ReadUsMember {
         boards.add(communityBoard);
     }
 
+    public void deleteCommunityBoard(CommunityBoard communityBoard) {
+        boards.remove(communityBoard);
+    }
     public void modifyNickname(String nickName) {
         this.nickName = nickName;
     }

@@ -53,6 +53,10 @@ public class CommunityBoard {
         this.member_id.updateCommunityBoard(this);
     }
 
+    public void deleteBoardToMember() {
+        this.member_id.deleteCommunityBoard(this);
+    }
+
     public void modifyBoard(String title, String contents) {
         this.title = title;
         this.contents = contents;

@@ -92,7 +92,17 @@ public class BoardServiceImpl implements BoardService{
     }
 
     @Override
+    @Transactional
     public Boolean delete(Long boardNo) {
-        return null;
+        Optional<CommunityBoard> maybeBoard = boardRepository.findById(boardNo);
+        if(maybeBoard.equals(Optional.empty())) {
+            log.info("Can't find board to delete!");
+            return false;
+        }
+
+        CommunityBoard board = maybeBoard.get();
+        board.deleteBoardToMember();
+        boardRepository.delete(board);
+        return true;
     }
 }
