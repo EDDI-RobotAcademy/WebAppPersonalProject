@@ -133,6 +133,7 @@
 <script>
 import ToolBarComponent from "@/components/common/ToolBarComponent";
 import BucketContentComponent from "@/components/common/BucketContentComponent";
+import axios from "axios";
 
 export default {
   name: "MyBucketList",
@@ -152,22 +153,41 @@ export default {
       fileInputPlaceholderText: '커버사진을 선택하세요',
       categoryItems: ['일상', '요리', '여행', '자기개발', '건강'],
       bucketCategory: '',
-      file: '',
+      files: '',
       switchValue: false,
       switchValueTrue: "비공개",
       switchValueFalse: "공개",
+      currentWriter: ''
     }
   },
   methods: {
     fileUpload() {
-      this.file = this.$refs.file.files
+      this.files = this.$refs.file.files
     },
-    onSubmit() {
-      let formData = new FormData()
-      formData.set("fileValue", this.file)
+    async onSubmit() {
 
-      const {bucketTitle, bucketContent, bucketCategory, file, switchValue} = this
-      this.$emit("submit", {bucketTitle, bucketContent, bucketCategory, file, switchValue})
+      let formData = new FormData()
+      let fileInfo = {
+        bucketTitle: this.bucketTitle,
+        bucketContent: this.bucketContent,
+        bucketCategory: this.bucketCategory,
+        switchValue: this.switchValue,
+        currentWriter: this.$store.state.currentUserNickname
+      }
+      for (let idx = 0; idx < this.files.length; idx++) {
+        formData.append('fileList', this.files[idx])
+      }
+      formData.append(
+          "info",
+          new Blob([JSON.stringify(fileInfo)], { type: "application/json" })
+      )
+      await axios.post('http://localhost:7777/bucket/register', formData)
+          .then(() => {
+            alert("버킷 등록 완료")
+          })
+          .catch(() => {
+            alert("버킷 등록 실패")
+          });
     },
   }
 }

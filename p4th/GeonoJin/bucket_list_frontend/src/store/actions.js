@@ -2,10 +2,7 @@ import {
     CHECK_DUPLICATE_EMAIL_TO_SPRING,
     CHECK_DUPLICATE_NICKNAME_TO_SPRING,
     REQUEST_CURRENT_USER_NICKNAME_FROM_SPRING,
-
 } from './mutation-types'
-
-// import axios from "axios";
 
 import axios from "axios";
 
@@ -73,7 +70,7 @@ export default {
             });
     },
     // eslint-disable-next-line no-empty-pattern
-    async requestChangeNicknameToSpring( { } ,payload) {
+    async requestChangeNicknameToSpring({}, payload) {
 
         const {nickName, currentUserToken} = payload
 
@@ -86,22 +83,6 @@ export default {
             })
             .catch((error) => {
                 alert(error)
-            });
-    },
-
-    // 버킷리스트
-    // eslint-disable-next-line no-empty-pattern
-    CreateBucketListFromSpring({ }, payload){
-        const {bucketTitle, bucketContent, bucketCategory, file, switchValue} = payload
-
-        axios.post("http://localhost:7777/bucket/register",
-            {bucketTitle, bucketContent, bucketCategory, file, switchValue}
-        )
-            .then((res) => {
-                alert("버킷 등록 완료!" + res)
-            })
-            .catch((res) => {
-                alert("버킷 등록 실패" + res)
             });
     },
 }
