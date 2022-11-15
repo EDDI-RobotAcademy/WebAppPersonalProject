@@ -37,11 +37,16 @@ public class ReadUsMember {
     @CreationTimestamp
     private Date createdDate;
 
-    @OneToMany(mappedBy = "member", fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "member", fetch = FetchType.LAZY, cascade = CascadeType.REMOVE)
     private Set<Authentication> authentications = new HashSet<>();
 
+    @Getter
     @OneToMany(mappedBy = "member_id", fetch = FetchType.LAZY)
     private List<CommunityBoard> boards = new ArrayList<>();
+
+    @Getter
+    @OneToMany(mappedBy = "member_id", fetch = FetchType.LAZY)
+    private List<BoardComment> comments = new ArrayList<>();
 
     public ReadUsMember(String email, String nickName, String biography) {
         this.email = email;
@@ -50,12 +55,22 @@ public class ReadUsMember {
     }
 
     public void updateCommunityBoard(CommunityBoard communityBoard) {
-        boards.add(communityBoard);
+        this.boards.add(communityBoard);
     }
 
     public void deleteCommunityBoard(CommunityBoard communityBoard) {
-        boards.remove(communityBoard);
+        this.boards.remove(communityBoard);
     }
+
+    public void updateComment(BoardComment comment) {
+        this.comments.add(comment);
+    }
+
+    public void deleteComment(BoardComment comment) {
+        this.comments.remove(comment);
+    }
+
+
     public void modifyNickname(String nickName) {
         this.nickName = nickName;
     }
