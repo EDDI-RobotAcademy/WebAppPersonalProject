@@ -16,6 +16,11 @@ class MainPage extends StatefulWidget {
 
 class _MainPageState extends State<MainPage> {
 
+  static final storage = FlutterSecureStorage();
+  String? userToken;
+  String? userEmail;
+  String? userNickname;
+
   int _selectedPageIndex = 0;
 
   List _pages = [
@@ -24,6 +29,36 @@ class _MainPageState extends State<MainPage> {
     Text('3'),
     Text('4'),
   ];
+
+  @override
+  void initState() {
+    WidgetsBinding.instance!.addPostFrameCallback((_) {
+      _checkUserState();
+    });
+    super.initState();
+  }
+
+  logout() async{
+    await storage.delete(key: 'userToken');
+    await storage.delete(key: 'userEmail');
+    await storage.delete(key: 'userNickname');
+    Get.offAllNamed('/');
+  }
+
+  _checkUserState() async{
+    userToken = await storage.read(key: 'userToken');
+    userEmail = await storage.read(key: 'userEmail');
+    userNickname = await storage.read(key: 'userNickname');
+    if (userToken == null) {
+      print('로그인 된 사용자가 아님');
+      Get.offNamed('/');
+    } else {
+      print(userToken);
+      print(userEmail);
+      print(userNickname);
+      print('로그인 중');
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -62,7 +97,7 @@ class _MainPageState extends State<MainPage> {
                                 leading: Icon(CustomIcons.outfit),
                                 title: Text('Fashion'),
                                 onTap: () {
-                                  Get.to(BoardRegisterPage());
+                                  Get.to(BoardRegisterPage(), arguments: [userNickname, '패션']);
                                 },
                                 trailing: Icon(Icons.add),
                               ),
@@ -70,7 +105,7 @@ class _MainPageState extends State<MainPage> {
                                 leading: Icon(CustomIcons.salon),
                                 title: Text('Hair style'),
                                 onTap: () {
-                                  Get.to(BoardRegisterPage());
+                                  Get.to(BoardRegisterPage(), arguments: [userNickname, '헤어스타일']);
                                 },
                                 trailing: Icon(Icons.add),
                               ),
@@ -78,7 +113,7 @@ class _MainPageState extends State<MainPage> {
                                 leading: Icon(CustomIcons.makeup),
                                 title: Text('Make-up'),
                                 onTap: () {
-                                  Get.to(BoardRegisterPage());
+                                  Get.to(BoardRegisterPage(), arguments: [userNickname, '메이크업']);
                                 },
                                 trailing: Icon(Icons.add),
                               ),
