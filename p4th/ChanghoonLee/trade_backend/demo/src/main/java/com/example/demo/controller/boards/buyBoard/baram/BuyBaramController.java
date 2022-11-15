@@ -38,4 +38,11 @@ public class BuyBaramController {
         return buyBaramService.buyBaramRead(buyBaramNo);
     }
 
+    @DeleteMapping("/{buyBaramNo}")
+    public void buyBaramBoardRemove (@PathVariable("buyBaramNo") Long buyBaramNo) {
+        log.info("buyBaramBoardRemove()");
+
+        buyBaramService.buyBaramRemove(buyBaramNo);
+    }
+
 }

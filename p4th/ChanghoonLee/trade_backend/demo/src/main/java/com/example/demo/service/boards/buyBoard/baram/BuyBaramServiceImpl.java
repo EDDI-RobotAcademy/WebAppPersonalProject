@@ -43,5 +43,10 @@ public class BuyBaramServiceImpl implements BuyBaramService{
         return maybeBoard.get();
     }
 
+    @Override
+    public void buyBaramRemove(Long buyBaramNo) {
+        buyBaramRepository.deleteById(Long.valueOf(buyBaramNo));
+    }
+
 
 }
