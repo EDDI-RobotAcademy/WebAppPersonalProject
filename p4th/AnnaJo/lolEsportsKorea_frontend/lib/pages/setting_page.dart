@@ -51,9 +51,6 @@ class _SettingPageState extends State<SettingPage> {
         title: const Text('Setting'),
         appBar: AppBar(),
       ),
-      drawer: const Drawer(
-        child: CommonDrawerMenu(),
-      ),
       body: Center(
         child: Padding(
           padding: const EdgeInsets.all(20.0),
