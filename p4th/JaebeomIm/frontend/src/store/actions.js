@@ -18,7 +18,13 @@ import {
     REQUEST_ARCHER_BOARD_LIST_FROM_SPRING,
     REQUEST_ARCHER_BOARD_FROM_SPRING,
     REQUEST_MAGE_BOARD_LIST_FROM_SPRING,
-    REQUEST_MAGE_BOARD_FROM_SPRING, REQUEST_PIRATE_BOARD_LIST_FROM_SPRING, REQUEST_PIRATE_BOARD_FROM_SPRING,
+    REQUEST_MAGE_BOARD_FROM_SPRING,
+    REQUEST_PIRATE_BOARD_LIST_FROM_SPRING,
+    REQUEST_PIRATE_BOARD_FROM_SPRING,
+    REQUEST_THIEF_BOARD_LIST_FROM_SPRING,
+    REQUEST_THIEF_BOARD_FROM_SPRING,
+    REQUEST_WARRIOR_BOARD_LIST_FROM_SPRING,
+    REQUEST_WARRIOR_BOARD_FROM_SPRING,
 } from './mutation-types'
 
 // npm install axios --save-dev
@@ -148,6 +154,24 @@ export default {
             })
     },
 
+    requestThiefBoardListFromSpring ({ commit }) {
+        console.log('requestThiefBoardListFromSpring()')
+
+        return axios.get('http://localhost:7777/insoya/jpa/board/thief/list')
+            .then((res) => {
+                commit(REQUEST_THIEF_BOARD_LIST_FROM_SPRING, res.data)
+            })
+    },
+
+    requestWarriorBoardListFromSpring ({ commit }) {
+        console.log('requestWarriorBoardListFromSpring()')
+
+        return axios.get('http://localhost:7777/insoya/jpa/board/warrior/list')
+            .then((res) => {
+                commit(REQUEST_WARRIOR_BOARD_LIST_FROM_SPRING, res.data)
+            })
+    },
+
     requestBoardFromSpring ({ commit }, boardNo) {
         console.log('requestBoardFromSpring()')
 
@@ -217,6 +241,25 @@ export default {
                 commit(REQUEST_PIRATE_BOARD_FROM_SPRING, res.data)
             })
     },
+
+    requestThiefBoardFromSpring ({ commit }, boardNo) {
+        console.log('requestThiefBoardFromSpring()')
+
+        return axios.get(`http://localhost:7777/insoya/jpa/board/thief/${boardNo}`)
+            .then((res) => {
+                commit(REQUEST_THIEF_BOARD_FROM_SPRING, res.data)
+            })
+    },
+
+    requestWarriorBoardFromSpring ({ commit }, boardNo) {
+        console.log('requestWarriorBoardFromSpring()')
+
+        return axios.get(`http://localhost:7777/insoya/jpa/board/warrior/${boardNo}`)
+            .then((res) => {
+                commit(REQUEST_WARRIOR_BOARD_FROM_SPRING, res.data)
+            })
+    },
+
 
 
 
@@ -315,6 +358,30 @@ export default {
             })
     },
 
+    // eslint-disable-next-line no-empty-pattern
+    requestCreateThiefBoardContentsToSpring ({ }, payload) {
+        console.log('requestCreateThiefBoardContentsToSpring()')
+
+        const { title, content, writer } = payload
+        return axios.post('http://localhost:7777/insoya/jpa/board/thief/register',
+            { title, content, writer })
+            .then(() => {
+                alert('게시물 등록 성공')
+            })
+    },
+
+    // eslint-disable-next-line no-empty-pattern
+    requestCreateWarriorBoardContentsToSpring ({ }, payload) {
+        console.log('requestCreateWarriorBoardContentsToSpring()')
+
+        const { title, content, writer } = payload
+        return axios.post('http://localhost:7777/insoya/jpa/board/warrior/register',
+            { title, content, writer })
+            .then(() => {
+                alert('게시물 등록 성공')
+            })
+    },
+
 
     // eslint-disable-next-line no-empty-pattern
     requestDeleteBoardToSpring ({ }, boardNo) {
@@ -389,6 +456,26 @@ export default {
         console.log('requestDeletePirateBoardToSpring()')
 
         return axios.delete(`http://localhost:7777/insoya/jpa/board/pirate/${boardNo}`)
+            .then(() => {
+                alert('삭제 성공')
+            })
+    },
+
+    // eslint-disable-next-line no-empty-pattern
+    requestDeleteThiefBoardToSpring ({ }, boardNo) {
+        console.log('requestDeleteThiefBoardToSpring()')
+
+        return axios.delete(`http://localhost:7777/insoya/jpa/board/thief/${boardNo}`)
+            .then(() => {
+                alert('삭제 성공')
+            })
+    },
+
+    // eslint-disable-next-line no-empty-pattern
+    requestDeleteWarriorBoardToSpring ({ }, boardNo) {
+        console.log('requestDeleteWarriorBoardToSpring()')
+
+        return axios.delete(`http://localhost:7777/insoya/jpa/board/warrior/${boardNo}`)
             .then(() => {
                 alert('삭제 성공')
             })
@@ -483,6 +570,7 @@ export default {
             })
     },
 
+
     // eslint-disable-next-line no-empty-pattern
     requestPirateBoardModifyToSpring ({ }, payload) {
         console.log('requestPirateBoardModifyToSpring()')
@@ -490,6 +578,32 @@ export default {
         const { title, content, boardNo, writer, regDate } = payload
 
         return axios.put(`http://localhost:7777/insoya/jpa/board/pirate/${boardNo}`,
+            { title, content, writer, regDate })
+            .then(() => {
+                alert('수정 성공')
+            })
+    },
+
+    // eslint-disable-next-line no-empty-pattern
+    requestThiefBoardModifyToSpring ({ }, payload) {
+        console.log('requestThiefBoardModifyToSpring()')
+
+        const { title, content, boardNo, writer, regDate } = payload
+
+        return axios.put(`http://localhost:7777/insoya/jpa/board/thief/${boardNo}`,
+            { title, content, writer, regDate })
+            .then(() => {
+                alert('수정 성공')
+            })
+    },
+
+    // eslint-disable-next-line no-empty-pattern
+    requestWarriorBoardModifyToSpring ({ }, payload) {
+        console.log('requestWarriorBoardModifyToSpring()')
+
+        const { title, content, boardNo, writer, regDate } = payload
+
+        return axios.put(`http://localhost:7777/insoya/jpa/board/warrior/${boardNo}`,
             { title, content, writer, regDate })
             .then(() => {
                 alert('수정 성공')

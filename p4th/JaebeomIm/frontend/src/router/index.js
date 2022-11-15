@@ -69,6 +69,12 @@ import MageBoardModifyView from "@/insoya/Views/ClassBoardView/MageBoardModifyVi
 import PirateBoardReadView from "@/insoya/Views/ClassBoardView/PirateBoardReadView";
 import PirateBoardModifyView from "@/insoya/Views/ClassBoardView/PirateBoardModifyView";
 import PirateBoardRegisterView from "@/insoya/Views/ClassBoardView/PirateBoardRegisterView";
+import ThiefBoardRegisterView from "@/insoya/Views/ClassBoardView/ThiefBoardRegisterView";
+import ThiefBoardReadView from "@/insoya/Views/ClassBoardView/ThiefBoardReadView";
+import ThiefBoardModifyView from "@/insoya/Views/ClassBoardView/ThiefBoardModifyView";
+import WarriorBoardReadView from "@/insoya/Views/ClassBoardView/WarriorBoardReadView";
+import WarriorBoardModifyView from "@/insoya/Views/ClassBoardView/WarriorBoardModifyView";
+import WarriorBoardRegisterView from "@/insoya/Views/ClassBoardView/WarriorBoardRegisterView";
 
 Vue.use(VueRouter)
 
@@ -271,6 +277,18 @@ const routes = [
   },
 
   {
+    path: '/thief-board',
+    name: 'ThiefBoardListView',
+    component: ThiefBoardListView
+  },
+
+  {
+    path: '/warrior-board',
+    name: 'WarriorBoardListView',
+    component: WarriorBoardListView
+  },
+
+  {
     path: '/insoya-free-board-register',
     name: 'FreeBoardRegisterView',
     component: FreeBoardRegisterView
@@ -309,6 +327,18 @@ const routes = [
     path: '/insoya-pirate-board-register',
     name: 'PirateBoardRegisterView',
     component: PirateBoardRegisterView
+  },
+
+  {
+    path: '/insoya-thief-board-register',
+    name: 'ThiefBoardRegisterView',
+    component: ThiefBoardRegisterView
+  },
+
+  {
+    path: '/insoya-warrior-board-register',
+    name: 'WarriorBoardRegisterView',
+    component: WarriorBoardRegisterView
   },
 
   {
@@ -380,6 +410,28 @@ const routes = [
     name: 'PirateBoardReadView',
     components: {
       default: PirateBoardReadView
+    },
+    props: {
+      default: true
+    }
+  },
+
+  {
+    path: '/insoya-thief-read/:boardNo',
+    name: 'ThiefBoardReadView',
+    components: {
+      default: ThiefBoardReadView
+    },
+    props: {
+      default: true
+    }
+  },
+
+  {
+    path: '/insoya-warrior-read/:boardNo',
+    name: 'WarriorBoardReadView',
+    components: {
+      default: WarriorBoardReadView
     },
     props: {
       default: true
@@ -463,6 +515,28 @@ const routes = [
   },
 
   {
+    path: '/insoya-thief-modify/:boardNo',
+    name: 'ThiefBoardModifyView',
+    components: {
+      default: ThiefBoardModifyView
+    },
+    props: {
+      default: true
+    }
+  },
+
+  {
+    path: '/insoya-warrior-modify/:boardNo',
+    name: 'WarriorBoardModifyView',
+    components: {
+      default: WarriorBoardModifyView
+    },
+    props: {
+      default: true
+    }
+  },
+
+  {
     path: '/insoya-sign-in',
     name: 'InsoyaSignInView',
     component: InsoyaSignInView
@@ -474,17 +548,8 @@ const routes = [
     component: InsoyaSignUpView
   },
 
-  {
-    path: '/warrior-board',
-    name: 'WarriorBoardListView',
-    component: WarriorBoardListView
-  },
 
-  {
-    path: '/thief-board',
-    name: 'ThiefBoardListView',
-    component: ThiefBoardListView
-  },
+
 
 ]
 

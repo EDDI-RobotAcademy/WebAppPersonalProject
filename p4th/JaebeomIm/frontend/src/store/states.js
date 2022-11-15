@@ -29,6 +29,12 @@ export default {
     pirateBoards: [],
     pirateBoard: {},
 
+    thiefBoards: [],
+    thiefBoard: {},
+
+    warriorBoards: [],
+    warriorBoard: {},
+
     products: [],
     product: {},
 

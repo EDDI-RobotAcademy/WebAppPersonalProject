@@ -20,7 +20,10 @@ import {
     REQUEST_ARCHER_BOARD_FROM_SPRING,
     REQUEST_MAGE_BOARD_LIST_FROM_SPRING,
     REQUEST_MAGE_BOARD_FROM_SPRING,
-    REQUEST_PIRATE_BOARD_LIST_FROM_SPRING, REQUEST_PIRATE_BOARD_FROM_SPRING,
+    REQUEST_PIRATE_BOARD_LIST_FROM_SPRING,
+    REQUEST_PIRATE_BOARD_FROM_SPRING,
+    REQUEST_THIEF_BOARD_LIST_FROM_SPRING,
+    REQUEST_THIEF_BOARD_FROM_SPRING, REQUEST_WARRIOR_BOARD_LIST_FROM_SPRING, REQUEST_WARRIOR_BOARD_FROM_SPRING,
 } from './mutation-types'
 
 export default {
@@ -105,6 +108,24 @@ export default {
     [REQUEST_PIRATE_BOARD_FROM_SPRING] (state, passingData) {
         state.pirateBoard = passingData
     },
+
+    [REQUEST_THIEF_BOARD_LIST_FROM_SPRING] (state, passingData) {
+        state.thiefBoards = passingData
+    },
+
+    [REQUEST_THIEF_BOARD_FROM_SPRING] (state, passingData) {
+        state.thiefBoard = passingData
+    },
+
+    [REQUEST_WARRIOR_BOARD_LIST_FROM_SPRING] (state, passingData) {
+        state.warriorBoards = passingData
+    },
+
+    [REQUEST_WARRIOR_BOARD_FROM_SPRING] (state, passingData) {
+        state.warriorBoard = passingData
+    },
+
+
 
 
 
