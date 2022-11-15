@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
-import '../../api/GlobalsSuccessCheck.dart';
+import '../../api/state/sign_in_validate_state.dart';
+import '../../api/state/sign_up_validate_state.dart';
 import '../../api/spring_validate_api.dart';
 
 
@@ -13,11 +14,14 @@ class CheckValidate {
       focusNode.requestFocus();
       return '유효하지 않은 이메일 형식입니다.';
     } else {
+      SignInValidateState.isEmailCheck = true;
       return null;
     }
   }
 
-  String? validateEmailInSignUp(FocusNode focusNode, String value) {
+
+
+  String? validateEmailForSignUp(FocusNode focusNode, String value) {
     if(value.isEmpty) {
       focusNode.requestFocus();
       return '이메일을 입력하세요';
@@ -26,12 +30,7 @@ class CheckValidate {
       return '유효하지 않은 이메일 형식입니다.';
     } else {
       SpringValidateApi().emailValidate(value);
-      if(!GlobalsSuccessCheck.isEmailCheck){
-        focusNode.requestFocus();
-        return '해당 이메일은 누군가 이미 사용 중입니다.';
-      }else{
-        return null;
-      }
+      return null;
     }
   }
 
@@ -43,6 +42,7 @@ class CheckValidate {
       focusNode.requestFocus();
       return '유효하지 않은 비밀번호입니다.';
     } else {
+      SignInValidateState.isPasswordCheck = true;
       return null;
     }
   }
@@ -56,14 +56,10 @@ class CheckValidate {
       return '해당 닉네임은 사용 할 수 없습니다.';
     } else {
       SpringValidateApi().nickNameValidate(value);
-      if(!GlobalsSuccessCheck.isNicknameCheck){
-        focusNode.requestFocus();
-        return '해당 닉네임은 누군가 이미 사용 중입니다.';
-      }else{
         return null;
-      }
     }
   }
+
 }
 
 
