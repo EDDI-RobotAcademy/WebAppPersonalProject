@@ -9,6 +9,7 @@ import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Slf4j
 @Service
@@ -28,6 +29,18 @@ public class BuyBaramServiceImpl implements BuyBaramService{
         buyBaramBoard.setWriter(boardsRequest.getWriter());
 
         buyBaramRepository.save(buyBaramBoard);
+    }
+
+    @Override
+    public BuyBaramBoard buyBaramRead(Long buyBaramNo) {
+        Optional<BuyBaramBoard> maybeBoard = buyBaramRepository.findById(Long.valueOf(buyBaramNo));
+
+        if (maybeBoard.equals(Optional.empty())) {
+            log.info("Can't read board!!!");
+            return null;
+        }
+
+        return maybeBoard.get();
     }
 
 

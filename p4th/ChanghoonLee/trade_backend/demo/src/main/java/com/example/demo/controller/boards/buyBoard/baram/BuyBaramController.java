@@ -31,4 +31,11 @@ public class BuyBaramController {
         buyBaramService.buyBaramRegister(boardsRequest);
     }
 
+    @GetMapping("/{buyBaramNo}")
+    public BuyBaramBoard buyBaramBoardRead (@PathVariable("buyBaramNo") Long buyBaramNo) {
+        log.info("buyBaramBoardRead()");
+
+        return buyBaramService.buyBaramRead(buyBaramNo);
+    }
+
 }

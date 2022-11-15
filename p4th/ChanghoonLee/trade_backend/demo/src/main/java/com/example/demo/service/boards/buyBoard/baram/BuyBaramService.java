@@ -8,5 +8,6 @@ import java.util.List;
 public interface BuyBaramService {
     public List<BuyBaramBoard> buyBaramList();
     public void buyBaramRegister(BoardsRequest boardsRequest);
+    public BuyBaramBoard buyBaramRead(Long buyBaramNo);
 
 }
