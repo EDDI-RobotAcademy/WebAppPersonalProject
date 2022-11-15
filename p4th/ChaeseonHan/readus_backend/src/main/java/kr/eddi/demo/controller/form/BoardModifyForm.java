@@ -8,7 +8,7 @@ import lombok.Data;
 @AllArgsConstructor
 public class BoardModifyForm {
 
-    public String category;
-    public String title;
-    public String contents;
+    private String category;
+    private String title;
+    private String contents;
 }
