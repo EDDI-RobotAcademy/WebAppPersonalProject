@@ -50,7 +50,7 @@ class _CustomListTileState extends State<CustomListTile> {
                 highlightColor: Colors.blueAccent,
                 onPressed: () async{
                   bool result = await listController.delete(todos.boardNo);
-
+                  print("삭제하고 싶어요 : " + todos.boardNo.toString());
                   if (result) {
                     Get.snackbar(
                       'SUCCESS',
