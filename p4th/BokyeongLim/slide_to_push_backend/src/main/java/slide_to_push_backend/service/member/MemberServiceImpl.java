@@ -73,4 +73,12 @@ public class MemberServiceImpl implements MemberService{
 
         throw new RuntimeException("가입된 사용자가 아님!");
     }
+    @Override
+    public Account findAccount(String token) {
+        Long memNo = redisService.getValueByKey(token);
+        Optional<Account> maybeMember = accountRepository.findByAccount(memNo);
+        Account account = maybeMember.get();
+        log.info("account id: " + account.getId());
+        return account;
+    }
 }
