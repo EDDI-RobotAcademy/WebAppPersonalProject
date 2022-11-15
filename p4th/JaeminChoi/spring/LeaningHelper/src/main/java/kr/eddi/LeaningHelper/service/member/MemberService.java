@@ -6,7 +6,7 @@ import kr.eddi.LeaningHelper.request.member.MemberSignInRequest;
 public interface MemberService {
     public Boolean memberSignUp(MemberSignUpRequest memberSignUpRequest);
 
-    public Boolean emailValidation(String email);
+    public Integer emailValidation(String email);
 
     public Boolean nickNameValidation(String nickName);
 

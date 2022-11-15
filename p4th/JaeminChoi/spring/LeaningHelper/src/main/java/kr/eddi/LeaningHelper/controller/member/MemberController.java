@@ -30,7 +30,7 @@ public class MemberController {
     }
 
     @PostMapping("/check-email/{email}")
-    public Boolean emailValidation(@PathVariable("email")  String email) {
+    public Integer emailValidation(@PathVariable("email")  String email) {
         log.info("emailValidation(): " + email);
         String tmp = service.emailValidation(email).toString();
 
@@ -38,7 +38,7 @@ public class MemberController {
         return service.emailValidation(email);
     }
 
-    @PostMapping("/check-email/{nickName}")
+    @PostMapping("/check-nickName/{nickName}")
     public Boolean nickNameValidation(@PathVariable("nickName")  String nickName) {
         log.info("nickNameValidation(): " + nickName);
         String tmp = service.nickNameValidation(nickName).toString();
