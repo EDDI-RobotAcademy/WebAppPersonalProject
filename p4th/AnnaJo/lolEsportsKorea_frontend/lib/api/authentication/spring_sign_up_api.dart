@@ -7,7 +7,7 @@ import 'package:lol_esports_korea_app/api/authentication/globals_success_check.d
 class SpringSignUpApi {
   static const String httpUri = '192.168.0.8:8888';
 
-  Future<UserSignUpResponse> signUp(UserSignUpRequest request) async {
+  Future<MemberSignUpResponse> signUp(MemberSignUpRequest request) async {
     var data = {
       'email': request.email,
       'password': request.password,
@@ -28,24 +28,24 @@ class SpringSignUpApi {
     if (response.statusCode == 200) {
       debugPrint("Success");
       GlobalsSuccessCheck.isSignUpCheck = true;
-      return UserSignUpResponse(true);
+      return MemberSignUpResponse(true);
     } else {
       debugPrint("Fail");
-      return UserSignUpResponse(false);
+      return MemberSignUpResponse(false);
     }
   }
 }
 
-class UserSignUpResponse {
+class MemberSignUpResponse {
   bool? success;
 
-  UserSignUpResponse(this.success);
+  MemberSignUpResponse(this.success);
 }
 
-class UserSignUpRequest {
+class MemberSignUpRequest {
   String email;
   String password;
   String nickname;
 
-  UserSignUpRequest(this.email, this.password, this.nickname);
+  MemberSignUpRequest(this.email, this.password, this.nickname);
 }
