@@ -9,4 +9,5 @@ public interface QuestionBoardService {
 
     public List<QuestionBoard> list();
     public void register(BoardRequest boardRequest);
+    public QuestionBoard read(Long boardNo);
 }

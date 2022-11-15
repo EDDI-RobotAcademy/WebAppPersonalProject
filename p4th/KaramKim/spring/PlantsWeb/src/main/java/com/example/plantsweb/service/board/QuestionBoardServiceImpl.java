@@ -32,4 +32,15 @@ public class QuestionBoardServiceImpl implements QuestionBoardService{
 
         repository.save(questionBoard);
     }
+
+    @Override
+    public QuestionBoard read(Long boardNo) {
+        Optional<QuestionBoard> maybeBoard = repository.findById(boardNo);
+
+        if(maybeBoard.equals(Optional.empty())) {
+            log.info("게시물을 읽을 수 없습니다.");
+            return null;
+        }
+        return maybeBoard.get();
+    }
 }

@@ -24,10 +24,16 @@ public class QuestionBoardController {
 
         return service.list();
     }
-    @PostMapping("/register-board")
+    @PostMapping("/register")
     public void questionBoardRegister (@RequestBody BoardRequest boardRequest) {
         log.info("questionBoardRegister()");
 
         service.register(boardRequest);
+    }
+    @PostMapping("/{boardNo}")
+    public QuestionBoard questionBoardRead (@PathVariable("boardNo") Long boardNo) {
+        log.info("questionBoardRead()");
+
+        return service.read(boardNo);
     }
 }
