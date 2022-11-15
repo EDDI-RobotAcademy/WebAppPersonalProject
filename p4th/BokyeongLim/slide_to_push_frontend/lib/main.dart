@@ -1,9 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import '../view/sign_in_view.dart';
+import 'component/sign_up_last_form.dart';
+import 'view/sign_in_view.dart';
+
+
+
 
 void main() {
-  runApp(GetMaterialApp(home: SignInView()));
+  runApp(GetMaterialApp(home: SignUpLastForm()));
 }
 
 class MyApp extends StatelessWidget {
@@ -11,7 +15,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return GetMaterialApp(
       debugShowCheckedModeBanner: false,
-      home: SignInView(),
+      home: SignUpLastForm(),
     );
   }
 }

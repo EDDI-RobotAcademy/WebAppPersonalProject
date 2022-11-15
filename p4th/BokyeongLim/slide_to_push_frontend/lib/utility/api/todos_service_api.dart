@@ -2,7 +2,7 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 
-import '../../model/todos.dart';
+import '/model/todos.dart';
 import '../states/authentication.dart';
 
 class TodosService {

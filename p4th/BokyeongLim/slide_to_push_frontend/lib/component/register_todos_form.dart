@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
-import 'package:my_todos/component/custom_date_picker.dart';
-import 'package:my_todos/controller/sign_in_controller.dart';
-import 'package:my_todos/controller/todo_list_controller.dart';
-import 'package:my_todos/view/my_main_view.dart';
 
-import '../controller/date_picker_controller.dart';
+import '/component/custom_date_picker.dart';
+import '/controller/sign_in_controller.dart';
+import '/controller/todo_list_controller.dart';
+import '/view/my_main_view.dart';
+import '/controller/date_picker_controller.dart';
 import 'custom_todos_input.dart';
 
 class RegisterTodosForm extends StatefulWidget {

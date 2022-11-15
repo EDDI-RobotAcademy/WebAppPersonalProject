@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:my_todos/controller/todo_list_controller.dart';
+import '/controller/todo_list_controller.dart';
 
 import '../controller/sign_in_controller.dart';
 import 'custom_list_tile.dart';
