@@ -43,4 +43,9 @@ public class QuestionBoardServiceImpl implements QuestionBoardService{
         }
         return maybeBoard.get();
     }
+
+    @Override
+    public void modify(QuestionBoard questionBoard) {
+        repository.save(questionBoard);
+    }
 }

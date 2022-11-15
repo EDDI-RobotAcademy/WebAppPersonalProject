@@ -36,4 +36,15 @@ public class QuestionBoardController {
 
         return service.read(boardNo);
     }
+
+    @PutMapping("/{boardNo}")
+    public QuestionBoard questionBoardModify(@PathVariable("boardNo") Long boardNo,
+                                             @RequestBody QuestionBoard questionBoard) {
+        log.info("questionBoardModify()");
+
+        questionBoard.setBoardNo(boardNo);
+        service.modify(questionBoard);
+
+        return questionBoard;
+    }
 }
