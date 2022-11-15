@@ -29,6 +29,12 @@ public class BoardServiceImpl implements BoardService{
     private CommunityBoardRepository boardRepository;
 
 
+    /**
+     * 게시글 작성 메소드
+     * 이메일로 작성자 회원 데이터를 찾아 게시글과 함께 등록
+     * @param boardWriteRequest
+     * @return 작성 성공 여부
+     */
     @Override
     @Transactional
     public Boolean write(BoardWriteRequest boardWriteRequest) {
@@ -46,6 +52,11 @@ public class BoardServiceImpl implements BoardService{
         }
     }
 
+
+    /**
+     * (임시) 게시글 전체 리스트 메소드
+     * @return 게시글 리스트
+     */
     @Override
     public List<CommunityBoard> temporaryBoardList(){
 
@@ -58,6 +69,14 @@ public class BoardServiceImpl implements BoardService{
 
         return null;
     }
+
+
+    /**
+     * 게시글 수정 메소드
+     * @param boardNo 수정할 게시글 번호
+     * @param boardModifyForm 수정할 내용
+     * @return 수정 성공 여부
+     */
 
     @Override
     @Transactional
@@ -81,6 +100,13 @@ public class BoardServiceImpl implements BoardService{
         return true;
     }
 
+
+    /**
+     * 게시글 읽기 메소드
+     * @param boardNo 읽을 게시글 번호
+     * @return 해당 게시글
+     */
+
     @Override
     public CommunityBoard read(Long boardNo) {
 
@@ -95,6 +121,11 @@ public class BoardServiceImpl implements BoardService{
         return board;
     }
 
+    /**
+     * 게시글 삭제 메소드
+     * @param boardNo 삭제할 게시글 번호
+     * @return 삭제 성공 여부
+     */
     @Override
     @Transactional
     public Boolean delete(Long boardNo) {

@@ -30,6 +30,12 @@ public class MemberServiceImpl implements MemberService{
     private RedisServiceImpl redisService;
 
 
+    /**
+     * 이메일 중복 체크
+     * @param email
+     * @return 중복된 이메일 존재여부 boolean값
+     */
+
     @Override
     public Boolean emailValidation(String email) {
         Optional<ReadUsMember> maybeMember = memberRepository.findByEmail(email);
@@ -37,7 +43,11 @@ public class MemberServiceImpl implements MemberService{
         return maybeMember.isEmpty();
     }
 
-
+    /**
+     * 회원 가입
+     * @param request
+     * @return 회원 가입 성공 여부
+     */
     @Override
     public Boolean signUp(MemberRegisterRequest request) {
         final ReadUsMember member = request.toMember();
@@ -50,6 +60,12 @@ public class MemberServiceImpl implements MemberService{
         return true;
     }
 
+
+    /**
+     * 로그인
+     * @param request
+     * @return 생성된 유저 토큰값
+     */
 
     @Override
     public String signIn(MemberLoginRequest request) {
@@ -73,6 +89,12 @@ public class MemberServiceImpl implements MemberService{
         }
         throw new RuntimeException("가입된 사용자가 아닙니다.");
     }
+
+    /**
+     * 현재 로그인된 회원 정보
+     * @param signInUserToken
+     * @return 로그인 토큰값으로 찾은 회원 정보
+     */
 
     @Override
     public ReadUsMember getSignInMemberProfile(String signInUserToken) {
