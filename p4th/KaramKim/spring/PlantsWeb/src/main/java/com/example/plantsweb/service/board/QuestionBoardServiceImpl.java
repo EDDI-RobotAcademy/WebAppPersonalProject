@@ -48,4 +48,9 @@ public class QuestionBoardServiceImpl implements QuestionBoardService{
     public void modify(QuestionBoard questionBoard) {
         repository.save(questionBoard);
     }
+
+    @Override
+    public void delete(Long boardNo) {
+        repository.deleteById(boardNo);
+    }
 }

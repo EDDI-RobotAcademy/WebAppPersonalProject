@@ -11,4 +11,5 @@ public interface QuestionBoardService {
     public void register(BoardRequest boardRequest);
     public QuestionBoard read(Long boardNo);
     public void modify(QuestionBoard questionBoard);
+    public void delete(Long boardNo);
 }

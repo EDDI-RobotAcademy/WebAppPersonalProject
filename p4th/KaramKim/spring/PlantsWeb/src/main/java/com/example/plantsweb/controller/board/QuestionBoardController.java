@@ -47,4 +47,11 @@ public class QuestionBoardController {
 
         return questionBoard;
     }
+
+    @DeleteMapping("/{boardNo}")
+    public void questionBoardDelete(@PathVariable("boardNo") Long boardNo) {
+        log.info("questionBoardDelete()");
+
+        service.delete(boardNo);
+    }
 }
