@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:my_todos/component/register_todos_form.dart';
+import '../component/register_todos_form.dart';
 import '../utility/style/common_text_style.dart';
 
 
