@@ -69,9 +69,13 @@ public class BoardServiceImpl implements BoardService{
         }
 
         CommunityBoard board = maybeBoard.get();
-        board.setCategory(boardModifyForm.getCategory());
-        board.setTitle(boardModifyForm.getTitle());
-        board.setContents(boardModifyForm.getContents());
+
+        board.modifyBoard(
+                boardModifyForm.getCategory(),
+                boardModifyForm.getTitle(),
+                boardModifyForm.getContents()
+        );
+
         board.updateBoardToMember();
         boardRepository.save(board);
         return true;
