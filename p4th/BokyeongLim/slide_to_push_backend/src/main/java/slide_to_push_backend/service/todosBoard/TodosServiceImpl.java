@@ -2,12 +2,12 @@ package slide_to_push_backend.service.todosBoard;
 
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Sort;
+
 import org.springframework.stereotype.Service;
-import slide_to_push_backend.controller.todosBoard.request.TodosRequest;
+import slide_to_push_backend.entity.member.Account;
 import slide_to_push_backend.entity.todosBoard.Todos;
 import slide_to_push_backend.repository.todosBoard.TodosRepository;
-
+import slide_to_push_backend.service.todosBoard.reqDto.TodosReqDto;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -24,21 +24,23 @@ public class TodosServiceImpl implements TodosService{
     TodosRepository repository;
 
     @Override
-    public List<Todos> list() {
-        return repository.findAll(Sort.by(Sort.Direction.DESC, "boardNo"));
+    public List<Todos> list(Account account) {
+        log.info(repository.findByAccount(account).toString());
+        return repository.findByAccount(account);
     }
 
     @Override
-    public void register(TodosRequest todosRequest) throws ParseException {
+    public void register(TodosReqDto reqDto) throws ParseException {
         Todos todos = new Todos();
 
         //전달받은 날짜 형변환 String > Date
         SimpleDateFormat changeDateType = new SimpleDateFormat("yyyy-MM-dd");
-        Date selectedDate = changeDateType.parse(todosRequest.getSelectedDate());
-
+        Date selectedDate = changeDateType.parse(reqDto.getSelectedDate());
         todos.setSelectedDate(selectedDate);
-        todos.setContent(todosRequest.getContent());
-        todos.setIsFinished(todosRequest.getIsFinished());
+
+        todos.setContent(reqDto.getContent());
+        todos.setIsFinished(reqDto.getIsFinished());
+        todos.setAccount(reqDto.getAccount());
 
         repository.save(todos);
     }
