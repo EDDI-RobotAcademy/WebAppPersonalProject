@@ -67,7 +67,7 @@ class TodosService {
     }
   }
   //우선 등록에만 토큰으로 사용자 인증 후 할 수 있도록 서버 설계 , 삭제는 우선 보드 넘버만..
-  static requestDeleteFromSpring(int boardNo) async {
+  static requestDeleteFromSpring(dynamic boardNo) async {
     var data = {'boardNo': boardNo};
     var body = json.encode(data);
 

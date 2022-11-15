@@ -36,7 +36,7 @@ class ListController extends GetxController{
 
     return true;
   }
-  delete(int boardNo) async{
+  delete(dynamic boardNo) async{
     if(signInController.isAuthenticated.value) {
       await TodosService.requestDeleteFromSpring(boardNo);
     }
