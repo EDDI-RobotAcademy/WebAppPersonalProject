@@ -6,8 +6,8 @@ import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 
-@Entity
 @Data
+@Entity
 @NoArgsConstructor
 public class ImgFile {
 
@@ -24,11 +24,17 @@ public class ImgFile {
     @Column(nullable = false)
     private String changeFileName;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "bucket_id")
-    private BucketBoard bucketBoard;
+    private BucketBoard bucket;
+
+    public ImgFile(String fileOriginalName, String filePath, String changeFileName) {
+        this.fileOriginalName = fileOriginalName;
+        this.filePath = filePath;
+        this.changeFileName = changeFileName;
+    }
 
     public void setBucketBoard(BucketBoard bucketBoard) {
-        this.bucketBoard = bucketBoard;
+        this.bucket = bucketBoard;
     }
 }
