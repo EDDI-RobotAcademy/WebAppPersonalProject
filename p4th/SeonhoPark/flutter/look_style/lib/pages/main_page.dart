@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:get/get.dart';
 import 'package:look_style/pages/board_register_page.dart';
 import 'package:look_style/utility/custom_icons_icons.dart';
@@ -29,7 +30,64 @@ class _MainPageState extends State<MainPage> {
     return Scaffold(
       appBar: AppBar(
           leading: IconButton(
-                onPressed: () {},
+                onPressed: () {
+                  showModalBottomSheet(
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.only(
+                          topLeft: Radius.circular(30),
+                          topRight: Radius.circular(30)
+                        )
+                      ),
+                      context: context,
+                      builder: (BuildContext context) {
+                        return Container(
+                          height: 300,
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.center,
+                            children: [
+                              SizedBox(height: 10),
+                              Container(
+                                height: 5,
+                                width: 40,
+                                decoration: BoxDecoration(
+                                  color: Colors.grey,
+                                  borderRadius: BorderRadius.circular(10)
+                                ),
+                              ),
+                              SizedBox(height: 10),
+                              Text('새 게시물 등록', style: TextStyle(fontWeight: FontWeight.bold),),
+                              SizedBox(height: 10),
+                              Divider(thickness: 0.3, height: 1,),
+                              ListTile(
+                                leading: Icon(CustomIcons.outfit),
+                                title: Text('Fashion'),
+                                onTap: () {
+                                  Get.to(BoardRegisterPage());
+                                },
+                                trailing: Icon(Icons.add),
+                              ),
+                              ListTile(
+                                leading: Icon(CustomIcons.salon),
+                                title: Text('Hair style'),
+                                onTap: () {
+                                  Get.to(BoardRegisterPage());
+                                },
+                                trailing: Icon(Icons.add),
+                              ),
+                              ListTile(
+                                leading: Icon(CustomIcons.makeup),
+                                title: Text('Make-up'),
+                                onTap: () {
+                                  Get.to(BoardRegisterPage());
+                                },
+                                trailing: Icon(Icons.add),
+                              ),
+                            ],
+                          ),
+                        );
+                      }
+                  );
+                },
                 icon: Icon(CustomIcons.add_square),
           ),
           title: Text(
