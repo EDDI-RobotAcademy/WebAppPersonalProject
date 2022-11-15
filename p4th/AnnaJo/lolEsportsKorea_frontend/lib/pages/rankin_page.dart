@@ -10,7 +10,7 @@ class RankingPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: CommonTopAppBar(
-        title: const Text('My Team'),
+        title: const Text('순위'),
         appBar: AppBar(),
       ),
       drawer: const Drawer(

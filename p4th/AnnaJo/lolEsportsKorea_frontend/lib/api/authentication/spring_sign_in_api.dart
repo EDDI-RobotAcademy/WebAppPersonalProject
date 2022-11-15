@@ -3,45 +3,34 @@ import 'dart:convert';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
-import 'package:lol_esports_korea_app/api/authentication/globals_success_check.dart';
 
-class SpringSignInApi {
+class SpringHttpApi {
   static const String httpUri = '192.168.0.8:8888';
+  static var signInResponse;
 
-  Future<UserSignInResponse> signIn(UserSignInRequest request) async {
-    var data = {'email': request.email, 'password': request.password};
-    var body = json.encode(data);
+  signInApi(MemberSignInRequest request) async {
+    var body = json.encode(request);
 
-    debugPrint(request.email);
-    debugPrint(request.password);
-    debugPrint(body);
-
-    var response = await http.post(
-      Uri.http(httpUri, '/member/sign-in'),
-      headers: {"Content-Type": "application/json"},
-      body: body,
-    );
-
-    if (response.statusCode == 200) {
-      debugPrint("Success");
-      GlobalsSuccessCheck.isSignInCheck = true;
-      return UserSignInResponse(true);
-    } else {
-      debugPrint("Fail");
-      return UserSignInResponse(false);
+    try {
+      signInResponse = await http.post(
+        Uri.http(httpUri, '/member/sign-in'),
+        headers: {"Content-Type": "application/json"},
+        body: body,
+      );
+    } catch (e){
+      debugPrint(e.toString());
     }
   }
 }
 
-class UserSignInResponse {
-  bool? success;
-
-  UserSignInResponse(this.success);
-}
-
-class UserSignInRequest {
+class MemberSignInRequest {
   String email;
   String password;
 
-  UserSignInRequest(this.email, this.password);
+  MemberSignInRequest(this.email, this.password);
+
+  Map<String, dynamic> toJson() => {
+    'email' : email,
+    'password' : password
+  };
 }

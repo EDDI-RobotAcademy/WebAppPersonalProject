@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:lol_esports_korea_app/api/authentication/spring_nickname_validation_api.dart';
-import 'package:lol_esports_korea_app/components/authentication/user.dart';
+import 'package:lol_esports_korea_app/components/authentication/member.dart';
 import 'package:lol_esports_korea_app/pages/authentication/sign_in_page.dart';
 
 import '../../api/authentication/globals_success_check.dart';
@@ -19,7 +19,7 @@ class SignUpPage extends StatefulWidget {
 }
 
 class _SignUpPageState extends State<SignUpPage> {
-  User user = User("", "", "");
+  Member member = Member("", "", "", 0);
   final _formKey = GlobalKey<FormState>();
   final TextEditingController _passwordController = TextEditingController();
 
@@ -67,9 +67,9 @@ class _SignUpPageState extends State<SignUpPage> {
                             Flexible(
                               child: TextFormField(
                                 controller:
-                                    TextEditingController(text: user.email),
+                                    TextEditingController(text: member.email),
                                 onChanged: (val) {
-                                  user.email = val;
+                                  member.email = val;
                                 },
                                 validator: (value) {
                                   value!.isEmpty ? "E-mail is Empty" : null;
@@ -129,12 +129,12 @@ class _SignUpPageState extends State<SignUpPage> {
                             const SizedBox(width: large_gap),
                             Flexible(
                               child: TextFormField(
-                                controller : _passwordController,
+                                controller: _passwordController,
                                 validator: (value) =>
                                     value!.isEmpty ? "Password is Empty" : null,
                                 style: const TextStyle(
                                     fontSize: 20, color: Colors.white),
-                                obscureText : true,
+                                obscureText: true,
                                 decoration: InputDecoration(
                                   hintText: "Please enter Password",
                                   hintStyle: const TextStyle(
@@ -167,21 +167,23 @@ class _SignUpPageState extends State<SignUpPage> {
                             const SizedBox(width: 140),
                             Flexible(
                               child: TextFormField(
-                                controller : TextEditingController(text: user.password),
+                                controller: TextEditingController(
+                                    text: member.password),
                                 onChanged: (val) {
-                                  user.password = val;
+                                  member.password = val;
                                 },
                                 validator: (value) {
-                                  if(value!.isEmpty){
+                                  if (value!.isEmpty) {
                                     return "Password is Empty";
-                                  }else if(value != _passwordController.text) {
+                                  } else if (value !=
+                                      _passwordController.text) {
                                     return "패스워드가 일치하지 않습니다";
                                   }
                                   return null;
                                 },
                                 style: const TextStyle(
                                     fontSize: 20, color: Colors.white),
-                                obscureText : true,
+                                obscureText: true,
                                 decoration: InputDecoration(
                                   hintText: "Check for Password",
                                   hintStyle: const TextStyle(
@@ -227,10 +229,10 @@ class _SignUpPageState extends State<SignUpPage> {
                             const SizedBox(width: large_gap),
                             Flexible(
                               child: TextFormField(
-                                controller:
-                                    TextEditingController(text: user.nickname),
+                                controller: TextEditingController(
+                                    text: member.nickname),
                                 onChanged: (val) {
-                                  user.nickname = val;
+                                  member.nickname = val;
                                 },
                                 validator: (value) =>
                                     value!.isEmpty ? "Nickname is Empty" : null,
@@ -294,14 +296,17 @@ class _SignUpPageState extends State<SignUpPage> {
                     onPressed: () {
                       if (_formKey.currentState!.validate()) {
                         //E-mail 중복 검사 실행
-                        SpringEmailValidationApi().emailValidation(user.email);
+                        SpringEmailValidationApi()
+                            .emailValidation(member.email);
                         if (GlobalsSuccessCheck.isEmailCheck) {
-
                           // 닉네임 중복 검사 실행
-                          SpringNicknameValidationApi().nicknameValidation(user.nickname);
+                          SpringNicknameValidationApi()
+                              .nicknameValidation(member.nickname);
                           if (GlobalsSuccessCheck.isNicknameCheck) {
-                            SpringSignUpApi().signUp(UserSignUpRequest(
-                                user.email, user.password, user.nickname));
+                            SpringSignUpApi().signUp(MemberSignUpRequest(
+                                member.email,
+                                member.password,
+                                member.nickname));
 
                             // 회원가입 완료 후 로그인 페이지로 이동
                             if (GlobalsSuccessCheck.isSignUpCheck) {
@@ -342,7 +347,13 @@ class _SignUpPageState extends State<SignUpPage> {
         context: context,
         barrierDismissible: false,
         builder: (BuildContext context) {
-          return CommonAlertDialog(title: "⚠", content: '중복된 이메일입니다.');
+          return CommonAlertDialog(
+            title: "⚠️",
+            content: '중복된 이메일입니다.',
+            onCustomButtonPressed: () {
+              Navigator.of(context).pop();
+            },
+          );
         });
   }
 
@@ -352,7 +363,13 @@ class _SignUpPageState extends State<SignUpPage> {
         context: context,
         barrierDismissible: false,
         builder: (BuildContext context) {
-          return CommonAlertDialog(title: "⚠", content: '중복된 닉네임입니다.');
+          return CommonAlertDialog(
+            title: "⚠️",
+            content: '중복된 닉네임입니다.',
+            onCustomButtonPressed: () {
+              Navigator.of(context).pop();
+            },
+          );
         });
   }
 
@@ -363,7 +380,12 @@ class _SignUpPageState extends State<SignUpPage> {
         barrierDismissible: false,
         builder: (BuildContext context) {
           return CommonAlertDialog(
-              title: "🎉", content: '가입을 축하합니다! \n 로그인 화면으로 이동합니다.');
+            title: "🎉",
+            content: '가입을 축하합니다!🥰 \n 로그인 화면으로 이동합니다.',
+            onCustomButtonPressed: () {
+              Navigator.of(context).pop();
+            },
+          );
         });
   }
 }

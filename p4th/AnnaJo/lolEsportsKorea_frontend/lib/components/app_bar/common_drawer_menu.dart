@@ -22,7 +22,7 @@ class CommonDrawerMenu extends StatelessWidget {
               backgroundColor: Colors.black,
             ),
             accountName: Text('닉네임'),
-            accountEmail: Text('T1@gmail.com')
+            accountEmail: Text('T1@gmail.com'),
         ),
         DrawerListTile(
             pageName: () => const HomePage(),
