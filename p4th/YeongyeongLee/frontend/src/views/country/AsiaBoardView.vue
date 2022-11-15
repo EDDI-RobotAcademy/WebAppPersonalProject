@@ -5,31 +5,20 @@
 
     <br>
     <p></p><br><br><br>
-    <ToolbarButton/>
-    <br>
 
+    <ToolbarButton/>
+
+    <br>
     <br><br><br><br>
 
+      <BoardWriteButton/>
 
-    <div>
+      <br><br><br><br><br>
 
-
-      <div id="board">
-
-        <v-btn class="Normal" rounded style="float: right">
-          <v-icon>mdi-view-list-outline</v-icon>
-          <router-link :to="{ name: 'JpaBoardRegisterView' }">
-            게시물 작성
-          </router-link>
-        </v-btn>
-        <br><br><br><br><br>
-        <jpa-board-list :boards="boards"/>
-      </div>
-    </div>
-
-
+      <jpa-board-list :boards="boards"/>
 
     <br><br><br><br><br><br><br><br><br><br><br>
+
     <FooterView/>
   </div>
 
@@ -40,8 +29,9 @@ import ToolbarButton from "@/components/common/button/ToolbarButton";
 import FooterView from "@/views/mainpage/FooterView";
 
 import {mapActions, mapState} from "vuex";
-import JpaBoardList from "@/components/boards/BoardList";
+import JpaBoardList from "@/components/boards/JpaBoardList";
 import MemberButton from "@/components/common/button/MemberButton";
+import BoardWriteButton from "@/components/common/button/BoardWriteButton";
 
 
 export default {
@@ -52,6 +42,8 @@ export default {
     JpaBoardList,
     FooterView,
     MemberButton,
+    BoardWriteButton,
+
 
   },
   computed:{
