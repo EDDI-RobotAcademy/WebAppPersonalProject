@@ -52,7 +52,7 @@
 
             <div class="d-flex justify-end px-12 py-5" v-if="board.member_id.id == this.$store.state.loginUserProfile.id">
               <v-btn color="#356859" class="mr-1" outlined small @click="toModify"> 수정 </v-btn>
-              <v-btn color="#356859" outlined small> 삭제 </v-btn>
+              <v-btn color="#356859" outlined small @click="toDelete"> 삭제 </v-btn>
             </div>
 
 
@@ -64,6 +64,8 @@
 </template>
 
 <script>
+import {mapActions} from "vuex";
+
 export default {
   name: "BoardReadForm",
   props: {
@@ -80,11 +82,17 @@ export default {
     }
   },
   methods: {
+    ...mapActions(['requestDeleteBoardToSpring']),
     toModify() {
       this.$router.push( {
         name: "BoardModifyView",
         params: { boardNo : this.board.boardNo.toString() }
       })
+    },
+
+    async toDelete() {
+      await this.requestDeleteBoardToSpring(this.board.boardNo)
+      await this.$router.push("/community")
     }
   },
 }
@@ -92,9 +100,6 @@ export default {
 
 <style scoped>
 
-.basic {
-  font-family: "210 M고딕 060";
-}
 .title text{
   font-weight: bold;
   font-size: x-large;

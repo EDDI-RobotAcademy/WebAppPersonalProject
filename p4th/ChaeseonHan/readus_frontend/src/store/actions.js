@@ -133,6 +133,22 @@ export default {
                 if(res.data) {
                     alert("수정 되었습니다!")
                 } else {
+                    alert("이미 삭제된 게시글입니다!")
+                }
+            }).catch((error) => {
+                console.log(error.message)
+            })
+    },
+
+    // eslint-disable-next-line no-empty-pattern
+    requestDeleteBoardToSpring({ }, boardNo ) {
+        console.log("requestDeleteBoardToSpring()")
+
+        return axios.delete(`http://localhost:7776/board/delete/${boardNo}`)
+            .then((res) => {
+                if(res.data) {
+                    alert("삭제 완료되었습니다!")
+                } else {
                     alert("오류가 발생했습니다!")
                 }
             }).catch((error) => {
