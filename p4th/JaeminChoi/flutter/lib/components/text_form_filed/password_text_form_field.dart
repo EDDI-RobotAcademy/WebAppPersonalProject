@@ -3,13 +3,13 @@ import 'package:flutter/material.dart';
 import '../../utility/decorations/text_form_decoration.dart';
 import '../../utility/decorations/text_style.dart';
 import '../../utility/validation/form_validate.dart';
-import '../../utility/size.dart';
 
 
 class PasswordTextFormField extends StatefulWidget {
-  const PasswordTextFormField({Key? key , required this.widthSize}) : super(key: key);
+  const PasswordTextFormField({Key? key , required this.widthSize, required this.controller}) : super(key: key);
 
-  static String password = '';
+  final TextEditingController controller;
+
   final double widthSize;
 
   @override
@@ -18,7 +18,20 @@ class PasswordTextFormField extends StatefulWidget {
 
 class _PasswordTextFormFieldState extends State<PasswordTextFormField> {
 
-  FocusNode _passwordFocus = new FocusNode();
+  late FocusNode _passwordFocus;
+  var controller;
+
+  void initState() {
+    super.initState();
+    controller = widget.controller;
+    _passwordFocus = FocusNode();
+  }
+
+  @override
+  void dispose() {
+    _passwordFocus.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -33,15 +46,17 @@ class _PasswordTextFormFieldState extends State<PasswordTextFormField> {
               child: Text("Password" , style: defaultTextFieldTextStyle(),textAlign: TextAlign.left,)),
           const SizedBox(height: 7,),
           TextFormField(
+            controller: controller,
             decoration: textFormDecoration("Password"),
             obscureText:true,
+            style: const TextStyle(color: Colors.black),
             keyboardType: TextInputType.visiblePassword,
             focusNode: _passwordFocus,
             autovalidateMode : AutovalidateMode.onUserInteraction ,
             validator: (value) => CheckValidate().validatePassword(_passwordFocus, value!),
             onSaved: (value) {
               setState(()
-              {PasswordTextFormField.password = value!;}
+              {controller.text = value!;}
               );
             },
           )
