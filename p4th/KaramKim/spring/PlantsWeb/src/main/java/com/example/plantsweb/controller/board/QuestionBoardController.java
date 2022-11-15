@@ -24,7 +24,7 @@ public class QuestionBoardController {
 
         return service.list();
     }
-    @PostMapping("/register-board")
+    @PostMapping("/register")
     public void questionBoardRegister (@RequestBody BoardRequest boardRequest) {
         log.info("questionBoardRegister()");
 
