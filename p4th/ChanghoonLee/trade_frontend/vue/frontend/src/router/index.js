@@ -37,6 +37,26 @@ const routes = [
     name: 'BuyBaramRegisterView',
     component: BuyBaramRegisterView
   },
+  {
+    path: '/buy-baram-read/:buyBaramNo',
+    name: 'BuyBaramReadView',
+    components: {
+      default: BuyBaramReadView
+    },
+    props: {
+      default: true
+    }
+  },
+  {
+    path: '/buy-baram-modify/:buyBaramNo',
+    name: 'BuyBaramModifyView',
+    components: {
+      default: BuyBaramModifyView
+    },
+    props: {
+      default: true
+    }
+  },
 ]
 
 const router = new VueRouter({

@@ -72,4 +72,17 @@ export default {
             })
     },
 
+    // eslint-disable-next-line no-empty-pattern
+    requestBuyBaramModifyToSpring ({ }, payload) {
+        console.log('requestBuyBaramModifyToSpring()')
+
+        const { title, content, buyBaramNo, writer, regDate } = payload
+
+        return axios.put(`http://localhost:7777/trade-item/boards/buy/baram/${buyBaramNo}`,
+            { title, content, writer, regDate })
+            .then(() => {
+                alert('수정 성공')
+            })
+    },
+
 }
