@@ -8,4 +8,5 @@ import java.util.List;
 public interface QuestionBoardService {
 
     public List<QuestionBoard> list();
+    public void register(BoardRequest boardRequest);
 }

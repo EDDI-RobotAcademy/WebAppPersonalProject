@@ -22,4 +22,14 @@ public class QuestionBoardServiceImpl implements QuestionBoardService{
     public List<QuestionBoard> list() {
         return repository.findAll(Sort.by(Sort.Direction.DESC, "boardNo"));
     }
+
+    @Override
+    public void register(BoardRequest boardRequest) {
+        QuestionBoard questionBoard = new QuestionBoard();
+        questionBoard.setTitle(boardRequest.getTitle());
+        questionBoard.setWriter(boardRequest.getWriter());
+        questionBoard.setContent(boardRequest.getContent());
+
+        repository.save(questionBoard);
+    }
 }
