@@ -1,6 +1,7 @@
 package kr.eddi.demo;
 
 
+import kr.eddi.demo.repository.CommentRepository;
 import kr.eddi.demo.service.CommentServiceImpl;
 import kr.eddi.demo.service.request.CommentWriteToBoardRequest;
 import org.junit.jupiter.api.Test;
@@ -13,11 +14,20 @@ public class CommentServiceTestCase {
     @Autowired
     CommentServiceImpl service;
 
+    @Autowired
+    CommentRepository repository;
+
     @Test
     void writeComment() {
-        CommentWriteToBoardRequest request = new CommentWriteToBoardRequest(2L, 2L, "댓글 작성 기능 완료" );
+        CommentWriteToBoardRequest request = new CommentWriteToBoardRequest(2L, 3L, "댓글 썻어요잉" );
         boolean isCommentSuccess = service.write(request);
         System.out.println("isCommentSuccess?: " + isCommentSuccess);
+    }
+
+    @Test
+    void modifyComment() {
+        boolean isCommentModified = service.modify(2l, "수정완료");
+        System.out.println("isCommentModified: " + isCommentModified);
     }
 
 }

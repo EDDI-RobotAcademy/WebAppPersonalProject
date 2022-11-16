@@ -7,6 +7,7 @@ public interface CommentService {
 
     Boolean write(CommentWriteToBoardRequest request);
 
-    Boolean modify();
+    Boolean modify(Long commentNo, String modifiedComment);
+
     Boolean delete();
 }

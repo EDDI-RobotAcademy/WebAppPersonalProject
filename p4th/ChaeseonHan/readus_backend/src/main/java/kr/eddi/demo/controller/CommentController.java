@@ -22,4 +22,9 @@ public class CommentController {
         return service.write(commentToBoardForm.toCommentToBoardWriteRequest());
     }
 
+    @PutMapping
+    public boolean modifyComment(@PathVariable("commentNo") Long commentNo, String modifiedComment) {
+        return service.modify(commentNo, modifiedComment);
+    }
+
 }
