@@ -23,9 +23,9 @@ public class CommentController {
         return service.write(commentToBoardForm.toCommentToBoardWriteRequest());
     }
 
-    @PutMapping
-    public boolean modifyComment(@PathVariable("commentNo") Long commentNo, String modifiedComment) {
-        return service.modify(commentNo, modifiedComment);
+    @PutMapping("/modify/{commentNo}")
+    public Boolean modifyComment(@PathVariable("commentNo") Long commentNo, @RequestBody CommentModifyForm form) {
+        return service.modify(commentNo, form.getModifiedComment());
     }
 
     @DeleteMapping("/delete/{commentNo}")
