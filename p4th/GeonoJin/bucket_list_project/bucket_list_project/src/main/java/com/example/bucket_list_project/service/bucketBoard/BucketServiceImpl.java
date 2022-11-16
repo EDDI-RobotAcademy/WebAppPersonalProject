@@ -7,12 +7,15 @@ import com.example.bucket_list_project.repository.bucketBoard.ImgFileRepository;
 import com.example.bucket_list_project.service.bucketBoard.request.bucketBoard.BucketBoardRequest;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.UUID;
 
 
@@ -73,5 +76,12 @@ public class BucketServiceImpl implements BucketService {
         log.info("파일 db 저장 완료");
         file.setBucketBoard(board);
         imgFileRepository.save(file);
+    }
+
+    @Override
+    public List<BucketBoard> list() {
+        List<BucketBoard> bucketBoards = bucketBoardRepository.findAll();
+
+        return bucketBoards;
     }
 }
