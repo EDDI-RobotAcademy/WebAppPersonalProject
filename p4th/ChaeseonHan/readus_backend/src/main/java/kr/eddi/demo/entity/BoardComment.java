@@ -1,6 +1,7 @@
 package kr.eddi.demo.entity;
 
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
@@ -31,6 +32,7 @@ public class BoardComment {
 
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "board_no")
+    @JsonIgnore
     private CommunityBoard board_no;
 
     @ManyToOne(fetch = FetchType.EAGER)
