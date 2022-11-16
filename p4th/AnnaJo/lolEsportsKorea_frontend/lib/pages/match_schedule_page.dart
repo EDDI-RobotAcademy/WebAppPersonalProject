@@ -22,15 +22,14 @@ class _MatchScheduleState extends State<MatchSchedulePage> {
       drawer: const Drawer(
         child: CommonDrawerMenu(),
       ),
-      body: Center(
+      body: SingleChildScrollView(
+          child: Center(
         child: Column(
           children: const <Widget>[
-            SingleChildScrollView(
-              child: MatchScheduleForm(),
-            ),
+            MatchScheduleForm(),
           ],
         ),
-      ),
+      )),
     );
   }
 }

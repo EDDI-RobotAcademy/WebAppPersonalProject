@@ -86,31 +86,33 @@ class _MatchScheduleFormState extends State<MatchScheduleForm>
     } else {
       return Column(
         children: <Widget>[
-          TableCalendar(
-            firstDay: DateTime.utc(2011, 01, 01),
-            lastDay: DateTime.utc(2032, 12, 31),
-            focusedDay: _focusedDay,
-            calendarFormat: _calendarFormat,
-            eventLoader: _getEventsForDay,
-            selectedDayPredicate: (day) => isSameDay(day, _selectedDay),
-            onDaySelected: (selectedDay, focusedDay) {
-              if (!isSameDay(_selectedDay, selectedDay)) {
-                setState(() {
-                  _selectedDay = selectedDay;
-                  _focusedDay = focusedDay;
-                });
-              }
-            },
-            onFormatChanged: (format) {
-              if (_calendarFormat != format) {
-                setState(() {
-                  _calendarFormat = format;
-                });
-              }
-            },
-            onPageChanged: (focusedDay) {
-              _focusedDay = focusedDay;
-            },
+          SingleChildScrollView(
+            child: TableCalendar(
+              firstDay: DateTime.utc(2011, 01, 01),
+              lastDay: DateTime.utc(2032, 12, 31),
+              focusedDay: _focusedDay,
+              calendarFormat: _calendarFormat,
+              eventLoader: _getEventsForDay,
+              selectedDayPredicate: (day) => isSameDay(day, _selectedDay),
+              onDaySelected: (selectedDay, focusedDay) {
+                if (!isSameDay(_selectedDay, selectedDay)) {
+                  setState(() {
+                    _selectedDay = selectedDay;
+                    _focusedDay = focusedDay;
+                  });
+                }
+              },
+              onFormatChanged: (format) {
+                if (_calendarFormat != format) {
+                  setState(() {
+                    _calendarFormat = format;
+                  });
+                }
+              },
+              onPageChanged: (focusedDay) {
+                _focusedDay = focusedDay;
+              },
+            ),
           ),
           const SizedBox(height: 16.0),
           SingleChildScrollView(
@@ -135,9 +137,9 @@ class _MatchScheduleFormState extends State<MatchScheduleForm>
                       ),
                       subtitle: Text(
                         event.time.toString() +
-                            " " +
+                            " [" +
                             event.gameState.toString() +
-                            " \n " +
+                            "] \n" +
                             event.homeTeam.toString() +
                             " " +
                             event.homeTeamScore.toString() +
@@ -149,6 +151,7 @@ class _MatchScheduleFormState extends State<MatchScheduleForm>
                             fontWeight: FontWeight.bold,
                             fontSize: 14,
                             color: Colors.black),
+                        textAlign: TextAlign.left,
                       ),
                     ),
                   ),
