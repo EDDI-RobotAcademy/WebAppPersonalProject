@@ -9,6 +9,7 @@ import BoardReadView from "@/views/routerView/community/Board/BoardReadView";
 import InformationCategoryView from "@/views/routerView/community/CommunitiCategory/InformationCategoryView";
 import LifeCategoryView from "@/views/routerView/community/CommunitiCategory/LifeCategoryView";
 import ReviewCategoryView from "@/views/routerView/community/CommunitiCategory/ReviewCategoryView";
+import BoardModifyView from "@/views/routerView/community/Board/BoardModifyView";
 
 Vue.use(VueRouter)
 
@@ -61,6 +62,16 @@ const routes = [
     name: 'BoardReadView',
     components:{
       default: BoardReadView
+    },
+    props: {
+      default: true
+    }
+  },
+  {
+    path: '/community/modify/:boardNo',
+    name: 'BoardModifyView',
+    components:{
+      default: BoardModifyView
     },
     props: {
       default: true

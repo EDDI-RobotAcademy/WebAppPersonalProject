@@ -1,6 +1,7 @@
 package kr.eddi.demo.controller;
 
 
+import kr.eddi.demo.controller.form.BoardModifyForm;
 import kr.eddi.demo.controller.form.BoardWriteForm;
 import kr.eddi.demo.entity.CommunityBoard;
 import kr.eddi.demo.service.BoardServiceImpl;
@@ -20,7 +21,7 @@ public class BoardController {
     BoardServiceImpl service;
 
     @PostMapping("/write")
-    public Boolean writeBoard(@RequestBody BoardWriteForm boardWriteForm){
+    public Boolean writeBoard(@RequestBody BoardWriteForm boardWriteForm) {
         return service.write(boardWriteForm.toBoardWriteRequest());
     }
 
@@ -34,7 +35,7 @@ public class BoardController {
 
     // TODO: 2022.11.10 페이징으로 게시판 리스트 구현하려는데 감이 안잡힌다
     @GetMapping("/list-view")
-    public String readAllPost(){
+    public String readAllPost() {
         return null;
     }
 
@@ -43,4 +44,15 @@ public class BoardController {
 
         return service.read(boardNo);
     }
+
+    @PutMapping("/modify/{boardNo}")
+    public Boolean modifyBoard(@PathVariable("boardNo") Long boardNo, @RequestBody BoardModifyForm modifyForm) {
+        return service.modify(boardNo, modifyForm);
+    }
+
+    @DeleteMapping("/delete/{boardNo}")
+    public Boolean deleteBoard(@PathVariable("boardNo") Long boardNo) {
+        return service.delete(boardNo);
+    }
+
 }

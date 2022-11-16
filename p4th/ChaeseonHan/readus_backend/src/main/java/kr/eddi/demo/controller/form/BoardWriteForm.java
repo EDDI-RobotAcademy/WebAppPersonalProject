@@ -7,11 +7,11 @@ import lombok.Data;
 @Data
 public class BoardWriteForm {
 
-    public String category;
-    public String title;
-    public String contents;
+    private String category;
+    private String title;
+    private String contents;
 
-    public String memberEmail;
+    private String memberEmail;
 
     public BoardWriteRequest toBoardWriteRequest() {
         return new BoardWriteRequest(this.category, this.title, this.contents, this.memberEmail);

@@ -10,6 +10,7 @@ import java.util.Date;
 
 @Entity
 @Getter
+@Setter
 @AllArgsConstructor
 @NoArgsConstructor
 public class CommunityBoard {
@@ -50,6 +51,10 @@ public class CommunityBoard {
 
     public void updateBoardToMember() {
         this.member_id.updateCommunityBoard(this);
+    }
+
+    public void deleteBoardToMember() {
+        this.member_id.deleteCommunityBoard(this);
     }
 
     public void modifyBoard(String title, String contents) {

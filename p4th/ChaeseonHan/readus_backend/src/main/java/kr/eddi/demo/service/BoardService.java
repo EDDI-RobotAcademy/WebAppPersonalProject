@@ -1,7 +1,7 @@
 package kr.eddi.demo.service;
 
 import kr.eddi.demo.entity.CommunityBoard;
-import kr.eddi.demo.service.request.BoardModifyRequest;
+import kr.eddi.demo.controller.form.BoardModifyForm;
 import kr.eddi.demo.service.request.BoardWriteRequest;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -16,7 +16,7 @@ public interface BoardService {
 
     Page<CommunityBoard> pageList(Pageable pageable);
 
-    Boolean modify(BoardModifyRequest boardModifyRequest);
+    Boolean modify(Long boardNo, BoardModifyForm boardModifyForm);
 
     CommunityBoard read(Long boardNo);
 
