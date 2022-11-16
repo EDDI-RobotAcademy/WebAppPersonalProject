@@ -10,10 +10,11 @@ class MatchSchedulePage extends StatefulWidget {
   _MatchScheduleState createState() => _MatchScheduleState();
 }
 
-class _MatchScheduleState extends State<MatchSchedulePage>{
+class _MatchScheduleState extends State<MatchSchedulePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      resizeToAvoidBottomInset: false,
       appBar: CommonTopAppBar(
         title: const Text('경기 일정'),
         appBar: AppBar(),
@@ -24,11 +25,12 @@ class _MatchScheduleState extends State<MatchSchedulePage>{
       body: Center(
         child: Column(
           children: const <Widget>[
-            MatchScheduleForm(),
+            SingleChildScrollView(
+              child: MatchScheduleForm(),
+            ),
           ],
         ),
       ),
     );
   }
 }
-

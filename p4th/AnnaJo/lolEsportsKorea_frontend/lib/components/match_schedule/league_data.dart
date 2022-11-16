@@ -21,7 +21,7 @@ class LeagueData {
     required this.awayTeam,
   });
 
-  LeagueData.fromJson(Map<String, dynamic> json){
+  LeagueData.fromJson(Map<String, dynamic> json) {
     leagueTitle = json['leagueTitle'];
     date = json['date'];
     time = json['time'];
