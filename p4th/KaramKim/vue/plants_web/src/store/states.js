@@ -1,6 +1,7 @@
 export default {
+    isAuthenticated: false,
+    checkUserInfo: false,
 
-    isAuthenticated: false
-
+    boards: [],
 
 }

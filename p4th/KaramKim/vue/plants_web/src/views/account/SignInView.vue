@@ -37,6 +37,7 @@ export default {
                 this.$store.state.isAuthenticated = true
                 this.$cookies.set("user", res.data, 3600)
                 localStorage.setItem("userInfo", JSON.stringify(res.data))
+                this.$store.state.checkUserInfo = true
                 this.isLogin = true
                 this.$router.push("/")
               } else {
@@ -50,7 +51,6 @@ export default {
         alert("이미 로그인 되어 있습니다.")
       }
     }
-
   }
 }
 </script>
