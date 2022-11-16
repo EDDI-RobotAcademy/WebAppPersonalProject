@@ -2,7 +2,9 @@ import {
     CHECK_DUPLICATE_EMAIL_TO_SPRING,
     CHECK_DUPLICATE_NICKNAME_TO_SPRING,
     REQUEST_CURRENT_USER_NICKNAME_FROM_SPRING,
-    GET_BUCKET_LIST_TO_SPRING
+    GET_BUCKET_LIST_TO_SPRING,
+    REQUEST_BUCKET_FROM_SPRING,
+    DOWN_LOAD_IMG_FILE_TO_SPRING
 } from './mutation-types'
 
 import axios from "axios";
@@ -88,12 +90,29 @@ export default {
     },
 
     //버킷리스트
-    getBucketListToSpring({ commit }) {
+    async getBucketListToSpring({ commit }) {
         console.log('getBucketListToSpring')
 
-        axios.get('http://localhost:7777/bucket/list')
+        await axios.get('http://localhost:7777/bucket/list')
             .then((res) => {
                 commit(GET_BUCKET_LIST_TO_SPRING, res.data);
+            });
+    },
+    downLoadImgFileToSpring({ commit }, bucketId) {
+        console.log('downLoadImgFileToSpring')
+
+        axios.get(`http://localhost:7777/bucket/imgDownLoad/${bucketId}`)
+            .then((res) => {
+                commit(DOWN_LOAD_IMG_FILE_TO_SPRING, res.data);
+            });
+    },
+    requestBucketFromSpring({commit}, bucketId) {
+        console.log("requestBucketFromSpring")
+        console.log(bucketId)
+
+        axios.get(`http://localhost:7777/bucket/${bucketId}`)
+            .then((res) => {
+                commit(REQUEST_BUCKET_FROM_SPRING, res.data)
             });
     },
 }

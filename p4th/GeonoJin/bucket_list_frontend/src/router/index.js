@@ -10,6 +10,9 @@ import CookBucketListView from "@/views/bucketListKind/CookBucketListView";
 import MyPageView from "@/views/member/MyPageView";
 import MyBucketListView from "@/views/MyBucketListView";
 
+//bucketList
+import BucketListReadView from "@/views/BucketListReadView";
+
 //member
 import SignInView from "@/views/member/SignInView";
 import SignUpView from "@/views/member/SignUpView";
@@ -67,7 +70,16 @@ const routes = [
     name: 'MyBucketListView',
     component: MyBucketListView
   },
-
+  {
+    path: '/readBucketList/:bucketId',
+    name: 'BucketListReadView',
+    components: {
+      default: BucketListReadView
+    },
+    props:{
+      default: true
+    }
+  },
 ]
 
 const router = new VueRouter({

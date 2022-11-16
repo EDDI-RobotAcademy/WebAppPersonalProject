@@ -2,7 +2,9 @@ import{
     CHECK_DUPLICATE_EMAIL_TO_SPRING,
     REQUEST_CURRENT_USER_NICKNAME_FROM_SPRING,
     CHECK_DUPLICATE_NICKNAME_TO_SPRING,
-    GET_BUCKET_LIST_TO_SPRING
+    GET_BUCKET_LIST_TO_SPRING,
+    REQUEST_BUCKET_FROM_SPRING,
+    DOWN_LOAD_IMG_FILE_TO_SPRING
     // REQUEST_LOGIN_STATE_TO_SPRING
 } from "./mutation-types"
 
@@ -18,5 +20,12 @@ export default {
     },
     [GET_BUCKET_LIST_TO_SPRING](state, passingData) {
         state.bucketList = passingData
+    },
+    [REQUEST_BUCKET_FROM_SPRING](state, passingData){
+        state.bucket = passingData
+    },
+    [DOWN_LOAD_IMG_FILE_TO_SPRING](state, passingData) {
+        console.log(passingData)
+        state.downLoadImgFile = passingData;
     },
 }

@@ -4,6 +4,8 @@ export default {
     currentUserNickname: null,
     nicknamePassValue: false,
     currentLoginUserCheck: false,
-    bucketList: []
+    bucketList: [],
+    bucket: {},
+    downLoadImgFile: {}
 
 }
