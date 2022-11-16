@@ -10,32 +10,68 @@
     <br/>
 
     <v-layout justify-center>
-      <bucket-content-component
-          :cards="cards"
-      />
+      <div>
+        <v-row class="ma-auto">
+          <div v-if="!bucketList || (Array.isArray(bucketList) && bucketList.length === 0)">
+            <h3>현재 등록된 버킷리스트가 없습니다.</h3>
+          </div>
+          <v-card
+              v-else
+              v-for="bucket in bucketList"
+              :key="bucket.bucketId"
+              max-width="250"
+              class="ma-5"
+          >
+            <router-link to="">
+              <v-img
+                  :src="require(`@/assets/thumbnail/${bucket.changeFileName}`)"
+                  class="white--text align-end"
+                  gradient="to bottom, rgba(0,0,0,.1), rgba(0,0,0,.5)"
+                  height="200px"
+                  contain
+              >
+                <v-card-title v-text="bucket.title"></v-card-title>
+              </v-img>
+            </router-link>
+          </v-card>
+        </v-row>
+      </div>
     </v-layout>
   </v-container>
 </template>
 
 <script>
-import BucketContentComponent from "@/components/common/BucketContentComponent";
 import HeaderComponent from "@/components/header/HeaderComponent";
+import {mapActions, mapState} from "vuex";
+/*todo
+* 스프링 컨트롤러 작업해주고
+* 넘겨받는 데이터 신경쓸꺼는 변경된 파일 이름을
+* 어떻게 가지고 올것인가 고민해봐야할 일이고
+* 넘겨받은 버킷리스트를 눌렀을 경우 어떻게 화면에 띄워줄건지
+* */
 
 export default {
   name: "AllBucketList",
   components: {
-    BucketContentComponent,
     HeaderComponent,
+  },
+  computed:{
+    ...mapState([
+        'bucketList'
+    ])
   },
   data(){
     return{
-      cards: [
-        { title: 'Pre-fab homes', src: 'https://cdn.vuetifyjs.com/images/cards/house.jpg', flex: 12, route:'/signIn' ,count:0},
-        { title: 'Favorite road trips', src: 'https://cdn.vuetifyjs.com/images/cards/road.jpg', flex: 6, count:0 },
-        { title: 'Best airlines', src: 'https://cdn.vuetifyjs.com/images/cards/plane.jpg', flex: 6, count:0 },
-      ],
     }
   },
+  mounted() {
+    this.getBucketListToSpring()
+  },
+  methods:{
+    ...mapActions([
+        'getBucketListToSpring'
+    ])
+  }
 }
 </script>
 

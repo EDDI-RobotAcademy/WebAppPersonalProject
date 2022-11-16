@@ -1,6 +1,6 @@
 package com.example.bucket_list_project.controller.member.accountSet;
 
-import com.example.bucket_list_project.controller.member.form.ReplaceNicknameForm;
+import com.example.bucket_list_project.controller.member.form.account.ReplaceNicknameForm;
 import com.example.bucket_list_project.service.member.accountSet.MemberAccountSetService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;

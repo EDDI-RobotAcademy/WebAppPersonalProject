@@ -8,6 +8,7 @@ import StudyBucketListView from "@/views/bucketListKind/StudyBucketListView";
 import TravelBucketListView from "@/views/bucketListKind/TravelBucketListView";
 import CookBucketListView from "@/views/bucketListKind/CookBucketListView";
 import MyPageView from "@/views/member/MyPageView";
+import MyBucketListView from "@/views/MyBucketListView";
 
 //member
 import SignInView from "@/views/member/SignInView";
@@ -60,6 +61,11 @@ const routes = [
     path: '/myPage',
     name: 'MyPageView',
     component: MyPageView
+  },
+  {
+    path: '/myBucket',
+    name: 'MyBucketListView',
+    component: MyBucketListView
   },
 
 ]
