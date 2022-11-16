@@ -172,5 +172,23 @@ export default {
             }).catch((error) => {
                 console.log(error.message)
             })
+    },
+
+    // eslint-disable-next-line no-empty-pattern
+    requestModifyCommentAtBoardToSpring({ }, payload) {
+        console.log("requestModifyCommentAtBoardToSpring()")
+
+        const { commentNo, modifiedComment } = payload
+
+        return axios.put(`http://localhost:7776/comment/modify/${commentNo}`, { modifiedComment })
+            .then((res) => {
+                if(res.data) {
+                    alert("댓글 수정 완료!")
+                } else {
+                    alert("오류가 발생했습니다!")
+                }
+            }).catch((error) => {
+                console.log(error.message)
+            })
     }
 }

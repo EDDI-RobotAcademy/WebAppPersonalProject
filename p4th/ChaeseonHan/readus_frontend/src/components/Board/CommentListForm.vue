@@ -14,19 +14,29 @@
           class="px-8"
           v-for="item in comments"
           :key="item.commentNo"
-          :item="item"/>
+          :item="item"
+          @submit="submitModifiedComment"/>
 
   </v-card>
 </template>
 
 <script>
 import CommentDetailForm from "@/components/Board/CommentDetailForm";
+import {mapActions} from "vuex";
 export default {
   name: "CommentListForm",
   components: {CommentDetailForm},
   props: {
     comments: {
       type: Array,
+      required: true,
+    }
+  },
+  methods: {
+    ...mapActions(['requestModifyCommentAtBoardToSpring']),
+    submitModifiedComment(payload) {
+      const { commentNo, modifiedComment } = payload
+      this.requestModifyCommentAtBoardToSpring( { commentNo, modifiedComment })
     }
   }
 }

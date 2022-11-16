@@ -29,7 +29,7 @@
       </div>
     </v-card-text>
 
-
+    <!-- 읽기 -->
 
     <v-card-text v-if="isModify == false" class="py-1">
       <div class="pl-6">
@@ -41,11 +41,17 @@
       </div>
     </v-card-text>
 
+    <!-- 수정 -->
     <v-card-text v-if="isModify == true" class="py-1">
-      <div class="d-flex">
-        <v-textarea style="font-size: small" outlined v-model="modifiedComment"/>
-        <v-btn class="ml-2" outlined small color="#356859"> 수정 </v-btn>
-      </div>
+      <v-form v-if="isModify == true" @submit.prevent="submitModifiedComment" ref="form">
+        <div class="d-flex" style="font-size: small">
+          <v-textarea style="font-size: small" outlined v-model="modifiedComment" :disabled="false"/>
+          <div class="d-flex flex-column">
+            <v-btn type="submit" class="ml-2" outlined small color="#356859"> 등록 </v-btn>
+            <v-btn class="ml-2 mt-1" outlined small color="#356859" @click="toModifyComment"> 취소 </v-btn>
+          </div>
+        </div>
+      </v-form>
     </v-card-text>
 
   </v-card>
@@ -64,12 +70,25 @@ export default {
     return {
       isModify: false,
       modifiedComment: "",
+      commentNo: "",
     }
   },
   methods: {
     toModifyComment() {
-      this.isModify = true
+      if(this.isModify == true){
+        this.isModify = false
+      } else {
+        this.isModify = true
+      }
+    },
+
+    submitModifiedComment() {
+      this.commentNo = this.item.commentNo
+      const { commentNo, modifiedComment } = this
+      this.$emit("submit", { commentNo, modifiedComment })
+      this.isModify = false
     }
+
   },
   created() {
     this.modifiedComment = this.item.comment
