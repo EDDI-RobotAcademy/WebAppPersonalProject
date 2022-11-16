@@ -1,11 +1,14 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:get/get.dart';
-import 'package:look_style/api/spring_api.dart';
+import 'package:look_style/api/member_spring_api.dart';
 import 'package:look_style/components/signIn/sign_in_email_text_form_field.dart';
 import 'package:look_style/components/signIn/sign_in_password_text_form_field.dart';
 
 class SignInFormField extends StatefulWidget {
-  const SignInFormField({Key? key}) : super(key: key);
+  SignInFormField({Key? key, required this.storage}) : super(key: key);
+
+  FlutterSecureStorage storage;
 
   @override
   State<SignInFormField> createState() => _SignInFormFieldState();
@@ -16,7 +19,6 @@ class _SignInFormFieldState extends State<SignInFormField> {
   final _formKey = GlobalKey<FormState>();
   final emailController = TextEditingController();
   final passwordController = TextEditingController();
-  final focusnode = FocusNode();
 
   @override
   void dispose() {
@@ -43,10 +45,14 @@ class _SignInFormFieldState extends State<SignInFormField> {
               ),
               onPressed: () {
                 if (_formKey.currentState!.validate()) {
-                  var validation = SpringApi().SignIn(UserSignInRequest(emailController.text, passwordController.text));
-                  validation.then((value) {
-                    if (value.success == true) {
-                      Get.toNamed('/main');
+                  var userInfo = MemberSpringApi().signIn(UserSignInRequest(emailController.text, passwordController.text));
+
+                  userInfo.then((value) async {
+                    if (value != null) {
+                      await widget.storage.write(key: 'userToken', value: value.token);
+                      await widget.storage.write(key: 'userEmail', value: value.email);
+                      await widget.storage.write(key: 'userNickname', value: value.nickname);
+                      Get.offNamed('/main', arguments: [value.email, value.nickname]);
                     } else {
                       showDialog(
                           context: context,

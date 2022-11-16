@@ -1,21 +1,46 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:get/get.dart';
-import 'package:look_style/components/signIn/sign_in_email_text_form_field.dart';
 import 'package:look_style/components/signIn/sign_in_form_field.dart';
-import 'package:look_style/components/route_button.dart';
 
-class SignInPage extends StatelessWidget {
+class SignInPage extends StatefulWidget {
   const SignInPage({Key? key}) : super(key: key);
+
+  @override
+  State<SignInPage> createState() => _SignInPageState();
+}
+
+class _SignInPageState extends State<SignInPage> {
+
+  String? userToken;
+  String? userEmail;
+  String? userNickname;
+  static final storage = FlutterSecureStorage();
+
+  @override
+  void initState() {
+    WidgetsBinding.instance!.addPostFrameCallback((_) {
+      _signIn();
+    });
+    super.initState();
+  }
+
+  _signIn() async {
+    userToken = await storage.read(key: 'userToken');
+    userEmail = await storage.read(key: 'userEmail');
+    userNickname = await storage.read(key: 'userNickname');
+    print(userToken);
+    print(userEmail);
+    print(userNickname);
+
+    if(userToken != null) {
+      Get.offNamed('/main', arguments: [userEmail, userNickname]);
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      // appBar: AppBar(
-      //   title: Text("Look Style", style: TextStyle(color: Colors.black),),
-      //   centerTitle: true,
-      //   elevation: 0.0,
-      //   backgroundColor: Colors.white
-      // ),
       body: SingleChildScrollView(
         child: Container(
           decoration: BoxDecoration(),
@@ -25,7 +50,7 @@ class SignInPage extends StatelessWidget {
               children: [
                 Image.asset('assets/logo.png' ,width: 300, height: 300,),
                 // Text("Look Style", style: TextStyle(fontSize: 40, fontFamily: "bazzi")),
-                SignInFormField(),
+                SignInFormField(storage: storage,),
                 SizedBox(height: 20,),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
