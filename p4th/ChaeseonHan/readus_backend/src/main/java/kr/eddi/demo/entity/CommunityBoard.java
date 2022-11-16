@@ -45,7 +45,6 @@ public class CommunityBoard {
 
     @OneToMany(mappedBy = "board_no", fetch = FetchType.EAGER, cascade = CascadeType.REMOVE)
     @OrderBy("commentNo asc")
-    @JsonIgnore
     private List<BoardComment> comments = new ArrayList<>();
 
     public CommunityBoard(String category, String title, String contents, ReadUsMember member) {
