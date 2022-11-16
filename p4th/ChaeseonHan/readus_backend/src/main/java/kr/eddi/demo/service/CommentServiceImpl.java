@@ -83,7 +83,22 @@ public class CommentServiceImpl implements CommentService {
     }
 
     @Override
-    public Boolean delete() {
-        return null;
+    @Transactional
+    public Boolean delete(Long commentNo) {
+
+        Optional<BoardComment> maybeComment = commentRepository.findById(commentNo);
+
+        if(maybeComment.isEmpty()) {
+            log.info("comment is empty!");
+            return false;
+        }
+
+        BoardComment boardComment = maybeComment.get();
+        boardComment.deleteCommentToBoard();
+        boardComment.deleteCommentToMember();
+
+        commentRepository.delete(boardComment);
+
+        return true;
     }
 }

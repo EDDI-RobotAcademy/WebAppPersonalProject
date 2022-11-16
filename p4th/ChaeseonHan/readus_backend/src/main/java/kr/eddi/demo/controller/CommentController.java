@@ -1,5 +1,6 @@
 package kr.eddi.demo.controller;
 
+import kr.eddi.demo.controller.form.CommentModifyForm;
 import kr.eddi.demo.controller.form.CommentToBoardForm;
 import kr.eddi.demo.service.CommentServiceImpl;
 import lombok.extern.slf4j.Slf4j;
@@ -25,6 +26,11 @@ public class CommentController {
     @PutMapping
     public boolean modifyComment(@PathVariable("commentNo") Long commentNo, String modifiedComment) {
         return service.modify(commentNo, modifiedComment);
+    }
+
+    @DeleteMapping("/delete/{commentNo}")
+    public Boolean deleteComment(@PathVariable("commentNo") Long commentNo) {
+        return service.delete(commentNo);
     }
 
 }

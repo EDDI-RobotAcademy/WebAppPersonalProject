@@ -30,4 +30,10 @@ public class CommentServiceTestCase {
         System.out.println("isCommentModified: " + isCommentModified);
     }
 
+    @Test
+    void deleteComment() {
+        Boolean isCommentDeleted = service.delete(4l);
+        System.out.println("isCommentDeleted: " + isCommentDeleted);
+    }
+
 }
