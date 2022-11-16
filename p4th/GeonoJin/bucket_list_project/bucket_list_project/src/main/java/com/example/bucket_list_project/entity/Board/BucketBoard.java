@@ -1,33 +1,46 @@
 package com.example.bucket_list_project.entity.Board;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import lombok.Data;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 import javax.persistence.*;
 
 
-@Data
 @Entity
 @NoArgsConstructor
 public class BucketBoard {
 
     @Id
+    @Getter
     @Column(name = "bucket_id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long bucketId;
 
+    @Getter
+    @Setter
     @Column(nullable = false)
     private String bucketTitle;
 
+    @Getter
+    @Setter
     @Column(nullable = false)
     private String bucketContent;
 
+    @Getter
+    @Setter
     @Column(nullable = false)
     private String bucketCategory;
 
+    @Getter
+    @Setter
     @Column(nullable = false)
     private Boolean switchValue;
 
+    @Getter
+    @Setter
     @Column(nullable = false)
     private String writer;
 
