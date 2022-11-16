@@ -16,6 +16,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 import java.util.UUID;
 
 
@@ -83,5 +84,30 @@ public class BucketServiceImpl implements BucketService {
         List<BucketBoard> bucketBoards = bucketBoardRepository.findAll();
 
         return bucketBoards;
+    }
+
+    @Override
+    public BucketBoard bucketRead(Long bucketId) {
+        Optional<BucketBoard> maybeBucket = bucketBoardRepository.findById(bucketId);
+
+        if (maybeBucket.equals(Optional.empty())) {
+            log.info("정보가 없다");
+            return null;
+        }
+
+        return maybeBucket.get();
+    }
+
+    @Override
+    public ImgFile imgFileDownload(Long bucketId) {
+        log.info("imgFileDownload");
+        Optional<ImgFile> maybeImgFile = imgFileRepository.findByImgFile(bucketId);
+
+        if (maybeImgFile.equals(Optional.empty())) {
+            log.info("이미지 파일이 없음");
+            return null;
+        }
+
+        return maybeImgFile.get();
     }
 }

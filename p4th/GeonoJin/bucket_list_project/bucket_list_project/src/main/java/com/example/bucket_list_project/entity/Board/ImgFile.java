@@ -1,8 +1,6 @@
 package com.example.bucket_list_project.entity.Board;
 
 
-import com.fasterxml.jackson.annotation.JsonManagedReference;
-import lombok.Data;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -34,7 +32,7 @@ public class ImgFile {
 
     @Getter
     @Setter
-    @OneToOne(fetch = FetchType.LAZY)
+    @OneToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "bucket_id")
     private BucketBoard bucket;
 
