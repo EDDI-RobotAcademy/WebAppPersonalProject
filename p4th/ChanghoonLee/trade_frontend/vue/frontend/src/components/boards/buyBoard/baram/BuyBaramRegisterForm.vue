@@ -7,7 +7,7 @@
           제목
         </th>
         <th scope="cols">
-          <input type="text" v-model.lazy="title">
+          <input type="text" v-model="title">
         </th>
       </tr>
       </thead>
@@ -17,7 +17,7 @@
           작성자
         </th>
         <td>
-          <input type="text" v-model.trim="writer">
+          <input type="text" v-model="writer">
         </td>
       </tr>
       <tr>
@@ -30,9 +30,9 @@
       </tbody>
     </table>
     <div>
-      <button type="submit">등록</button>
+      <v-btn class="grey white--text" rounded depressed small type="submit">등록</v-btn>&nbsp;
       <router-link :to="{ name: 'BuyBaramListView' }">
-        취소
+        <v-btn class="grey white--text" rounded depressed small>취소</v-btn>
       </router-link>
     </div>
   </form>
@@ -58,5 +58,44 @@ export default {
 </script>
 
 <style scoped>
+
+table.boards {
+  border-collapse: collapse;
+  text-align: left;
+  line-height: 1.5;
+  border: 1px solid #ccc;
+  margin: 20px 10px;
+}
+table.boards thead {
+  border-right: 1px solid #ccc;
+  border-left: 1px solid #ccc;
+  background: darkgrey;
+}
+table.boards thead th {
+  padding: 10px;
+  font-weight: bold;
+  vertical-align: top;
+  border-right: 1px solid #ccc;
+  color: #fff;
+}
+table.boards tbody th {
+  width: 150px;
+  padding: 10px;
+  font-weight: bold;
+  vertical-align: top;
+
+  border-bottom: 1px solid #ccc;
+  background: #ececec;
+}
+table.boards td {
+  width: 350px;
+  padding: 10px;
+  vertical-align: top;
+  border-bottom: 1px solid #ccc;
+}
+
+a {
+  text-decoration: none;
+}
 
 </style>
