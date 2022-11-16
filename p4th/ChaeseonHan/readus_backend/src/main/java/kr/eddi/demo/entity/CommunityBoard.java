@@ -1,6 +1,7 @@
 package kr.eddi.demo.entity;
 
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
@@ -44,6 +45,7 @@ public class CommunityBoard {
 
     @OneToMany(mappedBy = "board_no", fetch = FetchType.EAGER, cascade = CascadeType.REMOVE)
     @OrderBy("commentNo asc")
+    @JsonIgnore
     private List<BoardComment> comments = new ArrayList<>();
 
     public CommunityBoard(String category, String title, String contents, ReadUsMember member) {

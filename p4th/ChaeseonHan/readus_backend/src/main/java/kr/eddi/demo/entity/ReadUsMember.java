@@ -1,17 +1,16 @@
 package kr.eddi.demo.entity;
 
 
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import lombok.*;
 import org.hibernate.annotations.CreationTimestamp;
-import org.hibernate.annotations.UpdateTimestamp;
 
 import javax.persistence.*;
 import java.util.*;
 
 @Entity
+@ToString
+@Getter
 @NoArgsConstructor
 @AllArgsConstructor
 public class ReadUsMember {
@@ -37,14 +36,17 @@ public class ReadUsMember {
     @CreationTimestamp
     private Date createdDate;
 
-    @OneToMany(mappedBy = "member", fetch = FetchType.LAZY, cascade = CascadeType.REMOVE)
+    @OneToMany(mappedBy = "member", fetch = FetchType.LAZY)
+    @JsonIgnore
     private Set<Authentication> authentications = new HashSet<>();
 
     @Getter
+    @JsonIgnore
     @OneToMany(mappedBy = "member_id", fetch = FetchType.LAZY)
     private List<CommunityBoard> boards = new ArrayList<>();
 
     @Getter
+    @JsonIgnore
     @OneToMany(mappedBy = "member_id", fetch = FetchType.LAZY)
     private List<BoardComment> comments = new ArrayList<>();
 
