@@ -8,7 +8,10 @@
             제목
           </th>
           <th scope="cols">
-            <input type="text" v-model="title">
+            <input type="text" size="40" v-model="title"
+                   placeholder="제목을 입력해 주세요."
+                   onfocus="this.placeholder=''"
+                   onblur="this.placeholder='제목을 입력해 주세요.'">
           </th>
         </tr>
         </thead>
@@ -32,7 +35,10 @@
         <tr>
           <th scope="row">내용</th>
           <td>
-          <textarea cols="50" rows="20" v-model="content">
+          <textarea cols="50" rows="20" v-model="content"
+                    placeholder="내용을 입력해 주세요."
+                    onfocus="this.placeholder=''"
+                    onblur="this.placeholder='내용을 입력해 주세요.'">
           </textarea>
           </td>
         </tr>
@@ -76,8 +82,13 @@ export default {
   },
   methods: {
     onSubmit () {
-      const { title, content, writer, regDate } = this
-      this.$emit('submit', { title, content, writer, regDate })
+      if( this.title && this.content != '') {
+        const { title, content, writer, regDate } = this
+        this.$emit('submit', { title, content, writer, regDate })
+      }
+      else {
+        alert("빈칸 없이 작성해주세요.")
+      }
     }
   }
 }
