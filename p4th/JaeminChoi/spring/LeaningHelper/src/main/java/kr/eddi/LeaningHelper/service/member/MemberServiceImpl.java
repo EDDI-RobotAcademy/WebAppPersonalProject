@@ -21,6 +21,9 @@ import java.util.UUID;
 @Service
 public class MemberServiceImpl implements MemberService{
 
+    static final Integer PASSVALIDATE = 0;
+    static final Integer FAILALIDATE = 1;
+
     @Autowired
     MemberRepository memberRepository;
 
@@ -53,14 +56,14 @@ public class MemberServiceImpl implements MemberService{
     }
 
     @Override
-    public Boolean emailValidation(String email) {
+    public Integer emailValidation(String email) {
         Optional<Member> maybeMember = memberRepository.findById(email);
 
         if (maybeMember.isPresent()) {
-            return false;
+            log.info("maybeMember.isPresent() : " + maybeMember.isPresent());
+            return FAILALIDATE;
         }
-
-        return true;
+        return PASSVALIDATE;
     }
 
     @Override

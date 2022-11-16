@@ -10,9 +10,6 @@ import lombok.ToString;
 @ToString
 @RequiredArgsConstructor
 public class MemberSignInRequest {
-
     private final String email;
     private final String password;
-
-
 }

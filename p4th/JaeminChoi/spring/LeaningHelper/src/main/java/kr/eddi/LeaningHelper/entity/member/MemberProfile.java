@@ -21,7 +21,7 @@ public class MemberProfile {
     MemberTestGrade memberTestGrade;
 
     @OneToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "member_memberNo")
+    @JoinColumn(name = "Member")
     private Member member;
 
     public void setMember(Member member) {

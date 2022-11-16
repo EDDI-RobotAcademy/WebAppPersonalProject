@@ -1,10 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:leaing_helper/components/text_form_filed/email_text_form_field.dart';
 
-import '../components/Forms/sign_up_form.dart';
-import '../components/text_btn_box.dart';
-import '../utility/decorations/color.dart';
-import '../utility/size.dart';
+import '../../components/Forms/sign_up_form.dart';
+import '../../utility/decorations/color.dart';
 
 
 class SignUpPage extends StatelessWidget {

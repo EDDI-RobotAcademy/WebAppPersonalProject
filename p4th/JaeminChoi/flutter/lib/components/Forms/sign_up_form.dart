@@ -1,15 +1,19 @@
+import 'dart:convert';
+
+
 import 'package:flutter/material.dart';
-import 'package:leaing_helper/components/logo.dart';
 import 'package:leaing_helper/components/text_form_filed/email_text_form_field.dart';
 import 'package:leaing_helper/components/text_form_filed/nickname_text_form_feild.dart';
 import 'package:leaing_helper/components/text_form_filed/password_text_form_field.dart';
 
+import '../../api/state/sign_up_validate_state.dart';
+import '../../api/info/sign_up_info.dart';
 import '../../api/spring_sign_up_api.dart';
-import '../../api/spring_validate_api.dart';
 import '../../utility/decorations/buttonStyle.dart';
 import '../../utility/decorations/text_style.dart';
 import '../../utility/size.dart';
-import '../text_btn_box.dart';
+import '../../utility/snackBar/commonSnackBar.dart';
+import '../text_form_filed/password_checked_text_form_field.dart';
 
 class SignUpForm extends StatefulWidget{
   const SignUpForm({Key? key}) : super (key: key);
@@ -18,54 +22,136 @@ class SignUpForm extends StatefulWidget{
   State<SignUpForm> createState() => _SingUpFormState();
 }
 
-class _SingUpFormState extends State<SignUpForm>{
+class _SingUpFormState extends State<SignUpForm> {
+  late TextEditingController emailEditController;
+  late TextEditingController passwordController;
+  late TextEditingController nicknameController;
+  late TextEditingController passwordCheckController;
+
+
+  void initState() {
+    super.initState();
+    emailEditController = TextEditingController();
+    passwordController = TextEditingController();
+    nicknameController = TextEditingController();
+    passwordCheckController = TextEditingController();
+  }
 
   @override
-  Widget build(BuildContext context) {
-
-    GlobalKey<FormState> formkey = GlobalKey<FormState>();
-
-    return Form(
-        key: formkey,
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          mainAxisAlignment: MainAxisAlignment.start,
-          children: [
-            const SizedBox(height: 70,),
-            SizedBox(
-                width: double.infinity,
-                child:
-                Text(
-                  "Create a new" ,
-                  style: welcomeTextStyleBlack(),
-                  textAlign: TextAlign.left,)),
-            SizedBox(
-                width: double.infinity,
-                child:
-                Text(
-                  "account" ,
-                  style: welcomeTextStyleBlack(),
-                  textAlign: TextAlign.left,)),
-            const SizedBox(height: xmedium_gap),
-            const EmailTextFormField(widthSize: large_container_width , usedPosition: "signUp"),
-            const SizedBox(height: xmedium_gap),
-            const NickNameTextFormField(widthSize: large_container_width,),
-            const SizedBox(height: xmedium_gap),
-            const PasswordTextFormField(widthSize: large_container_width),
-            const SizedBox(height: xmedium_gap),
-            ElevatedButton(
-              onPressed: (){
-                formkey.currentState?.save();
-                SpringSignUpApi().signUp(UserSignUpRequest(EmailTextFormField.email ,NickNameTextFormField.nickName ,PasswordTextFormField.password));
-              },
-              child :
-              SizedBox(
-                  width: double.infinity,
-                  child: Text("Register now", style: defaultBtnTextStyle(), textAlign: TextAlign.center,)),
-              style: elevatedButtonStyle(medium_btn_width,small_btn_height , 2),
-            ),
-          ]
-            )
-       );
+  void dispose() {
+    emailEditController.dispose();
+    passwordController.dispose();
+    nicknameController.dispose();
+    passwordCheckController.dispose();
+    super.dispose();
   }
-}
+
+  saveAccountInfo() async{ // 회원 가입 진행 부분
+    SignUpAccount account = SignUpAccount(
+        nicknameController.text,
+        emailEditController.text,
+        passwordController.text
+    );
+
+    await SpringSignUpApi().signUp(account);
+
+    if(SpringSignUpApi.response.statusCode == 200) {
+      var responseBody = jsonDecode(SpringSignUpApi.response.body);
+      debugPrint(responseBody.toString());
+
+      if (responseBody == true) {
+        setSignUpValidateState();
+        debugPrint("가입됨");
+        ScaffoldMessenger.of(context).showSnackBar(
+            CommonSnackBar.successSignUP(context));
+      } else {
+        nicknameController.clear();
+        emailEditController.clear();
+        passwordController.clear();
+        setSignUpValidateState();
+        ScaffoldMessenger.of(context).showSnackBar(
+            CommonSnackBar.failSignUP());
+      }
+    }
+  }
+
+  setSignUpValidateState(){
+    SignUpValidateState.isEmailCheck = false;
+    SignUpValidateState.isPasswordCheck = false;
+    SignUpValidateState.isNicknameCheck = false;
+  }
+
+    @override
+    Widget build(BuildContext context) {
+      GlobalKey<FormState> formkey = GlobalKey<FormState>();
+      return Form(
+          key: formkey,
+          child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              mainAxisAlignment: MainAxisAlignment.start,
+              children: [
+                const SizedBox(height: xlarge_gap,),
+                SizedBox(
+                    width: double.infinity,
+                    child:
+                    Text(
+                      "Create a new",
+                      style: welcomeTextStyleBlack(),
+                      textAlign: TextAlign.left,)),
+                SizedBox(
+                    width: double.infinity,
+                    child:
+                    Text(
+                      "account",
+                      style: welcomeTextStyleBlack(),
+                      textAlign: TextAlign.left,)),
+                const SizedBox(height: large_gap),
+                EmailTextFormField(widthSize: textFormWidth,
+                    usedPosition: "signUp",
+                    controller: emailEditController),
+                const SizedBox(height: small_gap),
+                NickNameTextFormField(
+                  widthSize: textFormWidth, controller: nicknameController,),
+                const SizedBox(height: small_gap),
+                PasswordTextFormField(
+                    widthSize: textFormWidth, controller: passwordController),
+                const SizedBox(height: small_gap),
+                PasswordCheckedTextFormField(
+                  widthSize : textFormWidth,controller: passwordCheckController,),
+                const SizedBox(height: large_gap),
+                ElevatedButton(
+                  onPressed: () {
+                    // 비밀 번호 체크
+                    String myPassword = passwordController.text;
+                    int tmp = myPassword.compareTo(passwordCheckController.text);
+                    if(tmp == 0){
+                      SignUpValidateState.isPasswordCheck == true;
+                    }
+
+                    if(SignUpValidateState.isEmailCheck != true){ // 이메일 체크 확인
+                      ScaffoldMessenger.of(context).showSnackBar(
+                          CommonSnackBar.emailFailSnackBar());
+                    }else if(SignUpValidateState.isNicknameCheck != true){ // 닉네임 체크 확인
+                      ScaffoldMessenger.of(context).showSnackBar(
+                          CommonSnackBar.nickNameFailSnackBar());
+                    }else if(SignUpValidateState.isPasswordCheck != true){ // 비밀 번호 확인 체크
+                      ScaffoldMessenger.of(context).showSnackBar(
+                          CommonSnackBar.passwordFailSnackBar());
+                    }else{ //모두 통과 하면 회원 가입 진행
+                      formkey.currentState?.save();
+                      saveAccountInfo();
+                    }
+                  },
+                  child:
+                  SizedBox(
+                      width: double.infinity,
+                      child: Text("Register now", style: defaultBtnTextStyle(),
+                        textAlign: TextAlign.center,)),
+                  style: elevatedButtonStyle(
+                      medium_btn_width, small_btn_height),
+                ),
+              ]
+          )
+      );
+    }
+  }
