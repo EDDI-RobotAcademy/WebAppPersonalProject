@@ -68,7 +68,7 @@ export default {
     requestBestSellerListToAladin ( { commit } ) {
         console.log("requestBestSellerListToAladin")
 
-        return axios.get('https://cors-anywhere.herokuapp.com/https://www.aladin.co.kr/ttb/api/ItemList.aspx?ttbkey=ttbmdmodina341559001&QueryType=Bestseller&Cover=MidBig&MaxResults=7&start=1&SearchTarget=Book&output=js&Version=20131101')
+        return axios.get('https://cors-anywhere.herokuapp.com/https://www.aladin.co.kr/ttb/api/ItemList.aspx?ttbkey=[ttb키]&QueryType=Bestseller&Cover=MidBig&MaxResults=7&start=1&SearchTarget=Book&output=js&Version=20131101')
             .then((res) => {
                 commit(REQUEST_BESTSELLER_LIST, res.data.item)
             }).catch((error) => {
@@ -148,6 +148,24 @@ export default {
             .then((res) => {
                 if(res.data) {
                     alert("삭제 완료되었습니다!")
+                } else {
+                    alert("오류가 발생했습니다!")
+                }
+            }).catch((error) => {
+                console.log(error.message)
+            })
+    },
+
+    // eslint-disable-next-line no-empty-pattern
+    requestWriteCommentAtBoardToSpring({ }, payload) {
+        console.log("requestWriteCommentAtBoardToSpring()")
+
+        const { boardNo, member_id, comment } = payload
+
+        return axios.post(`http://localhost:7776/comment/write/${boardNo}`, { boardNo, member_id, comment })
+            .then((res) => {
+                if(res.data) {
+                    alert("댓글 작성 완료!")
                 } else {
                     alert("오류가 발생했습니다!")
                 }

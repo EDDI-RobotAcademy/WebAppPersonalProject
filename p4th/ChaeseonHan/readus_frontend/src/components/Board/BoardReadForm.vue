@@ -61,7 +61,7 @@
           <comment-list-form :comments="this.board.comments"/>
 
           <!-- 댓글 작성 -->
-          <comment-write-form :board-no="this.board.boardNo"/>
+          <comment-write-form @submit="writeComment"/>
 
         </v-col>
       </v-row>
@@ -76,22 +76,15 @@ import CommentWriteForm from "@/components/Board/CommentWriteForm";
 
 export default {
   name: "BoardReadForm",
-  components: {CommentWriteForm, CommentListForm},
+  components: { CommentListForm, CommentWriteForm,},
   props: {
     board: {
       type: Object,
       required: true,
     },
   },
-  data() {
-    return {
-      testBoard: {
-        comment: []
-      },
-    }
-  },
   methods: {
-    ...mapActions(['requestDeleteBoardToSpring']),
+    ...mapActions(['requestDeleteBoardToSpring', 'requestWriteCommentAtBoardToSpring']),
     toModify() {
       this.$router.push( {
         name: "BoardModifyView",
@@ -102,7 +95,14 @@ export default {
     async toDelete() {
       await this.requestDeleteBoardToSpring(this.board.boardNo)
       await this.$router.push("/community")
+    },
+
+    async writeComment(payload) {
+      const { member_id, comment } = payload
+      const boardNo = this.board.boardNo
+      await this.requestWriteCommentAtBoardToSpring( { boardNo, member_id, comment })
     }
+
   },
 }
 </script>
