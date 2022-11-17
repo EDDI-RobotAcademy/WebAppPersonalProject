@@ -1,5 +1,6 @@
 import {
-    REQUEST_DIARY_BOARD_LIST_FROM_SPRING
+    REQUEST_DIARY_BOARD_LIST_FROM_SPRING,
+    REQUEST_LOGIN_USER_FROM_SPRING,
 } from './mutation-types'
 
 import axios from 'axios'
@@ -14,7 +15,7 @@ export default {
         }
         return axios.get(url)
             .then((res) => {
-                //if payload = category 보내서 가져올때 diary는 diaryBoards애  이런식?
+                //if payload = category 보내서 가져올때 diary는 diaryBoards에  이런식?
                 commit(REQUEST_DIARY_BOARD_LIST_FROM_SPRING, res.data)
                 console.log('다이어리 리스트 조회')
             })
@@ -28,14 +29,12 @@ export default {
         return axios.post('http://localhost:7777/hometwang/boards/diary/register',
             { title, category, authority, content, writerToken})
             .then(() => {
-                alert('게시물 등록 성공')
+                alert('게시물 등록에 성공했습니다.')
             })
     },
-
     requestLoginUserFromSpring({commit}, payload) {
-        console.log("로그인 유저 정보 가져오기")
+        console.log("로그인 유저 정보 가져오기()")
 
-       // const {} = payload
         return axios.post('http://localhost:7777/hometwang/member/login-user', payload)
             .then((res) => {
                 commit(REQUEST_LOGIN_USER_FROM_SPRING, res.data)
