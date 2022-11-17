@@ -1,16 +1,16 @@
 class Board {
-  int? boardNo;
-  String? title;
-  String? writer;
-  String? content;
-  String? regDate;
+  int boardNo;
+  String title;
+  String writer;
+  String content;
+  String regDate;
 
   Board({
-    this.boardNo,
-    this.title,
-    this.writer,
-    this.content,
-    this.regDate
+    required this.boardNo,
+    required this.title,
+    required this.writer,
+    required this.content,
+    required this.regDate
   });
 
   factory Board.fromJson(Map<String, dynamic> json) {
