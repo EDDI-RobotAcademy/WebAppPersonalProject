@@ -13,7 +13,7 @@ class SignUpController extends GetxController {
     return result;
   }
   Future<bool> signUp(String password, String nickname ) async{
-    bool result = await MemberService.requestSignUp( saveEmail, password, nickname );
+    bool result = await MemberService.requestSignUp(  nickname, saveEmail, password, );
     print(result.toString() + "CONTROLLER");
     return result;
   }
@@ -27,8 +27,10 @@ class SignUpController extends GetxController {
       print("잘안됨");
     }
   }
-  verify(String code) async{
+  Future<bool> verify(String code) async{
     print(emailAuth.validateOtp( recipientMail: saveEmail, userOtp: code));
+    bool result = await emailAuth.validateOtp(recipientMail: saveEmail, userOtp: code);
+    return result;
   }
 
 }

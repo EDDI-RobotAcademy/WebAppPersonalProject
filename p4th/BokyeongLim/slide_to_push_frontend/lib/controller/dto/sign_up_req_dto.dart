@@ -1,8 +1,9 @@
 //Data to Object
 class SignUpReqDto {
+  final String? nickName;
   final String email;
   final String? password;
-  final String? nickName;
+
 
   SignUpReqDto(this.nickName, this.email, this.password );
 

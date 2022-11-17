@@ -40,8 +40,9 @@ class SignUpSecondForm extends StatelessWidget {
                       height: 54,
                       child: ElevatedButton(
                           child: Text('확인'),
-                          onPressed: () {
-                              if(signUpController.verify(codeController.text)) {
+                          onPressed: () async{
+                            bool? result = await signUpController.verify(codeController.text);
+                              if(result) {
 
                                 Get.snackbar(
                                   'SUCCESS',

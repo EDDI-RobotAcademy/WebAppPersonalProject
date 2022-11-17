@@ -62,8 +62,8 @@ class MemberService {
       return token;
     }
   }
-  static Future<bool> requestSignUp(String email, String password, String nickname) async {
-    SignUpReqDto data = SignUpReqDto(email, password, nickname);
+  static Future<bool> requestSignUp(String nickname, String email, String password, ) async {
+    SignUpReqDto data = SignUpReqDto(nickname, email, password, );
     var body = json.encode(data);
 
     try {
