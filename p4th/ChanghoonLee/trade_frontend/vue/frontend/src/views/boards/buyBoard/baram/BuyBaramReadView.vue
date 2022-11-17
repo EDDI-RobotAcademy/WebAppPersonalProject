@@ -5,15 +5,24 @@
       <toolbar-form/>
     </div>
     <div align="center">
-      <buy-baram-read v-if="buyBaramBoard" :buyBaramBoard="buyBaramBoard"/>
-      <p v-else>Loading .......</p>
-      <router-link :to="{ name: 'BuyBaramModifyView', params: { buyBaramNo } }">
-        <v-btn class="grey white--text" rounded depressed small>게시물 수정</v-btn>&nbsp;
-      </router-link>
-      <v-btn class="grey white--text" rounded depressed small @click="onDelete">삭제</v-btn>&nbsp;
-      <router-link :to="{ name: 'BuyBaramListView' }">
-        <v-btn class="grey white--text" rounded depressed small>돌아가기</v-btn>
-      </router-link>
+      <div>
+        <buy-baram-read v-if="buyBaramBoard" :buyBaramBoard="buyBaramBoard"/>
+        <p v-else>Loading .......</p>
+      </div>
+      <div v-if="this.$store.state.loginEmail == this.buyBaramBoard.writer">
+        <router-link :to="{ name: 'BuyBaramModifyView', params: { buyBaramNo } }">
+          <v-btn class="grey white--text" rounded depressed small>게시물 수정</v-btn>&nbsp;
+        </router-link>
+        <v-btn class="grey white--text" rounded depressed small @click="onDelete">삭제</v-btn>&nbsp;
+        <router-link :to="{ name: 'BuyBaramListView' }">
+          <v-btn class="grey white--text" rounded depressed small>돌아가기</v-btn>
+        </router-link>
+      </div>
+      <div v-else>
+        <router-link :to="{ name: 'BuyBaramListView' }">
+          <v-btn class="grey white--text" rounded depressed small>돌아가기</v-btn>
+        </router-link>
+      </div>
     </div>
   </v-container>
 </template>
@@ -35,6 +44,10 @@ export default {
     buyBaramNo: {
       type: String,
       required: true
+    },
+    buyBaramBoard: {
+      type: Object,
+      required: true,
     }
   },
   computed: {
