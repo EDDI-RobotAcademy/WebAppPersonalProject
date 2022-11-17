@@ -110,4 +110,11 @@ public class BucketServiceImpl implements BucketService {
 
         return maybeImgFile.get();
     }
+
+    @Override
+    public void bucketModify(BucketBoard bucketBoard) {
+        log.info("bucketModify");
+
+        bucketBoardRepository.save(bucketBoard);
+    }
 }

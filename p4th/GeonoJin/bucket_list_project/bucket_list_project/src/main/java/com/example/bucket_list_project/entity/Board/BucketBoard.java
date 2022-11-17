@@ -15,6 +15,7 @@ public class BucketBoard {
 
     @Id
     @Getter
+    @Setter
     @Column(name = "bucket_id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long bucketId;

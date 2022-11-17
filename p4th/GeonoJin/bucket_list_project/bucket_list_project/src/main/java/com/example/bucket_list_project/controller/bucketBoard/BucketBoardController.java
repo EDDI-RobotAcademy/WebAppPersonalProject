@@ -53,4 +53,12 @@ public class BucketBoardController {
 
         return service.imgFileDownload(bucketId);
     }
+
+    @PutMapping("/{bucketId}")
+    public void bucketListModify(@PathVariable("bucketId") Long bucketId, @RequestBody BucketBoard bucketBoard) {
+        log.info("bucketListModify" + bucketId);
+
+        bucketBoard.setBucketId(bucketId);
+        service.bucketModify(bucketBoard);
+    }
 }

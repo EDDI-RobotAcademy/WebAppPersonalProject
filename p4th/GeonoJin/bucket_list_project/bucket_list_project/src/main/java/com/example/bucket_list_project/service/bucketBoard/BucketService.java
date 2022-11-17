@@ -16,4 +16,6 @@ public interface BucketService {
     public BucketBoard bucketRead(Long bucketId);
 
     public ImgFile imgFileDownload(Long bucketId);
+
+    public void bucketModify(BucketBoard bucketBoard);
 }
