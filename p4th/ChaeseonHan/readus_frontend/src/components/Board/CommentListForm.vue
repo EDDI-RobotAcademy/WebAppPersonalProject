@@ -37,6 +37,7 @@ export default {
     async submitModifiedComment(payload) {
       const { commentNo, modifiedComment } = payload
       await this.requestModifyCommentAtBoardToSpring( { commentNo, modifiedComment })
+      await this.$router.go()
     }
   }
 }

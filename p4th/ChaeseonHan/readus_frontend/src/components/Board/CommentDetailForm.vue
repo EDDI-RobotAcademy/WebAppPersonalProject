@@ -43,7 +43,7 @@
 
     <!-- 수정 -->
     <v-card-text v-if="isModify == true" class="py-1">
-      <v-form v-if="isModify == true" @submit.prevent="submitModifiedComment" ref="form">
+      <v-form v-if="isModify == true" @submit="submitModifiedComment" ref="form">
         <div class="d-flex" style="font-size: small">
           <v-textarea style="font-size: small" outlined v-model="modifiedComment" :disabled="false"/>
           <div class="d-flex flex-column">
@@ -92,8 +92,9 @@ export default {
       this.isModify = false
     },
 
-    deleteComment() {
-      this.requestDeleteCommentAtBoardToSpring( this.item.commentNo )
+    async deleteComment() {
+      await this.requestDeleteCommentAtBoardToSpring( this.item.commentNo )
+      await this.$router.go()
     }
 
   }, // methods

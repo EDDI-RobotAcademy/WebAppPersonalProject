@@ -12,11 +12,9 @@
       <!-- 작성창 -->
       <!-- v-if="this.$store.state.isAuthenticated == true" -->
       <v-form v-if="this.$store.state.isAuthenticated == true" @submit="writeComment" ref="form">
-        <div class="d-flex" style="font-size: small">
-          <v-textarea outlined v-model="comment" :disabled="false"/>
-          <v-btn type="submit" class="ml-2" outlined small color="#356859">
-            등록
-          </v-btn>
+        <div class="d-flex">
+          <v-textarea style="font-size: small" outlined v-model="comment" :disabled="false"/>
+          <v-btn type="submit" class="ml-2" outlined small color="#356859"> 등록 </v-btn>
         </div>
       </v-form>
 
