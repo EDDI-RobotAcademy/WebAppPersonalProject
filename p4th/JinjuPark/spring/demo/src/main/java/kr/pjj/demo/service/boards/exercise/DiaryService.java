@@ -12,4 +12,6 @@ public interface DiaryService {
 
     //검색
     public List<Diary> search(String keyword);
+
+    public Diary read(Long boardNo);
 }

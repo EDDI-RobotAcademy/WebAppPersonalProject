@@ -39,4 +39,11 @@ class DiaryController {
 
         service.register(diaryRequest);
     }
+
+    @GetMapping("/{boardNo}")
+    public Diary diaryRead (@PathVariable("boardNo") Long boardNo) {
+        log.info("다이어리 Read()");
+
+        return service.read(boardNo);
+    }
 }

@@ -30,17 +30,12 @@ public class DiaryServiceImpl implements DiaryService{
 
     @Override
     public List<Diary> list() {
-        List<Diary> totalDiary ;
-        totalDiary= repository.findAll(Sort.by(Sort.Direction.DESC, "boardNo"));
-
-        log.info("다이어리 리스트 조회 메소드 실행"+ Arrays.toString(new List[]{totalDiary}) );
-
         return repository.findAll(Sort.by(Sort.Direction.DESC, "boardNo"));
     }
 
     @Override
     public List<Diary> search(String keyword) {
-        List<Diary> searchDiary ;
+        List<Diary> searchDiary;
         searchDiary= repository.findByTitleContainingOrWriterContainingOrContentContaining(keyword, keyword, keyword);
 
         log.info("다이어리 리스트 검색 메소드 실행"+ Arrays.toString(new List[]{searchDiary}) );
@@ -54,10 +49,6 @@ public class DiaryServiceImpl implements DiaryService{
         diary.setContent(diaryRequest.getContent());
         diary.setCategory(diaryRequest.getCategory());
         diary.setAuthority(diaryRequest.getAuthority());
-        //조회수 0
-        diary.setViews(0);
-        //좋아요 0
-        diary.setLikes(0);
 
         //1. 사용자 토큰 형식 변환
         //String writerToken = diaryRequest.getWriterToken();
@@ -73,6 +64,24 @@ public class DiaryServiceImpl implements DiaryService{
         diary.setWriter(member.getNickname());
         log.info("작성자 닉네임: " + member.getNickname());
         repository.save(diary);
+    }
+
+    @Override
+    public Diary read(Long boardNo) {
+        //findById 사용할 때는 Optional 사용 -> 객체가 Board 아닐 가능성도 있기때문에
+        Optional<Diary> maybeDiary = repository.findById(boardNo);
+
+        if (maybeDiary.equals(Optional.empty())) {
+            log.info("Can't read board!!!");
+            return null;
+        }
+        //조회수 카운트 기능 추가
+        Diary diary = maybeDiary.get();
+        Integer countAdd = 1;
+        diary.setViews(diary.getViews() + countAdd);
+        repository.save(diary);
+
+        return diary;
     }
 
 }
