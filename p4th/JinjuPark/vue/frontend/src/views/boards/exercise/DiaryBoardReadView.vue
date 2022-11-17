@@ -15,7 +15,7 @@
       <v-col align="left"><common-button-white btn-name="Back" @click="back"/></v-col>
       <v-col align="right" v-if="loginUser[0].nickname === diaryBoard.writer">
         <common-button-white btn-name="수정" @click="toModifyView"/>
-        <common-button-blue btn-name="삭제" />
+        <common-button-blue btn-name="삭제" @click="onDelete"/>
       </v-col>
       <!--        추천 /비추천 가운데 정렬용으로 내용없는 v-card 배치-->
         <v-col v-else>
@@ -64,9 +64,13 @@ export default {
   methods:{
     ...mapActions([
         'requestDiaryBoardFromSpring',
+      'requestDeleteDiaryBoardToSpring',
         'requestLoginUserFromSpring',
-        'requestModifyDiaryBoardCommentToSpring',
     ]),
+    async onDelete () {
+      await this.requestDeleteDiaryBoardToSpring(this.boardNo);
+      await this.$router.push({ name: 'DiaryBoardListView' })             // 삭제후 리스트 화면으로 바로 전환되도록
+    },
     toModifyView(){
       this.$router.push({name: 'DiaryBoardModifyView',
         params: { boardNo: this.boardNo }})

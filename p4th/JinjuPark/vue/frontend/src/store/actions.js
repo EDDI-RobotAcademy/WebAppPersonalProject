@@ -64,4 +64,14 @@ export default {
                 alert('게시글 수정을 완료했습니다.')
             })
     },
+    // eslint-disable-next-line no-empty-pattern
+    requestDeleteDiaryBoardToSpring ({ }, boardNo) {
+        console.log('다이어리 삭제()')
+
+        return axios.delete(`http://localhost:7777/hometwang/boards/diary/${boardNo}`)
+            .then(() => {
+                alert('게시글 삭제를 완료했습니다.')
+            })
+    },
+
 }
