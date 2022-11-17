@@ -13,6 +13,23 @@
     <v-card class="mt-3" width="850px" elevation="0" v-if="this.$store.state.userLoginCheck">
       <v-row >
       <v-col align="left"><common-button-white btn-name="Back" @click="back"/></v-col>
+<!--        추천수 스프링에서 받아서 states 값으로 commit -->
+        <v-col align="center">
+          <v-btn
+              color="#757575"
+              text
+              @click="thumbUp">
+            <v-icon>mdi-thumb-up</v-icon>
+            {{this.$store.state.thumbStatusCount[0]}} 추천
+          </v-btn>
+          <v-btn
+              color="#757575"
+              text
+              @click="thumbDown">
+            <v-icon>mdi-thumb-down</v-icon>
+            {{this.$store.state.thumbStatusCount[1]}}비추천
+          </v-btn>
+        </v-col>
       <v-col align="right" v-if="loginUser[0].nickname === diaryBoard.writer">
         <common-button-white btn-name="수정" @click="toModifyView"/>
         <common-button-blue btn-name="삭제" @click="onDelete"/>
@@ -28,6 +45,22 @@
       <v-card class="mt-3" width="850px" elevation="0" v-else>
         <v-row >
           <v-col align="left"><common-button-white btn-name="Back" @click="back"/></v-col>
+          <v-col align="center">
+            <v-btn
+                color="#757575"
+                text
+                @click="thumbUp">
+              <v-icon>mdi-thumb-up</v-icon>
+              {{thumbStatusCount[0]}} 추천
+            </v-btn>
+            <v-btn
+                color="#757575"
+                text
+                @click="thumbDown">
+              <v-icon>mdi-thumb-down</v-icon>
+              {{thumbStatusCount[1]}}비추천
+            </v-btn>
+          </v-col>
           <!--        추천 /비추천 가운데 정렬용으로 내용없는 v-card 배치-->
           <v-col>
             <v-card style="background-color: white"></v-card>
@@ -59,13 +92,14 @@ export default {
     }
   },
   computed: {
-    ...mapState(['diaryBoard', 'loginUser', 'userLoginCheck'])
+    ...mapState(['diaryBoard', 'loginUser', 'userLoginCheck', 'thumbStatusCount' ])
   },
   methods:{
     ...mapActions([
         'requestDiaryBoardFromSpring',
       'requestDeleteDiaryBoardToSpring',
         'requestLoginUserFromSpring',
+        'requestThumbStatusToSpring',
     ]),
     async onDelete () {
       await this.requestDeleteDiaryBoardToSpring(this.boardNo);
@@ -78,10 +112,34 @@ export default {
     back(){
       this.$router.push({ name: 'DiaryBoardListView' })
     },
+    async thumbUp(){
+      if(window.localStorage.getItem('userInfo') != null) {
+        const memberId = this.$store.state.loginUser[0].id
+        const thumbType = "thumbUp"
+        const boardNo = this.boardNo
+        await this.requestThumbStatusToSpring({ memberId, boardNo, thumbType})
+      } else {
+       alert("로그인한 경우에 추천 가능합니다.")
+      }
+    },
+    async thumbDown(){
+      if(window.localStorage.getItem('userInfo') != null) {
+        const memberId = this.$store.state.loginUser[0].id
+        const thumbType = "thumbDown"
+        const boardNo = this.boardNo
+        await this.requestThumbStatusToSpring({ memberId, boardNo, thumbType})
+      } else {
+        alert("로그인한 경우에 비추천 가능합니다.")
+      }
+    },
   },
   created() {
     console.log("다이어리 게시글 조회 페이지")
     this.requestDiaryBoardFromSpring(this.boardNo)
+    const memberId = this.$store.state.loginUser[0].id
+    const thumbType = "thumbCheck"
+    const boardNo = this.boardNo
+    this.requestThumbStatusToSpring({ memberId, boardNo, thumbType})
 
   },
   mounted(){

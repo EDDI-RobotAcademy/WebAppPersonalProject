@@ -2,6 +2,7 @@ import {
     REQUEST_DIARY_BOARD_LIST_FROM_SPRING,
     REQUEST_DIARY_BOARD_FROM_SPRING,
     REQUEST_LOGIN_USER_FROM_SPRING,
+   THUMB_STATUS_COUNT,
 } from './mutation-types'
 
 import axios from 'axios'
@@ -71,6 +72,19 @@ export default {
         return axios.delete(`http://localhost:7777/hometwang/boards/diary/${boardNo}`)
             .then(() => {
                 alert('게시글 삭제를 완료했습니다.')
+            })
+    },
+
+    // eslint-disable-next-line no-empty-pattern
+    requestThumbStatusToSpring({commit}, payload) {
+
+        const{ memberId, boardNo, thumbType} = payload
+        console.log("멤버 아이디: "+memberId+"추천/비추천- 게시물 번호"+boardNo + thumbType)
+
+        return axios.post('http://localhost:7777/hometwang/boards/diary/recommend', payload)
+            .then((res) => {
+                commit(THUMB_STATUS_COUNT, res.data)
+                console.log("추천/비추천- 게시글: " + res.data)
             })
     },
 
