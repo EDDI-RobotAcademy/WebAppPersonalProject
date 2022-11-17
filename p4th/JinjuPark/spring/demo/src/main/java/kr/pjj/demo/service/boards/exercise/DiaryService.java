@@ -16,4 +16,5 @@ public interface DiaryService {
     public Diary read(Long boardNo);
 
     public void modify(Diary diary);
+    public void remove(Long boardNo);
 }

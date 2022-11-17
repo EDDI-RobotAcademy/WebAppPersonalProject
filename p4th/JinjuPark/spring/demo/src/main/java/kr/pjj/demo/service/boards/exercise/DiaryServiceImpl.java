@@ -88,4 +88,9 @@ public class DiaryServiceImpl implements DiaryService{
         repository.save(diary);
     }
 
+    @Override
+    public void remove(Long boardNo) {
+        repository.deleteById(boardNo);
+    }
+
 }

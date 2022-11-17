@@ -41,15 +41,14 @@ public class BoardsTestCase {
 
         System.out.println(diaryList);
     }
+
     @Test
     void readDiary(){
         Optional<Diary> maybeDiary = diaryRepository.findById((long) 1);
         Diary diary = maybeDiary.get();
         diaryRepository.save(diary);
         System.out.println(diary);
-
     }
-
     @Test
     void modifyDiary () {
         Optional<Diary> maybeDiary = diaryRepository.findById((long) 8);
@@ -58,5 +57,10 @@ public class BoardsTestCase {
         diary.modifyDiary("기초대사량 전격 분석", "work out!!");
         diaryRepository.save(diary);
         System.out.println(diary);
+    }
+
+    @Test
+    void deleteDiary(){
+        diaryRepository.deleteById((long) 9);
     }
 }

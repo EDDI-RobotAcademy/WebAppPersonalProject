@@ -47,6 +47,13 @@ class DiaryController {
         return service.read(boardNo);
     }
 
+    @DeleteMapping("/{boardNo}")
+    public void diaryRemove (@PathVariable("boardNo") Long boardNo) {
+        log.info("다이어리 삭제()");
+
+        service.remove(boardNo);
+    }
+
     @PutMapping("/{boardNo}")
     public Diary diaryModify (@PathVariable("boardNo") Long boardNo, @RequestBody Diary diary) {
         log.info("다이어리 수정 ");
