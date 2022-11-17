@@ -1,17 +1,16 @@
 package kr.eddi.demo.entity;
 
 
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import lombok.*;
 import org.hibernate.annotations.CreationTimestamp;
-import org.hibernate.annotations.UpdateTimestamp;
 
 import javax.persistence.*;
 import java.util.*;
 
 @Entity
+@ToString
+@Getter
 @NoArgsConstructor
 @AllArgsConstructor
 public class ReadUsMember {
@@ -38,10 +37,18 @@ public class ReadUsMember {
     private Date createdDate;
 
     @OneToMany(mappedBy = "member", fetch = FetchType.LAZY)
+    @JsonIgnore
     private Set<Authentication> authentications = new HashSet<>();
 
+    @Getter
+    @JsonIgnore
     @OneToMany(mappedBy = "member_id", fetch = FetchType.LAZY)
     private List<CommunityBoard> boards = new ArrayList<>();
+
+    @Getter
+    @JsonIgnore
+    @OneToMany(mappedBy = "member_id", fetch = FetchType.LAZY)
+    private List<BoardComment> comments = new ArrayList<>();
 
     public ReadUsMember(String email, String nickName, String biography) {
         this.email = email;
@@ -50,12 +57,22 @@ public class ReadUsMember {
     }
 
     public void updateCommunityBoard(CommunityBoard communityBoard) {
-        boards.add(communityBoard);
+        this.boards.add(communityBoard);
     }
 
     public void deleteCommunityBoard(CommunityBoard communityBoard) {
-        boards.remove(communityBoard);
+        this.boards.remove(communityBoard);
     }
+
+    public void updateComment(BoardComment comment) {
+        this.comments.add(comment);
+    }
+
+    public void deleteComment(BoardComment comment) {
+        this.comments.remove(comment);
+    }
+
+
     public void modifyNickname(String nickName) {
         this.nickName = nickName;
     }

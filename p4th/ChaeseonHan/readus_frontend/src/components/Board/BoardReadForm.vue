@@ -33,10 +33,10 @@
                     </table>
                   </div>
                   <div>
-                    <v-icon class="pr-1">
+                    <v-icon small class="pr-1">
                       mdi-chat-processing
                     </v-icon>
-                    {{ testBoard.comment.length }}
+                    {{ board.comments.length }}
                   </div>
                 </div>
               </v-card-text>
@@ -55,8 +55,14 @@
               <v-btn color="#356859" outlined small @click="toDelete"> 삭제 </v-btn>
             </div>
 
-
           </v-card>
+
+          <!-- 댓글 리스트 및 수정 -->
+          <comment-list-form :comments="this.board.comments"/>
+
+          <!-- 댓글 작성 -->
+          <comment-write-form @submit="writeComment"/>
+
         </v-col>
       </v-row>
     </div>
@@ -65,24 +71,20 @@
 
 <script>
 import {mapActions} from "vuex";
+import CommentListForm from "@/components/Board/CommentListForm";
+import CommentWriteForm from "@/components/Board/CommentWriteForm";
 
 export default {
   name: "BoardReadForm",
+  components: { CommentListForm, CommentWriteForm,},
   props: {
     board: {
       type: Object,
       required: true,
     },
   },
-  data() {
-    return {
-      testBoard: {
-        comment: []
-      },
-    }
-  },
   methods: {
-    ...mapActions(['requestDeleteBoardToSpring']),
+    ...mapActions(['requestDeleteBoardToSpring', 'requestWriteCommentAtBoardToSpring']),
     toModify() {
       this.$router.push( {
         name: "BoardModifyView",
@@ -93,7 +95,14 @@ export default {
     async toDelete() {
       await this.requestDeleteBoardToSpring(this.board.boardNo)
       await this.$router.push("/community")
+    },
+
+    async writeComment(payload) {
+      const { member_id, comment } = payload
+      const boardNo = this.board.boardNo
+      await this.requestWriteCommentAtBoardToSpring( { boardNo, member_id, comment })
     }
+
   },
 }
 </script>

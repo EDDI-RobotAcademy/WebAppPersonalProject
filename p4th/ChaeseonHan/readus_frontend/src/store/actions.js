@@ -55,7 +55,7 @@ export default {
         console.log('requestLoggedInUserProfileToSpring')
 
         const { userToken } = payload
-        return axios.post(`http://localhost:7776/member/login-user-nickname/${userToken}`, { userToken })
+        return axios.post(`http://localhost:7776/member/login-user-profile/${userToken}`)
             .then((res) => {
                 if(res.data) {
                     commit(REQUEST_LOGGED_IN_USER_PROFILE, res.data)
@@ -68,7 +68,7 @@ export default {
     requestBestSellerListToAladin ( { commit } ) {
         console.log("requestBestSellerListToAladin")
 
-        return axios.get('https://cors-anywhere.herokuapp.com/https://www.aladin.co.kr/ttb/api/ItemList.aspx?ttbkey=ttbmdmodina341559001&QueryType=Bestseller&Cover=MidBig&MaxResults=7&start=1&SearchTarget=Book&output=js&Version=20131101')
+        return axios.get('https://cors-anywhere.herokuapp.com/https://www.aladin.co.kr/ttb/api/ItemList.aspx?ttbkey=[ttb키]&QueryType=Bestseller&Cover=MidBig&MaxResults=7&start=1&SearchTarget=Book&output=js&Version=20131101')
             .then((res) => {
                 commit(REQUEST_BESTSELLER_LIST, res.data.item)
             }).catch((error) => {
@@ -154,5 +154,59 @@ export default {
             }).catch((error) => {
                 console.log(error.message)
             })
-    }
-}
+    },
+
+    // eslint-disable-next-line no-empty-pattern
+    requestWriteCommentAtBoardToSpring({ }, payload) {
+        console.log("requestWriteCommentAtBoardToSpring()")
+
+        const { boardNo, member_id, comment } = payload
+
+        return axios.post(`http://localhost:7776/comment/write/${boardNo}`, { boardNo, member_id, comment })
+            .then((res) => {
+                if(res.data) {
+                    alert("댓글 작성 완료!")
+                } else {
+                    alert("오류가 발생했습니다!")
+                }
+            }).catch((error) => {
+                console.log(error.message)
+            })
+    },
+
+    // eslint-disable-next-line no-empty-pattern
+    requestModifyCommentAtBoardToSpring({ }, payload) {
+        console.log("requestModifyCommentAtBoardToSpring()")
+
+        const { commentNo, modifiedComment } = payload
+
+        return axios.put(`http://localhost:7776/comment/modify/${commentNo}`, { modifiedComment })
+            .then((res) => {
+                if(res.data) {
+                    alert("댓글 수정 완료!")
+                } else {
+                    alert("오류가 발생했습니다!")
+                }
+            }).catch((error) => {
+                console.log(error.message)
+            })
+    },
+
+    // eslint-disable-next-line no-empty-pattern
+    requestDeleteCommentAtBoardToSpring({ }, commentNo) {
+        console.log("requestDeleteCommentAtBoardToSpring()")
+
+        return axios.delete(`http://localhost:7776/comment/delete/${commentNo}`)
+            .then((res) => {
+                if(res.data) {
+                    alert("댓글 삭제 완료!")
+                } else {
+                    alert("이미 삭제된 댓글입니다!")
+                }
+            }).catch((error) => {
+                console.log(error.message)
+            })
+    },
+
+
+ }
