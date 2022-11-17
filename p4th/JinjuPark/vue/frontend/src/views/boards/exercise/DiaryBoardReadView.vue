@@ -13,7 +13,6 @@
     <v-card class="mt-3" width="850px" elevation="0" v-if="this.$store.state.userLoginCheck">
       <v-row >
       <v-col align="left"><common-button-white btn-name="Back" @click="back"/></v-col>
-
       <v-col align="right" v-if="loginUser[0].nickname === diaryBoard.writer">
         <common-button-white btn-name="수정" @click="toModifyView"/>
         <common-button-blue btn-name="삭제" />
@@ -29,7 +28,6 @@
       <v-card class="mt-3" width="850px" elevation="0" v-else>
         <v-row >
           <v-col align="left"><common-button-white btn-name="Back" @click="back"/></v-col>
-
           <!--        추천 /비추천 가운데 정렬용으로 내용없는 v-card 배치-->
           <v-col>
             <v-card style="background-color: white"></v-card>
@@ -67,6 +65,7 @@ export default {
     ...mapActions([
         'requestDiaryBoardFromSpring',
         'requestLoginUserFromSpring',
+        'requestModifyDiaryBoardCommentToSpring',
     ]),
     toModifyView(){
       this.$router.push({name: 'DiaryBoardModifyView',
