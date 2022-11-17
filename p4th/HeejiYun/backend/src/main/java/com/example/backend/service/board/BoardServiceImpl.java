@@ -93,8 +93,8 @@ public class BoardServiceImpl implements BoardService{
         Optional<BoardCategory> maybeCategory = categoryRepository.findByCategoryName(categoryName);
         if(maybeCategory.isPresent()) {
             category = maybeCategory.get();
-            System.out.println(boardRepository.findAllBoardsByCategoryId(category.getCategoryId()));
-            boards = boardRepository.findAllBoardsByCategoryId(category.getCategoryId());
+            // System.out.println(boardRepository.findAllBoardsByCategoryId(category.getCategoryId()));
+            boards = boardRepository.findAllBoardsByCategoryId(category.getCategoryId(), Sort.by(Sort.Direction.DESC, "boardNo"));
 
             for(Board b : boards) {
                 BoardResponse target = new BoardResponse(
@@ -160,4 +160,5 @@ public class BoardServiceImpl implements BoardService{
     public void remove(Long boardNo) {
         boardRepository.deleteById(boardNo);
     }
+
 }
