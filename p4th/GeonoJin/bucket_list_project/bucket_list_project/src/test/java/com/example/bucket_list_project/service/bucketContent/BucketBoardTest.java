@@ -8,7 +8,6 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
-import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
 
@@ -47,11 +46,20 @@ public class BucketBoardTest {
         System.out.println(changeImgFileName);
 
     }
-
     @Test
     public void findBucketBoard(){
         List<BucketBoard> bucketBoards = bucketBoardRepository.findAll();
 
         System.out.println(bucketBoards);
+    }
+
+    @Test
+    public void bucketListModify(){
+        Optional<BucketBoard> mayBeBucket = bucketBoardRepository.findById((long) 1);
+        BucketBoard bucketBoard = mayBeBucket.get();
+
+        bucketBoard.modifyTitle("제목변경 테스트");
+
+        bucketBoardRepository.save(bucketBoard);
     }
 }

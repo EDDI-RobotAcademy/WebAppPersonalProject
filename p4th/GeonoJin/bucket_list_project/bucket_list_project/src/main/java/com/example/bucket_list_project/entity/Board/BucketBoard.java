@@ -54,4 +54,8 @@ public class BucketBoard {
         this.switchValue = switchValue;
         this.writer = writer;
     }
+
+    public void modifyTitle(String bucketTitle) {
+        this.bucketTitle = bucketTitle;
+    }
 }
