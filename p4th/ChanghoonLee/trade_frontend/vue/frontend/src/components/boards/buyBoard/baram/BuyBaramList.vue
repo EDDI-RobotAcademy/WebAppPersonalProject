@@ -24,7 +24,12 @@
           <td align="left">
             <router-link :to="{ name: 'BuyBaramReadView',
                                 params: { buyBaramNo: buyBaramBoard.buyBaramNo.toString() }}">
-              {{ buyBaramBoard.title }}
+              <div v-if="isLogin == false" @click.prevent="readAccess">
+                {{ buyBaramBoard.title }}
+              </div>
+              <div v-else>
+                {{ buyBaramBoard.title }}
+              </div>
             </router-link>
           </td>
           <td align="left">
@@ -43,6 +48,26 @@
 <script>
 export default {
   name: "BuyBaramList",
+  data() {
+    return {
+      isLogin: false
+    }
+  },
+  mounted () {
+    if (this.$store.state.isAuthenticated != false) {
+      this.isLogin = true
+    } else {
+      this.isLogin = false
+    }
+  },
+  methods: {
+    readAccess() {
+      if(this.isLogin == false) {
+        alert("로그인이 필요한 기능입니다.")
+        this.$router.push("/sign-in")
+      }
+    }
+  },
   props: {
     buyBaramBoards: {
       type: Array

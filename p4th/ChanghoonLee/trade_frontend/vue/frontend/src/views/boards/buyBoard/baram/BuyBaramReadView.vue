@@ -84,6 +84,9 @@ export default {
     ...mapState(['buyBaramBoard'])
   },
   methods: {
+    cancelBtn() {
+      this.deleteDialog = false
+    },
     ...mapActions([
       'requestBuyBaramFromSpring',
       'requestDeleteBuyBaramToSpring',
@@ -95,9 +98,6 @@ export default {
   },
   created() {
     this.requestBuyBaramFromSpring(this.buyBaramNo)
-  },
-  cancelBtn() {
-    this.deleteDialog = false
   },
 }
 </script>
