@@ -35,7 +35,7 @@ export default {
     },
 
     requestLoginUserFromSpring({commit}, payload) {
-        console.log("로그인 유저 정보 가져오기()")
+        console.log("로그인 유저 정보 가져오기")
 
         return axios.post('http://localhost:7777/hometwang/member/login-user', payload)
             .then((res) => {
@@ -50,6 +50,18 @@ export default {
         return axios.get(`http://localhost:7777/hometwang/boards/diary/${boardNo}`)
             .then((res) => {
                 commit(REQUEST_DIARY_BOARD_FROM_SPRING, res.data)
+            })
+    },
+    // eslint-disable-next-line no-empty-pattern
+    requestDiaryBoardModifyToSpring ({ }, payload) {
+        console.log('다이어리 게시글 수정()')
+
+        const {  boardNo, title, writer, category, authority, regDate, views, likes, noLikes, content } = payload
+
+        return axios.put(`http://localhost:7777/hometwang/boards/diary/${boardNo}`,
+            {  title, writer, category, authority, regDate, views, likes, noLikes, content })
+            .then(() => {
+                alert('게시글 수정을 완료했습니다.')
             })
     },
 }
