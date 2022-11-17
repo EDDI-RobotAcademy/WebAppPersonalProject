@@ -7,6 +7,8 @@ import MainHomeBoardView from "@/components/common/CommonMainMenuTemplate";
 import BoardTestView from "@/views/board/BoardTestView";
 import HomeView from "@/views/HomeView";
 import DiaryBoardListView from "@/views/boards/exercise/DiaryBoardListView";
+import DiaryBoardRegisterView from "@/views/boards/exercise/DiaryBoardRegisterView";
+import DiaryBoardReadView from "@/views/boards/exercise/DiaryBoardReadView";
 
 Vue.use(VueRouter)
 
@@ -47,6 +49,22 @@ const routes = [
     component: DiaryBoardListView
   },
 
+  {
+    path: '/diary-board-register',
+    name: 'DiaryBoardRegisterView',
+    component: DiaryBoardRegisterView
+  },
+
+  {
+    path: '/diary-board-read/:boardNo',
+    name: 'DiaryBoardReadView',
+    components: {
+      default: DiaryBoardReadView
+    },
+    props:{
+      default: true
+    }
+  },
 ]
 
 const router = new VueRouter({
