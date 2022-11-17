@@ -83,5 +83,9 @@ public class DiaryServiceImpl implements DiaryService{
 
         return diary;
     }
+    @Override
+    public void modify(Diary diary) {
+        repository.save(diary);
+    }
 
 }

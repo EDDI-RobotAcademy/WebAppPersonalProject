@@ -1,8 +1,6 @@
 package kr.pjj.demo;
 
-import kr.pjj.demo.entity.boards.exercise.Comment;
 import kr.pjj.demo.entity.boards.exercise.Diary;
-import kr.pjj.demo.entity.boards.exercise.Recommend;
 import kr.pjj.demo.repository.boards.exercise.CommentRepository;
 import kr.pjj.demo.repository.boards.exercise.DiaryRepository;
 import kr.pjj.demo.repository.boards.exercise.RecommendRepository;
@@ -50,5 +48,15 @@ public class BoardsTestCase {
         diaryRepository.save(diary);
         System.out.println(diary);
 
+    }
+
+    @Test
+    void modifyDiary () {
+        Optional<Diary> maybeDiary = diaryRepository.findById((long) 8);
+        Diary diary = maybeDiary.get();
+
+        diary.modifyDiary("기초대사량 전격 분석", "work out!!");
+        diaryRepository.save(diary);
+        System.out.println(diary);
     }
 }

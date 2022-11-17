@@ -46,4 +46,16 @@ class DiaryController {
 
         return service.read(boardNo);
     }
+
+    @PutMapping("/{boardNo}")
+    public Diary diaryModify (@PathVariable("boardNo") Long boardNo, @RequestBody Diary diary) {
+        log.info("다이어리 수정 ");
+
+        diary.setBoardNo(boardNo);
+
+        service.modify(diary);
+        log.info("서비스 수정 진행 했음");
+        return diary;
+    }
+
 }
