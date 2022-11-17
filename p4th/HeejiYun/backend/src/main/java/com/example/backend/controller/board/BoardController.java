@@ -4,6 +4,7 @@ import com.example.backend.entity.board.Board;
 import com.example.backend.service.board.BoardService;
 import com.example.backend.service.board.request.BoardModifyRequest;
 import com.example.backend.service.board.request.BoardRegisterRequest;
+import com.example.backend.service.board.response.BoardResponse;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -20,14 +21,14 @@ public class BoardController {
     private BoardService service;
 
     @GetMapping("/list")
-    public List<Board> everyBoardList () {
+    public List<BoardResponse> everyBoardList () {
         log.info("everyBoardList()");
 
         return service.everyBoardList();
     }
 
-    @GetMapping("/list/{category}")
-    public List<Board> specificBoardList (@PathVariable("category") String category) {
+    @GetMapping(value = "/list/{category}", produces = "application/json; charset=utf8")
+    public List<BoardResponse> specificBoardList (@PathVariable("category") String category) {
         log.info("specificBoardList()");
 
         return service.specificBoardList(category);
@@ -41,7 +42,7 @@ public class BoardController {
     }
 
     @GetMapping("/{boardNo}")
-    public Board boardRead (@PathVariable("boardNo") Long boardNo) {
+    public BoardResponse boardRead (@PathVariable("boardNo") Long boardNo) {
         log.info("boardRead()");
 
         return service.read(boardNo);
@@ -55,7 +56,7 @@ public class BoardController {
     }
 
     @PutMapping("/{boardNo}")
-    public Board boardModify (@PathVariable("boardNo") Long boardNo, @RequestBody BoardModifyRequest boardModifyRequest) {
+    public BoardResponse boardModify (@PathVariable("boardNo") Long boardNo, @RequestBody BoardModifyRequest boardModifyRequest) {
         log.info("boardModify()");
 
         return service.modify(boardNo, boardModifyRequest);
