@@ -12,6 +12,7 @@ import MyBucketListView from "@/views/MyBucketListView";
 
 //bucketList
 import BucketListReadView from "@/views/BucketListReadView";
+import BucketListModifyView from "@/views/BucketListModifyView";
 
 //member
 import SignInView from "@/views/member/SignInView";
@@ -75,6 +76,16 @@ const routes = [
     name: 'BucketListReadView',
     components: {
       default: BucketListReadView
+    },
+    props:{
+      default: true
+    }
+  },
+  {
+    path: '/modifyBucketList/:bucketId',
+    name: 'BucketListModifyView',
+    components: {
+      default: BucketListModifyView
     },
     props:{
       default: true

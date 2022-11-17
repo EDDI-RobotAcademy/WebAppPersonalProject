@@ -98,21 +98,36 @@ export default {
                 commit(GET_BUCKET_LIST_TO_SPRING, res.data);
             });
     },
-    downLoadImgFileToSpring({ commit }, bucketId) {
+    async downLoadImgFileToSpring({ commit }, bucketId) {
         console.log('downLoadImgFileToSpring')
 
-        axios.get(`http://localhost:7777/bucket/imgDownLoad/${bucketId}`)
+        await axios.get(`http://localhost:7777/bucket/imgDownLoad/${bucketId}`)
             .then((res) => {
                 commit(DOWN_LOAD_IMG_FILE_TO_SPRING, res.data);
             });
     },
     requestBucketFromSpring({commit}, bucketId) {
         console.log("requestBucketFromSpring")
-        console.log(bucketId)
 
         axios.get(`http://localhost:7777/bucket/${bucketId}`)
             .then((res) => {
                 commit(REQUEST_BUCKET_FROM_SPRING, res.data)
             });
     },
+    // eslint-disable-next-line no-empty-pattern
+    requestBucketListModifyToSpring({ }, payload) {
+        console.log("requestBucketListModifyToSpring")
+
+        const {bucketId, bucketTitle, bucketContent, switchValue, writer, bucketCategory} = payload
+
+        axios.put(`http://localhost:7777/bucket/${bucketId}`,
+            {bucketTitle, bucketContent, switchValue, writer, bucketCategory}
+        )
+            .then(() => {
+                alert("수정 되었습니다.")
+            })
+            .catch(() => {
+                alert("수정에 실패했습니다.")
+            });
+    }
 }
