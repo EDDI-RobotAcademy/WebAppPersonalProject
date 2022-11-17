@@ -9,6 +9,11 @@
     <diary-board-read v-if="diaryBoard" :diaryBoard="diaryBoard"/>
     <p v-else>Loading....</p>
     <v-container>
+      <v-row class="mt-3 ml-1">
+        <common-comment-text-field @submit="onSubmit" @modify="commentModify" @delete="deleteComment"/>
+      </v-row>
+    </v-container>
+    <v-container>
 <!--      로그인한 경우, 작성자와 닉네임이 동일한 경우에만 수정 삭제 버튼 보이도록 구현 -->
     <v-card class="mt-3" width="850px" elevation="0" v-if="this.$store.state.userLoginCheck">
       <v-row >
@@ -92,7 +97,7 @@ export default {
     }
   },
   computed: {
-    ...mapState(['diaryBoard', 'loginUser', 'userLoginCheck', 'thumbStatusCount' ])
+    ...mapState(['diaryBoard', 'loginUser', 'userLoginCheck', 'thumbStatusCount', 'diaryComment'])
   },
   methods:{
     ...mapActions([
@@ -100,6 +105,10 @@ export default {
       'requestDeleteDiaryBoardToSpring',
         'requestLoginUserFromSpring',
         'requestThumbStatusToSpring',
+        'requestCreateDiaryBoardCommentToSpring',
+        'requestCommentListFromSpring',
+        'requestModifyDiaryBoardCommentToSpring',
+        'requestDeleteCommentBoardToSpring'
     ]),
     async onDelete () {
       await this.requestDeleteDiaryBoardToSpring(this.boardNo);
@@ -132,6 +141,29 @@ export default {
         alert("로그인한 경우에 비추천 가능합니다.")
       }
     },
+    async onSubmit(payload){
+      const { content, parentsCommentId } = payload
+      const writerNickname = this.$store.state.loginUser[0].nickname
+      const boardNo = this.boardNo
+      console.log("댓글 버튼 메소드 호출전:" +content+"부모댓글 id:"+parentsCommentId)
+      await this.requestCreateDiaryBoardCommentToSpring({ boardNo, writerNickname, parentsCommentId, content })
+      await this.requestCommentListFromSpring(this.boardNo)
+    },
+    async commentModify(payload){
+      const { commentId, updateContent, parentsCommentId } = payload
+      const writerNickname = this.$store.state.loginUser[0].nickname
+      const boardNo = this.boardNo
+      console.log("댓글 수정버튼 메소드 호출전:" +updateContent+"부모댓글 id:"+parentsCommentId)
+      await this.requestModifyDiaryBoardCommentToSpring({ commentId, boardNo, writerNickname, parentsCommentId, updateContent })
+      await this.requestCommentListFromSpring(this.boardNo)
+    },
+    async deleteComment(payload) {
+      const commentIdObj = payload.valueOf()
+      const commentId = commentIdObj.id
+      console.log('삭제 에밋 받은 후- 액션 호출 전' + commentId)
+      await this.requestDeleteCommentBoardToSpring({commentId})
+      await this.requestCommentListFromSpring(this.boardNo)
+    },
   },
   created() {
     console.log("다이어리 게시글 조회 페이지")
@@ -143,6 +175,7 @@ export default {
 
   },
   mounted(){
+    this.requestCommentListFromSpring(this.boardNo)
     if(window.localStorage.getItem('userInfo') != null) {
       this.$store.commit('USER_LOGIN_CHECK', true)
       let userToken = window.localStorage.getItem('userInfo')

@@ -3,6 +3,7 @@ import {
     REQUEST_DIARY_BOARD_FROM_SPRING,
     REQUEST_LOGIN_USER_FROM_SPRING,
    THUMB_STATUS_COUNT,
+    REQUEST_COMMENT_LIST_FROM_SPRING
 } from './mutation-types'
 
 import axios from 'axios'
@@ -87,5 +88,45 @@ export default {
                 console.log("추천/비추천- 게시글: " + res.data)
             })
     },
+
+    // eslint-disable-next-line no-empty-pattern
+    requestCreateDiaryBoardCommentToSpring ({ }, payload) {
+        return axios.post('http://localhost:7777/hometwang/boards/diary/comment/register', payload)
+            .then(() => {
+                alert('댓글이 등록되었습니다.')
+            })
+    },
+    requestCommentListFromSpring ({ commit }, boardNo) {
+        console.log('다이어리 댓글 읽기()')
+
+        return axios.get(`http://localhost:7777/hometwang/boards/diary/comment/${boardNo}`)
+            .then((res) => {
+                commit(REQUEST_COMMENT_LIST_FROM_SPRING, res.data)
+                console.log("댓글 res.data: "+ res.data)
+            })
+    },
+    // eslint-disable-next-line no-empty-pattern
+    requestModifyDiaryBoardCommentToSpring ({ }, payload) {
+        return axios.put(`http://localhost:7777/hometwang/boards/diary/comment/${payload.commentId}`,
+            {id: payload.commentId, boardNo: payload.boardNo,
+                writerNickname: payload.writerNickname, parentsCommentId: payload.parentsCommentId , content: payload.updateContent})
+            .then(() => {
+                alert('댓글이 수정되었습니다')
+                console.log('다이어리 댓글 수정() 액션 board_id: '+payload.boardNo)
+            })
+
+    },
+    // eslint-disable-next-line no-empty-pattern
+    requestDeleteCommentBoardToSpring({}, payload) {
+        const id = payload.valueOf().commentId
+        console.log('다이어리 댓글 삭제 번호():'+id)
+
+        return axios.post(`http://localhost:7777/hometwang/boards/diary/comment/delete`, {id})
+            .then(() => {
+                alert('댓글을 삭제했습니다.')
+            })
+    },
+
+
 
 }

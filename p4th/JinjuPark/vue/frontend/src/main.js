@@ -10,6 +10,8 @@ import CommonMainMenuTemplate from "@/components/common/CommonMainMenuTemplate";
 import CommonFooterTemplate from "@/components/common/CommonFooterTemplate";
 import CommonBoardList from "@/components/common/CommonBoardList";
 import CommonMyTextField from "@/components/common/CommonMyTextField";
+import CommonCommentTextField from "@/components/common/CommonCommentTextField";
+
 
 Vue.component('CommonButtonBlue', CommonButtonBlue)
 Vue.component('CommonButtonWhite', CommonButton_White)
@@ -17,6 +19,8 @@ Vue.component('CommonMainMenuTemplate', CommonMainMenuTemplate)
 Vue.component('CommonFooterTemplate', CommonFooterTemplate)
 Vue.component('CommonBoardList', CommonBoardList)
 Vue.component('CommonMyTextField', CommonMyTextField)
+Vue.component('CommonCommentTextField', CommonCommentTextField)
+
 
 Vue.config.productionTip = false
 

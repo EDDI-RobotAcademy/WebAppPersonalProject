@@ -7,4 +7,6 @@ export default {
     diaryBoard: {},
 
     thumbStatusCount:{},
+
+    diaryComment:[]
 }

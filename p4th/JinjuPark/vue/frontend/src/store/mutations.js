@@ -4,6 +4,7 @@ import {
     REQUEST_LOGIN_USER_FROM_SPRING,
     IS_AUTHENTICATED, USER_LOGIN_CHECK,
     THUMB_STATUS_COUNT,
+    REQUEST_COMMENT_LIST_FROM_SPRING,
 } from './mutation-types'
 
 export default {
@@ -33,4 +34,9 @@ export default {
         state.thumbStatusCount = passingData
     },
 
+    [REQUEST_COMMENT_LIST_FROM_SPRING] (state, passingData) {
+        state.diaryComment = passingData
+    },
+
 }
+
