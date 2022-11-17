@@ -49,6 +49,11 @@ public class DiaryServiceImpl implements DiaryService{
         diary.setContent(diaryRequest.getContent());
         diary.setCategory(diaryRequest.getCategory());
         diary.setAuthority(diaryRequest.getAuthority());
+        //조회수 0
+        diary.setViews(0);
+        //추천수, 비추천수 0
+        diary.setLikes(0);
+        diary.setNoLikes(0);
 
         //1. 사용자 토큰 형식 변환
         //String writerToken = diaryRequest.getWriterToken();
@@ -75,11 +80,11 @@ public class DiaryServiceImpl implements DiaryService{
             log.info("Can't read board!!!");
             return null;
         }
-        //조회수 카운트 기능 추가
-        Diary diary = maybeDiary.get();
-        Integer countAdd = 1;
-        diary.setViews(diary.getViews() + countAdd);
-        repository.save(diary);
+            //조회수 카운트 기능 추가 부분
+            Diary diary = maybeDiary.get();
+            Integer countAdd = 1;
+            diary.setViews(diary.getViews() + countAdd);
+            repository.save(diary);
 
         return diary;
     }
