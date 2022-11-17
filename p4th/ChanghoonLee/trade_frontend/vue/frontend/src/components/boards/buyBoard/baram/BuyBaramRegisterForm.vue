@@ -20,7 +20,7 @@
           작성자
         </th>
         <td>
-          <input type="text" v-model="writer">
+          <input type="text" v-model="this.$store.state.loginEmail" readonly>
         </td>
       </tr>
       <tr>
@@ -50,13 +50,13 @@ export default {
   data () {
     return {
       title: '',
-      writer: '',
+      writer: this.$store.state.loginEmail,
       content: '',
     }
   },
   methods: {
     onSubmit() {
-      if (this.title && this.writer && this.content != '') {
+      if (this.title && this.content != '') {
         const {title, writer, content} = this
         this.$emit('submit', {title, writer, content})
       } else {
