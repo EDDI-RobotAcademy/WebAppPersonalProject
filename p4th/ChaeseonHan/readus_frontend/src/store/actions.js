@@ -190,5 +190,23 @@ export default {
             }).catch((error) => {
                 console.log(error.message)
             })
-    }
-}
+    },
+
+    // eslint-disable-next-line no-empty-pattern
+    requestDeleteCommentAtBoardToSpring({ }, commentNo) {
+        console.log("requestDeleteCommentAtBoardToSpring()")
+
+        return axios.delete(`http://localhost:7776/comment/delete/${commentNo}`)
+            .then((res) => {
+                if(res.data) {
+                    alert("댓글 삭제 완료!")
+                } else {
+                    alert("이미 삭제된 댓글입니다!")
+                }
+            }).catch((error) => {
+                console.log(error.message)
+            })
+    },
+
+
+ }

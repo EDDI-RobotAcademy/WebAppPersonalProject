@@ -37,7 +37,7 @@
       </div>
       <div v-if="item.member_id.id === this.$store.state.loginUserProfile.id" class="d-flex justify-end">
         <v-btn class="mr-1" x-small outlined color="#356859" @click="toModifyComment"> 수정 </v-btn>
-        <v-btn class="mr-1" x-small outlined color="#356859"> 삭제 </v-btn>
+        <v-btn class="mr-1" x-small outlined color="#356859" @click="deleteComment"> 삭제 </v-btn>
       </div>
     </v-card-text>
 
@@ -59,6 +59,8 @@
 </template>
 
 <script>
+import {mapActions} from "vuex";
+
 export default {
   name: "CommentDetailForm",
   props: {
@@ -74,6 +76,7 @@ export default {
     }
   },
   methods: {
+    ...mapActions(['requestDeleteCommentAtBoardToSpring']),
     toModifyComment() {
       if(this.isModify == true){
         this.isModify = false
@@ -87,9 +90,13 @@ export default {
       const { commentNo, modifiedComment } = this
       this.$emit("submit", { commentNo, modifiedComment })
       this.isModify = false
+    },
+
+    deleteComment() {
+      this.requestDeleteCommentAtBoardToSpring( this.item.commentNo )
     }
 
-  },
+  }, // methods
   created() {
     this.modifiedComment = this.item.comment
   }

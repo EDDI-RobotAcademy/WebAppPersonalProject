@@ -34,9 +34,9 @@ export default {
   },
   methods: {
     ...mapActions(['requestModifyCommentAtBoardToSpring']),
-    submitModifiedComment(payload) {
+    async submitModifiedComment(payload) {
       const { commentNo, modifiedComment } = payload
-      this.requestModifyCommentAtBoardToSpring( { commentNo, modifiedComment })
+      await this.requestModifyCommentAtBoardToSpring( { commentNo, modifiedComment })
     }
   }
 }
