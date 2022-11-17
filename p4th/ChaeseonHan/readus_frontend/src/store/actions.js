@@ -55,7 +55,7 @@ export default {
         console.log('requestLoggedInUserProfileToSpring')
 
         const { userToken } = payload
-        return axios.post(`http://localhost:7776/member/login-user-nickname/${userToken}`, { userToken })
+        return axios.post(`http://localhost:7776/member/login-user-profile/${userToken}`)
             .then((res) => {
                 if(res.data) {
                     commit(REQUEST_LOGGED_IN_USER_PROFILE, res.data)
