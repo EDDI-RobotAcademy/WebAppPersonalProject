@@ -38,7 +38,7 @@
             <v-card-text>
               <v-row justify="center">
                 <v-col>
-                  <v-form @submit.prevent="onSubmit">
+                  <v-form @submit="onSubmit">
 
                     <v-layout justify-end>
                       <v-switch
@@ -118,28 +118,19 @@
           </v-card>
         </v-dialog>
       </div>
-
-      <v-layout justify-center style="padding-top: 50px">
-        <bucket-content-component
-            :cards="bucketItems"
-        />
-      </v-layout>
     </v-container>
-
   </div>
 
 </template>
 
 <script>
 import ToolBarComponent from "@/components/common/ToolBarComponent";
-import BucketContentComponent from "@/components/common/BucketContentComponent";
 import axios from "axios";
 
 export default {
   name: "MyBucketList",
   components: {
     ToolBarComponent,
-    BucketContentComponent
   },
   data() {
     return {
@@ -165,7 +156,6 @@ export default {
       this.files = this.$refs.file.files
     },
     async onSubmit() {
-
       let formData = new FormData()
       let fileInfo = {
         bucketTitle: this.bucketTitle,

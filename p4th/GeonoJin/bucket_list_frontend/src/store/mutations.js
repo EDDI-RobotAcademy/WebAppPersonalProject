@@ -25,7 +25,6 @@ export default {
         state.bucket = passingData
     },
     [DOWN_LOAD_IMG_FILE_TO_SPRING](state, passingData) {
-        console.log(passingData)
         state.downLoadImgFile = passingData;
     },
 }

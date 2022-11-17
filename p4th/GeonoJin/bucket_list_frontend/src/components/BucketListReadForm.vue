@@ -13,7 +13,20 @@
     </v-layout>
 
     <v-layout justify-end style="margin-top: 20px; margin-right: 20px">
-      <h4>{{ bucket.writer }}</h4>
+      <div>
+        <div v-if="bucket.switchValue === false">
+          <h5>글 공개여부: {{ this.switchValueFalse }}</h5>
+        </div>
+        <div v-else>
+          <h5>글 공개여부: {{ this.switchValueTrue }}</h5>
+        </div>
+      </div>
+      <v-spacer></v-spacer>
+      <div>
+        <h4>
+          작성자: {{ bucket.writer }}
+        </h4>
+      </div>
     </v-layout>
     <div style="margin-top: 50px; margin-bottom: 30px">
       <v-card>
@@ -21,10 +34,10 @@
           <v-img
               height="300px"
               contain
+              :src="require(`@/assets/thumbnail/${imgFile.changeFileName}`)"
           >
 
           </v-img>
-
           <br/>
           <br/>
           <br/>
@@ -33,13 +46,12 @@
       </v-card>
     </div>
 
-
-    <v-divider></v-divider>
     <v-layout justify-end style="margin-top: 10px">
       <div v-if="bucket.writer === this.$store.state.currentUserNickname">
         <v-btn
             rounded elevation="0" color="green lighten-1"
             style="margin-right: 10px"
+            :to="{name: 'BucketListModifyView', params: { bucketId: bucket.bucketId.toString() }}"
         >
           수정
         </v-btn>
@@ -62,22 +74,31 @@
 
 <script>
 import ToolBarComponent from "@/components/common/ToolBarComponent";
+import {mapState} from "vuex";
 
 export default {
   name: "BucketListReadForm",
   components: {ToolBarComponent},
+  computed: {
+    ...mapState([
+      'downLoadImgFile'
+    ])
+  },
   props: {
     bucket: {
       type: Object,
       required: true,
     },
-    imgFile:{
+    imgFile: {
       type: Object,
       required: true,
     }
   },
-  mounted() {
-    console.log(this.imgFile.changeFileName)
+  data(){
+    return{
+      switchValueTrue: "비공개",
+      switchValueFalse: "공개",
+    }
   }
 }
 </script>
