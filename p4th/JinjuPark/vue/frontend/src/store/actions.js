@@ -1,5 +1,6 @@
 import {
     REQUEST_DIARY_BOARD_LIST_FROM_SPRING,
+    REQUEST_DIARY_BOARD_FROM_SPRING,
     REQUEST_LOGIN_USER_FROM_SPRING,
 } from './mutation-types'
 
@@ -32,6 +33,7 @@ export default {
                 alert('게시물 등록에 성공했습니다.')
             })
     },
+
     requestLoginUserFromSpring({commit}, payload) {
         console.log("로그인 유저 정보 가져오기()")
 
@@ -39,6 +41,15 @@ export default {
             .then((res) => {
                 commit(REQUEST_LOGIN_USER_FROM_SPRING, res.data)
                 console.log("로그인한 회원정보 가져옴: " + res.data)
+            })
+    },
+
+    requestDiaryBoardFromSpring ({ commit }, boardNo) {
+        console.log('다이어리 게시글 정보 읽기()')
+
+        return axios.get(`http://localhost:7777/hometwang/boards/diary/${boardNo}`)
+            .then((res) => {
+                commit(REQUEST_DIARY_BOARD_FROM_SPRING, res.data)
             })
     },
 }

@@ -4,4 +4,6 @@ export default {
     loginUser:{},
 
     diaryBoards: [],
+    diaryBoard: {},
+
 }
