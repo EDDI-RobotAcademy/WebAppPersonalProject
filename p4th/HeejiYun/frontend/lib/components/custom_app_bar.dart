@@ -7,6 +7,7 @@ class CommonAppBar extends StatelessWidget with PreferredSizeWidget {
 
   @override
   Widget build(BuildContext context) {
+
     return AppBar(
       elevation: 0.0,
       title: Text(title),
