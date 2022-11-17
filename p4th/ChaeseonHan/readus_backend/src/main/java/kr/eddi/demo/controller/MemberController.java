@@ -40,7 +40,7 @@ public class MemberController {
         return service.signIn(form.toMemberLoginRequest());
     }
 
-    @PostMapping("/login-user-nickname/{userToken}")
+    @PostMapping("/login-user-profile/{userToken}")
     public ReadUsMember loginUserProfile(@PathVariable("userToken") String userToken) {
         log.info("nowMemberProfile()");
 
