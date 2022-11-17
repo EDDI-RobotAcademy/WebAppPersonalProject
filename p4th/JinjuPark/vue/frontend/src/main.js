@@ -9,12 +9,14 @@ import CommonButtonBlue from "@/components/common/CommonButtonBlue";
 import CommonMainMenuTemplate from "@/components/common/CommonMainMenuTemplate";
 import CommonFooterTemplate from "@/components/common/CommonFooterTemplate";
 import CommonBoardList from "@/components/common/CommonBoardList";
+import CommonMyTextField from "@/components/common/CommonMyTextField";
 
-Vue.component('CommonButtonBlue', CommonButtonBlue) // 글로벌 컴포넌트로 만듦
+Vue.component('CommonButtonBlue', CommonButtonBlue)
 Vue.component('CommonButtonWhite', CommonButton_White)
 Vue.component('CommonMainMenuTemplate', CommonMainMenuTemplate)
 Vue.component('CommonFooterTemplate', CommonFooterTemplate)
 Vue.component('CommonBoardList', CommonBoardList)
+Vue.component('CommonMyTextField', CommonMyTextField)
 
 Vue.config.productionTip = false
 
