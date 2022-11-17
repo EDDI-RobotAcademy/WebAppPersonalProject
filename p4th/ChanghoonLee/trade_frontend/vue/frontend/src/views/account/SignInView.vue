@@ -48,6 +48,7 @@ export default {
                 this.$cookies.set("user", res.data, 3600);
                 localStorage.setItem("userInfo", JSON.stringify(res.data))
                 this.isLogin = true
+                this.$store.state.loginEmail = email
                 this.$router.push("/")
               } else {
                 alert("이메일 혹은 비밀번호가 존재하지 않거나 틀렸습니다!")
