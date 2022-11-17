@@ -2,16 +2,19 @@ package kr.pjj.demo.controller.member;
 
 import kr.pjj.demo.controller.member.form.MemberLoginForm;
 import kr.pjj.demo.controller.member.form.MemberRegisterForm;
+import kr.pjj.demo.entity.member.Member;
 import kr.pjj.demo.service.member.MemberService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @Slf4j
 @RestController
 @RequestMapping("hometwang/member")
 @CrossOrigin(origins = "http://localhost:8080", allowedHeaders = "*")
-public class memberController {
+public class MemberController {
 
     @Autowired
     private MemberService service;
@@ -42,5 +45,11 @@ public class memberController {
         log.info("signIn: " + form);
 
         return service.signIn(form.toLoginRequest());
+    }
+
+    @PostMapping("/login-user")
+    public List<Member> loginUserInfo(@RequestBody String loginUserToken){
+
+        return service.loginUserInfo(loginUserToken);
     }
 }
