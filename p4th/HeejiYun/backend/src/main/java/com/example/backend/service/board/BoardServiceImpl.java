@@ -8,12 +8,14 @@ import com.example.backend.repository.BoardRepository;
 import com.example.backend.repository.MemberRepository;
 import com.example.backend.service.board.request.BoardModifyRequest;
 import com.example.backend.service.board.request.BoardRegisterRequest;
+import com.example.backend.service.board.response.BoardResponse;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -66,29 +68,51 @@ public class BoardServiceImpl implements BoardService{
     }
 
     @Override
-    public List<Board> everyBoardList() {
-
+    public List<BoardResponse> everyBoardList() {
+        List<BoardResponse> responses = new ArrayList<>();
+        List<Board> boards = boardRepository.findAll(Sort.by(Sort.Direction.DESC, "boardNo"));
+        for(Board b : boards) {
+            BoardResponse target = new BoardResponse(
+                                            b.getBoardNo(),
+                                            b.getTitle(),
+                                            b.getWriter(),
+                                            b.getContent(),
+                                            b.getRegDate() );
+            responses.add(target);
+        }
         // System.out.println("board list: " + boardRepository.findAll(Sort.by(Sort.Direction.DESC, "boardNo")));
-        return boardRepository.findAll(Sort.by(Sort.Direction.DESC, "boardNo"));
+        return responses;
     }
 
     @Override
-    public List<Board> specificBoardList(String categoryName) {
+    public List<BoardResponse> specificBoardList(String categoryName) {
         BoardCategory category;
+        List<BoardResponse> responses = new ArrayList<>();
+        List<Board> boards = new ArrayList<>();
 
         Optional<BoardCategory> maybeCategory = categoryRepository.findByCategoryName(categoryName);
         if(maybeCategory.isPresent()) {
             category = maybeCategory.get();
             // System.out.println(boardRepository.findAllBoardsByCategoryId(category.getCategoryId()));
+            boards = boardRepository.findAllBoardsByCategoryId(category.getCategoryId(), Sort.by(Sort.Direction.DESC, "boardNo"));
 
-            return boardRepository.findAllBoardsByCategoryId(category.getCategoryId());
+            for(Board b : boards) {
+                BoardResponse target = new BoardResponse(
+                                            b.getBoardNo(),
+                                            b.getTitle(),
+                                            b.getWriter(),
+                                            b.getContent(),
+                                            b.getRegDate() );
+                responses.add(target);
+            }
+            return responses;
         } else {
             throw new RuntimeException("존재하지 않는 게시판");
         }
     }
 
     @Override
-    public Board read(Long boardNo) {
+    public BoardResponse read(Long boardNo) {
         Optional<Board> maybeBoard = boardRepository.findById(boardNo);
 
         if (maybeBoard.equals(Optional.empty())) {
@@ -96,13 +120,23 @@ public class BoardServiceImpl implements BoardService{
 
             return null;
         }
+        Board board = maybeBoard.get();
+        BoardResponse responseBoard = new BoardResponse(
+                                            board.getBoardNo(),
+                                            board.getTitle(),
+                                            board.getWriter(),
+                                            board.getContent(),
+                                            board.getRegDate() );
+
         // log.info(String.valueOf(maybeBoard.get()));
-        return maybeBoard.get();
+        return responseBoard;
     }
 
     @Override
-    public Board modify(Long boardNo, BoardModifyRequest boardModifyRequest) {
+    public BoardResponse modify(Long boardNo, BoardModifyRequest boardModifyRequest) {
         Board modifyBoard;
+        BoardResponse modifyBoardResponse;
+
         Optional<Board> maybeBoard = boardRepository.findById(boardNo);
         if(maybeBoard.isPresent()) {
             modifyBoard = maybeBoard.get();
@@ -110,7 +144,13 @@ public class BoardServiceImpl implements BoardService{
             modifyBoard.setContent(boardModifyRequest.getContent());
             boardRepository.save(modifyBoard);
 
-            return modifyBoard;
+            modifyBoardResponse = new BoardResponse(modifyBoard.getBoardNo(),
+                                                modifyBoard.getTitle(),
+                                                modifyBoard.getWriter(),
+                                                modifyBoard.getContent(),
+                                                modifyBoard.getRegDate());
+
+            return modifyBoardResponse;
         } else {
             throw new RuntimeException("존재하지 않는 게시물!");
         }
@@ -120,4 +160,5 @@ public class BoardServiceImpl implements BoardService{
     public void remove(Long boardNo) {
         boardRepository.deleteById(boardNo);
     }
+
 }
