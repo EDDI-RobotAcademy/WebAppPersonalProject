@@ -129,5 +129,17 @@ export default {
             .catch(() => {
                 alert("수정에 실패했습니다.")
             });
+    },
+    // eslint-disable-next-line no-empty-pattern
+    requestDeleteBucketListToSpring({ }, bucketId){
+        console.log("requestDeleteBucketListToSpring")
+
+        axios.delete(`http://localhost:7777/bucket/${bucketId}`)
+            .then(() => {
+                alert("삭제 되었습니다.")
+            })
+            .catch(() => {
+                alert("삭제되지 않았습니다.")
+            });
     }
 }

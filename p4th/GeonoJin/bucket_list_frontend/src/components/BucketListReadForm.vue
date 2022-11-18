@@ -56,7 +56,9 @@
           수정
         </v-btn>
         <v-btn
-            rounded elevation="0" color="green lighten-1">
+            rounded elevation="0" color="green lighten-1"
+            @click="onDelete"
+        >
           삭제
         </v-btn>
       </div>
@@ -74,7 +76,7 @@
 
 <script>
 import ToolBarComponent from "@/components/common/ToolBarComponent";
-import {mapState} from "vuex";
+import {mapActions, mapState} from "vuex";
 
 export default {
   name: "BucketListReadForm",
@@ -98,6 +100,10 @@ export default {
     imgFile: {
       type: Object,
       required: true,
+    },
+    bucketId:{
+      type: String,
+      require: true
     }
   },
   data(){
@@ -107,6 +113,15 @@ export default {
       changeFileName : ''
     }
   },
+  methods:{
+    ...mapActions([
+        'requestDeleteBucketListToSpring'
+    ]),
+    async onDelete() {
+      await this.requestDeleteBucketListToSpring(this.bucketId)
+      await this.$router.push({name: 'HomeView'})
+    }
+  }
 }
 </script>
 

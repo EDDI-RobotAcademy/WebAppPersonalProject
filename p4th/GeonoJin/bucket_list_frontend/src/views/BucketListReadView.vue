@@ -3,9 +3,9 @@
     <v-container>
       <bucket-list-read-form v-if="bucket" :bucket="bucket"
                              :imgFile="downLoadImgFile"
+                             :bucketId="bucketId"
       />
       <v-layout justify-end>
-
 
       </v-layout>
     </v-container>
@@ -23,8 +23,8 @@ export default {
   },
   computed: {
     ...mapState([
-        'bucket',
-        'downLoadImgFile'
+      'bucket',
+      'downLoadImgFile'
     ])
   },
   props: {
@@ -36,8 +36,8 @@ export default {
   methods: {
     ...mapActions([
       'requestBucketFromSpring',
-      'downLoadImgFileToSpring'
-    ])
+      'downLoadImgFileToSpring',
+    ]),
   },
   async mounted() {
     this.requestBucketFromSpring(this.bucketId)
