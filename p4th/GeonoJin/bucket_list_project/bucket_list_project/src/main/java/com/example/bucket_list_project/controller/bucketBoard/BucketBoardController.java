@@ -1,6 +1,7 @@
 package com.example.bucket_list_project.controller.bucketBoard;
 
 import com.example.bucket_list_project.entity.Board.BucketBoard;
+import com.example.bucket_list_project.entity.Board.ImgFile;
 import com.example.bucket_list_project.service.bucketBoard.BucketService;
 import com.example.bucket_list_project.service.bucketBoard.request.bucketBoard.BucketBoardRequest;
 import lombok.extern.slf4j.Slf4j;
@@ -37,5 +38,34 @@ public class BucketBoardController {
         log.info("bucketList");
 
         return service.list();
+    }
+
+    @GetMapping("/{bucketId}")
+    public BucketBoard bucketRead(@PathVariable("bucketId") Long bucketId) {
+        log.info("bucketRead " + bucketId);
+
+        return service.bucketRead(bucketId);
+    }
+
+    @GetMapping("/imgDownLoad/{bucketId}")
+    public ImgFile imgFileDownLoad(@PathVariable("bucketId") Long bucketId) {
+        log.info("imgFileDownLoad" + bucketId);
+
+        return service.imgFileDownload(bucketId);
+    }
+
+    @PutMapping("/{bucketId}")
+    public void bucketListModify(@PathVariable("bucketId") Long bucketId, @RequestBody BucketBoard bucketBoard) {
+        log.info("bucketListModify" + bucketId);
+
+        bucketBoard.setBucketId(bucketId);
+        service.bucketModify(bucketBoard);
+    }
+
+    @DeleteMapping("/{bucketId}")
+    public void deleteBucketList(@PathVariable("bucketId") Long bucketId) {
+        log.info("deleteBucketList" + bucketId);
+
+        service.delete(bucketId);
     }
 }

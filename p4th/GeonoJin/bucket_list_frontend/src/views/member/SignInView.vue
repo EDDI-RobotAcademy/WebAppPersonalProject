@@ -34,13 +34,9 @@ export default {
               if (localStorage.getItem('userInfo') == null) {
 
                 alert("로그인 성공!")
-
                 this.$store.state.isAuthenticated = true
-
                 localStorage.setItem("userInfo", JSON.stringify(res.data))
-
                 this.$store.state.currentLoginUserCheck = true
-
                 this.$router.push("/home")
               } else {
                 alert("아이디 혹은 비밀번호가 존재하지 않거나 틀렸습니다!")

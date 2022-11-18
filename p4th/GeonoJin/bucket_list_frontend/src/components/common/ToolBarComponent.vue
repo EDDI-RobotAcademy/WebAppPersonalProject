@@ -61,7 +61,6 @@ export default {
   async mounted() {
 
     let replacedUserValue
-
     const currentUserValue = localStorage.getItem('userInfo');
 
     if (currentUserValue != null) {

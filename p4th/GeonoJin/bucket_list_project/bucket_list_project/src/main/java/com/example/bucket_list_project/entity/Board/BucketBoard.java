@@ -15,6 +15,7 @@ public class BucketBoard {
 
     @Id
     @Getter
+    @Setter
     @Column(name = "bucket_id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long bucketId;
@@ -44,6 +45,9 @@ public class BucketBoard {
     @Column(nullable = false)
     private String writer;
 
+    @OneToOne(mappedBy = "bucket", fetch = FetchType.EAGER,cascade = CascadeType.REMOVE)
+    private ImgFile imgFile;
+
     public BucketBoard(
             String bucketTitle, String bucketContent, String bucketCategory,
             Boolean switchValue, String writer) {
@@ -52,5 +56,9 @@ public class BucketBoard {
         this.bucketContent = bucketContent;
         this.switchValue = switchValue;
         this.writer = writer;
+    }
+
+    public void modifyTitle(String bucketTitle) {
+        this.bucketTitle = bucketTitle;
     }
 }
