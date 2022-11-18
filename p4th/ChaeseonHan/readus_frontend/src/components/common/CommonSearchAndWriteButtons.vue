@@ -53,21 +53,50 @@ export default {
     }
   },
   methods: {
-    ...mapActions(['requestSearchBoardAboutTitleAndContentsToSpring']),
+    ...mapActions(['requestSearchBoardAboutTitleAndContentsToSpring', 'requestSearchBoardAboutTitleToSpring', 'requestSearchBoardAboutContentsToSpring', 'requestSearchBoardAboutWriterToSpring']),
     toWrite() {
       this.$router.push("/community/write")
     },
     async toSearch() {
-      if(this.optionSelected == 1) {
-        await this.requestSearchBoardAboutTitleAndContentsToSpring(this.keyword);
-        await this.$router.push({
-          name: 'CommunitySearchView',
-          params: {
-            keyword: this.keyword
-          }
-        })
+
+      if(this.keyword.length == 0) {
+
+        alert("검색어를 입력해주세요!")
+
       } else {
-        alert("준비중!")
+        if(this.optionSelected > 0) {
+
+          // 제목+내용
+          if(this.optionSelected == 1) {
+            await this.requestSearchBoardAboutTitleAndContentsToSpring(this.keyword)
+          }
+
+          // 제목
+          if(this.optionSelected == 2) {
+            await this.requestSearchBoardAboutTitleToSpring(this.keyword)
+          }
+
+          // 내용
+          if(this.optionSelected == 3) {
+            await this.requestSearchBoardAboutContentsToSpring(this.keyword)
+          }
+
+          // 작성자
+          if(this.optionSelected == 4) {
+            await this.requestSearchBoardAboutWriterToSpring(this.keyword)
+          }
+
+          await this.$router.push({
+            name: 'CommunitySearchView',
+            params: {
+              keyword: this.keyword
+            }
+          })
+
+        } else {
+          alert("검색 조건을 설정해주세요!")
+        }
+
       }
     }
 

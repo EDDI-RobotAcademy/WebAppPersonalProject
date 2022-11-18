@@ -217,7 +217,41 @@ export default {
             }).catch((error) => {
                 console.log(error.message)
             })
-    }
+    },
+
+    requestSearchBoardAboutTitleToSpring({commit}, keyword) {
+        console.log("requestSearchBoardAboutTitleAToSpring()")
+
+        return axios.get(`http://localhost:7776/search/title/${keyword}`)
+            .then((res) => {
+                commit(REQUEST_SEARCH_BOARD_WITH_TITLE_AND_KEYWORD, res.data)
+            }).catch((error) => {
+                console.log(error.message)
+            })
+    },
+
+    requestSearchBoardAboutContentsToSpring({commit}, keyword) {
+        console.log("requestSearchBoardAboutContentsToSpring()")
+
+        return axios.get(`http://localhost:7776/search/contents/${keyword}`)
+            .then((res) => {
+                commit(REQUEST_SEARCH_BOARD_WITH_TITLE_AND_KEYWORD, res.data)
+            }).catch((error) => {
+                console.log(error.message)
+            })
+    },
+
+    requestSearchBoardAboutWriterToSpring({commit}, keyword) {
+        console.log("requestSearchBoardAboutWriterToSpring()")
+
+        return axios.get(`http://localhost:7776/search/writer/${keyword}`)
+            .then((res) => {
+                commit(REQUEST_SEARCH_BOARD_WITH_TITLE_AND_KEYWORD, res.data)
+            }).catch((error) => {
+                console.log(error.message)
+            })
+    },
+
 
 
  }
