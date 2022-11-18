@@ -6,6 +6,7 @@ export default {
     currentLoginUserCheck: false,
     bucketList: [],
     bucket: {},
-    downLoadImgFile: {}
+    downLoadImgFile: {},
+    currentCategoryBucketList: []
 
 }
