@@ -4,9 +4,12 @@ import 'package:slide_to_push_frontend/utility/decoration.dart';
 
 
 class TextFieldCheckedPassword extends StatefulWidget {
-  const TextFieldCheckedPassword({Key? key}) : super(key: key);
+  final TextEditingController controller;
 
-  static String checkedPassword = '';
+  const TextFieldCheckedPassword({
+    Key? key,
+    required this.controller,
+  }) : super(key: key);
 
   @override
   State<TextFieldCheckedPassword> createState() => _TextFieldCheckedPasswordState();
@@ -14,23 +17,38 @@ class TextFieldCheckedPassword extends StatefulWidget {
 
 class _TextFieldCheckedPasswordState extends State<TextFieldCheckedPassword> {
 
-  FocusNode _checkedPasswordFocus = new FocusNode();
-  var textFieldStyle = textFormDecoration('다시 한번 password를 입력해주세요.');
+  late FocusNode checkedPasswordFocus;
+  var textFieldStyle = textFormDecoration('password를 입력해주세요.');
+  var controller;
+
+  @override
+  void initState() {
+    super.initState();
+    controller = widget.controller;
+    checkedPasswordFocus = FocusNode();
+  }
+
+  @override
+  void dispose() {
+    checkedPasswordFocus.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
 
     return TextFormField(
+      controller: controller,
       decoration: textFieldStyle,
       keyboardType: TextInputType.visiblePassword,
-      focusNode:_checkedPasswordFocus,
+      focusNode:checkedPasswordFocus,
       autovalidateMode: AutovalidateMode.onUserInteraction,
       // validator: (value) =>
       // TextFieldPassword.password == checkedPassword ? '틀렸습니다.' : null,
       obscureText: true,
       onSaved: (value) {
         setState(() {
-          TextFieldCheckedPassword.checkedPassword = value!;
+          controller.text = value!;
         });
       },
     );

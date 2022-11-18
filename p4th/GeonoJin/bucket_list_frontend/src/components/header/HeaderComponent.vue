@@ -1,6 +1,7 @@
 <template>
   <v-container class="headerFrom">
     <tool-bar-component/>
+    <br/>
     <v-divider></v-divider>
     <category-component/>
   </v-container>

@@ -1,4 +1,9 @@
 export default {
     isAuthenticated: false,
-    unDuplicateEmailPass: false
+    unDuplicateEmailPass: false,
+    loginUserProfile: [],
+    aladinBestSeller: [],
+    communityMainBoardList: [],
+    communityBoard: {},
+
 }

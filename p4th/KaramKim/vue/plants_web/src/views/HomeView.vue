@@ -1,19 +1,18 @@
 <template>
-  <common-menu-bar/>
-
+  <div>
+    <main-page-form/>
+  </div>
 </template>
 
 <script>
 
 
-  import CommonMenuBar from "@/components/common/CommonMenuBar";
+  import MainPageForm from "@/components/page/MainPageForm";
   export default {
     name: 'HomeView',
 
     components: {
-      CommonMenuBar,
-
-
+      MainPageForm
     },
     data () {
       return {

@@ -14,7 +14,7 @@ class TextBtnBoxRouter extends StatelessWidget{
     return Form(
         child: Column(
           children: [
-            const SizedBox(height: medium_gap,),
+            const SizedBox(height: small_gap,),
             TextButton(
               onPressed: () {
                 Navigator.pushNamed(context, router);

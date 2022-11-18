@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import '../components/app_bar/common_drawer_menu.dart';
 import '../components/app_bar/common_top_app_bar.dart';
+import '../components/match_schedule/match_schedule_form.dart';
 
 class MatchSchedulePage extends StatefulWidget {
   const MatchSchedulePage({Key? key}) : super(key: key);
@@ -9,10 +10,11 @@ class MatchSchedulePage extends StatefulWidget {
   _MatchScheduleState createState() => _MatchScheduleState();
 }
 
-class _MatchScheduleState extends State<MatchSchedulePage>{
+class _MatchScheduleState extends State<MatchSchedulePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      resizeToAvoidBottomInset: false,
       appBar: CommonTopAppBar(
         title: const Text('경기 일정'),
         appBar: AppBar(),
@@ -20,17 +22,14 @@ class _MatchScheduleState extends State<MatchSchedulePage>{
       drawer: const Drawer(
         child: CommonDrawerMenu(),
       ),
-      body: Center(
+      body: SingleChildScrollView(
+          child: Center(
         child: Column(
-          children: const [
-            Text('TODAY',
-            style: TextStyle(
-              color: Colors.black87),
-            ),
+          children: const <Widget>[
+            MatchScheduleForm(),
           ],
         ),
-      ),
+      )),
     );
   }
 }
-

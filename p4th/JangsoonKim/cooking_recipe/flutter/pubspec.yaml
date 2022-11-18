@@ -38,6 +38,9 @@ dependencies:
   cupertino_icons: ^1.0.2
   introduction_screen: ^3.0.2
   shared_preferences: ^2.0.15
+  http: ^0.13.5
+  get: ^4.6.5
+  multiple_images_picker: ^1.0.1
 
 dev_dependencies:
   flutter_test:
@@ -64,6 +67,10 @@ flutter:
   # To add assets to your application, add an assets section, like this:
   assets:
     - assets/images/introduction/
+    - assets/images/signin/
+    - assets/icons/sns/
+    - assets/images/tmp/
+    - assets/icons/
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware

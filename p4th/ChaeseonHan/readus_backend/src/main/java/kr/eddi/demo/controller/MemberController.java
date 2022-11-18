@@ -3,6 +3,7 @@ package kr.eddi.demo.controller;
 
 import kr.eddi.demo.controller.form.MemberLoginForm;
 import kr.eddi.demo.controller.form.MemberRegisterForm;
+import kr.eddi.demo.entity.ReadUsMember;
 import kr.eddi.demo.service.MemberServiceImpl;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,7 +19,7 @@ public class MemberController {
     @Autowired
     MemberServiceImpl service;
 
-    @GetMapping("/check-email/{email}")
+    @PostMapping ("/check-email/{email}")
     public Boolean emailValidation(@PathVariable("email") String email) {
         log.info("checkEmail()");
 
@@ -37,5 +38,12 @@ public class MemberController {
         log.info("signin:" + form);
 
         return service.signIn(form.toMemberLoginRequest());
+    }
+
+    @PostMapping("/login-user-profile/{userToken}")
+    public ReadUsMember loginUserProfile(@PathVariable("userToken") String userToken) {
+        log.info("nowMemberProfile()");
+
+        return service.getSignInMemberProfile(userToken);
     }
 }

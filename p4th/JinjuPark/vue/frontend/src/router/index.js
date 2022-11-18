@@ -6,6 +6,10 @@ import SignUpView from "@/views/account/SignUpView";
 import MainHomeBoardView from "@/components/common/CommonMainMenuTemplate";
 import BoardTestView from "@/views/board/BoardTestView";
 import HomeView from "@/views/HomeView";
+import DiaryBoardListView from "@/views/boards/exercise/DiaryBoardListView";
+import DiaryBoardRegisterView from "@/views/boards/exercise/DiaryBoardRegisterView";
+import DiaryBoardReadView from "@/views/boards/exercise/DiaryBoardReadView";
+import DiaryBoardModifyView from "@/views/boards/exercise/DiaryBoardModifyView";
 
 Vue.use(VueRouter)
 
@@ -40,7 +44,38 @@ const routes = [
     name: 'BoardTest',
     component: BoardTestView
   },
+  {
+    path: '/diary-board-list',
+    name: 'DiaryBoardListView',
+    component: DiaryBoardListView
+  },
 
+  {
+    path: '/diary-board-register',
+    name: 'DiaryBoardRegisterView',
+    component: DiaryBoardRegisterView
+  },
+
+  {
+    path: '/diary-board-read/:boardNo',
+    name: 'DiaryBoardReadView',
+    components: {
+      default: DiaryBoardReadView
+    },
+    props:{
+      default: true
+    }
+  },
+  {
+    path: '/diary-board-modify/:boardNo',
+    name: 'DiaryBoardModifyView',
+    components: {
+      default: DiaryBoardModifyView
+    },
+    props:{
+      default: true
+    }
+  },
 
 ]
 

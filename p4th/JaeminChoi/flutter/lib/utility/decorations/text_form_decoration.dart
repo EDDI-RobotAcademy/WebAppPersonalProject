@@ -1,23 +1,27 @@
 import 'package:flutter/material.dart';
-import 'package:leaing_helper/utility/color.dart';
+import 'package:leaing_helper/utility/decorations/color.dart';
+import 'package:leaing_helper/utility/decorations/text_style.dart';
 
 InputDecoration textFormDecoration(String hintText) {
   return InputDecoration(
+    filled: true,
+    fillColor: ColorStyle.textFormGray,
+    hintStyle : defaultTextFieldTextStyle(),
     hintText: hintText,
-    contentPadding: const EdgeInsets.symmetric(vertical: 20.0, horizontal: 15.0),
+    contentPadding: const EdgeInsets.symmetric(vertical: 20.0, horizontal: 10.0),
     enabledBorder:
     OutlineInputBorder(
-        borderRadius: BorderRadius.circular(20),
-        borderSide: const BorderSide(color: colorStyle.mainBlack, width: 1.0)
+        borderRadius: BorderRadius.circular(10),
+        borderSide: const BorderSide(color: ColorStyle.lineGray, width: 2.0)
     ),
     focusedBorder:
-    OutlineInputBorder(borderRadius: BorderRadius.circular(20),
-        borderSide: const BorderSide(color: colorStyle.strongBlue, width: 1.0)),
+    OutlineInputBorder(borderRadius: BorderRadius.circular(10),
+        borderSide: const BorderSide(color: ColorStyle.focusedTextForm, width: 2.0)),
     errorBorder:
-    OutlineInputBorder(borderRadius: BorderRadius.circular(20),
-        borderSide: const BorderSide(color: Colors.red , width: 1.0)),
+    OutlineInputBorder(borderRadius: BorderRadius.circular(10),
+        borderSide: const BorderSide(color: ColorStyle.errorTextForm , width: 2.0)),
     focusedErrorBorder:
-    OutlineInputBorder(borderRadius: BorderRadius.circular(20),
-        borderSide: const BorderSide(color: colorStyle.strongBlue, width: 1.0)),
+    OutlineInputBorder(borderRadius: BorderRadius.circular(10),
+        borderSide: const BorderSide(color: ColorStyle.focusedTextForm, width: 2.0)),
     );
 }

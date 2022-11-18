@@ -18,8 +18,8 @@ export default {
   methods: {
     ...mapActions(['requestMemberRegisterToSpring']),
     async onSubmit(payload) {
-      const { email, password, nickname } = payload
-      await this.requestMemberRegisterToSpring({ email, password, nickname } )
+      const { email, password, nickName } = payload
+      await this.requestMemberRegisterToSpring({ email, password, nickName } )
     }
   }, // methods
 }

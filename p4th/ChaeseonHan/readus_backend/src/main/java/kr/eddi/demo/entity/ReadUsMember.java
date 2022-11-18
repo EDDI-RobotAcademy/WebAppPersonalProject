@@ -1,18 +1,16 @@
 package kr.eddi.demo.entity;
 
 
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import lombok.*;
+import org.hibernate.annotations.CreationTimestamp;
 
 import javax.persistence.*;
-import java.util.HashSet;
-import java.util.Optional;
-import java.util.Set;
+import java.util.*;
 
 @Entity
-@Builder
+@ToString
+@Getter
 @NoArgsConstructor
 @AllArgsConstructor
 public class ReadUsMember {
@@ -26,16 +24,61 @@ public class ReadUsMember {
     @Column(nullable = false)
     private String email;
 
-    @OneToOne(mappedBy = "member", fetch = FetchType.LAZY, cascade = CascadeType.PERSIST)
-    private MemberProfile profile;
+    @Getter
+    @Column(nullable = false)
+    private String nickName;
+
+    @Getter
+    @Column(length = 200)
+    private String biography;
+
+    @Getter
+    @CreationTimestamp
+    private Date createdDate;
 
     @OneToMany(mappedBy = "member", fetch = FetchType.LAZY)
+    @JsonIgnore
     private Set<Authentication> authentications = new HashSet<>();
 
-    public ReadUsMember(String email, MemberProfile profile) {
+    @Getter
+    @JsonIgnore
+    @OneToMany(mappedBy = "member_id", fetch = FetchType.LAZY)
+    private List<CommunityBoard> boards = new ArrayList<>();
+
+    @Getter
+    @JsonIgnore
+    @OneToMany(mappedBy = "member_id", fetch = FetchType.LAZY)
+    private List<BoardComment> comments = new ArrayList<>();
+
+    public ReadUsMember(String email, String nickName, String biography) {
         this.email = email;
-        this.profile = profile;
-        profile.setMember(this);
+        this.nickName = nickName;
+        this.biography = biography;
+    }
+
+    public void updateCommunityBoard(CommunityBoard communityBoard) {
+        this.boards.add(communityBoard);
+    }
+
+    public void deleteCommunityBoard(CommunityBoard communityBoard) {
+        this.boards.remove(communityBoard);
+    }
+
+    public void updateComment(BoardComment comment) {
+        this.comments.add(comment);
+    }
+
+    public void deleteComment(BoardComment comment) {
+        this.comments.remove(comment);
+    }
+
+
+    public void modifyNickname(String nickName) {
+        this.nickName = nickName;
+    }
+
+    public void modifyBiography(String biography) {
+        this.biography = biography;
     }
 
 

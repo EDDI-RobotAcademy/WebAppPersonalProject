@@ -7,6 +7,7 @@
         <router-link to="/sign-up">회원 가입</router-link> |
         <router-link to="/sign-in">로그인</router-link> |
         <router-link to="/main-home-board">메인홈 게시판</router-link> |
+        <router-link to="/diary-board-list">운동일기</router-link> |
       </nav>
       <router-view/>
     </div>

@@ -1,11 +1,14 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
 import HomeView from '../views/HomeView.vue'
-import LifeBucketListView from "@/views/bucketListKind/LifeBucketListView";
-import HealthBucketList from "@/views/bucketListKind/HealthBucketList";
-import StudyBucketList from "@/views/bucketListKind/StudyBucketList";
-import TravelBucketList from "@/views/bucketListKind/TravelBucketList";
-import CookBucketList from "@/views/bucketListKind/CookBucketList";
+
+import LifeBucketListview from "@/views/bucketListKind/LifeBucketListview";
+import HealthBucketListView from "@/views/bucketListKind/HealthBucketListView";
+import StudyBucketListView from "@/views/bucketListKind/StudyBucketListView";
+import TravelBucketListView from "@/views/bucketListKind/TravelBucketListView";
+import CookBucketListView from "@/views/bucketListKind/CookBucketListView";
+import MyPageView from "@/views/member/MyPageView";
+import MyBucketListView from "@/views/MyBucketListView";
 
 //member
 import SignInView from "@/views/member/SignInView";
@@ -22,27 +25,27 @@ const routes = [
   {
     path: '/life',
     name: 'LifeBucketListView',
-    component: LifeBucketListView
+    component: LifeBucketListview
   },
   {
     path: '/health',
-    name: 'HealthBucketList',
-    component: HealthBucketList
+    name: 'HealthBucketListView',
+    component: HealthBucketListView
   },
   {
     path: '/study',
-    name: 'StudyBucketList',
-    component: StudyBucketList
+    name: 'StudyBucketListView',
+    component: StudyBucketListView
   },
   {
     path: '/travel',
-    name: 'TravelBucketList',
-    component: TravelBucketList
+    name: 'TravelBucketListView',
+    component: TravelBucketListView
   },
   {
     path: '/cook',
-    name: 'CookBucketList',
-    component: CookBucketList
+    name: 'CookBucketListView',
+    component: CookBucketListView
   },
   {
     path: '/signIn',
@@ -53,6 +56,16 @@ const routes = [
     path: '/signUp',
     name: 'SignUpView',
     component: SignUpView
+  },
+  {
+    path: '/myPage',
+    name: 'MyPageView',
+    component: MyPageView
+  },
+  {
+    path: '/myBucket',
+    name: 'MyBucketListView',
+    component: MyBucketListView
   },
 
 ]

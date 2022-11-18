@@ -9,10 +9,9 @@ public class MemberRegisterForm {
 
     private String email;
     private String password;
-    private String nickname;
-    private String biography;
+    private String nickName;
 
     public MemberRegisterRequest toMemberRegisterRequest() {
-        return new MemberRegisterRequest(email, password, nickname, biography);
+        return new MemberRegisterRequest(email, password, nickName, "");
     }
 }

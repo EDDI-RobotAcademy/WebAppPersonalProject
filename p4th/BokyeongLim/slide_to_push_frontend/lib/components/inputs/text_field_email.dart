@@ -48,7 +48,6 @@ class _TextFieldEmailState extends State<TextFieldEmail> {
           controller.text = value;
         });
       },
-      // onChanged: (value) => setState(()=> controller.text = value)
     );
   }
 

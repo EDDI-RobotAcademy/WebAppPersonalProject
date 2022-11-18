@@ -67,7 +67,7 @@ public class MemberServiceImpl implements MemberService{
 
             redisService.deleteByKey(userToken.toString());
             redisService.setKeyAndValue(userToken.toString(), account.getId());
-
+            log.info("userToken " + userToken);
             return userToken.toString();
         }
 

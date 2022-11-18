@@ -14,6 +14,7 @@ class _HomePageState extends State<HomePage>{
   @override
   Widget build(BuildContext context) {
     return const Scaffold(
+      resizeToAvoidBottomInset: false,
       drawer: Drawer(
         child: CommonDrawerMenu(),
       ),

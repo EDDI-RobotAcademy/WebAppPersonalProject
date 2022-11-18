@@ -1,46 +1,33 @@
 <template>
-  <div>
-    <MemberButtonView/>
-    <br><br><br><br>
-    <CarouselTestView/>
-    <ToolbarView/>
-    <br><br><br><br><br><br><br><br>
-    <CalendarView/>
-    <br><br><br><br><br><br><br><br><br><br><br>
-    <FooterView/>
-  </div>
+  <v-container>
+ <div class="home">
+<nav>
+  <router-link to="/main-page">MainPage</router-link>   |
+  <router-link to="/login-view">loginPage</router-link>   |
+  <router-link to="/signup-view">signupPage</router-link>   |
+  <router-link to="/post-list">Post</router-link>   |
 
+  <router-link to="/board-list">게시판</router-link> |
+  <router-link to="/member-button-view">멤버 버튼 </router-link> |
+
+
+
+
+</nav>
+   <router-view/>
+</div>
+  </v-container>
 </template>
 
 <script>
 // @ is an alias to /src
 
 
-import CarouselTestView from "@/views/main/CarouselView";
-import ToolbarView from "@/views/main/ToolbarView";
-import FooterView from "@/views/main/FooterView";
-import MemberButtonView from "@/views/main/member/MemberButtonView";
-import CalendarView from "@/views/main/CalendarView";
-
-
 export default {
   name: 'HomeView',
   components: {
 
-    CalendarView,
-    MemberButtonView,
-    CarouselTestView,
-    ToolbarView,
-    FooterView,
 
-
-  },
-
-
+  }
 }
 </script>
-
-<style>
-
-
-</style>

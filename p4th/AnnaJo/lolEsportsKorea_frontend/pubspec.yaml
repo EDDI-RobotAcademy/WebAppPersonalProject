@@ -27,6 +27,7 @@ environment:
 # the latest version available on pub.dev. To see which dependencies have newer
 # versions available, run `flutter pub outdated`.
 dependencies:
+  table_calendar: ^3.0.8
   flutter:
     sdk: flutter
 
@@ -36,6 +37,7 @@ dependencies:
   cupertino_icons: ^1.0.2
   google_nav_bar: ^5.0.6
   http: ^0.13.4
+  flutter_secure_storage: ^6.0.0
 
 dev_dependencies:
   flutter_test:

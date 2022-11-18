@@ -7,7 +7,6 @@ import lombok.*;
 @ToString
 @RequiredArgsConstructor
 public class MemberRegisterRequest {
-
     private final String email;
     private final String password;
     private final String nickname;

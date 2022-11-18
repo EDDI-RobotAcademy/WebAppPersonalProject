@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:leaing_helper/pages/main_page.dart';
 import 'package:leaing_helper/pages/sign_in_Page.dart';
-import 'package:leaing_helper/utility/color.dart';
+import 'package:leaing_helper/pages/sign_up_page.dart';
+import 'package:leaing_helper/pages/splash_screen_page.dart';
+import 'package:leaing_helper/utility/decorations/color.dart';
 
 
 void main() {
@@ -15,13 +17,15 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
 
     return MaterialApp(
+      debugShowCheckedModeBanner: false,
       title: 'Leaning_helper',
       theme: ThemeData(
-        scaffoldBackgroundColor: colorStyle.defaultBackground,
+        fontFamily: "Cafe24Ohsquareair",
+        scaffoldBackgroundColor: Colors.white,
         textButtonTheme : TextButtonThemeData(
             style: TextButton.styleFrom(
               elevation : 5,
-              backgroundColor: colorStyle.defaultButton,
+              backgroundColor: ColorStyle.defaultButton,
               primary: Colors.white,
               shape:
               RoundedRectangleBorder(borderRadius: BorderRadius.circular(30)),
@@ -31,10 +35,12 @@ class MyApp extends StatelessWidget {
 
       ),
 
-      initialRoute: "/main_manu",
+      initialRoute: "/splash_page",
       routes: {
-        "/main_manu": (context) => const MainPage(),
-        "/sign_in_view" : (context) => const SignInPage(),
+        "/splash_page": (context) => const SplashScreenPage(),
+        "/main_page": (context) => const MainPage(),
+        "/sign_in_page" : (context) => const SignInPage(),
+        "/sign_up_page" : (context) => const SignUpPage(),
       },
     );
 

@@ -6,11 +6,14 @@ import com.example.backend.entity.member.Member;
 import com.example.backend.repository.AuthenticationRepository;
 import com.example.backend.repository.MemberRepository;
 import com.example.backend.service.member.request.MemberRegisterRequest;
+import com.example.backend.service.member.request.MemberSignInRequest;
+import com.example.backend.service.security.RedisService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.Optional;
+import java.util.UUID;
 
 @Slf4j
 @Service
@@ -21,6 +24,9 @@ public class MemberServiceImpl implements MemberService{
 
     @Autowired
     private AuthenticationRepository authenticationRepository;
+
+    @Autowired
+    private RedisService redisService;
 
     @Override
     public Boolean emailValidation(String email) {
@@ -55,6 +61,39 @@ public class MemberServiceImpl implements MemberService{
         authenticationRepository.save(auth);
 
         return true;
+    }
+
+    @Override
+    public String signIn(MemberSignInRequest request) {
+        final String NO_EMAIL = "1";
+        final String PASSWORD_MISS = "2";
+
+        String email = request.getEmail();
+        Optional<Member> maybeMember = memberRepository.findByEmail(email);
+
+        if (maybeMember.isPresent()) {
+            Member member = maybeMember.get();
+
+            log.info("member email: " + member.getEmail());
+            log.info("request email: " + request.getEmail());
+            log.info("request password: " + request.getPassword());
+
+            if (!member.isRightPassword(request.getPassword())) {
+                log.info("패스워드 오류");
+                return PASSWORD_MISS;
+                // throw new RuntimeException("잘못된 패스워드 입니다.");
+            }
+
+            UUID userToken = UUID.randomUUID();
+
+            redisService.deleteByKey(userToken.toString());
+            redisService.setKeyAndValue(userToken.toString(), member.getId());
+
+            return userToken.toString();
+        }
+        log.info("가입된 사용자 아님");
+        return NO_EMAIL;
+        // throw new RuntimeException("가입된 사용자가 아닙니다.");
     }
 
 }

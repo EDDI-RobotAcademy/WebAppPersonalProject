@@ -3,7 +3,11 @@ import VueRouter from 'vue-router'
 import HomeView from '../views/HomeView.vue'
 
 import SignUpView from "@/views/account/SignUpView";
+import SignInView from "@/views/account/SignInView";
+
 import VuetifyTasteView from "@/views/main/VuetifyTasteView";
+import MainView from "@/views/main/MainView";
+import HeaderView from "@/views/main/HeaderView";
 
 Vue.use(VueRouter)
 
@@ -22,6 +26,21 @@ const routes = [
     path: '/sign-up',
     name: 'SignUpView',
     component: SignUpView
+  },
+  {
+    path: '/sign-in',
+    name: 'SignInView',
+    component: SignInView
+  },
+  {
+    path: '/main-view',
+    name: 'MainView',
+    component: MainView
+  },
+  {
+    path: '/header-view',
+    name: 'HeaderView',
+    component: HeaderView
   }
 ]
 

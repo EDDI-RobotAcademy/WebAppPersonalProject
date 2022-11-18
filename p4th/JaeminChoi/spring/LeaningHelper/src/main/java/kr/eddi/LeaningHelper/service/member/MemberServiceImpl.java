@@ -7,7 +7,7 @@ import kr.eddi.LeaningHelper.entity.member.MemberProfile;
 import kr.eddi.LeaningHelper.repository.Member.MemberAuthRepository;
 import kr.eddi.LeaningHelper.repository.Member.MemberProfileRepository;
 import kr.eddi.LeaningHelper.repository.Member.MemberRepository;
-import kr.eddi.LeaningHelper.request.member.MemberRegisterRequest;
+import kr.eddi.LeaningHelper.request.member.MemberSignUpRequest;
 import kr.eddi.LeaningHelper.request.member.MemberSignInRequest;
 import kr.eddi.LeaningHelper.service.security.RedisService;
 import lombok.extern.slf4j.Slf4j;
@@ -21,6 +21,9 @@ import java.util.UUID;
 @Service
 public class MemberServiceImpl implements MemberService{
 
+    static final Integer PASSVALIDATE = 0;
+    static final Integer FAILALIDATE = 1;
+
     @Autowired
     MemberRepository memberRepository;
 
@@ -33,8 +36,8 @@ public class MemberServiceImpl implements MemberService{
     MemberAuthRepository memberAuthRepository;
 
     @Override
-    public Boolean memberRegister(MemberRegisterRequest memberRegisterRequest) {
-        final Member member = memberRegisterRequest.toMember();
+    public Boolean memberSignUp(MemberSignUpRequest memberSignUpRequest) {
+        final Member member = memberSignUpRequest.toMember();
         memberRepository.save(member);
 
         MemberProfile memberProfile = MemberProfile.builder()
@@ -45,7 +48,7 @@ public class MemberServiceImpl implements MemberService{
 
 
         final MemberBasicAuth auth = new MemberBasicAuth(member,
-                MemberAuth.BASIC_AUTH, memberRegisterRequest.getPw());
+                MemberAuth.BASIC_AUTH, memberSignUpRequest.getPassword());
 
         memberAuthRepository.save(auth);
 
@@ -53,10 +56,21 @@ public class MemberServiceImpl implements MemberService{
     }
 
     @Override
-    public Boolean emailValidation(String id) {
-        Optional<Member> maybeMember = memberRepository.findById(id);
+    public Integer emailValidation(String email) {
+        Optional<Member> maybeMember = memberRepository.findById(email);
 
         if (maybeMember.isPresent()) {
+            log.info("maybeMember.isPresent() : " + maybeMember.isPresent());
+            return FAILALIDATE;
+        }
+        return PASSVALIDATE;
+    }
+
+    @Override
+    public Boolean nickNameValidation(String nickName) {
+        Optional<Member> maybeMemberNickName = memberRepository.findByNickName(nickName);
+
+        if (maybeMemberNickName.isPresent()) {
             return false;
         }
 
@@ -65,17 +79,17 @@ public class MemberServiceImpl implements MemberService{
 
     @Override
     public String signIn(MemberSignInRequest memberSignInRequest) {
-        String id = memberSignInRequest.getId();
-        Optional<Member> maybeMember = memberRepository.findById(id);
+        String email = memberSignInRequest.getEmail();
+        Optional<Member> maybeMember = memberRepository.findById(email);
 
         if(maybeMember.isPresent()){
             Member member = maybeMember.get();
 
-            log.info("member ID: " + member.getId());
-            log.info("request ID: " + memberSignInRequest.getId());
-            log.info("request PW: " + memberSignInRequest.getPw());
+            log.info("member ID: " + member.getEmail());
+            log.info("request ID: " + memberSignInRequest.getEmail());
+            log.info("request PW: " + memberSignInRequest.getPassword());
 
-            if (!member.isRightPassword(memberSignInRequest.getPw())) {
+            if (!member.isRightPassword(memberSignInRequest.getPassword())) {
                 throw new RuntimeException("패스워드가 잘못됨!");
             }
             UUID userToken = UUID.randomUUID();

@@ -17,15 +17,20 @@ class _MainPageState extends State<MainPage>{
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        body: Padding(
-          padding: const EdgeInsets.all(16.0),
-          child: ListView(
-            children:  const [
-              SizedBox(height: medium_gap,),
-              Logo(title: "Leaning_helper",),
-              SizedBox(height: large_gap,),
-              TextBtnBoxRouter(text: '로그인',router: '/sign_in_view',),
-            ],
+        resizeToAvoidBottomInset: false,
+        body: SafeArea(
+          child: Container(
+              width: double.infinity,
+              padding: const EdgeInsets.all(30),
+            child : Column(
+              children: const [
+                SizedBox(height: xmedium_gap,),
+                Logo(title: "Leaning_helper",),
+                SizedBox(height: large_gap,),
+                TextBtnBoxRouter(text: '로그인',router: '/sign_in_page',),
+                TextBtnBoxRouter(text: '회원가입',router: '/sign_up_page',),
+              ],
+            )
           ),
         )
     );
