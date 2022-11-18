@@ -1,6 +1,7 @@
 package slide_to_push_backend.entity.todosBoard;
 
 import lombok.Data;
+import slide_to_push_backend.entity.member.Account;
 
 import javax.persistence.*;
 import java.util.Date;
@@ -18,5 +19,10 @@ public class Todos {
 
     private Boolean isFinished;
 
-//    private Date date;
+    private Date selectedDate;
+
+    @OneToOne
+    @JoinColumn(name = "account_id")
+    private Account account;
+
 }

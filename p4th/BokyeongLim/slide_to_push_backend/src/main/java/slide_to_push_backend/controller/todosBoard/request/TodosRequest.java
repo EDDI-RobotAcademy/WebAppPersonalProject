@@ -6,4 +6,6 @@ import lombok.Data;
 public class TodosRequest {
     String content;
     Boolean isFinished;
+    String selectedDate;
+    String token;
 }
