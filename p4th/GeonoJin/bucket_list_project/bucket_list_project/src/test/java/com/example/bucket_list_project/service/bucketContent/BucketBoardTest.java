@@ -62,4 +62,9 @@ public class BucketBoardTest {
 
         bucketBoardRepository.save(bucketBoard);
     }
+
+    @Test
+    public void deleteBucketList() {
+        bucketBoardRepository.deleteById((long) 4);
+    }
 }
