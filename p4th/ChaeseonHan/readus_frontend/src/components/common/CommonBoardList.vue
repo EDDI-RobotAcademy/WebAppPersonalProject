@@ -1,6 +1,5 @@
 <template>
   <v-container>
-    <common-community-category-buttons/>
     <div>
       <table style="height: min-content" class="greentop">
 
@@ -14,7 +13,7 @@
 
         <tr v-if="!boardList || (Array.isArray(boardList) && boardList.length === 0)">
           <td align="center" colspan="12">
-            현재 등록된 게시글이  없습니다!
+            게시글이 없습니다!
           </td>
         </tr>
 
@@ -45,27 +44,14 @@
 
       </table>
     </div>
-    
 
 <!-- 밑 버튼 -->
-
-    <div class="d-flex justify-end">
-<!--      <v-pagination
-          class="mt-1"
-          color="#356859"
-          total-visible="6"
-          :value="1"
-          :length="9"/>-->
-      <v-btn small outlined class="mt-3" color="#356859" @click="toWrite"> 글쓰기 </v-btn>
-    </div>
   </v-container>
 </template>
 
 <script>
-import CommonCommunityCategoryButtons from "@/components/common/CommonCommunityCategoryButtons";
 export default {
   name: "CommonBoardList",
-  components: {CommonCommunityCategoryButtons},
   props: {
     boardList: {
       type: Array,
@@ -76,11 +62,6 @@ export default {
 
     }
   },
-  methods: {
-    toWrite() {
-      this.$router.push("/community/write")
-    }
-  }
 }
 </script>
 

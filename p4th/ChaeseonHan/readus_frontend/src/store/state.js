@@ -5,5 +5,6 @@ export default {
     aladinBestSeller: [],
     communityMainBoardList: [],
     communityBoard: {},
+    searchResultBoard: [],
 
 }

@@ -1,11 +1,13 @@
 <template>
-  <v-row>
-    <v-col>
-      <v-btn class="mr-2 mb-2" color="#356859" outlined small v-for="item in category" :key="item.index" :to="item.route">
-        {{ item.title }}
-      </v-btn>
-    </v-col>
-  </v-row>
+  <v-container>
+    <v-row>
+      <v-col>
+        <v-btn class="mr-2" color="#356859" outlined small v-for="item in category" :key="item.index" :to="item.route">
+          {{ item.title }}
+        </v-btn>
+      </v-col>
+    </v-row>
+  </v-container>
 </template>
 
 <script>

@@ -3,7 +3,7 @@
     <div style="font-family: Arial">
       <v-row justify="center">
         <v-col cols="12" style="padding-bottom: 90px">
-          <v-card color="grey lighten-5">
+          <v-card elevation="0" style="background-color: #e1f0eb">
             <v-card-text class="text-subtitle-2 text-center px-12 py-8">
               <v-form @submit.prevent="onSubmit" ref="form">
 
@@ -43,10 +43,10 @@
                 </div>
 
                 <div class="d-flex justify-center">
-                  <v-btn class="mx-1" @click="goBack">
+                  <v-btn class="mx-1" elevation="0" color="#356859" outlined small @click="goBack">
                     {{ "취소" }}
                   </v-btn>
-                  <v-btn class="mx-1" type="submit" :disabled="this.title_pass == false || this.category_pass == false">
+                  <v-btn class="mx-1" type="submit" elevation="0" color="#356859" outlined small :disabled="this.title_pass == false || this.category_pass == false">
                     {{ "등록" }}
                   </v-btn>
                 </div>
