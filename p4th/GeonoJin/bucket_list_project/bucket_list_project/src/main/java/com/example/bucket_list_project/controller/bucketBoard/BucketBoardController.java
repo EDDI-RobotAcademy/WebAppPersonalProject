@@ -68,4 +68,11 @@ public class BucketBoardController {
 
         service.delete(bucketId);
     }
+
+    @GetMapping("/categoryKind/{bucketCategory}")
+    public List<BucketBoard> bucketListByCategory(@PathVariable("bucketCategory") String bucketCategory) {
+        log.info("bucketListByCategory" + bucketCategory);
+
+        return service.findBucketListByCategory(bucketCategory);
+    }
 }
