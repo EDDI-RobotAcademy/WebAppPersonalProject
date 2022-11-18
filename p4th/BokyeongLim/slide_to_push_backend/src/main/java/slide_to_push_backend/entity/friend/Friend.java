@@ -23,12 +23,11 @@ public class Friend {
     @JoinColumn(name = "friend_id")
     private Account friendedAccount;
 
-    // Type - 친구관계가 아니면 0 , 친구관계면 1
-    private Boolean isFriended;
+    private String friendEmail;
 
-    public Friend(Account myAccount, Account friendedAccount, Boolean isFriended) {
+    public Friend(Account myAccount, Account friendedAccount) {
         this.myAccount = myAccount;
         this.friendedAccount = friendedAccount;
-        this.isFriended = isFriended;
+        this.friendEmail = friendedAccount.getEmail();
     }
 }
