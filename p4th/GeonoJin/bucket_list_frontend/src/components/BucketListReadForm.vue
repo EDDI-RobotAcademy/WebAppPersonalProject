@@ -34,7 +34,7 @@
           <v-img
               height="300px"
               contain
-              :src="require(`@/assets/thumbnail/${imgFile.changeFileName}`)"
+              :src="getImage.changeFileName"
           >
 
           </v-img>
@@ -82,7 +82,13 @@ export default {
   computed: {
     ...mapState([
       'downLoadImgFile'
-    ])
+    ]),
+    getImage(){
+      return{
+        ...this.imgFile,
+        changeFileName: this.imgFile.changeFileName && require(`@/assets/thumbnail/${this.imgFile.changeFileName}`)
+      }
+    }
   },
   props: {
     bucket: {
@@ -98,8 +104,9 @@ export default {
     return{
       switchValueTrue: "비공개",
       switchValueFalse: "공개",
+      changeFileName : ''
     }
-  }
+  },
 }
 </script>
 
