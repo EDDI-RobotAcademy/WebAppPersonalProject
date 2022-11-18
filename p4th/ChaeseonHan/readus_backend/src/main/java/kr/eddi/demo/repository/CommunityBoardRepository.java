@@ -14,5 +14,11 @@ public interface CommunityBoardRepository extends JpaRepository<CommunityBoard, 
     @Query("select b from CommunityBoard b join fetch b.comments where b.boardNo = :boardNo")
     Optional<CommunityBoard> findByIdWithComments(Long boardNo);
 
-    List<CommunityBoard> findByContentsIgnoreCaseOrTitleContainingIgnoreCase(String title, String contents, Sort sort);
+    List<CommunityBoard> findByContentsContainingIgnoreCaseOrTitleContainingIgnoreCase(String title, String contents, Sort sort);
+
+    List<CommunityBoard> findByTitleContainingIgnoreCase(String title, Sort sort);
+
+    List<CommunityBoard> findByContentsContainingIgnoreCase(String contents, Sort sort);
+
+    List<CommunityBoard> findByWriterContainingIgnoreCase(String writer, Sort sort);
 }

@@ -18,9 +18,26 @@ public class SearchController {
     SearchServiceImpl service;
 
     @GetMapping("/title-contents/{keyword}")
-    public List<CommunityBoard> searchBoardAtTitleAndContents(@PathVariable("keyword") String keyword) {
+    public List<CommunityBoard> searchBoardTitleAndContents(@PathVariable("keyword") String keyword) {
         return service.searchBoardWithTitleAndContents(keyword);
     }
+
+    @GetMapping("/title/{keyword}")
+    public List<CommunityBoard> searchBoardTitle(@PathVariable("keyword") String keyword) {
+        return service.searchBoardWithTitle(keyword);
+    }
+
+    @GetMapping("/contents/{keyword}")
+    public List<CommunityBoard> searchBoardContents(@PathVariable("keyword") String keyword) {
+        return service.searchBoardWithContents(keyword);
+    }
+
+    @GetMapping("/writer/{keyword}")
+    public List<CommunityBoard> searchBoardWriter(@PathVariable("keyword") String keyword) {
+        return service.searchBoardWithWriter(keyword);
+    }
+
+
 
 
 }

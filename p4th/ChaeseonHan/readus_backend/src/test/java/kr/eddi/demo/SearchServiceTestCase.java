@@ -22,5 +22,12 @@ public class SearchServiceTestCase {
             System.out.println(searchList.get(i).toString());
         }
     }
+
+    @Test
+    void searchBoardAtWriter() {
+        List<CommunityBoard> searchList = service.searchBoardWithWriter("해파");
+        System.out.println(searchList);
+    }
+
 }
 

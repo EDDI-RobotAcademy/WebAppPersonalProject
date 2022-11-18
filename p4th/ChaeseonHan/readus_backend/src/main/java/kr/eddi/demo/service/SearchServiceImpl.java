@@ -19,7 +19,7 @@ public class SearchServiceImpl implements SearchService{
     @Override
     @Transactional
     public List<CommunityBoard> searchBoardWithTitleAndContents(String keyword) {
-        List<CommunityBoard> searchList = boardRepository.findByContentsIgnoreCaseOrTitleContainingIgnoreCase(keyword, keyword, Sort.by(Sort.Direction.DESC, "boardNo"));
+        List<CommunityBoard> searchList = boardRepository.findByContentsContainingIgnoreCaseOrTitleContainingIgnoreCase(keyword, keyword, Sort.by(Sort.Direction.DESC, "boardNo"));
 
         if(searchList.size() == 0) {
             return null;
@@ -28,5 +28,42 @@ public class SearchServiceImpl implements SearchService{
         return searchList;
 
     }
+
+    @Override
+    @Transactional
+    public List<CommunityBoard> searchBoardWithTitle(String keyword) {
+        List<CommunityBoard> searchList = boardRepository.findByTitleContainingIgnoreCase(keyword, Sort.by(Sort.Direction.DESC, "boardNo"));
+
+        if(searchList.size() == 0) {
+            return null;
+        }
+
+        return searchList;
+    }
+
+    @Override
+    @Transactional
+    public List<CommunityBoard> searchBoardWithContents(String keyword) {
+        List<CommunityBoard> searchList = boardRepository.findByContentsContainingIgnoreCase(keyword, Sort.by(Sort.Direction.DESC, "boardNo"));
+
+        if(searchList.size() == 0) {
+            return null;
+        }
+
+        return searchList;
+    }
+
+    @Override
+    @Transactional
+    public List<CommunityBoard> searchBoardWithWriter(String keyword) {
+        List<CommunityBoard> searchList = boardRepository.findByWriterContainingIgnoreCase(keyword, Sort.by(Sort.Direction.DESC, "boardNo"));
+
+        if(searchList.size() == 0) {
+            return null;
+        }
+
+        return searchList;
+    }
+
 
 }
