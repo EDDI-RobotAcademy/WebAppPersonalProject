@@ -8,6 +8,7 @@
       </v-toolbar-title>
 
       <v-spacer></v-spacer>
+      {{ this.$store.state.loginEmail }} 님 어서오세요.&nbsp;&nbsp;
       <v-dialog v-model="myPageDialog" persisten max-width="800">
         <template v-slot:activator="{on}">
           <v-btn class="grey white--text" rounded depressed small v-on="on">
@@ -66,6 +67,7 @@
       </v-toolbar-title>
 
       <v-spacer></v-spacer>
+      방문자 님 어서오세요.&nbsp;&nbsp;
       <router-link to="/sign-up">
         <v-btn class="grey white--text" rounded depressed small>
           회원가입
@@ -98,7 +100,12 @@ export default {
       this.logoutDialog = false
     },
     logoutBtn() {
-
+      this.$store.state.isAuthenticated = false
+      localStorage.removeItem("userInfo")
+      this.$cookies.remove("user")
+      this.$store.state.loginEmail = ''
+      alert("로그아웃 성공")
+      this.$router.push("/sign-in")
     }
   }
 }

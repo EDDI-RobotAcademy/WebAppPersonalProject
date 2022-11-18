@@ -15,7 +15,11 @@
     <br/>
     <div style="float: right">
       <router-link :to="{ name: 'BuyBaramRegisterView' }">
-        <v-btn class="grey white--text" rounded depressed small>
+        <v-btn class="grey white--text" rounded depressed small
+        v-if="isLogin == false" @click.prevent="registerAccess">
+          게시물 작성
+        </v-btn>
+        <v-btn class="grey white--text" rounded depressed small v-else>
           게시물 작성
         </v-btn>
       </router-link>
@@ -41,10 +45,26 @@ export default {
       'buyBaramBoards'
     ]),
   },
+  data() {
+    return {
+      isLogin: false
+    }
+  },
   mounted() {
     this.requestBuyBaramListFromSpring()
+    if (this.$store.state.isAuthenticated != false) {
+      this.isLogin = true
+    } else {
+      this.isLogin = false
+    }
   },
   methods: {
+    registerAccess() {
+      if(this.isLogin == false) {
+        alert("로그인이 필요한 기능입니다.")
+        this.$router.push("/sign-in")
+      }
+    },
     ...mapActions([
       'requestBuyBaramListFromSpring'
     ])
