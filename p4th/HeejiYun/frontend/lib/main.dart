@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:frontend/pages/board_list_page_ask.dart';
-import 'package:frontend/pages/board_list_page_free.dart';
-import 'package:frontend/pages/board_list_page_recipe.dart';
+import 'package:frontend/pages/boards/board_list_page_ask.dart';
+import 'package:frontend/pages/boards/board_list_page_free.dart';
+import 'package:frontend/pages/boards/board_list_page_notice.dart';
+import 'package:frontend/pages/boards/board_list_page_recipe.dart';
 import 'package:frontend/pages/home_page.dart';
+import 'package:frontend/pages/my_page.dart';
 import 'package:frontend/pages/sign_in_page.dart';
 import 'package:frontend/pages/sign_up_complete_page.dart';
 import 'package:frontend/pages/sign_up_page.dart';
@@ -49,7 +51,9 @@ class MyApp extends StatelessWidget {
         "/sign-up-complete": (context) =>SignUpCompletePage(),
         "/board-list-free": (context) => BoardListPageFree(),
         "/board-list-ask": (context) => BoardListPageAsk(),
-        "/board-list-recipe": (context) => BoardListPageRecipe()
+        "/board-list-recipe": (context) => BoardListPageRecipe(),
+        "/board-list-notice": (context) => BoardListPageNotice(),
+          "/my-page": (context) => MyPage(),
         },
       ),
     );

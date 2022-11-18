@@ -31,4 +31,10 @@ class BoardListProvider extends ChangeNotifier{
     _boards = boardList!;
     notifyListeners();
   }
+
+  loadNoticeBoards() async {
+    List<Board>? boardList = await SpringBoardApi().requestSpecificBoardList("공지");
+    _boards = boardList!;
+    notifyListeners();
+  }
 }
