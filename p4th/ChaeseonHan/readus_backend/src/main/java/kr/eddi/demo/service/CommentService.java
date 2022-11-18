@@ -9,5 +9,5 @@ public interface CommentService {
 
     Boolean modify(Long commentNo, String modifiedComment);
 
-    Boolean delete();
+    Boolean delete(Long commentNo);
 }
