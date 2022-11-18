@@ -1,4 +1,4 @@
-,season_title,rank,team,win,lose,goal_difference,winning_rate,kda,kill,death,assist
+,season_title,ranking,team_name,win_count,lose_count,goal_difference,winning_rate,kda_score,kill_count,death_count,assist_count
 0,2022 LCK 스프링,1,T1,18,0,29,1,4.86,686,686,686
 1,2022 LCK 스프링,2,젠지,15,3,18,0.83,4.39,567,567,567
 2,2022 LCK 스프링,3,담원 기아,11,7,12,0.61,4.16,514,514,514
