@@ -18,4 +18,6 @@ public interface BucketService {
     public ImgFile imgFileDownload(Long bucketId);
 
     public void bucketModify(BucketBoard bucketBoard);
+
+    public void delete(Long bucketId);
 }

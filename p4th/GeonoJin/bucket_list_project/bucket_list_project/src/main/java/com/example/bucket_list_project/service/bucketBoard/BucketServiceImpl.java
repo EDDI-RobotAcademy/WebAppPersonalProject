@@ -117,4 +117,9 @@ public class BucketServiceImpl implements BucketService {
 
         bucketBoardRepository.save(bucketBoard);
     }
+
+    @Override
+    public void delete(Long bucketId) {
+        bucketBoardRepository.deleteById(bucketId);
+    }
 }

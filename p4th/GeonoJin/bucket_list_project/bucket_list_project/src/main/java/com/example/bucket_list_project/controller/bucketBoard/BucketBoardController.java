@@ -61,4 +61,11 @@ public class BucketBoardController {
         bucketBoard.setBucketId(bucketId);
         service.bucketModify(bucketBoard);
     }
+
+    @DeleteMapping("/{bucketId}")
+    public void deleteBucketList(@PathVariable("bucketId") Long bucketId) {
+        log.info("deleteBucketList" + bucketId);
+
+        service.delete(bucketId);
+    }
 }

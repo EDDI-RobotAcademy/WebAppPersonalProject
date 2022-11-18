@@ -45,6 +45,9 @@ public class BucketBoard {
     @Column(nullable = false)
     private String writer;
 
+    @OneToOne(mappedBy = "bucket", fetch = FetchType.EAGER,cascade = CascadeType.REMOVE)
+    private ImgFile imgFile;
+
     public BucketBoard(
             String bucketTitle, String bucketContent, String bucketCategory,
             Boolean switchValue, String writer) {
