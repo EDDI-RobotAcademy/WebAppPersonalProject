@@ -1,11 +1,10 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
-import 'package:lol_esports_korea_app/api/authentication/spring_nickname_validation_api.dart';
-import 'package:lol_esports_korea_app/components/authentication/member.dart';
 import 'package:lol_esports_korea_app/pages/authentication/sign_in_page.dart';
 
-import '../../api/authentication/globals_success_check.dart';
-import '../../api/authentication/spring_email_validation_api.dart';
-import '../../api/authentication/spring_sign_up_api.dart';
+import '../../api/authentication/spring_validation_api.dart';
+import '../../api/authentication/spring_sign_In_and_up_api.dart';
 import '../../components/authentication/accept/accept_box.dart';
 import '../../utility/common_alert_dialog.dart';
 import '../../utility/size.dart';
@@ -19,16 +18,79 @@ class SignUpPage extends StatefulWidget {
 }
 
 class _SignUpPageState extends State<SignUpPage> {
-  Member member = Member("", "", "", 0);
   final _formKey = GlobalKey<FormState>();
+  bool isEmailCheck = false;
+  bool isNicknameCheck = false;
+  var emailController = TextEditingController();
+  var passwordController = TextEditingController();
+  var nickNameController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
+
+  /// 이메일 중복 검사 요청
+  emailValidationAction() async {
+    await SpringValidationApi().emailValidation(emailController.text);
+
+    if (SpringValidationApi.emailValidationResponse.statusCode == 200) {
+      var response = jsonDecode(
+          SpringValidationApi.emailValidationResponse.body);
+
+      if (response) {
+        debugPrint('emailValidation Success!');
+        nicknameValidationAction();
+      } else {
+        _emailOverlapShowDialog();
+        debugPrint('emailValidation Fail!');
+      }
+    } else {
+      _FailShowDialog();
+      debugPrint('error');
+    }
+  }
+
+  /// 닉네임 중복 검사 요청
+  nicknameValidationAction() async {
+    await SpringValidationApi().nicknameValidation(nickNameController.text);
+
+    if (SpringValidationApi.nicknameValidationResponse.statusCode == 200) {
+      var response = jsonDecode(
+          SpringValidationApi.nicknameValidationResponse.body);
+      if (response) {
+        debugPrint('nicknameValidation Success!');
+        signUpAction();
+      } else {
+        _nicknameOverlapShowDialog();
+        debugPrint('nicknameValidation Fail!');
+      }
+    } else {
+      _FailShowDialog();
+      debugPrint('error');
+    }
+  }
+
+  /// 최종 회원가입 요청
+  signUpAction() async {
+    MemberSignUpRequest memberSignUpRequest =
+    MemberSignUpRequest(
+        emailController.text, passwordController.text, nickNameController.text);
+
+    await
+    SpringHttpApi().signUpApi(memberSignUpRequest);
+
+    if (SpringHttpApi.signUpResponse.statusCode == 200) {
+      _signUpSuccessShowDialog();
+      debugPrint('회원가입 성공!');
+    } else {
+      _FailShowDialog();
+      debugPrint('error');
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       resizeToAvoidBottomInset: false,
       appBar:
-          CommonTopAppBar(title: const Text('MEMBER JOIN'), appBar: AppBar()),
+      CommonTopAppBar(title: const Text('MEMBER JOIN'), appBar: AppBar()),
       body: SingleChildScrollView(
         child: Form(
           key: _formKey,
@@ -36,11 +98,14 @@ class _SignUpPageState extends State<SignUpPage> {
             children: [
               Container(
                 height: 610,
-                width: MediaQuery.of(context).size.width,
+                width: MediaQuery
+                    .of(context)
+                    .size
+                    .width,
                 decoration: const BoxDecoration(
                     color: Color(0xff23124b),
                     borderRadius: BorderRadius.only(
-                        //둥글게 만들기
+                      //둥글게 만들기
                         bottomLeft: Radius.circular(80),
                         bottomRight: Radius.circular(80))),
                 child: Padding(
@@ -66,17 +131,13 @@ class _SignUpPageState extends State<SignUpPage> {
                             const SizedBox(width: 58),
                             Flexible(
                               child: TextFormField(
-                                controller:
-                                    TextEditingController(text: member.email),
-                                onChanged: (val) {
-                                  member.email = val;
-                                },
+                                controller: emailController,
                                 validator: (value) {
                                   value!.isEmpty ? "E-mail is Empty" : null;
                                   if (!RegExp(
-                                          r'^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|'
-                                          r'(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|'
-                                          r'(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$')
+                                      r'^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|'
+                                      r'(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|'
+                                      r'(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$')
                                       .hasMatch(value)) {
                                     return '잘못된 이메일 형식입니다.';
                                   }
@@ -131,7 +192,7 @@ class _SignUpPageState extends State<SignUpPage> {
                               child: TextFormField(
                                 controller: _passwordController,
                                 validator: (value) =>
-                                    value!.isEmpty ? "Password is Empty" : null,
+                                value!.isEmpty ? "Password is Empty" : null,
                                 style: const TextStyle(
                                     fontSize: 20, color: Colors.white),
                                 obscureText: true,
@@ -164,14 +225,10 @@ class _SignUpPageState extends State<SignUpPage> {
                       Expanded(
                         child: Row(
                           children: [
-                            const SizedBox(width: 140),
+                            const SizedBox(width: 130),
                             Flexible(
                               child: TextFormField(
-                                controller: TextEditingController(
-                                    text: member.password),
-                                onChanged: (val) {
-                                  member.password = val;
-                                },
+                                controller: passwordController,
                                 validator: (value) {
                                   if (value!.isEmpty) {
                                     return "Password is Empty";
@@ -229,13 +286,9 @@ class _SignUpPageState extends State<SignUpPage> {
                             const SizedBox(width: large_gap),
                             Flexible(
                               child: TextFormField(
-                                controller: TextEditingController(
-                                    text: member.nickname),
-                                onChanged: (val) {
-                                  member.nickname = val;
-                                },
+                                controller: nickNameController,
                                 validator: (value) =>
-                                    value!.isEmpty ? "Nickname is Empty" : null,
+                                value!.isEmpty ? "Nickname is Empty" : null,
                                 style: const TextStyle(
                                     fontSize: 20, color: Colors.white),
                                 decoration: InputDecoration(
@@ -295,34 +348,7 @@ class _SignUpPageState extends State<SignUpPage> {
                   child: ElevatedButton(
                     onPressed: () {
                       if (_formKey.currentState!.validate()) {
-                        //E-mail 중복 검사 실행
-                        SpringEmailValidationApi()
-                            .emailValidation(member.email);
-                        if (GlobalsSuccessCheck.isEmailCheck) {
-                          // 닉네임 중복 검사 실행
-                          SpringNicknameValidationApi()
-                              .nicknameValidation(member.nickname);
-                          if (GlobalsSuccessCheck.isNicknameCheck) {
-                            SpringSignUpApi().signUp(MemberSignUpRequest(
-                                member.email,
-                                member.password,
-                                member.nickname));
-
-                            // 회원가입 완료 후 로그인 페이지로 이동
-                            if (GlobalsSuccessCheck.isSignUpCheck) {
-                              _signUpSuccessShowDialog();
-                              Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                      builder: (context) =>
-                                          const SignInPage()));
-                            }
-                          } else {
-                            _nicknameOverlapShowDialog();
-                          }
-                        } else {
-                          _emailOverlapShowDialog();
-                        }
+                        emailValidationAction();
                       }
                     },
                     child: const Text(
@@ -382,6 +408,23 @@ class _SignUpPageState extends State<SignUpPage> {
           return CommonAlertDialog(
             title: "🎉",
             content: '가입을 축하합니다!🥰 \n 로그인 화면으로 이동합니다.',
+            onCustomButtonPressed: () {
+              Navigator.push(context,
+                  MaterialPageRoute(builder: (context) => const SignInPage()));
+            },
+          );
+        });
+  }
+
+  /// 통신 실패 실패 alertDialog
+  void _FailShowDialog() {
+    showDialog(
+        context: context,
+        barrierDismissible: false,
+        builder: (BuildContext context) {
+          return CommonAlertDialog(
+            title: "⚠️",
+            content: '죄송합니다. \n 서버와 통신이 실패했습니다.😥 ',
             onCustomButtonPressed: () {
               Navigator.of(context).pop();
             },

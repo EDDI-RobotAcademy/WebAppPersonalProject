@@ -1,4 +1,4 @@
-,season_title,rank,team,win,lose,goal_difference,winning_rate,kda,kill,death,assist
+,season_title,ranking,team_name,win_count,lose_count,goal_difference,winning_rate,kda_score,kill_count,death_count,assist_count
 0,2022 LCK 서머,1,젠지,17,1,30,0.94,5.89,564,564,564
 1,2022 LCK 서머,2,T1,15,3,18,0.83,4.11,544,544,544
 2,2022 LCK 서머,3,리브 샌박,13,5,13,0.72,4.57,554,554,554

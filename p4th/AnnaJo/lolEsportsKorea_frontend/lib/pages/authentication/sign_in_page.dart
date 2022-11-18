@@ -1,11 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
-import 'package:lol_esports_korea_app/api/authentication/globals_success_check.dart';
-import 'package:lol_esports_korea_app/pages/authentication/sign_out_page.dart';
 import 'package:lol_esports_korea_app/pages/authentication/sign_up_page.dart';
 import 'package:lol_esports_korea_app/pages/home_page.dart';
 
-import '../../api/authentication/spring_sign_in_api.dart';
+import '../../api/authentication/spring_sign_In_and_up_api.dart';
 import '../../utility/common_alert_dialog.dart';
 import '../../utility/size.dart';
 import '../../components/app_bar/common_top_app_bar.dart';

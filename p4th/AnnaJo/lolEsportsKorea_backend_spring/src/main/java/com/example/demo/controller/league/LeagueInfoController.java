@@ -20,6 +20,10 @@ public class LeagueInfoController {
     @Autowired
     private LeagueService service;
 
+    /**
+     * 경기 정보 리스트를 반환하는 메서드
+     * @return League DB에 저장되어있는 경기 일정
+     */
     @GetMapping("/list")
     public List<League> leagueList () {
         log.info("leagueList()");
