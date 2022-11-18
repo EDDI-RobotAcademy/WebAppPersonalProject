@@ -7,7 +7,6 @@ import '../states/authentication.dart';
 
 class TodosService {
   static const String httpUri = '192.168.200.183:9955';
-  static var reqList;
   static var reqChangeStatus;
   static var reqRegisterTodos;
   static var reqDelete;
