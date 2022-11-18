@@ -44,7 +44,7 @@ export default {
                 console.log(this.$store.state.isAuthenticated)
                 let userToken = this.$cookies.get("user")
                 this.requestLoggedInUserProfileToSpring({ userToken })
-                this.$router.push("/")
+                this.$router.go(-1)
               } else {
                 alert("아이디 혹은 비밀번호가 존재하지 않거나 틀렸습니다!")
               }
