@@ -1,10 +1,12 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
+import '../controller/friend_controller.dart';
 import '../utility/style/common_text_style.dart';
 
 class FriendsDrawer extends StatelessWidget {
-
+  FriendController friendController = Get.put(FriendController());
+  var refreshKey = GlobalKey<RefreshIndicatorState>();
   @override
   Widget build(BuildContext context) {
     return Drawer(
@@ -26,30 +28,40 @@ class FriendsDrawer extends StatelessWidget {
 
           Container(
 
-              child:Expanded(child: ListView.builder(
-                  itemCount: 3,
-                  itemBuilder: (context, index){
-                    return Column(
-                        children: [
-                          ListTile(
-                              title: Row(
-                                children: [
-                                  Icon(Icons.person, color: Colors.blueAccent, size: 20),
-                                  SizedBox(width: 8,),
-                                  Text("admin@admin.com" , style: subText())
-                                ],
-                              ),
-                              trailing : TextButton(
-                                child: Text('삭제', style: TextStyle(fontSize: 10),),
-                                onPressed: (){},
-                              )
-                          ),
-                          SizedBox( width: MediaQuery.of(context).size.width, child: Container(height: 1, color: Colors.black12,),)
-                        ]
-                    );
-              }
-          )) ),
-
+              child:Expanded(
+                  child: Obx(
+                      ()=> RefreshIndicator(
+                          key: refreshKey,
+                          onRefresh: () async {
+                            await friendController.fetchData();
+                          },
+                          child : ListView.builder(
+                            itemCount: friendController.friendsList.length,
+                            itemBuilder: (context, index) {
+                              return Column(
+                                  children: [
+                                    ListTile(
+                                        title: Row(
+                                          children: [
+                                            Icon(Icons.person, color: Colors.blueAccent, size: 20),
+                                            SizedBox(width: 8,),
+                                            Text(friendController.friendsList[index].friendEmail, style: subText())
+                                          ],
+                                        ),
+                                        trailing : TextButton(
+                                          child: Text('삭제', style: TextStyle(fontSize: 10),),
+                                          onPressed: (){},
+                                        )
+                                    ),
+                                    SizedBox( width: MediaQuery.of(context).size.width, child: Container(height: 1, color: Colors.black12,),)
+                                  ]
+                              );
+                            }
+                      )
+                  ),
+              )
+          ),
+          )
         ],
       )
     );
