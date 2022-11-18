@@ -6,7 +6,6 @@
       <h3>전체</h3>
     </div>
     <br/><br/>
-    <hr>
     <br/>
 
     <v-layout justify-center>

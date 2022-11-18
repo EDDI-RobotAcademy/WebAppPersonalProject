@@ -142,7 +142,7 @@ export default {
       bucketContent: '',
       placeholderText: '버킷리스트 내용을 입력해주세요',
       fileInputPlaceholderText: '커버사진을 선택하세요',
-      categoryItems: ['일상', '요리', '여행', '자기개발', '건강'],
+      categoryItems: ['일상', '요리', '여행', '자기 개발', '헬스'],
       bucketCategory: '',
       files: '',
       switchValue: false,
