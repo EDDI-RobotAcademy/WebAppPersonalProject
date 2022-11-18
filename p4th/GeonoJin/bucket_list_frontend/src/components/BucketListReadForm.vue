@@ -12,24 +12,8 @@
       </div>
     </v-layout>
 
-    <v-layout justify-end style="margin-top: 20px; margin-right: 20px">
-      <div>
-        <div v-if="bucket.switchValue === false">
-          <h5>글 공개여부: {{ this.switchValueFalse }}</h5>
-        </div>
-        <div v-else>
-          <h5>글 공개여부: {{ this.switchValueTrue }}</h5>
-        </div>
-      </div>
-      <v-spacer></v-spacer>
-      <div>
-        <h4>
-          작성자: {{ bucket.writer }}
-        </h4>
-      </div>
-    </v-layout>
-    <div style="margin-top: 50px; margin-bottom: 30px">
-      <v-card>
+    <div style="margin-top: 10px; margin-bottom: 30px" align="center">
+      <v-card width="800px">
         <v-card-text style="height: 500px">
           <v-img
               height="300px"
@@ -43,6 +27,11 @@
           <br/>
           <h2>{{ bucket.bucketContent }}</h2>
         </v-card-text>
+        <v-layout justify-end>
+          <h4>
+            작성자: {{ bucket.writer }}
+          </h4>
+        </v-layout>
       </v-card>
     </div>
 
@@ -85,8 +74,8 @@ export default {
     ...mapState([
       'downLoadImgFile'
     ]),
-    getImage(){
-      return{
+    getImage() {
+      return {
         ...this.imgFile,
         changeFileName: this.imgFile.changeFileName && require(`@/assets/thumbnail/${this.imgFile.changeFileName}`)
       }
@@ -101,21 +90,21 @@ export default {
       type: Object,
       required: true,
     },
-    bucketId:{
+    bucketId: {
       type: String,
       require: true
     }
   },
-  data(){
-    return{
+  data() {
+    return {
       switchValueTrue: "비공개",
       switchValueFalse: "공개",
-      changeFileName : ''
+      changeFileName: ''
     }
   },
-  methods:{
+  methods: {
     ...mapActions([
-        'requestDeleteBucketListToSpring'
+      'requestDeleteBucketListToSpring'
     ]),
     async onDelete() {
       await this.requestDeleteBucketListToSpring(this.bucketId)

@@ -5,6 +5,7 @@ import com.example.bucket_list_project.entity.Board.ImgFile;
 import com.example.bucket_list_project.repository.bucketBoard.BucketBoardRepository;
 import com.example.bucket_list_project.repository.bucketBoard.ImgFileRepository;
 import com.example.bucket_list_project.service.bucketBoard.request.bucketBoard.BucketBoardRequest;
+import lombok.ToString;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Sort;
@@ -14,7 +15,6 @@ import org.springframework.web.multipart.MultipartFile;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
@@ -121,5 +121,12 @@ public class BucketServiceImpl implements BucketService {
     @Override
     public void delete(Long bucketId) {
         bucketBoardRepository.deleteById(bucketId);
+    }
+
+    @Override
+    public List<BucketBoard> findBucketListByCategory(String bucketCategory) {
+        log.info("findBucketListByCategory" + bucketCategory);
+
+        return bucketBoardRepository.findByBucketCategory(bucketCategory);
     }
 }

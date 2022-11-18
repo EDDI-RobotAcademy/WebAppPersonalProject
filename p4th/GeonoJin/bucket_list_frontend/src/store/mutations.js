@@ -4,7 +4,8 @@ import{
     CHECK_DUPLICATE_NICKNAME_TO_SPRING,
     GET_BUCKET_LIST_TO_SPRING,
     REQUEST_BUCKET_FROM_SPRING,
-    DOWN_LOAD_IMG_FILE_TO_SPRING
+    DOWN_LOAD_IMG_FILE_TO_SPRING,
+    GET_CURRENT_BUCKET_LIST_CATEGORY
     // REQUEST_LOGIN_STATE_TO_SPRING
 } from "./mutation-types"
 
@@ -26,5 +27,8 @@ export default {
     },
     [DOWN_LOAD_IMG_FILE_TO_SPRING](state, passingData) {
         state.downLoadImgFile = passingData;
+    },
+    [GET_CURRENT_BUCKET_LIST_CATEGORY](state, passingData) {
+        state.currentCategoryBucketList = passingData
     },
 }

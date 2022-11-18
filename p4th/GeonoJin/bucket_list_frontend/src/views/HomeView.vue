@@ -18,8 +18,8 @@ export default {
         'bucketList'
     ]),
   },
-  mounted() {
-    this.getBucketListToSpring()
+  async mounted() {
+    await this.getBucketListToSpring()
   },
   methods: {
     ...mapActions([

@@ -20,4 +20,6 @@ public interface BucketService {
     public void bucketModify(BucketBoard bucketBoard);
 
     public void delete(Long bucketId);
+
+    public List<BucketBoard> findBucketListByCategory(String bucketCategory);
 }

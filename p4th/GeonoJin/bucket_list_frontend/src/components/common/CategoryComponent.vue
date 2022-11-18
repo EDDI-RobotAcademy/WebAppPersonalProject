@@ -24,8 +24,8 @@ export default {
         {name: '일상', route: "/life"},
         {name: '요리', route: "/cook"},
         {name: '여행', route: "/travel"},
-        {name: '자기개발', route: "/study"},
-        {name: '건강', route: "/health"},
+        {name: '자기 개발', route: "/study"},
+        {name: '헬스', route: "/health"},
       ]
     }
   },

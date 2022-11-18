@@ -4,7 +4,8 @@ import {
     REQUEST_CURRENT_USER_NICKNAME_FROM_SPRING,
     GET_BUCKET_LIST_TO_SPRING,
     REQUEST_BUCKET_FROM_SPRING,
-    DOWN_LOAD_IMG_FILE_TO_SPRING
+    DOWN_LOAD_IMG_FILE_TO_SPRING,
+    GET_CURRENT_BUCKET_LIST_CATEGORY
 } from './mutation-types'
 
 import axios from "axios";
@@ -96,6 +97,16 @@ export default {
         await axios.get('http://localhost:7777/bucket/list')
             .then((res) => {
                 commit(GET_BUCKET_LIST_TO_SPRING, res.data);
+            });
+    },
+    async getCurrentBucketListCategory({commit}, payload) {
+        console.log('getCurrentBucketListCategory')
+
+        const bucketCategory = payload
+
+        await axios.get(`http://localhost:7777/bucket/categoryKind/${bucketCategory}`)
+            .then((res) => {
+                commit(GET_CURRENT_BUCKET_LIST_CATEGORY, res.data);
             });
     },
     async downLoadImgFileToSpring({ commit }, bucketId) {

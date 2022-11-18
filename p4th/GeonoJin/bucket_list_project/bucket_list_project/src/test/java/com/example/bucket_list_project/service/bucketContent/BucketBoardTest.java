@@ -65,6 +65,13 @@ public class BucketBoardTest {
 
     @Test
     public void deleteBucketList() {
-        bucketBoardRepository.deleteById((long) 4);
+        bucketBoardRepository.deleteById((long) 1);
+    }
+
+    @Test
+    public void findBucketListByCategory() {
+        List<BucketBoard> currentCategoryBucketList = bucketBoardRepository.findByBucketCategory("요리");
+
+        System.out.println(currentCategoryBucketList);
     }
 }
