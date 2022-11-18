@@ -7,6 +7,26 @@ import '../utility/http_uri.dart';
 import 'board.dart';
 
 class SpringBoardApi{
+  Future<bool> requestBoardRegister(BoardRegisterRequest request) async {
+    var data = { 'title': request.title, 'writer': request.writer,
+                'content' : request.content, 'boardCategoryName' : request.boardCategoryname };
+    var body = json.encode(data);
+
+    var response = await http.post(
+      Uri.http(HttpUri.home, '/board/register'),
+      headers: {"Content-Type": "application/json"},
+      body: body,
+    );
+
+    if (response.statusCode == 200) {
+      debugPrint("통신 확인");
+      return json.decode(response.body);
+    } else {
+      throw Exception("통신 실패");
+    }
+  }
+
+
   Future<List<Board>?> requestEveryBoardList() async {
 
     var response = await http.get(
@@ -50,4 +70,13 @@ class SpringBoardApi{
       throw Exception("통신 실패");
     }
   }
+}
+
+class BoardRegisterRequest {
+  String title;
+  String writer;
+  String content;
+  String boardCategoryname;
+
+  BoardRegisterRequest(this.title, this.writer, this.content, this.boardCategoryname);
 }
