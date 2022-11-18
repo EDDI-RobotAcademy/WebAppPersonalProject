@@ -1,8 +1,10 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:my_todos/controller/sign_in_controller.dart';
+import 'package:my_todos/view/sign_in_view.dart';
 
 class MenuDrawer extends StatelessWidget {
-  const MenuDrawer({Key? key}) : super(key: key);
+  SignInController signInController = Get.find();
 
   @override
   Widget build(BuildContext context) {
@@ -20,7 +22,12 @@ class MenuDrawer extends StatelessWidget {
           ),
           ListTile(
             title: Text("로그아웃"),
-            trailing: IconButton(icon: Icon(Icons.navigate_next), onPressed: (){},),
+            trailing: IconButton(
+              icon: Icon(Icons.navigate_next),
+              onPressed: (){
+                signInController.logout();
+                Get.to(() => SignInView());
+                },),
           ),
         ],
       ),
