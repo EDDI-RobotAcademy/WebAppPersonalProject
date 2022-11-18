@@ -7,5 +7,5 @@ import java.util.List;
 
 public interface FriendService {
 
-    public List<String> list(Account account);
+    public List<Friend> list(Account account);
 }
