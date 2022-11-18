@@ -10,6 +10,15 @@ TextStyle headerText () {
   );
 }
 
+TextStyle subHeaderText () {
+  return const TextStyle(
+      fontFamily: 'FontAppleSDGothicNeo',
+      fontSize: 16,
+      fontWeight: FontWeight.bold,
+      color: Colors.black87
+  );
+}
+
 TextStyle linkText () {
   return const TextStyle(
       fontFamily: 'FontAppleSDGothicNeo',
@@ -22,7 +31,16 @@ TextStyle linkText () {
 TextStyle defaultText () {
   return const TextStyle(
       fontFamily: 'FontAppleSDGothicNeo',
-      fontSize: 18,
+      fontSize: 16,
+      fontWeight: FontWeight.w300,
+      color: Colors.black87
+  );
+}
+
+TextStyle subText () {
+  return const TextStyle(
+      fontFamily: 'FontAppleSDGothicNeo',
+      fontSize: 12,
       fontWeight: FontWeight.w300,
       color: Colors.black87
   );
