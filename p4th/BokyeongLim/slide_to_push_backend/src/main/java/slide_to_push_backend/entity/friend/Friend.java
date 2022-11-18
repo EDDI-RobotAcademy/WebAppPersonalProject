@@ -1,24 +1,24 @@
 package slide_to_push_backend.entity.friend;
 
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import slide_to_push_backend.entity.member.Account;
 
 import javax.persistence.*;
 
 @Entity
+@NoArgsConstructor
+@Getter
 public class Friend {
 
     @Id
-    @Getter
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Getter
     @OneToOne
     @JoinColumn(name = "my_id")
     private Account myAccount;
 
-    @Getter
     @OneToOne
     @JoinColumn(name = "friend_id")
     private Account friendedAccount;
