@@ -23,7 +23,9 @@
               v-show="bucket.switchValue === false"
           >
             <router-link :to="{name: 'BucketListReadView',
-            params: { bucketId: bucket.bucketId.toString() }}">
+            params: { bucketId: bucket.bucketId.toString() }}"
+                         style="text-decoration: none"
+            >
               <v-img
                   src="@/assets/thumbnail/기본이미지.jpg"
                   class="white--text align-end"
@@ -49,8 +51,8 @@ export default {
   components: {
     HeaderComponent,
   },
-  props:{
-    buckets:{
+  props: {
+    buckets: {
       type: Array
     }
   },
