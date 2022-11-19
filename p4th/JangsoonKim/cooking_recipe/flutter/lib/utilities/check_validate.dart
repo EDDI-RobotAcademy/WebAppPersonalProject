@@ -36,6 +36,27 @@ class CheckValidate {
       return null;
     }
   }
+
+  String? validateTitle(FocusNode focusNode, String value) {
+    if (value.isEmpty) {
+      focusNode.requestFocus();
+      return '필수 입력 항목입니다.';
+    } else if (!value.isValidTitle()) {
+      focusNode.requestFocus();
+      return '제목은 3자이상 33자 이하로 입력가능합니다.';
+    } else {
+      return null;
+    }
+  }
+
+  String? validateContent(FocusNode focusNode, String value) {
+    if (value.isEmpty) {
+      focusNode.requestFocus();
+      return '레시피를 입력해주세요.';
+    } else {
+      return null;
+    }
+  }
 }
 
 extension InputValidate on String {
@@ -46,14 +67,18 @@ extension InputValidate on String {
   }
 
   bool isValidPassword() {
-    final passwordRegExp = RegExp(
-        r"^(?=.*?[a-z])(?=.*?[0-9])(?=.*?[!@#\$&*~]).{8,}$");
+    final passwordRegExp =
+        RegExp(r"^(?=.*?[a-z])(?=.*?[0-9])(?=.*?[!@#\$&*~]).{8,}$");
     return passwordRegExp.hasMatch(this);
   }
 
   bool isValidNickName() {
-    final nickNameRegExp = RegExp(
-        r"^[a-zA-Z0-9ㄱ-ㅎㅏ-ㅣ가-힣]{3,10}$");
+    final nickNameRegExp = RegExp(r"^[a-zA-Z0-9ㄱ-ㅎㅏ-ㅣ가-힣]{3,10}$");
+    return nickNameRegExp.hasMatch(this);
+  }
+
+  bool isValidTitle() {
+    final nickNameRegExp = RegExp(r"^[a-zA-Z0-9ㄱ-ㅎㅏ-ㅣ가-힣\s]{3,33}$");
     return nickNameRegExp.hasMatch(this);
   }
 }
