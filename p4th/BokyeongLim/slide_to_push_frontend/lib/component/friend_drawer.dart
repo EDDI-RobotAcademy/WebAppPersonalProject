@@ -50,7 +50,17 @@ class FriendsDrawer extends StatelessWidget {
                                         ),
                                         trailing : TextButton(
                                           child: Text('삭제', style: TextStyle(fontSize: 10),),
-                                          onPressed: (){},
+                                          onPressed: () async{
+                                            bool result =  await friendController.delete
+                                              (friendController.friendsList[index].friendEmail);
+
+                                            if(result) {
+                                              friendController.fetchData();
+                                            } else {
+                                              print("통신 오류");
+                                            }
+
+                                            },
                                         )
                                     ),
                                     SizedBox( width: MediaQuery.of(context).size.width, child: Container(height: 1, color: Colors.black12,),)

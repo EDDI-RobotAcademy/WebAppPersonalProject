@@ -24,4 +24,17 @@ class FriendController extends GetxController {
       friendsList.value = friend;
     }
   }
+
+  delete(String friendEmail) async {
+    if(signInController.isAuthenticated.value) {
+      await FriendService.requestDeleteFriend(friendEmail);
+    }
+
+    if(FriendService.reqDeleteFriend.statusCode != 200) {
+      return false;
+    }
+
+    return true;
+
+  }
 }

@@ -7,7 +7,7 @@ import '../states/authentication.dart';
 
 class FriendService {
   static const String httpUri = '192.168.200.183:9955';
-
+  static var reqDeleteFriend;
   // '10.0.2.2:9955';
 
   static Future<List<Friend>?> fetchFriends() async {
@@ -25,6 +25,21 @@ class FriendService {
       return friendFromJson(jsonData);
     } else {
       return null;
+    }
+  }
+  static requestDeleteFriend(String friendEmail) async {
+    var data = {'friendEmail': friendEmail , "token" : Auth.authToken};
+    var body = json.encode(data);
+
+    try{
+      reqDeleteFriend = await http.delete(
+        Uri.http(httpUri, '/friend/delete'),
+        headers: {"Content-Type": "application/json"},
+        body: body,
+      );
+
+    }catch (e){
+      debugPrint(e.toString());
     }
   }
 }
