@@ -1,4 +1,4 @@
-import 'package:demo/screens/signup_screen.dart';
+import 'package:demo/screens/authentication%20/signup_screen.dart';
 import 'package:demo/widgets/authentication/background.dart';
 import 'package:demo/widgets/authentication/rounded_id_field.dart';
 import 'package:demo/widgets/authentication/rounded_password_field.dart';
@@ -19,7 +19,6 @@ class LoginForm extends StatefulWidget {
 
 class LoginFormState extends State<LoginForm> {
   String email = '';
-  String nickname = '';
   String password = '';
 
   final _formKey = GlobalKey<FormState>();
@@ -58,11 +57,10 @@ class LoginFormState extends State<LoginForm> {
             ),
             RoundedButton(
               text: "로그인",
-              onPressed: () {
+              onPressed: () async {
                 if (_formKey.currentState!.validate()) {
                   Future<UserLoginResponse> future =
                       SpringApi().login(UserLoginRequest(email, password));
-
                   future.then((UserLoginResponse) {
                     print("로그인 성공");
                   }).catchError((error) {
