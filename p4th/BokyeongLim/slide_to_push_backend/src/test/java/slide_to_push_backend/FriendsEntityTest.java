@@ -25,8 +25,6 @@ public class FriendsEntityTest {
         Long myId = 2L;
         Long friendId = 20L;
 
-
-
         Optional<Account> maybeMember = accountRepository.findByAccount(myId);
         Account myAccount = maybeMember.get();
 

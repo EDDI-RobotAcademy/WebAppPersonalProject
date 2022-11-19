@@ -6,8 +6,8 @@ String friendToJson(List<Friend> data) =>
     json.encode(List<dynamic>.from(data.map((x) => x.toJson())));
 
 class Friend{
- var myAccount;
- var friendedAccount;
+  var myAccount;
+  var friendedAccount;
   final String friendEmail;
 
   Friend({
