@@ -9,6 +9,7 @@ import slide_to_push_backend.repository.friend.FriendRepository;
 import slide_to_push_backend.repository.member.AccountRepository;
 
 import java.util.List;
+import java.util.Objects;
 import java.util.Optional;
 
 
@@ -29,19 +30,51 @@ public class FriendServiceImpl implements FriendService{
     }
 
     @Override
+    public Boolean add(Account myAccount, String friendEmail) {
+        Account friendAccount = acquireFriendAccount(friendEmail);
+
+        // 나를 친구로 추가 못하게!
+        if(Objects.equals(myAccount.getId(), friendAccount.getId())) {
+            return false;
+        }
+
+        // 이미 존재하는치 확인
+        Optional<Friend> isAdded = friendRepository.alreadyExist(myAccount, friendAccount);
+        if(isAdded.isPresent()) {
+            return false;
+        }
+
+        Friend mine = new Friend(myAccount, friendAccount);
+        Friend yours = new Friend(friendAccount, myAccount);
+
+        friendRepository.save(mine);
+        friendRepository.save(yours);
+
+        return true;
+    }
+
+    @Override
     public void remove(Account myAccount, String friendEmail) {
         // 친구의 email 값으로 친구 Account 찾기
-        Optional<Account> maybeFriendAccount = accountRepository.findByEmail(friendEmail);
+        Account friendAccount = acquireFriendAccount(friendEmail);
 
-        //Repository에서 친구의 Account까지 찾으면 두 어카운트 값을 넣어 friendRepository의 값을 찾는다.
-        //양방으로 2개를 찾아야 한다.
-        if (maybeFriendAccount.isPresent()) {
-            Account friendedAccount = maybeFriendAccount.get();
-            Friend mine = friendRepository.findByOurAccount(myAccount, friendedAccount);
-            Friend yours = friendRepository.findByOurAccount(friendedAccount, myAccount);
+        Friend mine = friendRepository.findByOurAccount(myAccount, friendAccount);
+        Friend yours = friendRepository.findByOurAccount(friendAccount, myAccount);
 
-            friendRepository.delete(mine);
-            friendRepository.delete(yours);
-        }
+        friendRepository.delete(mine);
+        friendRepository.delete(yours);
     }
+
+    public Account acquireFriendAccount(String friendEmail) {
+        Optional<Account> maybeFriendAccount = accountRepository.findByEmail(friendEmail);
+        Account friendAccount;
+        if (maybeFriendAccount.isPresent()) {
+            friendAccount = maybeFriendAccount.get();
+            return friendAccount;
+        }
+
+        return null;
+    }
+
+
 }
