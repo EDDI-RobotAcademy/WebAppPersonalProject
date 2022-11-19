@@ -1,42 +1,80 @@
 PODS:
-  - BSGridCollectionViewLayout (1.2.5)
-  - BSImagePicker (2.10.3):
-    - BSGridCollectionViewLayout (= 1.2.5)
-    - BSImageView (= 1.0.3)
-  - BSImageView (1.0.3)
-  - Flutter (1.0.0)
-  - multiple_images_picker (1.0.00):
-    - BSImagePicker (~> 2.10.3)
+  - DKImagePickerController/Core (4.3.4):
+    - DKImagePickerController/ImageDataManager
+    - DKImagePickerController/Resource
+  - DKImagePickerController/ImageDataManager (4.3.4)
+  - DKImagePickerController/PhotoGallery (4.3.4):
+    - DKImagePickerController/Core
+    - DKPhotoGallery
+  - DKImagePickerController/Resource (4.3.4)
+  - DKPhotoGallery (0.0.17):
+    - DKPhotoGallery/Core (= 0.0.17)
+    - DKPhotoGallery/Model (= 0.0.17)
+    - DKPhotoGallery/Preview (= 0.0.17)
+    - DKPhotoGallery/Resource (= 0.0.17)
+    - SDWebImage
+    - SwiftyGif
+  - DKPhotoGallery/Core (0.0.17):
+    - DKPhotoGallery/Model
+    - DKPhotoGallery/Preview
+    - SDWebImage
+    - SwiftyGif
+  - DKPhotoGallery/Model (0.0.17):
+    - SDWebImage
+    - SwiftyGif
+  - DKPhotoGallery/Preview (0.0.17):
+    - DKPhotoGallery/Model
+    - DKPhotoGallery/Resource
+    - SDWebImage
+    - SwiftyGif
+  - DKPhotoGallery/Resource (0.0.17):
+    - SDWebImage
+    - SwiftyGif
+  - file_picker (0.0.1):
+    - DKImagePickerController/PhotoGallery
     - Flutter
+  - Flutter (1.0.0)
+  - image_picker_ios (0.0.1):
+    - Flutter
+  - SDWebImage (5.14.1):
+    - SDWebImage/Core (= 5.14.1)
+  - SDWebImage/Core (5.14.1)
   - shared_preferences_ios (0.0.1):
     - Flutter
+  - SwiftyGif (5.4.3)
 
 DEPENDENCIES:
+  - file_picker (from `.symlinks/plugins/file_picker/ios`)
   - Flutter (from `Flutter`)
-  - multiple_images_picker (from `.symlinks/plugins/multiple_images_picker/ios`)
+  - image_picker_ios (from `.symlinks/plugins/image_picker_ios/ios`)
   - shared_preferences_ios (from `.symlinks/plugins/shared_preferences_ios/ios`)
 
 SPEC REPOS:
   trunk:
-    - BSGridCollectionViewLayout
-    - BSImagePicker
-    - BSImageView
+    - DKImagePickerController
+    - DKPhotoGallery
+    - SDWebImage
+    - SwiftyGif
 
 EXTERNAL SOURCES:
+  file_picker:
+    :path: ".symlinks/plugins/file_picker/ios"
   Flutter:
     :path: Flutter
-  multiple_images_picker:
-    :path: ".symlinks/plugins/multiple_images_picker/ios"
+  image_picker_ios:
+    :path: ".symlinks/plugins/image_picker_ios/ios"
   shared_preferences_ios:
     :path: ".symlinks/plugins/shared_preferences_ios/ios"
 
 SPEC CHECKSUMS:
-  BSGridCollectionViewLayout: 333dcb457a5a3bdd9212607ab5756553dcfe06cb
-  BSImagePicker: 07404254f2fcdaf5a2eb403c0f8c337267ce8738
-  BSImageView: a149459433a2687157d034c78e059d30ac7f2544
+  DKImagePickerController: b512c28220a2b8ac7419f21c491fc8534b7601ac
+  DKPhotoGallery: fdfad5125a9fdda9cc57df834d49df790dbb4179
+  file_picker: 817ab1d8cd2da9d2da412a417162deee3500fc95
   Flutter: f04841e97a9d0b0a8025694d0796dd46242b2854
-  multiple_images_picker: c57bdc05801e244c110040889e84851a56e140fd
+  image_picker_ios: b786a5dcf033a8336a657191401bfdf12017dabb
+  SDWebImage: e1b3c38f170c6100130fce6856e423ed9e5f4fce
   shared_preferences_ios: 548a61f8053b9b8a49ac19c1ffbc8b92c50d68ad
+  SwiftyGif: 6c3eafd0ce693cad58bb63d2b2fb9bacb8552780
 
 PODFILE CHECKSUM: ef19549a9bc3046e7bb7d2fab4d021637c0c58a3
 
