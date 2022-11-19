@@ -51,7 +51,7 @@ class _MypageFormState extends State<MypageForm> {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       SizedBox(
-                        height: size.height * 0.2,
+                        height: size.height * 0.25,
                       ),
                       Padding(
                         padding: const EdgeInsets.only(left: 15),
