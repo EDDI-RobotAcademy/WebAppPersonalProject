@@ -34,7 +34,7 @@ public class BoardServiceImpl implements BoardService{
     BoardRepository boardRepository;
 
     @Override
-    public void register(BoardRegisterRequest boardRegisterRequest) {
+    public boolean register(BoardRegisterRequest boardRegisterRequest) {
         BoardCategory boardCategory;
         Member member;
         Optional<BoardCategory> maybeCategory = categoryRepository.findByCategoryName(boardRegisterRequest.getBoardCategoryName());
@@ -65,6 +65,8 @@ public class BoardServiceImpl implements BoardService{
         memberRepository.save(member);
 
         boardRepository.save(board);
+
+        return true;
     }
 
     @Override
@@ -77,6 +79,7 @@ public class BoardServiceImpl implements BoardService{
                                             b.getTitle(),
                                             b.getWriter(),
                                             b.getContent(),
+                                            b.getBoardCategory().getCategoryName(),
                                             b.getRegDate() );
             responses.add(target);
         }
@@ -102,6 +105,7 @@ public class BoardServiceImpl implements BoardService{
                                             b.getTitle(),
                                             b.getWriter(),
                                             b.getContent(),
+                                            b.getBoardCategory().getCategoryName(),
                                             b.getRegDate() );
                 responses.add(target);
             }
@@ -126,6 +130,7 @@ public class BoardServiceImpl implements BoardService{
                                             board.getTitle(),
                                             board.getWriter(),
                                             board.getContent(),
+                                            board.getBoardCategory().getCategoryName(),
                                             board.getRegDate() );
 
         // log.info(String.valueOf(maybeBoard.get()));
@@ -144,11 +149,13 @@ public class BoardServiceImpl implements BoardService{
             modifyBoard.setContent(boardModifyRequest.getContent());
             boardRepository.save(modifyBoard);
 
-            modifyBoardResponse = new BoardResponse(modifyBoard.getBoardNo(),
-                                                modifyBoard.getTitle(),
-                                                modifyBoard.getWriter(),
-                                                modifyBoard.getContent(),
-                                                modifyBoard.getRegDate());
+            modifyBoardResponse = new BoardResponse(
+                                        modifyBoard.getBoardNo(),
+                                        modifyBoard.getTitle(),
+                                        modifyBoard.getWriter(),
+                                        modifyBoard.getContent(),
+                                        modifyBoard.getBoardCategory().getCategoryName(),
+                                        modifyBoard.getRegDate());
 
             return modifyBoardResponse;
         } else {
