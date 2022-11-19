@@ -1,6 +1,6 @@
 <template>
-  <div style="background-color: #356859" >
-    <v-container>
+  <div style="background-color: #356859">
+    <v-container style="font-family: '210 M고딕 040'">
       <app-bar-component/>
     </v-container>
   </div>
@@ -16,18 +16,26 @@ export default {
     return {
       nickName: "방문자",
       isLogin: false,
+      /* userToken: "", */
     }
   },
 
-  created() {
-    if(this.$cookies.isKey("user")) {
-      let userToken = this.$cookies.get("user")
-      this.requestLoggedInUserProfileToSpring({ userToken })
-    }
+created() {
+   /* await this.getUserProfile() */
+
+
   },
 
   methods: {
-    ...mapActions(['requestLoggedInUserProfileToSpring'])
+    ...mapActions(['requestLoggedInUserProfileToSpring']),
+
+    /*async getUserProfile() {
+      this.userToken = localStorage.getItem("userInfo")
+      const { userToken } = this
+      console.log("userToken: " + userToken)
+      await this.requestLoggedInUserProfileToSpring( { userToken })
+    } */
+
   }
 
 }
