@@ -78,7 +78,6 @@ public class MemberServiceImpl implements MemberService {
 
             log.info("member email: " + member.getEmail());
             log.info("request email: " + request.getEmail());
-            log.info("request password: " + request.getPassword());
 
             if (!member.isRightPassword(request.getPassword())) {
                 throw new RuntimeException("잘못된 패스워드입니다.");
