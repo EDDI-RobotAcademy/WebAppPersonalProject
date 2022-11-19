@@ -8,4 +8,6 @@ import java.util.List;
 public interface FriendService {
 
     public List<Friend> list(Account account);
+
+    public void remove(Account myAccount, String friendEmail);
 }

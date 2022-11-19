@@ -11,4 +11,7 @@ import java.util.List;
 public interface FriendRepository extends JpaRepository<Friend, Long> {
     @Query("select f from Friend f where f.myAccount = :myAccount")
     List<Friend> findByAccount(Account myAccount);
+
+    @Query("select f from Friend f where f.myAccount = :myAccount and f.friendedAccount = :friendedAccount")
+    Friend findByOurAccount(Account myAccount, Account friendedAccount);
 }
