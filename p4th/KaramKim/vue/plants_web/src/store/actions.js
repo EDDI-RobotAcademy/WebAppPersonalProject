@@ -53,7 +53,7 @@ export default {
             })
     },
     requestQuestionBoardContentsFromSpring({ commit }, boardNo) {
-        console.log('requestQuestionBoardFromSpring()')
+        console.log('requestQuestionBoardContentsFromSpring()')
 
         axios.post(`http://localhost:7777/plants/question-board/read/${boardNo}`)
             .then((res) => {
@@ -66,6 +66,17 @@ export default {
         axios.delete(`http://localhost:7777/plants/question-board/delete/${boardNo}`)
             .then(() => {
                 alert('해당 게시물을 삭제 완료했습니다.')
+            })
+    },
+    requestBoardModifyToSpring(_, payload) {
+        console.log('requestBoardModifyToSpring()')
+
+        const { boardNo, title, content, writer, regDate } = payload
+
+        axios.put(`http://localhost:7777/plants/question-board/modify/${boardNo}`,
+            { title, content, writer, regDate })
+            .then(() => {
+                alert('게시물을 수정 완료했습니다.')
             })
     }
 }
