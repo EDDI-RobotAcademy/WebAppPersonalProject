@@ -1,6 +1,11 @@
 import axios from "axios";
 import router from "@/router";
-import {REQUEST_QUESTION_BOARD_LIST_FROM_SPRING} from "@/store/mutation-types";
+import {
+    REQUEST_QUESTION_BOARD_CONTENTS_FROM_SPRING,
+    REQUEST_QUESTION_BOARD_LIST_FROM_SPRING
+} from "@/store/mutation-types";
+import store from "@/store/index";
+import cookies from "vue-cookies";
 
 export default {
     requestSignUpDataToSpring (_, payload) {
@@ -29,6 +34,22 @@ export default {
             })
             .catch((res) => {
                 alert((res.response.data.message))
+            })
+    },
+    requestQuestionBoardListFromSpring({ commit }) {
+        console.log('requestQuestionBoardListFromSpring')
+
+        axios.post('http://localhost:7777/plants/question-board/list')
+            .then((res) => {
+                commit(REQUEST_QUESTION_BOARD_LIST_FROM_SPRING, res.data)
+            })
+    },
+    requestCreateQuestionBoardContentsToSpring(_, payload) {
+        console.log('requestQuestionBoardListFromSpring')
+
+        axios.post('http://localhost:7777/plants/question-board/register', payload)
+            .then(() => {
+                alert('게시물 등록 완료')
             })
     },
 }
