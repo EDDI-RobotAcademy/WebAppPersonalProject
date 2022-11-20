@@ -1,6 +1,5 @@
 <template>
   <div align="center">
-    <h2>게시물 수정</h2>
     <board-modify-form
         v-if="board"
         :board="board"

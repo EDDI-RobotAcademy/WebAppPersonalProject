@@ -1,53 +1,70 @@
 <template>
   <div>
     <form @submit.prevent="onSubmit">
-      <table>
-        <tr>
-          <td>게시물 번호</td>
-          <td>
-            <input type="text" :value="board.boardNo" disabled>
-          </td>
-        </tr>
-        <tr>
-          <td>제목</td>
-          <td>
-            <input type="text" v-model="title">
-          </td>
-        </tr>
-        <tr>
-          <td>작성자</td>
-          <td>
-            <input type="text" :value="board.writer" disabled>
-          </td>
-        </tr>
-        <tr>
-          <td>등록일자</td>
-          <td>
-            <input type="text" :value="board.regDate" disabled>
-          </td>
-        </tr>
-        <tr>
-          <td>본문</td>
-          <td>
-            <textarea cols="50" rows="20" v-model="content">
-            </textarea>
-          </td>
-        </tr>
-      </table>
-      <div>
-        <common-button
-            type="submit"
-            btn-name="저장"
+      <v-container>
+        <common-page-description
+          page-name="게시물 수정"
         />
-        <router-link
-            :to="{ name: 'BoardReadView', params: { boardNo: board.boardNo.toString() } }"
-            style="text-decoration: none"
-        >
-          <common-button
-              btn-name="취소"
-          />
-        </router-link>
-      </div>
+        <div class="mt-10 mb-10" style="width: 630px">
+          <div>
+            <common-text-field
+                type="text"
+                label="식물 종류"
+                :value="board.plantName"
+                disabled
+            />
+          </div>
+          <div>
+            <common-text-field
+                type="text"
+                label="제목"
+                v-model="title"
+            />
+          </div>
+          <div>
+            <common-text-field
+                type="text"
+                label="작성자"
+                :value="board.writer"
+                disabled
+            />
+          </div>
+          <div>
+            <common-text-field
+                type="text"
+                label="등록 일자"
+                :value="board.regDate"
+                disabled
+            />
+          </div>
+
+          <div>
+            <v-textarea
+                label="내용"
+                v-model="content"
+                height="600px"
+                color="light-green darken-3"
+                outlined
+            />
+          </div>
+          <div>
+            <common-button
+                type="submit"
+                btn-name="저장"
+                class="mr-3 ml-3"
+            />
+            <router-link
+                :to="{ name: 'BoardReadView', params: { boardNo: board.boardNo.toString() } }"
+                style="text-decoration: none"
+            >
+              <common-button
+                  btn-name="취소"
+                  class="mr-3 ml-3"
+              />
+            </router-link>
+          </div>
+        </div>
+      </v-container>
     </form>
   </div>
 </template>
