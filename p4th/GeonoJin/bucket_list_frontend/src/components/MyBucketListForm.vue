@@ -13,7 +13,7 @@
       <v-layout>
         <h2 style="margin-left: 20px">마이버킷</h2>
       </v-layout>
-      <div align="end">
+      <div align="end" style="margin-top: 50px">
         <v-dialog
             v-model="dialog"
             persistent
@@ -118,6 +118,39 @@
           </v-card>
         </v-dialog>
       </div>
+      <v-layout justify-center style="margin-top: 100px">
+        <div>
+          <v-row class="ma-auto">
+            <div v-if="!buckets || (Array.isArray(buckets) && buckets.length === 0)"
+                 style="margin-top: 200px"
+            >
+              <h3>현재 등록된 버킷리스트가 없습니다.</h3>
+            </div>
+            <v-card
+                v-else
+                v-for="bucket in buckets" :key="bucket.bucketId"
+                max-width="250"
+                class="ma-5"
+                v-show="bucket.switchValue === false"
+            >
+              <router-link :to="{name: 'BucketListReadView',
+            params: { bucketId: bucket.bucketId.toString() }}"
+                           style="text-decoration: none"
+              >
+                <v-img
+                    src="@/assets/thumbnail/기본이미지.jpg"
+                    class="white--text align-end"
+                    gradient="to bottom, rgba(0,0,0,.1), rgba(0,0,0,.5)"
+                    height="200px"
+                    contain
+                >
+                  <v-card-title v-text="bucket.bucketTitle"></v-card-title>
+                </v-img>
+              </router-link>
+            </v-card>
+          </v-row>
+        </div>
+      </v-layout>
     </v-container>
   </div>
 
@@ -131,6 +164,11 @@ export default {
   name: "MyBucketList",
   components: {
     ToolBarComponent,
+  },
+  props:{
+    buckets:{
+      type: Array
+    }
   },
   data() {
     return {

@@ -5,7 +5,8 @@ import{
     GET_BUCKET_LIST_TO_SPRING,
     REQUEST_BUCKET_FROM_SPRING,
     DOWN_LOAD_IMG_FILE_TO_SPRING,
-    GET_CURRENT_BUCKET_LIST_CATEGORY
+    GET_CURRENT_BUCKET_LIST_CATEGORY,
+    REQUEST_MY_BUCKET_LIST_TO_SPRING
     // REQUEST_LOGIN_STATE_TO_SPRING
 } from "./mutation-types"
 
@@ -30,5 +31,8 @@ export default {
     },
     [GET_CURRENT_BUCKET_LIST_CATEGORY](state, passingData) {
         state.currentCategoryBucketList = passingData
+    },
+    [REQUEST_MY_BUCKET_LIST_TO_SPRING](state, passingData) {
+        state.bucketListByNickname = passingData
     },
 }
