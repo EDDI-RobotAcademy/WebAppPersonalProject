@@ -1,38 +1,55 @@
 <template>
   <div>
-    <table>
-      <tr>
-        <td>게시물 번호</td>
-        <td>
-          <input type="text" :value="board.boardNo" readonly>
-        </td>
-      </tr>
-      <tr>
-        <td>제목</td>
-        <td>
-          <input type="text" :value="board.title" readonly>
-        </td>
-      </tr>
-      <tr>
-        <td>작성자</td>
-        <td>
-          <input type="text" :value="board.writer" readonly>
-        </td>
-      </tr>
-      <tr>
-        <td>등록일자</td>
-        <td>
-          <input type="text" :value="board.regDate" readonly>
-        </td>
-      </tr>
-      <tr>
-        <td>본문</td>
-        <td>
-          <textarea cols="50" rows="20" :value="board.content" readonly>
-          </textarea>
-        </td>
-      </tr>
-    </table>
+    <v-container>
+      <common-page-description
+        page-name="질문게시판"
+      />
+      <div class="mt-10 mb-10" style="width: 630px">
+        <div>
+          <common-text-field
+              type="text"
+              label="식물 종류"
+              :value="board.plantName"
+              readonly
+          />
+        </div>
+        <div>
+          <common-text-field
+              type="text"
+              label="제목"
+              :value="board.title"
+              readonly
+          />
+        </div>
+        <div>
+          <common-text-field
+              type="text"
+              label="작성자"
+              :value="board.writer"
+              readonly
+          />
+        </div>
+        <div>
+          <common-text-field
+              type="text"
+              label="등록 일자"
+              :value="board.regDate"
+              readonly
+          />
+        </div>
+
+        <div>
+          <v-textarea
+              label="내용"
+              :value="board.content"
+              height="600px"
+              color="light-green darken-3"
+              outlined
+              readonly
+          />
+        </div>
+      </div>
+    </v-container>
   </div>
 </template>
 

@@ -7,13 +7,13 @@
             :items="boards"
             :boards="boards"
         />
-    <div align="center" class="mb-10 mt-3">
-        <common-button
-            icon-name="mdi-pencil"
-            btn-name="글쓰기"
-            @click="registerBoardContent"
-        />
-    </div>
+        <div align="center" class="mb-10 mt-3">
+          <common-button
+              icon-name="mdi-pencil"
+              btn-name="글쓰기"
+              @click="registerBoardContent"
+          />
+        </div>
   </div>
 </template>
 

@@ -35,7 +35,7 @@
           <v-data-table
               :headers="headers"
               :items="items"
-              :items-per-page="5"
+              :items-per-page="10"
               @click:row="rowClick"
               class="elevation-1"
               :search="search"
