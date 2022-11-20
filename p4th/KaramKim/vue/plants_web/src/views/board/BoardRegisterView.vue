@@ -1,6 +1,5 @@
 <template>
   <div align="center">
-    <h2>게시물 작성</h2>
     <board-register-form @submit="onSubmit"/>
   </div>
 </template>

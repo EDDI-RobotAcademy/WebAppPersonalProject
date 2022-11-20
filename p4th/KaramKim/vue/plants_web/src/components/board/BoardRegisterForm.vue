@@ -1,62 +1,79 @@
 <template>
   <form @submit.prevent="onSubmit">
-    <!-- 이미지 넣기 !!!!!!!!!!!!! -->
-    <!-- 식물 종류 dropdown -->
-
-    <table width="460" height="500">
-      <tr>
-        <td>식물 종류</td>
-        <td>
-          <v-select
-              v-model="select"
-              :items="items"
-              item-text="plantName"
-              item-value="abbr"
-              label="식물 종류"
-              persistent-hint
-              single-line
-              return-object
-          />
-        </td>
-      </tr>
-      <tr>
-        <td>
-          <common-text-field
-              v-model="title"
-              label="제목"
-          />
-        </td>
-      </tr>
-      <tr>
-        <td>
-          <common-text-field
-              :value="writer"
-              label="작성자"
-              readonly
-          />
-        </td>
-      </tr>
-      <tr>
-        <td>
-          <v-textarea outlined v-model="content"/>
-        </td>
-      </tr>
-    </table>
-
-    <div>
-      <common-button
-          type="submit"
-          btn-name="등록"
+    <v-container>
+      <common-page-description
+        page-name="게시물 작성"
       />
-      <common-button
-          btn-name="취소"
-          @click="cancel"
-      />
-    </div>
+      <div class="mt-10 mb-10" style="width: 630px">
+        <v-row>
+          <v-col>
+            <div>
+              <v-select
+                  v-model="select"
+                  :items="items"
+                  item-text="plantName"
+                  item-value="abbr"
+                  label="식물 종류"
+                  color="light-green darken-3"
+                  persistent-hint
+                  single-line
+                  return-object
+              />
+            </div>
+          </v-col>
+        </v-row>
+        <v-row>
+          <v-col>
+            <common-text-field
+                v-model="title"
+                label="제목"
+                style="text-align: center"
+            />
+          </v-col>
+        </v-row>
+
+        <v-row>
+          <v-col>
+            <common-text-field
+                :value="writer"
+                label="작성자"
+                disabled="false"
+            />
+          </v-col>
+        </v-row>
+        <v-row>
+          <v-col>
+            <v-textarea
+                label="내용"
+                v-model="content"
+                height="600px"
+                color="light-green darken-3"
+                outlined>
+            </v-textarea>
+          </v-col>
+        </v-row>
+        <v-row>
+          <v-col>
+            <common-button
+                type="submit"
+                btn-name="등록"
+                class="mr-3 ml-3"
+            />
+            <common-button
+                btn-name="취소"
+                @click="cancel"
+                class="mr-3 ml-3"
+            />
+          </v-col>
+        </v-row>
+      </div>
+
+    </v-container>
   </form>
 </template>
 
 <script>
+
 export default {
   name: "BoardRegisterForm",
   data() {
@@ -64,14 +81,7 @@ export default {
       title: '',
       writer: '',
       content: '',
-      dropItems: [
-        {title: '종류1'},
-        {title: '종류2'},
-        {title: '종류3'},
-      ],
-      select: {
-        plantName: '몬스테라', abbr: 'ML'
-      },
+      select: '',
       items: [
         {plantName: '몬스테라'},
         {plantName: '스투키'},
