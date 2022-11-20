@@ -52,6 +52,14 @@ export default {
                 alert('게시물 등록 완료')
             })
     },
+    requestQuestionBoardContentsFromSpring({ commit }, boardNo) {
+        console.log('requestQuestionBoardFromSpring()')
+
+        axios.get(`http://localhost:7777/plants/question-board/read/${boardNo}`)
+            .then((res) => {
+                commit(REQUEST_QUESTION_BOARD_CONTENTS_FROM_SPRING, res.data)
+            })
+    }
 }
 
 
