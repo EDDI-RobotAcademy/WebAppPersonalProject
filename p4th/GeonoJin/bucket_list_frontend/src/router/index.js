@@ -62,9 +62,14 @@ const routes = [
     component: SignUpView
   },
   {
-    path: '/myPage',
+    path: '/myPage/:nickName',
     name: 'MyPageView',
-    component: MyPageView
+    components: {
+      default: MyPageView
+    },
+    props:{
+      default: true
+    }
   },
   {
     path: '/myBucket',

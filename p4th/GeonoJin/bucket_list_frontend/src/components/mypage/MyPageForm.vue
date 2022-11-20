@@ -20,9 +20,6 @@
             <h3>계정 정보</h3>
           </div>
           <v-divider></v-divider>
-          <v-btn rounded elevation="0" style="margin-top: 10px" color="white" @click="refreshNickname">
-            <v-icon>mdi-refresh</v-icon>
-          </v-btn>
           <div style="margin-left: 80px">
             <div class="settingTitle">
               <h5>닉네임</h5>
@@ -60,11 +57,17 @@
 
 <script>
 import ToolBarComponent from "@/components/common/ToolBarComponent";
-import {mapActions, mapState} from "vuex";
+import {mapActions} from "vuex";
 
 export default {
   name: "MyPageForm",
   components: {ToolBarComponent},
+  props:{
+    nickname:{
+      type: String,
+      required: true
+    }
+  },
   data() {
     return {
       nickName: '',
@@ -73,9 +76,6 @@ export default {
     }
   },
   methods: {
-    ...mapState([
-      'currentUserNickname'
-    ]),
     ...mapActions([
       'checkDuplicateNicknameToSpring'
     ]),
@@ -88,8 +88,7 @@ export default {
       }
     },
     async changeNicknameOverlapCheck() {
-      const {nickName} = this
-      await this.checkDuplicateNicknameToSpring({nickName})
+      await this.checkDuplicateNicknameToSpring(this.nickName)
 
       if (this.$store.state.nicknamePassValue) {
         const userToken = localStorage.getItem('userInfo')
@@ -102,10 +101,10 @@ export default {
         this.signInCheckNicknamePassValue = false
       }
     },
-    refreshNickname() {
-      this.nickName = this.$store.state.currentUserNickname
-    }
   },
+  created() {
+    this.nickName = this.nickname
+  }
 }
 </script>
 
