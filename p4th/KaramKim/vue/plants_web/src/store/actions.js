@@ -59,6 +59,14 @@ export default {
             .then((res) => {
                 commit(REQUEST_QUESTION_BOARD_CONTENTS_FROM_SPRING, res.data)
             })
+    },
+    requestDeleteBoardToSpring(_, boardNo) {
+        console.log('requestDeleteBoardToSpring()')
+
+        axios.delete(`http://localhost:7777/plants/question-board/delete/${boardNo}`)
+            .then(() => {
+                alert('해당 게시물을 삭제 완료했습니다.')
+            })
     }
 }
 
