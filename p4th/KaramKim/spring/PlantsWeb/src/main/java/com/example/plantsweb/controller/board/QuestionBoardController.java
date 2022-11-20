@@ -37,7 +37,7 @@ public class QuestionBoardController {
         return service.read(boardNo);
     }
 
-    @PutMapping("/{boardNo}")
+    @PutMapping("/modify/{boardNo}")
     public QuestionBoard questionBoardModify(@PathVariable("boardNo") Long boardNo,
                                              @RequestBody QuestionBoard questionBoard) {
         log.info("questionBoardModify()");
@@ -48,7 +48,7 @@ public class QuestionBoardController {
         return questionBoard;
     }
 
-    @DeleteMapping("/{boardNo}")
+    @DeleteMapping("/delete/{boardNo}")
     public void questionBoardDelete(@PathVariable("boardNo") Long boardNo) {
         log.info("questionBoardDelete()");
 
