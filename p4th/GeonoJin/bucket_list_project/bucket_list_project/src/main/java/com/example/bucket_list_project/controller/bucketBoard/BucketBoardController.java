@@ -75,4 +75,11 @@ public class BucketBoardController {
 
         return service.findBucketListByCategory(bucketCategory);
     }
+
+    @PostMapping("/{userNickname}")
+    public List<BucketBoard> bucketListByUserNickname(@PathVariable("userNickname") String userNickname) {
+        log.info("bucketListByUserNickname" + userNickname);
+
+        return service.findBucketListByUserNickname(userNickname);
+    }
 }

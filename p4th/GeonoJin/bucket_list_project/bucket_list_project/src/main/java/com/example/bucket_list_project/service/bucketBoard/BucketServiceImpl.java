@@ -129,4 +129,11 @@ public class BucketServiceImpl implements BucketService {
 
         return bucketBoardRepository.findByBucketCategory(bucketCategory);
     }
+
+    @Override
+    public List<BucketBoard> findBucketListByUserNickname(String userNickname) {
+        log.info("findBucketListByUserNickname" + userNickname);
+
+        return bucketBoardRepository.findByBucketListWriter(userNickname);
+    }
 }
