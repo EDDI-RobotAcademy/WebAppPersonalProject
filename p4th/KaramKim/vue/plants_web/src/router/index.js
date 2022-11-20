@@ -8,6 +8,7 @@ import QuestionBoardListView from "@/views/board/QuestionBoardListView";
 import BoardRegisterView from "@/views/board/BoardRegisterView";
 import BoardReadView from "@/views/board/BoardReadView";
 import GeneralBoardListView from "@/views/board/GeneralBoardListView";
+import BoardModifyView from "@/views/board/BoardModifyView";
 
 
 Vue.use(VueRouter)
@@ -48,6 +49,16 @@ const routes = [
     name: 'BoardReadView',
     components: {
       default: BoardReadView
+    },
+    props: {
+      default: true
+    }
+  },
+  {
+    path: '/question-board/modify/:boardNo',
+    name: 'BoardModifyView',
+    components: {
+      default: BoardModifyView
     },
     props: {
       default: true
