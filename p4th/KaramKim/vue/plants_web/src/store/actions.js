@@ -55,7 +55,7 @@ export default {
     requestQuestionBoardContentsFromSpring({ commit }, boardNo) {
         console.log('requestQuestionBoardFromSpring()')
 
-        axios.get(`http://localhost:7777/plants/question-board/read/${boardNo}`)
+        axios.post(`http://localhost:7777/plants/question-board/read/${boardNo}`)
             .then((res) => {
                 commit(REQUEST_QUESTION_BOARD_CONTENTS_FROM_SPRING, res.data)
             })
