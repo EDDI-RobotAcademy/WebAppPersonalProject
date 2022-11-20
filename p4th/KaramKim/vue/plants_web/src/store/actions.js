@@ -14,12 +14,21 @@ export default {
                 alert(res.response.data.message)
             })
     },
-    requestQuestionBoardListFromSpring({ commit }) {
-        console.log('requestQuestionBoardListFromSpring')
+    requestSignInDataToSpring(_, payload) {
+        console.log('requestSignInDataFromSpring')
 
-        axios.post('http://localhost:7777/plants/question-board/list')
+        return axios.post("http://localhost:7777/plants/member/sign-in", payload)
             .then((res) => {
-                commit(REQUEST_QUESTION_BOARD_LIST_FROM_SPRING, res.data)
+                if(res.data) {
+                    alert("로그인 성공!")
+                    store.state.isAuthenticated = true
+                    cookies.set("user", res.data, 3600)
+                    localStorage.setItem("userInfo", JSON.stringify(res.data))
+                    store.state.checkUserInfo = true
+                }
+            })
+            .catch((res) => {
+                alert((res.response.data.message))
             })
     },
 }

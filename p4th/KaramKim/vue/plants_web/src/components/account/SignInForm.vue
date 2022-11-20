@@ -10,33 +10,40 @@
               </div>
               <div class="d-flex">
                 <common-text-field
-                  v-model="email"
-                  label="이메일"
-                  :rules="email_rule"/>
+                    v-model="email"
+                    label="이메일"
+                    :rules="email_rule"
+                />
               </div>
               <div class="d-flex">
                 <common-text-field
                     v-model="password"
                     label="비밀번호"
                     type="password"
-                    :rules="password_rule"/>
+                    :rules="password_rule"
+                />
               </div>
               <common-button
-                block
-                x-large
-                btn-name="로그인"
-                type="submit"
-                color="light-green"
-                class="mt-1 white--text"
-                :disabled="false"/>
-              <router-link to="/sign-up" style="text-decoration: none">
-                <common-button
                   block
                   x-large
-                  btn-name="회원가입"
-                  color="white"
-                  class="mt-6 light-green--text"
-                  :disabled="false"/>
+                  btn-name="로그인"
+                  type="submit"
+                  color="light-green"
+                  class="mt-1 white--text"
+                  :disabled="false"
+              />
+              <router-link
+                  to="/sign-up"
+                  style="text-decoration: none"
+              >
+                <common-button
+                    block
+                    x-large
+                    btn-name="회원가입"
+                    color="white"
+                    class="mt-6 light-green--text"
+                    :disabled="false"
+                />
               </router-link>
             </v-form>
           </v-card-text>
