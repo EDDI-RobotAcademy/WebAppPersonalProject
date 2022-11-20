@@ -74,6 +74,12 @@ export default {
     this.writer = this.board.writer
     this.content = this.board.content
     this.regDate = this.board.regDate
+  },
+  methods: {
+    onSubmit() {
+      const { title, content, writer, regDate } = this
+      this.$emit('submit', { title, content, writer, regDate })
+    }
   }
 }
 </script>

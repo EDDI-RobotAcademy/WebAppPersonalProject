@@ -12,7 +12,7 @@
 
 <script>
 import BoardModifyForm from "@/components/board/BoardModifyForm";
-import {mapState} from "vuex";
+import {mapActions, mapState} from "vuex";
 export default {
   name: "BoardModifyView",
   components: {BoardModifyForm},
@@ -26,6 +26,19 @@ export default {
     ...mapState([
         'board'
     ])
+  },
+  methods: {
+    ...mapActions([
+        'requestQuestionBoardContentsFromSpring',
+        'requestBoardModifyToSpring'
+    ]),
+    onSubmit(payload) {
+      const { title, content, writer, regDate } = payload
+      const boardNo = this.boardNo
+
+      this.requestBoardModifyToSpring({ boardNo, title, content, writer, regDate })
+      this.$router.push({ name: 'BoardReadView', params: { boardNo: this.boardNo } })
+    }
   },
   created() {
     this.requestQuestionBoardContentsFromSpring(this.boardNo)
