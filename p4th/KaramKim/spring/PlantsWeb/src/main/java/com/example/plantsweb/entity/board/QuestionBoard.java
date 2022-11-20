@@ -5,6 +5,7 @@ import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
 import javax.persistence.*;
+import java.time.LocalDate;
 import java.util.Date;
 
 @Data
@@ -25,10 +26,10 @@ public class QuestionBoard {
     private String content;
 
     @CreationTimestamp
-    private Date regDate;
+    private LocalDate regDate;
 
     @UpdateTimestamp
-    private Date updDate;
+    private LocalDate updDate;
 
 
 }

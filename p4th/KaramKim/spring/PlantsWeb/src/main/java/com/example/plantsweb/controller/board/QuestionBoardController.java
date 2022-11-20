@@ -30,7 +30,7 @@ public class QuestionBoardController {
 
         service.register(boardRequest);
     }
-    @PostMapping("/{boardNo}")
+    @PostMapping("/read/{boardNo}")
     public QuestionBoard questionBoardRead (@PathVariable("boardNo") Long boardNo) {
         log.info("questionBoardRead()");
 
