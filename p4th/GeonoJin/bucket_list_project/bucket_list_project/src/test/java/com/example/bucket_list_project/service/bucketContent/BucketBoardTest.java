@@ -74,4 +74,12 @@ public class BucketBoardTest {
 
         System.out.println(currentCategoryBucketList);
     }
+
+    @Test
+    public void findBucketListByNickname(){
+        List<BucketBoard> getWriterBucketList = bucketBoardRepository.findByBucketListWriter("관리자1");
+
+
+        System.out.println(getWriterBucketList);
+    }
 }
