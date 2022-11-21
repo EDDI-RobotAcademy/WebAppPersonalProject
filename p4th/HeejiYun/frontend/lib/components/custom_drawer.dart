@@ -41,19 +41,19 @@ class CustomDrawer extends StatelessWidget {
                   Container (
                       height: 30,
                       width: 200,
-                      child: CustomRichText(text: "자유게시판", route: "/board-list-free")
+                      child: CustomRichText(text: "자유 게시판", route: "/board-list-free")
                   ),
                   Divider(height: 3,),
                   Container (
                       height: 30,
                       width: 200,
-                      child: CustomRichText(text: "자취인 질문 게시판", route: "/board-list-ask")
+                      child: CustomRichText(text: "질문 게시판", route: "/board-list-ask")
                   ),
                   Divider(height: 3,),
                   Container (
                       height: 30,
                       width: 200,
-                      child: CustomRichText(text: "1인분 레시피 게시판", route: "/board-list-recipe")
+                      child: CustomRichText(text: "1인분 게시판", route: "/board-list-recipe")
                   )
                 ],
               ),

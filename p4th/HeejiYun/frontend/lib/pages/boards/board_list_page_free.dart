@@ -1,11 +1,11 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:frontend/components/forms/BoardListView.dart';
+import 'package:frontend/components/forms/board_list_view.dart';
 import 'package:frontend/components/custom_app_bar.dart';
 import 'package:frontend/components/custom_drawer.dart';
 import 'package:provider/provider.dart';
 
-import '../utility/board_list_provider.dart';
+import '../../utility/board_list_provider.dart';
 
 class BoardListPageFree extends StatelessWidget {
   BoardListPageFree({Key? key}) : super(key: key);
@@ -17,7 +17,7 @@ class BoardListPageFree extends StatelessWidget {
     _providerTest = Provider.of<BoardListProvider>(context, listen: false);
     _providerTest.loadFreeBoards();
     return Scaffold(
-        appBar: CommonAppBar(title: "자유게시판"),
+        appBar: CommonAppBar(title: "자유 게시판"),
         drawer: CustomDrawer(isLogin: true,),
         body: Consumer<BoardListProvider>(
           builder: (context, provider, widget){

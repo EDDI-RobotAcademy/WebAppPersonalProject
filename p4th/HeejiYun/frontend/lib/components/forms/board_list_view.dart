@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 
 import '../../api/board.dart';
+import '../../pages/boards/board_detail_page.dart';
 
 class BoardListView extends StatelessWidget {
   BoardListView ({Key? key, required this.boards, required this.listTitle}) : super(key: key);
@@ -25,14 +26,18 @@ class BoardListView extends StatelessWidget {
             child: ListView.separated(
               itemCount: boards.length,
               itemBuilder: (BuildContext context, int index) {
-                return Container(
-                    height: 60, color: Colors.white,
-                    child: _makeBoard(boards[index])
+                return ListTile(
+                    title: _makeBoard(boards[index]),
+                  onTap: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => BoardDetailPage(board: boards[index]),
+                      ),
+                    );
+                  },
                 );
-              },
-              separatorBuilder: (BuildContext context, int index) {
-                return Divider();
-              },
+              }, separatorBuilder: (BuildContext context, int index) => Divider(thickness: 1, height: 1),
             )
           )
         ],

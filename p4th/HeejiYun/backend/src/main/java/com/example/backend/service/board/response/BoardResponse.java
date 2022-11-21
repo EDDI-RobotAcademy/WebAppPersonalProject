@@ -16,5 +16,6 @@ public class BoardResponse {
     private String title;
     private String writer;
     private String content;
+    private String categoryName;
     private Date regDate;
 }
