@@ -78,7 +78,7 @@ extension InputValidate on String {
   }
 
   bool isValidTitle() {
-    final nickNameRegExp = RegExp(r"^[a-zA-Z0-9ㄱ-ㅎㅏ-ㅣ가-힣\s]{3,33}$");
+    final nickNameRegExp = RegExp(r"^[a-zA-Z0-9ㄱ-ㅎㅏ-ㅣ가-힣-!?.@#\$&*~\s]{3,33}$");
     return nickNameRegExp.hasMatch(this);
   }
 }
