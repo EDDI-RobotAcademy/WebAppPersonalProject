@@ -23,4 +23,6 @@ public interface BucketService {
 
     public List<BucketBoard> findBucketListByCategory(String bucketCategory);
     public List<BucketBoard> findBucketListByUserNickname(String userNickname);
+
+    public List<BucketBoard> bucketLIstSearch(String searchWord);
 }

@@ -14,4 +14,6 @@ public interface BucketBoardRepository extends JpaRepository<BucketBoard, Long> 
 
     @Query("select b from BucketBoard b where b.writer = :writer")
     List<BucketBoard> findByBucketListWriter(@Param("writer") String writer);
+
+    List<BucketBoard> findByBucketTitleContaining(String bucketTitle);
 }

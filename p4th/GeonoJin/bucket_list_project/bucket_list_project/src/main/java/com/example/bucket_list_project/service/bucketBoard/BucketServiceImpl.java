@@ -136,4 +136,11 @@ public class BucketServiceImpl implements BucketService {
 
         return bucketBoardRepository.findByBucketListWriter(userNickname);
     }
+
+    @Override
+    public List<BucketBoard> bucketLIstSearch(String searchWord) {
+        log.info("bucketLIstSearch" + searchWord);
+
+        return bucketBoardRepository.findByBucketTitleContaining(searchWord);
+    }
 }

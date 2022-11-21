@@ -82,4 +82,11 @@ public class BucketBoardController {
 
         return service.findBucketListByUserNickname(userNickname);
     }
+
+    @GetMapping("/search/{searchWord}")
+    public List<BucketBoard> bucketListSearch(@PathVariable("searchWord") String searchWord) {
+        log.info("bucketListSearch" + searchWord);
+
+        return service.bucketLIstSearch(searchWord);
+    }
 }
