@@ -1,3 +1,4 @@
+import 'package:demo/widgets/recipe/recipe_modify_form.dart';
 import 'package:demo/widgets/recipe/recipe_register_form.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -43,7 +44,7 @@ class _CustomDropdownPageState extends State<CustomDropdownPage> {
       _closeOverlay();
       isActive = false;
       RecipeRegisterFormState.getCategory(dropdownValue);
-
+      RecipeModifyFormState.getCategoryForModify(dropdownValue);
     }
   }
 
