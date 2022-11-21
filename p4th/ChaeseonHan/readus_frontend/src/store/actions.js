@@ -53,7 +53,6 @@ export default {
 
     requestLoggedInUserProfileToSpring ( { commit }, payload) {
         console.log('requestLoggedInUserProfileToSpring')
-
         const { userToken } = payload
         return axios.post(`http://localhost:7776/member/login-user-profile/${userToken}`)
             .then((res) => {
@@ -251,6 +250,38 @@ export default {
                 console.log(error.message)
             })
     },
+
+    // eslint-disable-next-line no-empty-pattern
+    requestNicknameModifyToSpring({ }, { userToken, nickName } ) {
+        console.log("requestNicknameModifyToSpring")
+
+        return axios.put(`http://localhost:7776/member/modify-nickname/${userToken}`, {nickName})
+            .then((res) => {
+                if(res.data) {
+                    alert("닉네임 수정 완료!")
+                } else {
+                    alert("회원 정보가 존재하지 않습니다.")
+                }
+            }).catch((error) => {
+                console.log(error.message)
+            })
+    },
+
+    // eslint-disable-next-line no-empty-pattern
+    requestBiographyModifyToSpring({ }, { userToken, biography } ) {
+        console.log("requestNicknameModifyToSpring")
+
+        return axios.put(`http://localhost:7776/member/modify-biography/${userToken}`, { biography })
+            .then((res) => {
+                if(res.data) {
+                    alert("자기소개개 수정완료!")
+                } else {
+                    alert("회원 정보가 존재하지 않습니다.")
+                }
+            }).catch((error) => {
+                console.log(error.message)
+            })
+    }
 
 
 

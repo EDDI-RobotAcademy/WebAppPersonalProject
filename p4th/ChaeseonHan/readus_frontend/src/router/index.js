@@ -11,6 +11,7 @@ import LifeCategoryView from "@/views/routerView/community/CommunitiCategory/Lif
 import ReviewCategoryView from "@/views/routerView/community/CommunitiCategory/ReviewCategoryView";
 import BoardModifyView from "@/views/routerView/community/Board/BoardModifyView";
 import CommunitySearchView from "@/views/routerView/community/CommunitySearchView";
+import MyPageView from "@/views/routerView/account/MyPageView";
 
 Vue.use(VueRouter)
 
@@ -34,6 +35,15 @@ const routes = [
     component: SignUpView
   },
 
+    //회원 정보
+  {
+    path: '/my-page',
+    name: 'MyPageView',
+    component: MyPageView,
+  },
+
+
+
     //커뮤니티
   { path: '/community',
     name: 'CommunityView',
@@ -52,8 +62,20 @@ const routes = [
     component: ReviewCategoryView
   },
 
+  // 커뮤니티 - 검색
+  {
+    path: '/community/search/:keyword',
+    name: 'CommunitySearchView',
+    components: {
+      default: CommunitySearchView,
+    },
+    props: {
+      default: true
+    }
+  },
 
-    //게시글 기능
+
+    //게시글 개별 기능
   { path: '/community/write',
     name: 'BoardWriteView',
     component: BoardWriteView
@@ -79,18 +101,6 @@ const routes = [
     }
   },
 
-
-    // 커뮤니티 - 검색
-  {
-   path: '/community/search/:keyword',
-    name: 'CommunitySearchView',
-    components: {
-      default: CommunitySearchView,
-    },
-    props: {
-      default: true
-    }
-  }
 
 ]
 
