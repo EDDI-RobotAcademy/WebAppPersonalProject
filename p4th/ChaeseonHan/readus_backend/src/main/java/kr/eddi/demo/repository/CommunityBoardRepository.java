@@ -21,4 +21,6 @@ public interface CommunityBoardRepository extends JpaRepository<CommunityBoard, 
     List<CommunityBoard> findByContentsContainingIgnoreCase(String contents, Sort sort);
 
     List<CommunityBoard> findByWriterContainingIgnoreCase(String writer, Sort sort);
+
+    List<CommunityBoard> findByCategoryContainingIgnoreCase(String category, Sort sort);
 }

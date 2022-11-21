@@ -55,4 +55,9 @@ public class BoardController {
         return service.delete(boardNo);
     }
 
+    @GetMapping("/category/{category}")
+    public List<CommunityBoard> readCategoryList(@PathVariable("category") String category) {
+        return service.categoryBoardList(category);
+    }
+
 }
