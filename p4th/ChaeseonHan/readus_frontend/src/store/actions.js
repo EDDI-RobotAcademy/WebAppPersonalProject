@@ -105,6 +105,18 @@ export default {
             })
     },
 
+    requestCategoryBoardList( { commit }, category ) {
+        console.log("requestAllCommunityBoardListTOSpring()")
+
+        return axios.get(`http://localhost:7776/board/category/${category}`)
+            .then((res) => {
+                commit(REQUEST_COMMUNITY_MAIN_BOARD_LIST, res.data)
+            }).catch((error) => {
+                console.log(error.message)
+            })
+    },
+
+
     requestReadBoardToSpring( {commit}, boardNo ) {
         console.log("requestReadBoardToSpring()")
 

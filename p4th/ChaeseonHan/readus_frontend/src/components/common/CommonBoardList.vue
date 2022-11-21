@@ -1,6 +1,7 @@
 <template>
   <v-container>
     <div>
+      <h2 class="mb-2"> {{ boardName }}</h2>
       <table style="height: min-content" class="greentop">
 
         <tr>
@@ -55,7 +56,8 @@ export default {
   props: {
     boardList: {
       type: Array,
-    }
+    },
+    boardName: String,
   }, // props
   data() {
     return{
