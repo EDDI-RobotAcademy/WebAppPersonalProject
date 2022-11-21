@@ -5,7 +5,8 @@ import {
     GET_BUCKET_LIST_TO_SPRING,
     REQUEST_BUCKET_FROM_SPRING,
     DOWN_LOAD_IMG_FILE_TO_SPRING,
-    GET_CURRENT_BUCKET_LIST_CATEGORY
+    GET_CURRENT_BUCKET_LIST_CATEGORY,
+    REQUEST_MY_BUCKET_LIST_TO_SPRING,
 } from './mutation-types'
 
 import axios from "axios";
@@ -30,7 +31,7 @@ export default {
     },
     async checkDuplicateNicknameToSpring({commit}, payload) {
 
-        const {nickName} = payload;
+        const nickName = payload;
 
         await axios.post(`http://localhost:7777/member/check-nickname/${nickName}`)
             .then((res) => {
@@ -78,9 +79,7 @@ export default {
 
         const {nickName, currentUserToken} = payload
 
-        console.log(nickName, currentUserToken)
-
-        axios.post("http://localhost:7777/member/set/changeNickname",
+        await axios.post("http://localhost:7777/member/set/changeNickname",
             {nickName, currentUserToken})
             .then(() => {
                 alert("닉네임 수정 완료")
@@ -152,5 +151,15 @@ export default {
             .catch(() => {
                 alert("삭제되지 않았습니다.")
             });
-    }
+    },
+    requestMyBucketListToSpring({commit}, payload) {
+        console.log("requestMyBucketListToSpring")
+
+        const userNickname = payload
+
+        axios.post(`http://localhost:7777/bucket/${userNickname}`)
+            .then((res) => {
+                commit(REQUEST_MY_BUCKET_LIST_TO_SPRING, res.data)
+            });
+    },
 }

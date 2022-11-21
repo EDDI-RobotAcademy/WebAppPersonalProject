@@ -22,4 +22,5 @@ public interface BucketService {
     public void delete(Long bucketId);
 
     public List<BucketBoard> findBucketListByCategory(String bucketCategory);
+    public List<BucketBoard> findBucketListByUserNickname(String userNickname);
 }

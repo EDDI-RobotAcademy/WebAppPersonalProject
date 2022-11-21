@@ -19,13 +19,10 @@
               <v-list width="180px" height="180px">
                 <v-list-item>
                   <v-list-item-title>
-                    <a href="/myPage"
-                       style="text-decoration: none; color: black"
-                    >
-                      <h5>{{ nickName }}
-                        <v-icon style="margin-bottom: 5px">mdi-home</v-icon>
-                      </h5>
-                    </a>
+                    <v-btn  color="white" rounded elevation="0" :to="{name: 'MyPageView', params: {nickName: nickName}}">
+                      <h4>{{ nickName }}</h4>
+                      <v-icon style="margin-bottom: 5px">mdi-home</v-icon>
+                    </v-btn>
                   </v-list-item-title>
                 </v-list-item>
                 <hr color="black">
