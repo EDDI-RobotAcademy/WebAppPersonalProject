@@ -1,13 +1,26 @@
-import 'package:demo/screens/recipe_detail_screen.dart';
+import 'package:demo/screens/recipe/recipe_detail_screen.dart';
 import 'package:flutter/material.dart';
 
 import '../../app_theme.dart';
-import '../../model/tmp_recipe.dart';
 
-class AllRecipesForm extends StatelessWidget {
-  const AllRecipesForm({Key? key, required this.recipes}) : super(key: key);
+class AllRecipesForm extends StatefulWidget {
+  final List<dynamic>? recipeList;
 
-  final List<Recipe>? recipes;
+  const AllRecipesForm({Key? key, this.recipeList}) : super(key: key);
+
+  @override
+  State<AllRecipesForm> createState() => _AllRecipesFormState();
+}
+
+class _AllRecipesFormState extends State<AllRecipesForm> {
+  List<dynamic>? recipes;
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    recipes = widget.recipeList;
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -17,7 +30,7 @@ class AllRecipesForm extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
-            Text(
+            const Text(
               '모든 레시피',
               textAlign: TextAlign.left,
               style: TextStyle(
@@ -28,78 +41,60 @@ class AllRecipesForm extends StatelessWidget {
             ),
             recipes != null
                 ? Padding(
-                  padding: const EdgeInsets.only(left: 14),
-                  child: Wrap(
-              alignment: WrapAlignment.spaceBetween,
+                    padding: const EdgeInsets.only(left: 14),
+                    child: Wrap(
+                      alignment: WrapAlignment.spaceBetween,
                       children: recipes!.map((recipe) {
                         return Padding(
                           padding: const EdgeInsets.only(left: 14),
                           child: Container(
-                            width: size.width *0.4,
-                              height: size.height *0.33,
+                              width: size.width * 0.4,
+                              height: size.height * 0.33,
                               child: Card(
                                 shape: RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.circular(19)
+                                    borderRadius: BorderRadius.circular(19)),
+                                child: InkWell(
+                                  onTap: () {
+                                    Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                          builder: (context) =>
+                                              RecipeDetailScreen(
+                                                  recipeNo: recipe.recipeNo,
+                                                  recipe: recipe)),
+                                    );
+                                  },
+                                  child: Column(
+                                    children: [
+                                      Container(
+                                        height: size.height * 0.24,
+                                        width: size.width * 0.4,
+                                        child: Image.asset(
+                                            "assets/images/uploadImgs/${recipe.thumbnail}"),
+                                      ),
+                                      Padding(
+                                        padding: EdgeInsets.all(7.0),
+                                        child: Text(
+                                          recipe.title,
+                                          style: const TextStyle(
+                                              fontWeight: FontWeight.w600,
+                                              fontSize: 15,
+                                              letterSpacing: 0.5,
+                                              color: AppTheme.indiaInk),
+                                        ),
+                                      )
+                                    ],
+                                  ),
                                 ),
-                            child: InkWell(
-                              onTap: (){
-                                Navigator.push(
-                                  context,
-                                  MaterialPageRoute(builder: (context) => RecipeDetailScreen(recipe: recipe)),
-                                );
-                              },
-                              child: Column(
-                                children: [
-                                    Container(
-                                      height: size.height * 0.24,
-                                      width: size.width * 0.4,
-                                      child: Image.asset(recipe.images[0]),
-                                    ),
-                                  Padding(
-                                    padding: EdgeInsets.all(7.0),
-                                    child: Text(recipe.title, style: TextStyle(
-                                      fontWeight: FontWeight.w600,
-                                      fontSize: 15,
-                                      letterSpacing: 0.5,
-                                      color: AppTheme.indiaInk
-                                    ),),
-                                  )
-                                ],
-                              ),
-                            ),
-                          )),
+                              )),
                         );
                       }).toList(),
                     ),
-                )
-                : Container(),
+                  )
+                : Container(
+                    child: Text("게시물 없음"),
+                  ),
           ],
         ));
   }
-
-/*  List<Widget>? makeImages(List<Recipe> recipes) {
-    List<Widget> results = [];
-    for (var i = 0; i < recipes.length; i++) {
-      results.add(InkWell(
-        onTap: () {
-          Navigator.of(context).push(MaterialPageRoute<Nulll>(
-            fullscreenDialog: true,
-            builder: (BuildContext context){
-              return RecipeDetailForm(
-
-              )
-            }
-          ))
-        },
-        child: Container(
-          padding: EdgeInsets.only(right: 10),
-          child: Align(
-            alignment: Alignment.centerLeft,
-            child: Image.asset('images/' + recipes[i].thumbnail),
-          ),
-        ),
-      ));
-    }
-    return results;
-  }*/
 }
