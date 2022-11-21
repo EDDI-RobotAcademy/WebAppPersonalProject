@@ -46,13 +46,21 @@ public class MemberController {
     public ReadUsMember loginUserProfile(@PathVariable("userToken") String userToken) {
         log.info("nowMemberProfile()");
         String token = userToken.replaceAll("\"", "");
+        log.info(token);
         return service.getSignInMemberProfile(token);
     }
 
-    @PutMapping("/modify-nickname/{id}")
-    public Boolean modifyUserNickname(@PathVariable("id") Long id, @RequestBody Map<String, String> param) {
+    @PutMapping("/modify-nickname/{userToken}")
+    public Boolean modifyUserNickname(@PathVariable("userToken") String userToken, @RequestBody Map<String, String> param) {
         String nickName = param.get("nickName");
+        String token = userToken.replaceAll("\"", "");
+        return service.modifyMemberNickName(token, nickName);
+    }
 
-        return service.modifyMemberNickName(id, nickName);
+    @PutMapping("/modify-biography/{userToken}")
+    public Boolean modifyUserBiography(@PathVariable("userToken") String userToken, @RequestBody Map<String, String> param) {
+        String biography = param.get("biography");
+        String token = userToken.replaceAll("\"", "");
+        return service.modifyMemberBiography(token, biography);
     }
 }

@@ -103,8 +103,49 @@ public class MemberServiceImpl implements MemberService{
         Long memberId = redisService.getValueByKey(userToken);
 
         Optional<ReadUsMember> maybeMember = memberRepository.findById(memberId);
+
+        if(maybeMember.isEmpty()) {
+            log.info("this member isn't present!");
+            return null;
+        }
+
         ReadUsMember member = maybeMember.get();
         return member;
+
+    }
+
+
+    @Override
+    public Boolean modifyMemberNickName(String userToken, String nickName) {
+
+        ReadUsMember member = getSignInMemberProfile(userToken);
+
+        if(member == null) {
+            return false;
+        }
+
+        member.modifyNickname(nickName);
+
+        memberRepository.save(member);
+
+        return true;
+
+    }
+
+    @Override
+    public Boolean modifyMemberBiography(String userToken, String biography) {
+
+        ReadUsMember member = getSignInMemberProfile(userToken);
+
+        if(member == null) {
+            return false;
+        }
+
+        member.modifyBiography(biography);
+
+        memberRepository.save(member);
+
+        return true;
 
     }
 
