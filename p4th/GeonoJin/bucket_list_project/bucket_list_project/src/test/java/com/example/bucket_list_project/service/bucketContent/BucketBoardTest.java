@@ -82,4 +82,11 @@ public class BucketBoardTest {
 
         System.out.println(getWriterBucketList);
     }
+
+    @Test
+    public void searchByBucketTitle(){
+        List<BucketBoard> searchBucketTitle = bucketBoardRepository.findByBucketTitleContaining("일상");
+
+        System.out.println(searchBucketTitle);
+    }
 }
