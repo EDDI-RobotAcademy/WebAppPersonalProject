@@ -13,7 +13,7 @@
 </template>
 
 <script>
-import BucketListReadForm from "@/components/BucketListReadForm";
+import BucketListReadForm from "@/components/aboutBucketList/BucketListReadForm";
 import {mapActions, mapState} from "vuex";
 
 export default {

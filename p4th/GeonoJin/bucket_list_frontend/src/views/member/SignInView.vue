@@ -42,8 +42,8 @@ export default {
                 alert("아이디 혹은 비밀번호가 존재하지 않거나 틀렸습니다!")
               }
             })
-            .catch((error) => {
-              alert(error)
+            .catch(() => {
+              alert("아이디 혹은 비밀번호가 존재하지 않거나 틀렸습니다!")
             })
       } else {
         alert("이미 로그인 되어 있습니다!")

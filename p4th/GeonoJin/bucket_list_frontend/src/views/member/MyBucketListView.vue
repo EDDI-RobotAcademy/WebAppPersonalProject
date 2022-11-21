@@ -6,7 +6,7 @@
 
 <script>
 
-import MyBucketListForm from "@/components/MyBucketListForm";
+import MyBucketListForm from "@/components/myBucketList/MyBucketListForm";
 import {mapActions, mapState} from "vuex";
 
 export default {

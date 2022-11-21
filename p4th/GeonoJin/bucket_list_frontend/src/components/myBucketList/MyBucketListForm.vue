@@ -172,9 +172,6 @@ export default {
   },
   data() {
     return {
-      bucketItems: [
-        {title: "시험", src: 'https://cdn.vuetifyjs.com/images/cards/house.jpg'}
-      ],
       dialog: false,
       bucketTitle: '',
       bucketContent: '',
