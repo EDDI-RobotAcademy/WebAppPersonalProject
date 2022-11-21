@@ -8,7 +8,7 @@ class MoreInformationScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: customAppbar(),
+      appBar: customAppbar('EZ.COOK'),
       endDrawer: CustomDrawer(),
       body: Column(
         children: [

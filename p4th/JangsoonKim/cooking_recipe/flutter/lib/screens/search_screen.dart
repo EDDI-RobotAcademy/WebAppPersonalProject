@@ -10,7 +10,7 @@ class SearchScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       endDrawer: CustomDrawer(),
-      appBar: customAppbar(),
+      appBar: customAppbar('EZ.COOK'),
       body: Column(
         children: const [
           Text("검색페이지"),
