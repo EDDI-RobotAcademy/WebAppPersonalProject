@@ -286,7 +286,7 @@ export default {
         return axios.put(`http://localhost:7776/member/modify-biography/${userToken}`, { biography })
             .then((res) => {
                 if(res.data) {
-                    alert("자기소개개 수정완료!")
+                    alert("자기소개 수정완료!")
                 } else {
                     alert("회원 정보가 존재하지 않습니다.")
                 }
