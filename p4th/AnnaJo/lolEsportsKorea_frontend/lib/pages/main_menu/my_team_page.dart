@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:lol_esports_korea_app/pages/main_menu/teams_page/drx_page.dart';
-import 'package:lol_esports_korea_app/pages/main_menu/teams_page/t1_page.dart';
+import 'package:lol_esports_korea_app/pages/main_menu/teams_info_page/drx_page.dart';
+import 'package:lol_esports_korea_app/pages/main_menu/teams_info_page/t1_page.dart';
 
 import '../../components/app_bar/common_drawer_menu.dart';
 import '../../components/app_bar/common_top_app_bar.dart';
