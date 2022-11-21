@@ -20,21 +20,18 @@ export default {
     }
   },
 
-created() {
-   /* await this.getUserProfile() */
-
-
+  async created() {
+    await this.getUserProfile()
   },
 
   methods: {
     ...mapActions(['requestLoggedInUserProfileToSpring']),
 
-    /*async getUserProfile() {
+    getUserProfile() {
       this.userToken = localStorage.getItem("userInfo")
       const { userToken } = this
-      console.log("userToken: " + userToken)
-      await this.requestLoggedInUserProfileToSpring( { userToken })
-    } */
+      this.requestLoggedInUserProfileToSpring( { userToken })
+    }
 
   }
 
