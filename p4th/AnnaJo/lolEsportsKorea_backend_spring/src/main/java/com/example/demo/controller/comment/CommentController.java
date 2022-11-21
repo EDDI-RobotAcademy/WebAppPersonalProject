@@ -35,7 +35,7 @@ public class CommentController {
      */
     @GetMapping("/{myTeam}")
     public List<Comment> teamCommentList (@PathVariable("myTeam") String myTeam) {
-        log.info("teamRankingList()");
+        log.info("teamCommentList()");
 
         return service.getTeamCommentList(myTeam);
     }

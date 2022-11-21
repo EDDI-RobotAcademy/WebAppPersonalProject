@@ -34,6 +34,6 @@ public class CommentServiceImpl implements CommentService{
 
     @Override
     public List<Comment> getTeamCommentList(String requestRanking) {
-        return listRepository.findCommentByContentsContaining(requestRanking);
+        return listRepository.findCommentByMyTeamContaining(requestRanking);
     }
 }

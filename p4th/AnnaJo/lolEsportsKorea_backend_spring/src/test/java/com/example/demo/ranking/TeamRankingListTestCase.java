@@ -1,7 +1,7 @@
 package com.example.demo.ranking;
 
-import com.example.demo.entity.ranking.TeamRanking;
-import com.example.demo.service.ranking.RankingService;
+import com.example.demo.entity.comment.Comment;
+import com.example.demo.service.comment.CommentService;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -12,12 +12,12 @@ import java.util.List;
 public class TeamRankingListTestCase {
 
     @Autowired
-    private RankingService service;
+    private CommentService service;
 
     @Test
     public void teamRankingList () {
         System.out.println("teamRankingList()");
-        List<TeamRanking> teamRankingList = service.getFindRankingList("2022 LCK 스프링");
-        System.out.println(teamRankingList);
+        List<Comment> teamCommentList = service.getTeamCommentList("T1");
+        System.out.println("teamCommentList:" + teamCommentList);
     }
 }
