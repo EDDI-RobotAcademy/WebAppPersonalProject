@@ -178,7 +178,7 @@ export default {
     async requestSearchBucketListToSpring({ commit }, payload) {
         const searchWord = payload
 
-        await axios.get(`http://localhost:7777/bucket/${searchWord}`)
+        await axios.get(`http://localhost:7777/bucket/search/${searchWord}`)
             .then((res) => {
                 commit(REQUEST_SEARCH_BUCKET_LIST_TO_SPRING, res.data)
             });
