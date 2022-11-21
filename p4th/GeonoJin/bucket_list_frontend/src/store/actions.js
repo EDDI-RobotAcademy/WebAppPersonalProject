@@ -88,6 +88,18 @@ export default {
                 alert(error)
             });
     },
+    // eslint-disable-next-line no-empty-pattern
+    async requestDeleteUserToSpring({ }, payload) {
+        const nickName = payload
+
+        await axios.post(`http://localhost:7777/member/set/${nickName}`)
+            .then(() => {
+                alert("회원 탈퇴 완료")
+            })
+            .catch(() => {
+                alert("회원 탈퇴 실패")
+            });
+    },
 
     //버킷리스트
     async getBucketListToSpring({ commit }) {
