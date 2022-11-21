@@ -1,12 +1,15 @@
 package kr.eddi.demo.entity.jpa.boards;
 
-import lombok.Data;
+import lombok.*;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
 import javax.persistence.*;
 import java.util.Date;
 
+@NoArgsConstructor
+@AllArgsConstructor
+@Builder
 @Data
 @Entity
 public class FreeBoard {
@@ -17,7 +20,7 @@ public class FreeBoard {
     @Column(length = 128, nullable = false)
     private String title;
 
-    @Column(length = 32, nullable = false)
+    @Column(length = 80, nullable = false)
     private String writer;
 
     @Lob
@@ -28,4 +31,7 @@ public class FreeBoard {
 
     @UpdateTimestamp
     private Date updDate;
+
+
+
 }

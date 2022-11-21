@@ -6,8 +6,10 @@ import kr.eddi.demo.entity.jpa.boards.Board;
 import kr.eddi.demo.entity.jpa.boards.FreeBoard;
 import kr.eddi.demo.service.jpa.board.BoardService;
 import kr.eddi.demo.service.jpa.board.FreeBoardService;
+import kr.eddi.demo.service.jpa.board.FreeBoardServiceImpl;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.ui.Model;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
@@ -58,5 +60,17 @@ public class FreeBoardController {
         service.modify(board);
 
         return board;
+    }
+
+    private FreeBoardServiceImpl boardService;
+
+
+    @GetMapping("/search")
+    public String search(@RequestParam(value = "keyword") String keyword, Model model) {
+        List<FreeBoard> boardDtoList = boardService.searchPosts(keyword);
+        model.addAttribute("boardList", boardDtoList);
+
+
+        return "board/list.html";
     }
 }
