@@ -8,15 +8,18 @@ import StudyBucketListView from "@/views/bucketListKind/StudyBucketListView";
 import TravelBucketListView from "@/views/bucketListKind/TravelBucketListView";
 import CookBucketListView from "@/views/bucketListKind/CookBucketListView";
 import MyPageView from "@/views/member/MyPageView";
-import MyBucketListView from "@/views/MyBucketListView";
+import MyBucketListView from "@/views/member/MyBucketListView";
 
 //bucketList
-import BucketListReadView from "@/views/BucketListReadView";
-import BucketListModifyView from "@/views/BucketListModifyView";
+import BucketListReadView from "@/views/aboutBucketList/BucketListReadView";
+import BucketListModifyView from "@/views/aboutBucketList/BucketListModifyView";
 
 //member
 import SignInView from "@/views/member/SignInView";
 import SignUpView from "@/views/member/SignUpView";
+
+//search
+import SearchView from "@/views/search/SearchView";
 
 Vue.use(VueRouter)
 
@@ -96,6 +99,12 @@ const routes = [
       default: true
     }
   },
+  {
+    path: '/search',
+    name: 'SearchView',
+    component: SearchView
+  },
+
 ]
 
 const router = new VueRouter({

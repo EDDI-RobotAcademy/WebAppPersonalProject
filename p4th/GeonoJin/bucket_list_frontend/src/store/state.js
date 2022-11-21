@@ -8,6 +8,7 @@ export default {
     bucket: {},
     downLoadImgFile: {},
     currentCategoryBucketList: [],
-    bucketListByNickname: []
+    bucketListByNickname: [],
+    searchedBucketList: []
 
 }

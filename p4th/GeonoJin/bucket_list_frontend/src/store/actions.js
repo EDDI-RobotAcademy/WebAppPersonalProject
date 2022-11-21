@@ -7,6 +7,7 @@ import {
     DOWN_LOAD_IMG_FILE_TO_SPRING,
     GET_CURRENT_BUCKET_LIST_CATEGORY,
     REQUEST_MY_BUCKET_LIST_TO_SPRING,
+    REQUEST_SEARCH_BUCKET_LIST_TO_SPRING
 } from './mutation-types'
 
 import axios from "axios";
@@ -58,7 +59,7 @@ export default {
                 alert("회원 가입 완료!" + res)
             })
             .catch((res) => {
-                alert(res.response.data.message)
+                alert("회원가입 실패" + res)
             })
 
     },
@@ -172,6 +173,14 @@ export default {
         axios.post(`http://localhost:7777/bucket/${userNickname}`)
             .then((res) => {
                 commit(REQUEST_MY_BUCKET_LIST_TO_SPRING, res.data)
+            });
+    },
+    async requestSearchBucketListToSpring({ commit }, payload) {
+        const searchWord = payload
+
+        await axios.get(`http://localhost:7777/bucket/${searchWord}`)
+            .then((res) => {
+                commit(REQUEST_SEARCH_BUCKET_LIST_TO_SPRING, res.data)
             });
     },
 }
