@@ -7,7 +7,8 @@ import{
     DOWN_LOAD_IMG_FILE_TO_SPRING,
     GET_CURRENT_BUCKET_LIST_CATEGORY,
     REQUEST_MY_BUCKET_LIST_TO_SPRING,
-    REQUEST_SEARCH_BUCKET_LIST_TO_SPRING
+    REQUEST_SEARCH_BUCKET_LIST_TO_SPRING,
+    REQUEST_ALL_BUCKET_LIST_TOTAL_PAGE_FROM_SPRING
 } from "./mutation-types"
 
 export default {
@@ -37,5 +38,8 @@ export default {
     },
     [REQUEST_SEARCH_BUCKET_LIST_TO_SPRING](state, passingData) {
         state.searchedBucketList = passingData
+    },
+    [REQUEST_ALL_BUCKET_LIST_TOTAL_PAGE_FROM_SPRING](state, passingData) {
+        state.allBucketListTotalPageValue = passingData;
     },
 }

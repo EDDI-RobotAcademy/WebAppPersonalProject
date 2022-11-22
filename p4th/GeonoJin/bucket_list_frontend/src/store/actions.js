@@ -8,7 +8,7 @@ import {
     GET_CURRENT_BUCKET_LIST_CATEGORY,
     REQUEST_MY_BUCKET_LIST_TO_SPRING,
     REQUEST_SEARCH_BUCKET_LIST_TO_SPRING,
-
+    REQUEST_ALL_BUCKET_LIST_TOTAL_PAGE_FROM_SPRING
 } from './mutation-types'
 
 import axios from "axios";
@@ -188,4 +188,13 @@ export default {
                 commit(REQUEST_SEARCH_BUCKET_LIST_TO_SPRING, res.data)
             });
     },
+
+    //페이지
+    async requestAllBucketListTotalPageFromSpring({commit}) {
+        await axios.get("http://localhost:7777/page/totalPage")
+            .then((res) => {
+                commit(REQUEST_ALL_BUCKET_LIST_TOTAL_PAGE_FROM_SPRING, res.data)
+            });
+    },
+
 }

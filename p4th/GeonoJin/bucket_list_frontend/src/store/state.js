@@ -9,6 +9,7 @@ export default {
     downLoadImgFile: {},
     currentCategoryBucketList: [],
     bucketListByNickname: [],
-    searchedBucketList: []
+    searchedBucketList: [],
+    allBucketListTotalPageValue: 0
 
 }
