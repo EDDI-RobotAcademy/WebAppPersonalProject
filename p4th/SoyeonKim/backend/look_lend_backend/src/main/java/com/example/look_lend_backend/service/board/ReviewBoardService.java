@@ -12,3 +12,4 @@ public interface ReviewBoardService {
     public void modify(ReviewBoard reviewBoard);
     public void remove(Long reviewNo);
 }
+

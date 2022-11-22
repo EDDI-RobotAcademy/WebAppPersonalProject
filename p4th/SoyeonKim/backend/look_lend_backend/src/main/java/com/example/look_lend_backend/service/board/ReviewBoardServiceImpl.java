@@ -56,3 +56,4 @@ public class ReviewBoardServiceImpl implements ReviewBoardService{
         repository.deleteById(reviewNo);
     }
 }
+
