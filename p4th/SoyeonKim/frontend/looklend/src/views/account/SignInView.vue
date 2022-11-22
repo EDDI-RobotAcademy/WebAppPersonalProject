@@ -43,14 +43,17 @@ export default {
                 this.isLogin = true
                 this.$router.push("/")
               } else {
-                alert("아이디 혹은 비밀버호가 존재하지 않거나 틀렸습니다!")
+                alert('아이디 혹은 비밀번호가 올바르지 않습니다.')
               }
             })
-            .catch((res) => {
+            .catch(res => {
               alert(res.response.data.message)
             })
       } else {
-        alert("이미 로그인 되어 있습니다!")
+        alert('이미 로그인 되어 있습니다!')
+        this.$router.push({
+          name: 'MainHomepage'
+        })
       }
     }
   }
