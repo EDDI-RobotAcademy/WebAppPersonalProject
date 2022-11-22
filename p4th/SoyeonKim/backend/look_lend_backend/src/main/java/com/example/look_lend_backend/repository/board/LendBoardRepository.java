@@ -7,3 +7,4 @@ import org.springframework.data.jpa.repository.JpaRepository;
 public interface LendBoardRepository extends JpaRepository<LendBoard, Long> {
 
 }
+
