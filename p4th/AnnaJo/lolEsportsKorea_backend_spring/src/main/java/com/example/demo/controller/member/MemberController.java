@@ -71,7 +71,7 @@ public class MemberController {
      * 회원 탍퇴 Controller 메서드
      * @param email 회원 이메일
      */
-    @DeleteMapping("/remove/{email}")
+    @PostMapping("/remove/{email}")
     public Boolean memberRemove (@PathVariable("email") String email) {
         log.info("memberRemove()");
 
