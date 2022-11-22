@@ -7,7 +7,8 @@ import {
     DOWN_LOAD_IMG_FILE_TO_SPRING,
     GET_CURRENT_BUCKET_LIST_CATEGORY,
     REQUEST_MY_BUCKET_LIST_TO_SPRING,
-    REQUEST_SEARCH_BUCKET_LIST_TO_SPRING
+    REQUEST_SEARCH_BUCKET_LIST_TO_SPRING,
+
 } from './mutation-types'
 
 import axios from "axios";
@@ -103,10 +104,11 @@ export default {
     },
 
     //버킷리스트
-    async getBucketListToSpring({ commit }) {
+    async getBucketListToSpring({ commit }, payload) {
         console.log('getBucketListToSpring')
+        const currentPage = payload
 
-        await axios.get('http://localhost:7777/bucket/list')
+        await axios.get(`http://localhost:7777/bucket/list/${currentPage}`)
             .then((res) => {
                 commit(GET_BUCKET_LIST_TO_SPRING, res.data);
             });
@@ -114,9 +116,12 @@ export default {
     async getCurrentBucketListCategory({commit}, payload) {
         console.log('getCurrentBucketListCategory')
 
-        const bucketCategory = payload
+        const {categoryName, pageValue} = payload
+        console.log(categoryName)
 
-        await axios.get(`http://localhost:7777/bucket/categoryKind/${bucketCategory}`)
+        await axios.post('http://localhost:7777/bucket/categoryKind',{categoryName, pageValue}
+
+            )
             .then((res) => {
                 commit(GET_CURRENT_BUCKET_LIST_CATEGORY, res.data);
             });

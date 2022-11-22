@@ -15,16 +15,16 @@ export default {
   components: {AllBucketList},
   computed: {
     ...mapState([
-        'bucketList'
+      'bucketList'
     ]),
   },
   async mounted() {
-    await this.getBucketListToSpring()
+    await this.getBucketListToSpring(1)
   },
   methods: {
     ...mapActions([
-      'getBucketListToSpring'
-    ])
+      'getBucketListToSpring',
+    ]),
   },
 }
 </script>

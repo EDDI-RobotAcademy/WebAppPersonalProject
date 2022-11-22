@@ -33,17 +33,29 @@
                   contain
               >
                 <v-card-title v-text="bucket.bucketTitle"></v-card-title>
+                <v-card-subtitle align="end" v-text="bucket.writer"></v-card-subtitle>
               </v-img>
             </router-link>
           </v-card>
         </v-row>
       </div>
     </v-layout>
+
+    <template>
+      <div class="text-center">
+        <v-pagination
+            v-model="pageValue"
+            :length="6"
+            @input="paging"
+        ></v-pagination>
+      </div>
+    </template>
   </v-container>
 </template>
 
 <script>
 import HeaderComponent from "@/components/header/HeaderComponent";
+import {mapActions} from "vuex";
 
 export default {
   name: "AllBucketList",
@@ -55,6 +67,19 @@ export default {
       type: Array
     }
   },
+  data(){
+    return{
+      pageValue: 1
+    }
+  },
+  methods:{
+    ...mapActions([
+        'getBucketListToSpring'
+    ]),
+    async paging(){
+      await this.getBucketListToSpring(this.pageValue);
+    }
+  }
 }
 </script>
 
