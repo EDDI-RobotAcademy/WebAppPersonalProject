@@ -42,4 +42,18 @@ public class BoardController {
 
         return boardService.list(boardType);
     }
+
+    @GetMapping("/read/{boardNo}")
+    public Board boardRead(@PathVariable("boardNo") Long boardNo) {
+        log.info("boardRead()");
+
+        return boardService.read(boardNo);
+    }
+
+    @GetMapping("/image/{boardNo}")
+    public List<BoardImage> findBoardImagesOnSpecificBoard(@PathVariable("boardNo") Long boardNo) {
+        log.info("findBoardImagesOnSpecificBoard()");
+
+        return boardService.findBoardImagesOnSpecificBoard(boardNo);
+    }
 }

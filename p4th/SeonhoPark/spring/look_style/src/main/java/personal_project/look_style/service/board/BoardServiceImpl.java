@@ -82,4 +82,34 @@ public class BoardServiceImpl implements BoardService{
     public List<Board> list(String boardType) {
         return boardRepository.findBoardsByBoardType(Sort.by(Sort.Direction.DESC, "boardNo"),boardType);
     }
+
+    @Override
+    public Board read(Long boardNo) {
+        Optional<Board> maybeBoard = boardRepository.findById(boardNo);
+
+        if (maybeBoard.equals(Optional.empty())) {
+            log.info("Can't read board!!!");
+            return null;
+        }
+
+        return maybeBoard.get();
+    }
+
+    @Override
+    public List<BoardImage> findBoardImagesOnSpecificBoard(Long boardNo) {
+        List<BoardImage> imageList = boardImageRepository.findAllBoardImagesByBoardId(boardNo);
+//        log.info(String.valueOf(imageList));
+
+        return imageList;
+    }
+
+    @Override
+    public void modify(Board board) {
+
+    }
+
+    @Override
+    public void remove(Long boardNo) {
+
+    }
 }
