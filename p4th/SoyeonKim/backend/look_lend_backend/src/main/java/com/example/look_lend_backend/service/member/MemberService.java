@@ -15,3 +15,4 @@ public interface MemberService {
 
     String loginUserNickname(String replacedUserValue);
 }
+

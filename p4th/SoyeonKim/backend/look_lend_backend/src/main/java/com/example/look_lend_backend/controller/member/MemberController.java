@@ -67,3 +67,4 @@ public class MemberController {
         return service.loginUserNickname(replaceUserValue);
     }
 }
+
