@@ -35,7 +35,10 @@
     <div class="mt-5">
       <comment-list-form
           :headers="headers"
-          :items="comments"/>
+          :items="comments"
+          @submit="saveComment"
+          @modify="modifyComment"
+      />
     </div>
   </div>
 
@@ -52,9 +55,11 @@ export default {
   data() {
     return {
       headers: [
+        {text: '번호', value: 'id'},
         {text: '작성자', value: 'writer'},
         {text: '내용', value: 'content'},
         {text: '등록일자', value: 'regDate'},
+        {text: '수정 및 삭제', value: 'actions', sortable: false},
       ],
     }
   },
@@ -74,11 +79,26 @@ export default {
     ...mapActions([
       'requestQuestionBoardContentsFromSpring',
       'requestDeleteBoardToSpring',
-      'requestCommentsFromSpring'
+      'requestCommentsFromSpring',
+      'requestSaveCommentToSpring',
+      'requestModifyCommentToSpring'
     ]),
     deleteBoard() {
       this.requestDeleteBoardToSpring(this.boardNo)
       this.$router.push({ name: 'QuestionBoardListView' })
+    },
+    saveComment(payload) {
+      const { writer, content } = payload
+      const boardNo = this.boardNo
+
+      this.requestSaveCommentToSpring({ boardNo, writer, content })
+    },
+    modifyComment(payload) {
+      const { id, writer, content, regDate } = payload
+      const boardNo = this.boardNo
+
+      this.requestModifyCommentToSpring({ boardNo, id, writer, content, regDate })
+
     }
   },
   created() {

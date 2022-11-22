@@ -54,6 +54,44 @@ export default {
                 alert('게시물 등록 완료')
             })
     },
+    requestSaveCommentToSpring(_, payload) {
+        console.log('requestSaveCommentToSpring')
+
+        const { boardNo, writer, content } = payload
+        
+        axios.post(`http://localhost:7777/plants/comment/register/${boardNo}`,
+            { writer, content })
+            .then(() => {
+                alert('댓글을 등록했습니다.')
+            })
+    },
+    // requestModifyCommentToSpring(_, payload) {
+    //
+    //     const { boardNo, id, writer, content, regDate } = payload
+    //
+    //     axios.put(`http://localhost:7777/plants/comment/modify/${boardNo}/${id}`,
+    //         { writer, content, regDate })
+    //         .then(() => {
+    //             alert('댓글을 수정했습니다.')
+    //         })
+    // },
+    requestModifyCommentToSpring(_, payload) {
+        const { id, content } = payload
+        axios.put(`http://localhost:7777/plants/comment/modify/${id}`,
+                { content })
+                .then(() => {
+                    alert('댓글을 수정했습니다.')
+                })
+    },
+    requestDeleteCommentToSpring(_, id) {
+        console.log('requestDeleteCommentToSpring()')
+
+        axios.delete(`http://localhost:7777/plants/comment/delete/${id}`)
+            .then(() => {
+                alert('해당 댓글을 삭제 완료했습니다.')
+            })
+
+    },
     requestQuestionBoardContentsFromSpring({ commit }, boardNo) {
         console.log('requestQuestionBoardContentsFromSpring()')
 
@@ -88,7 +126,17 @@ export default {
             .then(() => {
                 alert('게시물을 수정 완료했습니다.')
             })
-    }
+    },
+
+    requestGeneralBoardListFromSpring({ commit }) {
+        console.log('requestGeneralBoardListFromSpring')
+
+        axios.post('http://localhost:7777/plants/general-board/list')
+            .then((res) => {
+                commit(REQUEST_GENERAL_BOARD_LIST_FROM_SPRING, res.data)
+            })
+    },
+
 }
 
 
