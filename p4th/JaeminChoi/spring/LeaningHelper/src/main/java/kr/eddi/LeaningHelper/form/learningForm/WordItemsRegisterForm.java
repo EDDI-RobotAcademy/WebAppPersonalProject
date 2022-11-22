@@ -7,12 +7,19 @@ import lombok.Data;
 public class WordItemsRegisterForm {
     private String word;
     private String meaning;
+    private String synonym;
+    private String antonym;
+    private String example;
     private Long degree;
+
 
     public WordItemsRequest toWordItemsRequest (){
         return new WordItemsRequest(
-                word,
+               word,
                 meaning,
+                synonym,
+                antonym,
+                example,
                 degree
         );
     }

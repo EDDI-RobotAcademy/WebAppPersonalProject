@@ -17,16 +17,24 @@ import java.util.Date;
 @Builder
 public class WordItems {
 
-    private Long degree;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long wordsItemsNo;
+    private Long id;
 
     @Column(nullable = false)
     private String word;
 
     @Column(name = "words_meaning", nullable = false)
     private String meaning;
+
+    @Column(name = "words_synonym", nullable = false)
+    private String synonym;
+
+    @Column(name = "words_antonym", nullable = false)
+    private String antonym;
+
+    @Column(name = "words_example", nullable = false)
+    private String example;
 
     @CreationTimestamp
     private Date regDate;
@@ -35,18 +43,22 @@ public class WordItems {
     private Date updDate;
 
     @ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = "WordsDegree_wordsDegreeId")
+    @JoinColumn(name = "degree_id")
     private WordsDegree wordsDegree;
 
-    public WordItems(String word, String meaning , Long degree){
+    public WordItems(String word, String meaning ,String synonym ,String antonym ,String example){
         this.word = word;
         this.meaning = meaning;
-        this.degree = degree;
+        this.synonym = synonym;
+        this.antonym = antonym;
+        this.example = example;
     }
 
-    public void modifyWordItems (String word, String meaning, Long degree){
+    public void ModifyWordItems(String word, String meaning ,String synonym ,String antonym ,String example){
         this.word = word;
         this.meaning = meaning;
-        this.degree = degree;
+        this.synonym = synonym;
+        this.antonym = antonym;
+        this.example = example;
     }
 }

@@ -17,20 +17,15 @@ import java.util.List;
 public class WordsDegree {
 
     @Id
+    @Column(name = "degree_id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long wordsDegreeId;
+    private Long Id;
 
-    @Column(name = "wordsDegree", nullable = false)
     private Long Degree;
 
-    @OneToMany(fetch = FetchType.EAGER)
-    @JoinColumn(name = "WordsItems_wordsItemsNo")
-    public List<WordItems> wordItemsList = new ArrayList<>();
+    @OneToMany(mappedBy = "wordsDegree",fetch = FetchType.EAGER)
+    final public List<WordItems> wordItemsList = new ArrayList<>();
 
     public WordsDegree(Long Degree){this.Degree = Degree;}
 
-    public void setWordItems (WordItems wordItems){
-        wordItemsList.add(wordItems);
-        wordItems.setWordsDegree(this);
-    }
 }

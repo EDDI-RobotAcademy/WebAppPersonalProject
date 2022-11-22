@@ -15,13 +15,19 @@ public class WordItemsRequest {
 
     private  final String word;
     private  final String meaning;
+    private final String synonym;
+    private final String antonym;
+    private final String example;
+
     private final Long degree;
 
     public WordItems toWordItems () {
         return new WordItems(
                 word,
                 meaning,
-                degree
+                synonym,
+                antonym,
+                example
         );
     }
 }
