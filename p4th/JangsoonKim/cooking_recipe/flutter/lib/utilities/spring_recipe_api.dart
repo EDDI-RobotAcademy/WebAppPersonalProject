@@ -91,11 +91,11 @@ class SpringRecipeApi {
     );
     if (response.statusCode == 200) {
       debugPrint("통신 확인");
-
     } else {
       throw ("error");
     }
   }
+
   Future<void> recipeDelete(int recipeNo) async {
     var response = await http.delete(
       Uri.http(httpUrl, '/recipe/$recipeNo'),
@@ -103,7 +103,6 @@ class SpringRecipeApi {
     );
     if (response.statusCode == 200) {
       debugPrint("통신 확인");
-
     } else {
       throw ("error");
     }
@@ -129,6 +128,7 @@ class RequestRecipe {
   double rating;
   int likeCount;
   String thumbnail;
+  String keyword;
 
   RequestRecipe(
       {required this.recipeNo,
@@ -139,20 +139,21 @@ class RequestRecipe {
       required this.rating,
       required this.likeCount,
       required this.thumbnail,
-      required this.category});
+      required this.category,
+      required this.keyword});
 
   factory RequestRecipe.fromJson(Map<String, dynamic> json) {
     return RequestRecipe(
-      recipeNo: json["recipeNo"],
-      title: json["title"],
-      writer: json["writer"],
-      content: json["content"],
-      regDate: json["regDate"],
-      rating: json["rating"],
-      likeCount: json["likeCount"],
-      thumbnail: json["thumbnail"],
-      category: json["category"],
-    );
+        recipeNo: json["recipeNo"],
+        title: json["title"],
+        writer: json["writer"],
+        content: json["content"],
+        regDate: json["regDate"],
+        rating: json["rating"],
+        likeCount: json["likeCount"],
+        thumbnail: json["thumbnail"],
+        category: json["category"],
+        keyword: json["keyword"]);
   }
 }
 

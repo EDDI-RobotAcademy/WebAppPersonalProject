@@ -1,7 +1,6 @@
 package com.example.demo.repository.recipe;
 
 import com.example.demo.entity.board.Recipe;
-import com.example.demo.entity.member.Member;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 

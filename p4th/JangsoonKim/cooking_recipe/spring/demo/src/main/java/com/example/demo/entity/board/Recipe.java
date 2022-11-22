@@ -39,6 +39,9 @@ public class Recipe {
     @Column(length = 100, nullable = false)
     private String thumbnail;
 
+    @Column(length = 100, nullable = false)
+    private String keyword;
+
     @CreatedDate
     private String regDate;
 

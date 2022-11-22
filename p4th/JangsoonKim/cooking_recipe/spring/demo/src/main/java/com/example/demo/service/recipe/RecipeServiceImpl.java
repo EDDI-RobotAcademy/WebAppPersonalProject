@@ -29,6 +29,7 @@ public class RecipeServiceImpl implements RecipeService {
         Recipe recipe = new Recipe();
         recipe.setTitle(recipeRequest.getTitle());
         recipe.setCategory(recipeRequest.getCategory());
+        recipe.setKeyword(recipeRequest.getCategory()+recipeRequest.getTitle());
         recipe.setContent(recipeRequest.getContent());
         recipe.setWriter(recipeRequest.getWriter());
         recipe.setThumbnail(uploadImageList.get(0));
