@@ -15,7 +15,8 @@ export default {
   },
   data(){
     return{
-      categoryName:'자기 개발'
+      categoryName:'자기 개발',
+      pageValue: 1
     }
   },
   methods:{
@@ -24,8 +25,8 @@ export default {
     ])
   },
   async mounted() {
-    const categoryName = this.categoryName
-    await this.getCurrentBucketListCategory(categoryName)
+    const {categoryName, pageValue} = this
+    await this.getCurrentBucketListCategory({categoryName, pageValue})
   }
 }
 </script>
