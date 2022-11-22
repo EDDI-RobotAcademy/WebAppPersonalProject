@@ -36,4 +36,3 @@ public class LendBoard {
     @UpdateTimestamp
     private Date updDate;
 }
-

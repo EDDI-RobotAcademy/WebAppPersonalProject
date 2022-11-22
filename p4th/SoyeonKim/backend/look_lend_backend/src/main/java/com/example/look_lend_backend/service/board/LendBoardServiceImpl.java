@@ -60,3 +60,4 @@ public class LendBoardServiceImpl implements LendBoardService {
         repository.deleteById(lendNo);
     }
 }
+

@@ -13,3 +13,4 @@ public interface LendBoardService {
     public void remove(Long lendNo);
 
 }
+
