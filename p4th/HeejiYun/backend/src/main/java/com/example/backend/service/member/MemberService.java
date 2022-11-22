@@ -14,6 +14,8 @@ public interface MemberService {
     Boolean nicknameValidation(String nickname);
     String signIn(MemberSignInRequest request);
 
+    Boolean signOut(FlutterUserTokenRequest request);
+
     MemberDataResponse userData(FlutterUserTokenRequest request);
 
     Boolean modifyUserData(MemberModifyRequest request);

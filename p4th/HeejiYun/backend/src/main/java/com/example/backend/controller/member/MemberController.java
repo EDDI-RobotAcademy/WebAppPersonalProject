@@ -49,6 +49,13 @@ public class MemberController {
         return service.signIn(request);
     }
 
+    @PostMapping("/sign-out")
+    public Boolean signOut(@RequestBody FlutterUserTokenRequest request) {
+        log.info("signOutRequest: " + request);
+
+        return service.signOut(request);
+    }
+
     @PostMapping("/data-read")
     public MemberDataResponse readUserData(@RequestBody FlutterUserTokenRequest request) {
         log.info("readUserData: " + request);

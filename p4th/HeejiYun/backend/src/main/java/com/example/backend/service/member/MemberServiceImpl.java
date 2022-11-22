@@ -106,6 +106,14 @@ public class MemberServiceImpl implements MemberService{
         return NO_EMAIL;
         // throw new RuntimeException("가입된 사용자가 아닙니다.");
     }
+
+    @Override
+    public Boolean signOut(FlutterUserTokenRequest request) {
+        String requestToken = request.getUserToken();
+        redisService.deleteByKey(requestToken);
+        return true;
+    }
+
     @Override
     public MemberDataResponse userData(FlutterUserTokenRequest request) {
         log.info("userToken: " + request.getUserToken());
