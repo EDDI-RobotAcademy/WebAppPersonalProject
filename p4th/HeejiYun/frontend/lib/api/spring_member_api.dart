@@ -112,6 +112,24 @@ class SpringMemberApi {
       throw Exception("통신 실패");
     }
   }
+
+  Future<bool?> requestSignOut (String? userToken) async {
+    var data = { 'userToken': userToken };
+    var body = json.encode(data);
+
+    var response = await http.post(
+      Uri.http(HttpUri.home, '/member/sign-out'),
+      headers: {"Content-Type": "application/json"},
+      body: body,
+    );
+
+    if (response.statusCode == 200) {
+      debugPrint("통신 확인");
+      return json.decode(response.body);
+    } else {
+      throw Exception("통신 실패");
+    }
+  }
 }
 class UserDataResponse {
   String userEmail;

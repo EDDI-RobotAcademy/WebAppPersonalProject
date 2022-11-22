@@ -1,10 +1,12 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:frontend/api/spring_member_api.dart';
 import 'package:frontend/components/custom_rich_text.dart';
 import 'package:frontend/utility/main_color.dart';
 import 'package:frontend/utility/providers/login_data_provider.dart';
 import 'package:provider/provider.dart';
 
+import '../utility/secure_storage.dart';
 import 'custom_alert_dialog.dart';
 import 'forms/board_register_form.dart';
 
@@ -29,7 +31,6 @@ class _CustomDrawerState extends State<CustomDrawer> {
   Widget build(BuildContext context) {
     _loginDataProvider = Provider.of<LoginDataProvider>(context, listen: true);
     // debugPrint(_loginDataProvider.loginState.toString());
-
           if(_loginDataProvider.loginState == true) {
             return _logInDrawer(context);
           } else {
@@ -89,10 +90,12 @@ class _CustomDrawerState extends State<CustomDrawer> {
                   ),
               ListTile(
                 title: Text("로그아웃"),
-                onTap: () {
+                onTap: () async {
+                  SpringMemberApi().requestSignOut(_loginDataProvider.userToken);
+                  await SecureStorage.storage.delete(key: 'login');
+                  _loginDataProvider.logOut();
+                  showResultDialog(context, "로그아웃", "로그아웃이 완료되었습니다.");
                   // 토큰 삭제 요청 api
-                  // 스토리지 내 login 토큰 삭제
-                  // loginDataProvider logout()추가
                 },
               ),
             ],
