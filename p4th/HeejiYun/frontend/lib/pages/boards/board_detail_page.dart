@@ -3,6 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:frontend/components/custom_app_bar.dart';
 import 'package:frontend/components/custom_drawer.dart';
 import 'package:frontend/components/forms/board_modify_form.dart';
+import 'package:frontend/utility/providers/login_data_provider.dart';
+import 'package:provider/provider.dart';
 
 import '../../api/board.dart';
 
@@ -12,9 +14,11 @@ class BoardDetailPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    LoginDataProvider _loginDataProvider = Provider.of<LoginDataProvider>(context, listen: false);
+
     return Scaffold(
       appBar: CommonAppBar(title: board.categoryName + " 게시판"),
-      drawer: CustomDrawer(isLogin: true,),
+      drawer: CustomDrawer(),
       body: Padding(
         padding: EdgeInsets.all(16.0),
         child: ListView(
@@ -79,7 +83,7 @@ class BoardDetailPage extends StatelessWidget {
                 )
             ),
             Visibility(
-                visible: true, // board.writer == 로그인 유저 닉네임 이런 식으로 줄 예정(?)
+                visible: _loginDataProvider.userNickname == board.writer ? true : false, // board.writer == 로그인 유저 닉네임 이런 식으로 줄 예정(?)
                 child: Container(
                     margin: EdgeInsets.only(left: 50, right: 50),
                     child: TextButton(

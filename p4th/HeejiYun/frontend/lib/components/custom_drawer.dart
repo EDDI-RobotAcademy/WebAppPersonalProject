@@ -2,34 +2,48 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:frontend/components/custom_rich_text.dart';
 import 'package:frontend/utility/main_color.dart';
+import 'package:frontend/utility/providers/login_data_provider.dart';
+import 'package:provider/provider.dart';
 
+import 'custom_alert_dialog.dart';
 import 'forms/board_register_form.dart';
 
 
-class CustomDrawer extends StatelessWidget {
-  const CustomDrawer({Key? key, required this.isLogin}) : super(key: key);
-  final bool isLogin;
+class CustomDrawer extends StatefulWidget {
+  CustomDrawer({Key? key}) : super(key: key);
+
+
+  @override
+  State<CustomDrawer> createState() => _CustomDrawerState();
+}
+
+class _CustomDrawerState extends State<CustomDrawer> {
+  late LoginDataProvider _loginDataProvider;
+
+  @override
+  void initState() {
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
-    String email = "tmp@test.com";
-    String nickname = "경수";
+    _loginDataProvider = Provider.of<LoginDataProvider>(context, listen: true);
+    // debugPrint(_loginDataProvider.loginState.toString());
 
-    debugPrint(isLogin.toString());
-    if (isLogin == true) {
-      return _logInDrawer(context, email, nickname);
-    }  else {
-       return _logOutDrawer(context);
-     }
+          if(_loginDataProvider.loginState == true) {
+            return _logInDrawer(context);
+          } else {
+            return _logOutDrawer(context);
+          }
   }
-    Widget _logInDrawer(BuildContext context, String email, String nickname) {
+    Widget _logInDrawer(BuildContext context) {
       return Drawer(
           child: ListView(
             children: [
               UserAccountsDrawerHeader(
-                accountName: Text(email),
-                accountEmail: Text(nickname),
-              ),
+                accountName: Text(_loginDataProvider.userNickname),
+                accountEmail: Text(_loginDataProvider.userEmail),
+               ),
               ListTile(
                 title: CustomRichText(text: "홈화면 가기", route: "/home"),
               ),
@@ -73,6 +87,14 @@ class CustomDrawer extends StatelessWidget {
                   ListTile(
                     title: CustomRichText(text: "공지사항", route: "/board-list-notice"),
                   ),
+              ListTile(
+                title: Text("로그아웃"),
+                onTap: () {
+                  // 토큰 삭제 요청 api
+                  // 스토리지 내 login 토큰 삭제
+                  // loginDataProvider logout()추가
+                },
+              ),
             ],
           )
       );
@@ -121,5 +143,12 @@ class CustomDrawer extends StatelessWidget {
           ],
         )
     );
+  }
+
+  void showResultDialog(BuildContext context, String title, String alertMsg) {
+    showDialog(
+        context: context,
+        builder: (BuildContext context) =>
+            CustomAlertDialog(title: title, alertMsg: alertMsg));
   }
 }
