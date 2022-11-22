@@ -209,10 +209,12 @@ export default {
       await axios.post('http://localhost:7777/bucket/register', formData)
           .then(() => {
             alert("버킷 등록 완료")
+            this.$router.push({name: 'HomeView'})
           })
           .catch(() => {
             alert("버킷 등록 실패")
           });
+
     },
   }
 }

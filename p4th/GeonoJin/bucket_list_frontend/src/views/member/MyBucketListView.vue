@@ -20,14 +20,19 @@ export default {
         'bucketListByNickname'
     ])
   },
+  props:{
+    userNickname:{
+      type: String,
+      required: true
+    }
+  },
   methods:{
     ...mapActions([
         'requestMyBucketListToSpring'
     ])
   },
   async mounted() {
-    const userNickname = this.$store.state.currentUserNickname
-    await this.requestMyBucketListToSpring(userNickname)
+    await this.requestMyBucketListToSpring(this.userNickname)
   }
 }
 </script>

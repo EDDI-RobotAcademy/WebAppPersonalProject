@@ -75,9 +75,14 @@ const routes = [
     }
   },
   {
-    path: '/myBucket',
+    path: '/myBucket/:userNickname',
     name: 'MyBucketListView',
-    component: MyBucketListView
+    components: {
+      default: MyBucketListView
+    },
+    props:{
+      default: true
+    }
   },
   {
     path: '/readBucketList/:bucketId',
