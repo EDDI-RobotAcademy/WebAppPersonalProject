@@ -1,7 +1,9 @@
 package kr.eddi.LeaningHelper.service.learning;
 
+import com.zaxxer.hikari.util.SuspendResumeLock;
 import kr.eddi.LeaningHelper.entity.learning.words.WordItems;
 import kr.eddi.LeaningHelper.entity.learning.words.WordsDegree;
+import kr.eddi.LeaningHelper.request.learning.WordItemsModifyRequest;
 import kr.eddi.LeaningHelper.respones.learning.WordResponseForm;
 import kr.eddi.LeaningHelper.repository.learning.WordItemsRepository;
 import kr.eddi.LeaningHelper.repository.learning.WordsDegreeRepository;
@@ -20,79 +22,114 @@ public class WordItemsServiceImpl implements WordItemsService{
 
     @Autowired
     WordItemsRepository wordItemsRepository;
+    @Autowired
     WordsDegreeRepository wordsDegreeRepository;
 
-    // 해당 차수에 원하는 단어 입력
+    @Override
+    public boolean createDegree(long degree) {
+        try {
+            WordsDegree wordsDegree= WordsDegree.builder()
+                    .Degree(degree)
+                    .build();
+
+            wordsDegreeRepository.save(wordsDegree);
+            return true;
+        }catch (Exception e){
+            System.out.println("오류" + e);
+            return false;
+        }
+    }
+
     @Override
     public boolean wordItemRegister(WordItemsRequest wordItemsRequest) {
-
         try {
-            Optional<WordsDegree> maybeWordsDegree = wordsDegreeRepository.findAllDegreeByDegree(wordItemsRequest.getDegree());
-            if(maybeWordsDegree == null){
-                WordsDegree createDegree = WordsDegree.builder().
-                        Degree(wordItemsRequest.getDegree())
-                        .build();
-                wordsDegreeRepository.save(createDegree);
-                Optional<WordsDegree> getWordsDegree = wordsDegreeRepository.findById(wordItemsRequest.getDegree());
-                WordsDegree wordsDegree = getWordsDegree.get();
-                final WordItems toWordItems = wordItemsRequest.toWordItems();
-                WordItems wordItems = WordItems.builder()
-                        .word(toWordItems.getWord())
-                        .meaning(toWordItems.getMeaning())
-                        .wordsDegree(wordsDegree)
-                        .build();
+            Optional<WordsDegree> maybeWordsDegree = wordsDegreeRepository.findDegreeByResponseDegree(wordItemsRequest.getDegree());
 
-                wordItemsRepository.save(wordItems);
-                return true;
-            }
             WordsDegree wordsDegree = maybeWordsDegree.get();
 
-            final WordItems toWordItems = wordItemsRequest.toWordItems();
             WordItems wordItems = WordItems.builder()
-                    .word(toWordItems.getWord())
-                    .meaning(toWordItems.getMeaning())
+                    .word(wordItemsRequest.getWord())
+                    .meaning(wordItemsRequest.getMeaning())
+                    .antonym(wordItemsRequest.getAntonym())
+                    .synonym(wordItemsRequest.getSynonym())
+                    .example(wordItemsRequest.getExample())
                     .wordsDegree(wordsDegree)
                     .build();
 
             wordItemsRepository.save(wordItems);
+
             return true;
-        }catch (Exception e){
+            }catch (Exception e){
             System.out.println("오류 발생! : " + e );
             return false;
         }
-
-
     }
 
     // 해당 차수 단어 반환
     @Override
-    public List<WordResponseForm> readWordItems(long Degree) {
-        List<WordItems> wordItemsList = wordItemsRepository.findAllWordByDegree(Degree);
+    public List<WordResponseForm> readWordItems(int Degree) {
 
-        List<WordResponseForm> WordItemResponse = new ArrayList<>();
+        try{
+            List<WordItems> wordItemsList = wordItemsRepository.findAllWordByDegree((long) Degree);
 
-        for(WordItems wordItems : wordItemsList){
-            WordItemResponse.add(new WordResponseForm(wordItems.getWord() , wordItems.getMeaning()));
+            List<WordResponseForm> WordItemResponse = new ArrayList<>();
+
+            for(WordItems wordItems : wordItemsList){
+                WordItemResponse.add(new WordResponseForm(
+                                wordItems.getId(),
+                                wordItems.getWord(),
+                                wordItems.getMeaning(),
+                                wordItems.getSynonym(),
+                                wordItems.getAntonym(),
+                                wordItems.getExample()
+                        )
+                );
+            }
+
+            System.out.println("WordItemResponse :  " + WordItemResponse);
+
+            return WordItemResponse;
+        }catch (Exception e){
+            System.out.println("ㅅㅂ 오류"+e);
         }
-
-        System.out.println("WordItemResponse :  " + WordItemResponse);
-
-        return WordItemResponse;
+        return null;
     }
 
     // 차수가 몇개가 있는지 요청받으면 차수 개수를 반환
     @Override
-    public long readWordDegreeCnt() {
-        return wordsDegreeRepository.count();
+    public List<Long> readWordDegreeCnt() {
+        List<WordsDegree> wordsDegreeListList = wordsDegreeRepository.findAll();
+
+        List<Long> DegreeList = new ArrayList<>();
+        for (WordsDegree wordsDegree : wordsDegreeListList) {
+            DegreeList.add(wordsDegree.getDegree());
+        }
+        return null;
     }
 
     @Override
-    public boolean updateWordItems(WordItemsRequest wordItemsRequest) {
+    public boolean ModifyWordItem(WordItemsModifyRequest wordItemsModifyRequest) {
+        Optional<WordItems> maybeWordItem = wordItemsRepository.findById(wordItemsModifyRequest.getWordId());
+        if(maybeWordItem != null){
+            WordItems existingItem = maybeWordItem.get();
+
+            existingItem.ModifyWordItems(wordItemsModifyRequest.getWord(),wordItemsModifyRequest.getMeaning(),
+                    wordItemsModifyRequest.getSynonym(),wordItemsModifyRequest.getAntonym(),wordItemsModifyRequest.getExample());
+
+            wordItemsRepository.save(existingItem);
+
+            return true;
+        }
         return false;
     }
 
     @Override
-    public boolean deleteWordItems(WordItemsRequest wordItemsRequest) {
-        return false;
+    public boolean deleteWordItems(Long WordItemId) {
+        try{
+            wordItemsRepository.deleteById(WordItemId);
+            return true;
+        }catch (Exception e){
+            return false;
+        }
     }
 }
