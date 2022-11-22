@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:leaing_helper/utility/decorations/color.dart';
 
-import '../../components/Forms/admin_register_form/learning_word_register_form.dart';
+import '../../components/Forms/admin_form/learning_word_register_form.dart';
+
 
 class LearningRegisterPage extends StatelessWidget{
   const LearningRegisterPage({Key? key}) :super (key:key);

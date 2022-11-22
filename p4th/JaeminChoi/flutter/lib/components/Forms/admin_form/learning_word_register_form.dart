@@ -4,6 +4,7 @@ import 'package:leaing_helper/utility/decorations/color.dart';
 import '../../../api/info/word_register_info.dart';
 import '../../../api/learning_api/spring_words_learning_api.dart';
 import '../../../api/state/learning_validate.dart';
+import '../../../utility/alert/commonSnackBar.dart';
 import '../../text_form_filed/admin_text_form.dart';
 
 class LearningRegisterForm extends StatefulWidget{
@@ -20,7 +21,7 @@ class _LearningRegisterForm extends State<LearningRegisterForm>{
   late TextEditingController antonymController;
   late TextEditingController exampleController;
 
-  late List<int> _Degree = [1,2,3,4,5,6];
+  List<int> _Degree = [1,2,3,4,5,6,7,8,9,10,11,12];
   int _selected = 1;
 
   void initState() {
@@ -51,21 +52,19 @@ class _LearningRegisterForm extends State<LearningRegisterForm>{
         exampleController.text,
         _selected,
     );
-
     await SpringWordLearningApi().registerWordList(wordItem);
-
     if(LearningValidate.isWordItemRegister == true){
-
       wordController.clear();
       meaningController.clear();
       synonymController.clear();
       antonymController.clear();
       exampleController.clear();
-
       debugPrint("등록 완료");
-
+      ScaffoldMessenger.of(context).showSnackBar(
+          CommonSnackBar.registerWordSnackBar());
     }
   }
+
 
   @override
   Widget build(BuildContext context) {
@@ -113,19 +112,6 @@ class _LearningRegisterForm extends State<LearningRegisterForm>{
                         });
                       }
                   ),
-                  SizedBox(width: 10,),
-                  ElevatedButton(
-                    style: ButtonStyle(
-                      backgroundColor: MaterialStateProperty.all(ColorStyle.defaultBlack),
-                      fixedSize: MaterialStateProperty.all(Size(150,25)),
-                    ),
-                    onPressed: () {
-                      setState(() {
-                        _Degree = [1,2,3,4,5,6,7];
-                        _selected = 7;
-                      });
-                    },
-                    child: Text("create new degree", style: TextStyle(fontSize: 12),),)
                 ],
               ),
             ),
@@ -133,7 +119,8 @@ class _LearningRegisterForm extends State<LearningRegisterForm>{
               onPressed: () {
                 registerWordItem();
               },
-              child: Text("show test degree"),)
+              child: Text("새로운 단어 등록"),
+            )
           ],
         ),
       ),
