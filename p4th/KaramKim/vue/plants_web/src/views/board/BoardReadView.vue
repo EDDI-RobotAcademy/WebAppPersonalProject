@@ -32,6 +32,11 @@
         />
       </router-link>
     </div>
+    <div class="mt-5">
+      <comment-list-form
+          :headers="headers"
+          :items="comments"/>
+    </div>
   </div>
 
 </template>
@@ -39,10 +44,20 @@
 <script>
 import {mapActions, mapState} from "vuex";
 import BoardReadForm from "@/components/board/BoardReadForm";
+import CommentListForm from "@/components/board/CommentListForm";
 
 export default {
   name: "BoardReadView",
-  components: {BoardReadForm},
+  components: {BoardReadForm, CommentListForm},
+  data() {
+    return {
+      headers: [
+        {text: '작성자', value: 'writer'},
+        {text: '내용', value: 'content'},
+        {text: '등록일자', value: 'regDate'},
+      ],
+    }
+  },
   props: {
     boardNo: {
       type: String,
@@ -51,22 +66,24 @@ export default {
   },
   computed: {
     ...mapState([
-      'board'
+      'board',
+      'comments'
     ])
   },
   methods: {
     ...mapActions([
       'requestQuestionBoardContentsFromSpring',
-      'requestDeleteBoardToSpring'
+      'requestDeleteBoardToSpring',
+      'requestCommentsFromSpring'
     ]),
     deleteBoard() {
       this.requestDeleteBoardToSpring(this.boardNo)
       this.$router.push({ name: 'QuestionBoardListView' })
-
     }
   },
   created() {
     this.requestQuestionBoardContentsFromSpring(this.boardNo)
+    this.requestCommentsFromSpring(this.boardNo)
   }
 }
 </script>

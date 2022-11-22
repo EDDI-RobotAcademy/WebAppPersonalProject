@@ -4,7 +4,7 @@
       <common-page-description
         page-name="질문게시판"
       />
-      <div class="mt-10 mb-10" style="width: 630px">
+      <div class="mt-10" style="width: 630px">
         <div>
           <common-text-field
               type="text"

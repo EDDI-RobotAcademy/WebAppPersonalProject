@@ -1,6 +1,8 @@
 import axios from "axios";
 import router from "@/router";
 import {
+    REQUEST_COMMENTS_FROM_SPRING,
+    REQUEST_GENERAL_BOARD_LIST_FROM_SPRING,
     REQUEST_QUESTION_BOARD_CONTENTS_FROM_SPRING,
     REQUEST_QUESTION_BOARD_LIST_FROM_SPRING
 } from "@/store/mutation-types";
@@ -58,6 +60,14 @@ export default {
         axios.post(`http://localhost:7777/plants/question-board/read/${boardNo}`)
             .then((res) => {
                 commit(REQUEST_QUESTION_BOARD_CONTENTS_FROM_SPRING, res.data)
+            })
+    },
+    requestCommentsFromSpring({ commit }, boardNo) {
+        console.log("requestCommentsFromSpring()")
+
+        axios.post(`http://localhost:7777/plants/comment/list/${boardNo}`)
+            .then((res) => {
+                commit(REQUEST_COMMENTS_FROM_SPRING, res.data)
             })
     },
     requestDeleteBoardToSpring(_, boardNo) {
