@@ -43,6 +43,7 @@ class _PasswordCheckedTextFormField extends State<PasswordCheckedTextFormField>{
             controller: controller,
             decoration: textFormDecoration("check Password"),
             obscureText:true,
+            obscuringCharacter: '*',
             style: const TextStyle(color: Colors.black),
             keyboardType: TextInputType.visiblePassword,
             focusNode: _PasswordCheckedFocus,

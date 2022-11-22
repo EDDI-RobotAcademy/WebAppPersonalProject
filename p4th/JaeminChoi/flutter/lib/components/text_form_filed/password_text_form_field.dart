@@ -21,6 +21,7 @@ class _PasswordTextFormFieldState extends State<PasswordTextFormField> {
   late FocusNode _passwordFocus;
   var controller;
 
+  @override
   void initState() {
     super.initState();
     controller = widget.controller;
@@ -49,6 +50,7 @@ class _PasswordTextFormFieldState extends State<PasswordTextFormField> {
             controller: controller,
             decoration: textFormDecoration("Password"),
             obscureText:true,
+            obscuringCharacter: '*',
             style: const TextStyle(color: Colors.black),
             keyboardType: TextInputType.visiblePassword,
             focusNode: _passwordFocus,
