@@ -8,6 +8,9 @@ import com.example.bucket_list_project.service.bucketBoard.request.bucketBoard.B
 import lombok.ToString;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
@@ -80,8 +83,13 @@ public class BucketServiceImpl implements BucketService {
     }
 
     @Override
-    public List<BucketBoard> list() {
-        List<BucketBoard> bucketBoards = bucketBoardRepository.findAll();
+    public List<BucketBoard> list(int currentPage) {
+        log.info("list" + currentPage);
+
+        int page = (currentPage - 1);
+
+        Page<BucketBoard> bucketBoardPage = bucketBoardRepository.findAll(PageRequest.of(page, 12));
+        List<BucketBoard> bucketBoards = bucketBoardPage.getContent();
 
         return bucketBoards;
     }
@@ -124,10 +132,14 @@ public class BucketServiceImpl implements BucketService {
     }
 
     @Override
-    public List<BucketBoard> findBucketListByCategory(String bucketCategory) {
+    public List<BucketBoard> findBucketListByCategory(String bucketCategory, int currentPage) {
         log.info("findBucketListByCategory" + bucketCategory);
 
-        return bucketBoardRepository.findByBucketCategory(bucketCategory);
+        int pageValue = (currentPage - 1);
+
+        Page<BucketBoard> bucketListByCategory = bucketBoardRepository.findByBucketCategory(bucketCategory, PageRequest.of(pageValue, 12));
+        List<BucketBoard> bucketBoardList = bucketListByCategory.getContent();
+        return bucketBoardList;
     }
 
     @Override

@@ -4,8 +4,14 @@ import com.example.bucket_list_project.entity.Board.BucketBoard;
 import com.example.bucket_list_project.entity.Board.ImgFile;
 import com.example.bucket_list_project.service.bucketBoard.BucketService;
 import com.example.bucket_list_project.service.bucketBoard.request.bucketBoard.BucketBoardRequest;
+import com.example.bucket_list_project.service.bucketBoard.request.bucketBoard.BucketListCategoryByPageRequest;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
@@ -33,11 +39,11 @@ public class BucketBoardController {
         service.register(boardRequest, file);
     }
 
-    @GetMapping("/list")
-    public List<BucketBoard> bucketList(){
-        log.info("bucketList");
+    @GetMapping("/list/{currentPage}")
+    public List<BucketBoard> bucketList(@PathVariable("currentPage") int currentPage){
+        log.info("bucketList" + currentPage);
 
-        return service.list();
+        return service.list(currentPage);
     }
 
     @GetMapping("/{bucketId}")
@@ -69,11 +75,14 @@ public class BucketBoardController {
         service.delete(bucketId);
     }
 
-    @GetMapping("/categoryKind/{bucketCategory}")
-    public List<BucketBoard> bucketListByCategory(@PathVariable("bucketCategory") String bucketCategory) {
-        log.info("bucketListByCategory" + bucketCategory);
+    @PostMapping("/categoryKind")
+    public List<BucketBoard> bucketListByCategory(@RequestBody BucketListCategoryByPageRequest categoryByPageRequest) {
+        log.info("bucketListByCategory" + categoryByPageRequest.getCategoryName() +"," + categoryByPageRequest.getPageValue());
 
-        return service.findBucketListByCategory(bucketCategory);
+        String bucketCategory = categoryByPageRequest.getCategoryName();
+        int currentPage = categoryByPageRequest.getPageValue();
+
+        return service.findBucketListByCategory(bucketCategory, currentPage);
     }
 
     @PostMapping("/{userNickname}")
