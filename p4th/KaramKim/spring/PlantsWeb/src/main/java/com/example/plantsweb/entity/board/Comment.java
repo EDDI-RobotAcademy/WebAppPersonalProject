@@ -1,6 +1,6 @@
 package com.example.plantsweb.entity.board;
 
-import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import lombok.*;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
@@ -21,7 +21,7 @@ public class Comment {
 
     private String content;
 
-    @JsonManagedReference
+    @JsonBackReference
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "board_id")
     private QuestionBoard questionBoard;
@@ -36,6 +36,9 @@ public class Comment {
     private LocalDate updDate;
 
     public Comment(String content) {
+        this.content = content;
+    }
+    public void modifyContent (String content) {
         this.content = content;
     }
 

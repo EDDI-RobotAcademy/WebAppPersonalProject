@@ -1,5 +1,6 @@
 package com.example.plantsweb.controller.board;
 
+import com.example.plantsweb.controller.board.request.CommentRequest;
 import com.example.plantsweb.entity.board.Comment;
 import com.example.plantsweb.service.board.CommentService;
 import lombok.extern.slf4j.Slf4j;
@@ -22,5 +23,40 @@ public class CommentController {
         log.info("commentList()");
 
         return service.list(boardNo);
+    }
+
+    @PostMapping("/register/{boardNo}")
+    public void commentRegister(@PathVariable("boardNo") Long boardNo,
+                                @RequestBody CommentRequest commentRequest) {
+        log.info("commentRegister()");
+
+        service.register(boardNo, commentRequest);
+    }
+
+//    @PutMapping("/modify/{boardNo}/{id}")
+//    public Comment commentModify(@PathVariable("boardNo") Long boardNo,
+//                              @PathVariable("id") Long id,
+//                              @RequestBody Comment comment) {
+//        log.info("commentModify()");
+//
+//        comment.setId(id);
+//        service.modify(boardNo, comment);
+//
+//        return comment;
+//    }
+    @PutMapping("/modify/{id}")
+    public void commentModify(@PathVariable("id") Long id,
+                                 @RequestBody CommentRequest commentRequest) {
+        log.info("commentModify()");
+
+
+        service.modify(id, commentRequest);
+    }
+
+    @DeleteMapping("/delete/{id}")
+    public void commentDelete(@PathVariable("id") Long id) {
+        log.info("commentDelete()");
+
+        service.delete(id);
     }
 }
