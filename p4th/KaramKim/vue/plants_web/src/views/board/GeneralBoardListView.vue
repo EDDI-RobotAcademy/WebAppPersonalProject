@@ -46,11 +46,11 @@ export default {
     ])
   },
   mounted() {
-    this.requestQuestionBoardListFromSpring()
+    this.requestGeneralBoardListFromSpring()
   },
   methods: {
     ...mapActions([
-      'requestQuestionBoardListFromSpring'
+      'requestGeneralBoardListFromSpring'
     ]),
     registerBoardContent() {
       this.$router.push({ name: 'BoardRegisterView' })
