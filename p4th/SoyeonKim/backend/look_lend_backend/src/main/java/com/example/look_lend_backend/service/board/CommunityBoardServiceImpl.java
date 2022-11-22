@@ -57,4 +57,3 @@ public class CommunityBoardServiceImpl implements CommunityBoardService {
         repository.deleteById(communityNo);
     }
 }
-

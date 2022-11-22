@@ -12,4 +12,3 @@ public interface CommunityBoardService {
     public void modify(CommunityBoard communityBoard);
     public void remove(Long communityNo);
 }
-
