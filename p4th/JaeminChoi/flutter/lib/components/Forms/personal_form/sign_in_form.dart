@@ -2,14 +2,16 @@ import 'package:flutter/material.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:leaing_helper/utility/decorations/buttonStyle.dart';
 
-import '../../api/info/sign_in_info.dart';
-import '../../api/spring_sign_in_api.dart';
-import '../../pages/personal_pages/personal_main_page.dart';
-import '../../utility/decorations/color.dart';
-import '../../utility/decorations/text_style.dart';
-import '../text_form_filed/email_text_form_field.dart';
-import '../text_form_filed/password_text_form_field.dart';
-import '../../utility/size.dart';
+import '../../../api/info/sign_in_info.dart';
+import '../../../api/spring_sign_in_api.dart';
+import '../../../api/state/sign_in_validate_state.dart';
+import '../../../pages/admin_pages/admin_main_page.dart';
+import '../../../pages/personal_pages/personal_main_page.dart';
+import '../../../utility/decorations/color.dart';
+import '../../../utility/decorations/text_style.dart';
+import '../../text_form_filed/email_text_form_field.dart';
+import '../../text_form_filed/password_text_form_field.dart';
+import '../../../utility/size.dart';
 
 
 class SignInForm extends StatefulWidget {
@@ -24,10 +26,9 @@ class _SignInFormState extends State<SignInForm> {
   String accountInfo = "";
   bool isAuthenticated = false;
   bool isSignIn = false;
-
   late TextEditingController emailEditController;
   late TextEditingController passwordController;
-  static final storage = FlutterSecureStorage();
+  static final signInStorage = FlutterSecureStorage();
 
   changeStatus() {
     if (isAuthenticated == true) {
@@ -38,21 +39,18 @@ class _SignInFormState extends State<SignInForm> {
   }
 
   saveSignInInfo() async{
+
     SignInAccount account = SignInAccount(
         emailEditController.text,
         passwordController.text
     );
-
     await SpringSignInApi().login(account);
-    if(SpringSignInApi.response.statusCode == 200) {
-      var resToken = SpringSignInApi.response.body;
+    if(SignInValidateState.isSignInCheck == true) {
 
       isAuthenticated = true;
-      await storage.write(key: 'sign_in', value: resToken.toString());
+      await signInStorage.write(key: 'sign_in', value: SpringSignInApi.resToken['userToken']);
       changeStatus();
       _asyncMethod();
-    } else {
-      debugPrint(SpringSignInApi.response.body.toString());
     }
   }
 
@@ -61,7 +59,7 @@ class _SignInFormState extends State<SignInForm> {
     super.initState();
     emailEditController = TextEditingController();
     passwordController = TextEditingController();
-    storage.deleteAll();
+    signInStorage.deleteAll();
     // 빌드가 끝나고 한번 콜백 해주는 용도
     WidgetsBinding.instance!.addPostFrameCallback((_) {
       _asyncMethod();
@@ -69,16 +67,25 @@ class _SignInFormState extends State<SignInForm> {
   }
 
   _asyncMethod() async {
-    accountInfo = (await storage.read(key: "sign_in"))!;
-    debugPrint(accountInfo);
-
+    accountInfo = (await signInStorage.read(key: 'sign_in'))!;
+    debugPrint("accountInfo : "+accountInfo);
+    debugPrint("SpringSignInApi.resToken['Admin'] : " + SpringSignInApi.resToken['Admin']);
     if (accountInfo != null) {
-      Navigator.pushReplacement<void, void>(
-        context,
-        MaterialPageRoute<void>(
-          builder: (BuildContext context) => PersonalPage(),
-        ),
-      );
+      if(SpringSignInApi.resToken['Admin'] == "isAdmin"){
+        Navigator.pushReplacement(
+          context,
+          MaterialPageRoute(
+            builder: (BuildContext context) => AdminMainPage(),
+          ),
+        );
+      }else{
+        Navigator.pushReplacement(
+          context,
+          MaterialPageRoute(
+            builder: (BuildContext context) => PersonalPage(),
+          ),
+        );
+      }
     } else {
       debugPrint("accountInfo 에 값이 없습니다.");
     }
