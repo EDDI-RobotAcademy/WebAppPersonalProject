@@ -6,6 +6,8 @@ import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import personal_project.look_style.controller.board.form.BoardRegisterForm;
+import personal_project.look_style.entity.board.Board;
+import personal_project.look_style.entity.board.BoardImage;
 import personal_project.look_style.service.board.BoardService;
 
 import java.util.List;
@@ -20,7 +22,7 @@ public class BoardController {
     private BoardService boardService;
 
     @PostMapping(value = "/register", consumes = {MediaType.MULTIPART_FORM_DATA_VALUE, MediaType.APPLICATION_JSON_VALUE})
-    public void BoardRegister(
+    public void boardRegister(
             @RequestPart(value = "form") BoardRegisterForm form,
             @RequestPart(value = "file",required = false) List<MultipartFile> file) {
 
@@ -32,5 +34,12 @@ public class BoardController {
         } else {
             boardService.register(form.toBoardRequest(), file);
         }
+    }
+
+    @GetMapping("/list/{boardType}")
+    public List<Board> boardList(@PathVariable("boardType") String boardType) {
+        log.info("boardList()");
+
+        return boardService.list(boardType);
     }
 }

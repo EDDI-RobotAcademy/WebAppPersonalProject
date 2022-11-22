@@ -2,6 +2,7 @@ package personal_project.look_style.service.board;
 
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 import personal_project.look_style.entity.board.Board;
@@ -17,6 +18,7 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @Slf4j
 @Service
@@ -47,7 +49,7 @@ public class BoardServiceImpl implements BoardService{
             boardImageList.add(boardImage);
             try {
                 FileOutputStream writer = new FileOutputStream(
-                        "C:/web/images/" + multipartFile.getOriginalFilename()
+                        "../../flutter/look_style/assets/" + multipartFile.getOriginalFilename()
                 );
                 writer.write(multipartFile.getBytes());
                 writer.close();
@@ -77,22 +79,7 @@ public class BoardServiceImpl implements BoardService{
     }
 
     @Override
-    public List<Board> list() {
-        return null;
-    }
-
-    @Override
-    public Board read(Long boardNo) {
-        return null;
-    }
-
-    @Override
-    public void modify(Board board) {
-
-    }
-
-    @Override
-    public void remove(Long boardNo) {
-
+    public List<Board> list(String boardType) {
+        return boardRepository.findBoardsByBoardType(Sort.by(Sort.Direction.DESC, "boardNo"),boardType);
     }
 }
