@@ -143,7 +143,6 @@ class _RecipeDetailFormState extends State<RecipeDetailForm> {
                               fontSize: 24, fontWeight: FontWeight.w600),
                         ),
                       ),
-                      const Spacer(flex: 1),
                       /*_like*/ tmp == true
                           ? IconButton(
                               onPressed: () {

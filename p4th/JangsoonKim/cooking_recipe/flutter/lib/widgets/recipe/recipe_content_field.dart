@@ -21,7 +21,7 @@ class _RecipeContentFieldState extends State<RecipeContentField> {
       child: TextFormField(
         keyboardType: TextInputType.multiline,
         maxLines: null,
-        minLines: 10,
+        minLines: 20,
         controller: _controller,
         onChanged: (text){
           recipe?.content = text;
@@ -29,8 +29,9 @@ class _RecipeContentFieldState extends State<RecipeContentField> {
         validator: (value) =>
             CheckValidate().validateContent(_contentFocus, value!),
         autovalidateMode: AutovalidateMode.onUserInteraction,
-        decoration: InputDecoration(
-            hintText: "레시피를 작성해주세요."),
+        decoration: const InputDecoration(
+            hintText: "레시피를 작성해주세요.",
+            border: InputBorder.none),
       ),
     );
   }

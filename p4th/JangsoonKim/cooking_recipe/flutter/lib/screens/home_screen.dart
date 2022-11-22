@@ -77,7 +77,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                     child: Text(snapshot.error.toString()),
                                   );
                                 } else {
-                                  return AllRecipesForm(recipeList: recipes);
+                                  return AllRecipesForm(recipeList: recipes, text: "모든 레시피",);
                                 }
                               } else{
                                 return const Text("망");

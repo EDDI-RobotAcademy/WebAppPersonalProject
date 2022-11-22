@@ -5,8 +5,9 @@ import '../../app_theme.dart';
 
 class AllRecipesForm extends StatefulWidget {
   final List<dynamic>? recipeList;
+  final String text;
 
-  const AllRecipesForm({Key? key, this.recipeList}) : super(key: key);
+  const AllRecipesForm({Key? key, this.recipeList, required this.text}) : super(key: key);
 
   @override
   State<AllRecipesForm> createState() => _AllRecipesFormState();
@@ -30,10 +31,10 @@ class _AllRecipesFormState extends State<AllRecipesForm> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
-            const Text(
-              '모든 레시피',
+            Text(
+              widget.text,
               textAlign: TextAlign.left,
-              style: TextStyle(
+              style: const TextStyle(
                   fontWeight: FontWeight.w600,
                   fontSize: 22,
                   letterSpacing: 0.27,

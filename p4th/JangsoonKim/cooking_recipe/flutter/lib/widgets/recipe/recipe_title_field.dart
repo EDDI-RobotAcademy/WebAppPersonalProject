@@ -15,19 +15,18 @@ class _RecipeTitleFieldState extends State<RecipeTitleField> {
 
   @override
   Widget build(BuildContext context) {
-    RecipeRegisterFormState? recipe = context.findAncestorStateOfType<RecipeRegisterFormState>();
+    RecipeRegisterFormState? recipe =
+        context.findAncestorStateOfType<RecipeRegisterFormState>();
     var _controller = TextEditingController();
     return TextFormField(
       controller: _controller,
-      validator: (value) =>
-          CheckValidate().validateTitle(_titleFocus, value!),
+      validator: (value) => CheckValidate().validateTitle(_titleFocus, value!),
       autovalidateMode: AutovalidateMode.onUserInteraction,
-      onChanged: (text){
+      onChanged: (text) {
         recipe?.title = text;
       },
-      decoration: InputDecoration(
-        hintText: "글 제목",
-      ),
+      decoration:
+          const InputDecoration(hintText: "글 제목", border: InputBorder.none),
     );
   }
 }
