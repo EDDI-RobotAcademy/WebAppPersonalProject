@@ -1,11 +1,16 @@
 package com.example.look_lend_backend;
 
+import com.example.look_lend_backend.entity.board.LendBoard;
+import com.example.look_lend_backend.entity.member.Member;
+import com.example.look_lend_backend.repository.board.LendBoardRepository;
 import com.example.look_lend_backend.service.member.MemberService;
 import com.example.look_lend_backend.service.member.request.MemberLoginRequest;
 import com.example.look_lend_backend.service.member.request.MemberRegisterRequest;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+
+import java.util.List;
 
 @SpringBootTest
 public class MemberTestCase {
