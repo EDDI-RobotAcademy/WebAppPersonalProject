@@ -94,6 +94,43 @@ class BoardSpringApi {
       throw Exception('에러');
     }
   }
+
+  Future<RequestBoard> requestBoard(int boardNo) async {
+    var response = await http.get(
+      Uri.http(httpUri, '/board/read/$boardNo'),
+      headers: {"Context-Type" : "application/json"}
+    );
+
+    if (response.statusCode == 200) {
+      debugPrint('통신 확인');
+      var data = jsonDecode(utf8.decode(response.bodyBytes));
+
+      RequestBoard board = RequestBoard.fromJson(data);
+
+      return board;
+    } else {
+      throw Exception('에러');
+    }
+  }
+
+  Future<List<BoardImage>> requestBoardImage(int boardNo) async {
+    var response = await http.get(
+        Uri.http(httpUri, '/board/image/$boardNo'),
+        headers: {"Context-Type" : "application/json"}
+    );
+
+    if (response.statusCode == 200) {
+
+    } else {
+      throw Exception();
+    }
+    debugPrint('통신 확인');
+    var data = jsonDecode(response.body) as List;
+
+    List<BoardImage> imageList = data.map((img) => BoardImage.fromJson(img)).toList();
+
+    return imageList;
+  }
 }
 
 class Board {
@@ -133,6 +170,20 @@ class RequestBoard {
         regDate: json['regDate'],
         updDate: json['updDate'],
         boardType: json['boardType']
+    );
+  }
+}
+
+class BoardImage {
+  int imageNo;
+  String imageName;
+
+  BoardImage({required this.imageNo, required this.imageName});
+
+  factory BoardImage.fromJson(Map<String, dynamic> json) {
+    return BoardImage(
+        imageNo: json['imageNo'],
+        imageName: json['imageName'],
     );
   }
 }
