@@ -173,13 +173,10 @@ export default {
 
       alert('로그아웃 되었습니다!')
 
-     /* localStorage.removeItem("loginInfo")
-      this.$cookies.remove("user")
-      this.$router.push({name: 'HomeView'})
-      alert('로그아웃 되었습니다!')*/
     }
   }
 }
+
 </script>
 
 <style scoped>
