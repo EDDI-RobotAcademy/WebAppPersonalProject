@@ -19,12 +19,29 @@ TextStyle defaultTextFieldTextStyle(){
   );
 }
 
+TextStyle defaultTextStyle(){
+  return const TextStyle(
+      color: ColorStyle.defaultBlack,
+      fontFamily: 'Cafe24Ohsquareair',
+      fontSize: 12,
+      fontWeight: FontWeight.bold
+  );
+}
+
 TextStyle welcomeTextStyleBlack(){
   return const TextStyle(
     color: Colors.black,
     fontFamily: 'Cafe24Danjunghae',
     fontSize: 35,
     fontWeight: FontWeight.bold
+  );
+}
+
+TextStyle welcomeTextStyleBlackInPersonalPage(){
+  return const TextStyle(
+      color: Colors.black,
+      fontFamily: 'Cafe24Danjunghae',
+      fontSize: 30,
   );
 }
 
