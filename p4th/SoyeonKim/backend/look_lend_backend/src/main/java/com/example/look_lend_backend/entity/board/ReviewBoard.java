@@ -32,3 +32,4 @@ public class ReviewBoard {
     @UpdateTimestamp
     private Date updDate;
 }
+

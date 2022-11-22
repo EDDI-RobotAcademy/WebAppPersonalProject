@@ -9,3 +9,4 @@ public class ReviewBoardRequest {
     private String writer;
     private String content;
 }
+
