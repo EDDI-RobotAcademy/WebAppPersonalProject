@@ -97,4 +97,29 @@ public class MemberServiceImpl implements MemberService {
         }
         throw new RuntimeException("가입된 정보가 없습니다.");
     }
+
+
+    @Override
+    public Boolean remove(String email) {
+        Optional<Member> maybeMember = memberRepository.findByEmail(email);
+        if (maybeMember.isPresent()) {
+            Long memberId = maybeMember.get().getId();
+            System.out.println("memberId :" + memberId);
+
+            final Optional<Authentication> maybeAuth = authenticationRepository.findByMemberId(memberId);
+            if (maybeAuth.isPresent()) {
+                Long authId = maybeAuth.get().getId();
+                authenticationRepository.deleteById(authId);
+                memberProfileRepository.deleteById(memberId);
+                memberRepository.deleteById(memberId);
+
+                return true;
+            }else{
+                System.out.println("삭제중 에러");
+                return false;
+            }
+        }else {
+            throw new RuntimeException("가입된 정보가 없습니다.");
+        }
+    }
 }
