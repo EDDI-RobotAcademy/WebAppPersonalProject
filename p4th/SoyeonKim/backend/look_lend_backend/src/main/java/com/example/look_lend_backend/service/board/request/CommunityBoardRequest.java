@@ -9,3 +9,5 @@ public class CommunityBoardRequest {
     private String writer;
     private String content;
 }
+
+
