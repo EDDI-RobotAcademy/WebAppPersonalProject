@@ -1,18 +1,22 @@
 package com.example.plantsweb.entity.board;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import lombok.Data;
+import lombok.ToString;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
 import javax.persistence.*;
 import java.time.LocalDate;
-import java.util.Date;
+import java.util.ArrayList;
+import java.util.List;
 
 @Data
 @Entity
 public class QuestionBoard {
 
     @Id
+    @Column(name = "board_id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long boardNo;
 
@@ -30,6 +34,11 @@ public class QuestionBoard {
 
     @UpdateTimestamp
     private LocalDate updDate;
+
+    @JsonBackReference
+    @OneToMany(mappedBy = "questionBoard", fetch = FetchType.EAGER)
+    private List<Comment> commentList = new ArrayList<>();
+
 
 
 }
