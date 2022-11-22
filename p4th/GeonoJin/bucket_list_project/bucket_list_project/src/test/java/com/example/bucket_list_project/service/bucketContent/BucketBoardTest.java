@@ -4,9 +4,14 @@ import com.example.bucket_list_project.entity.Board.BucketBoard;
 import com.example.bucket_list_project.entity.Board.ImgFile;
 import com.example.bucket_list_project.repository.bucketBoard.BucketBoardRepository;
 import com.example.bucket_list_project.repository.bucketBoard.ImgFileRepository;
+import com.example.bucket_list_project.service.bucketBoard.BucketService;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Slice;
+import org.springframework.data.redis.core.convert.Bucket;
 
 import java.util.List;
 import java.util.Optional;
@@ -19,6 +24,9 @@ public class BucketBoardTest {
 
     @Autowired
     private ImgFileRepository imgFileRepository;
+
+    @Autowired
+    private BucketService service;
 
     @Test
     public void registerBucket() {
@@ -70,7 +78,9 @@ public class BucketBoardTest {
 
     @Test
     public void findBucketListByCategory() {
-        List<BucketBoard> currentCategoryBucketList = bucketBoardRepository.findByBucketCategory("요리");
+
+        Page<BucketBoard> bucketListByCategory = bucketBoardRepository.findByBucketCategory("요리", PageRequest.of(0, 2));
+        List<BucketBoard> currentCategoryBucketList = bucketListByCategory.getContent();
 
         System.out.println(currentCategoryBucketList);
     }
@@ -88,5 +98,11 @@ public class BucketBoardTest {
         List<BucketBoard> searchBucketTitle = bucketBoardRepository.findByBucketTitleContaining("일상");
 
         System.out.println(searchBucketTitle);
+    }
+    @Test
+    public void testPage(){
+        List<BucketBoard> bucketListByPage = service.list(1);
+
+        System.out.println(bucketListByPage);
     }
 }
