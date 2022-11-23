@@ -13,6 +13,7 @@ import com.example.demo.security.RedisService;
 import com.example.demo.service.member.request.MemberNicknameModifyRequest;
 import com.example.demo.service.member.request.MemberRegisterRequest;
 import com.example.demo.service.member.request.MemberSigninRequest;
+import com.example.demo.service.recipe.RecipeService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -38,6 +39,9 @@ public class MemberServiceImpl implements MemberService {
 
     @Autowired
     private CommentRepository commentRepository;
+
+    @Autowired
+    private RecipeService service;
 
 
     @Override
@@ -174,6 +178,11 @@ public class MemberServiceImpl implements MemberService {
                 authenticationRepository.deleteById(maybeAuth.get().getId());
                 memberRepository.deleteById(memberId);
             }
+            List<Recipe> recipeList = recipeRepository.findAllRecipesByNickname(maybeMember.get().getNickname());
+            for(Recipe recipe: recipeList){
+                service.remove(recipe.getRecipeNo());
+            }
+
         }
         return true;
     }
