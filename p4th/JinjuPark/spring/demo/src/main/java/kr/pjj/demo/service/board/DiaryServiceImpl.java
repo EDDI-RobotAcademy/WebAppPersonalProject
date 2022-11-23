@@ -10,9 +10,14 @@ import kr.pjj.demo.service.security.RedisService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
 import java.util.List;
 import java.util.Optional;
+import java.util.UUID;
 
 @Slf4j
 @Service
@@ -85,6 +90,46 @@ public class DiaryServiceImpl implements DiaryService{
     public void register(DiaryRequest diaryRequest) {
 
         registerDiaryContents(diaryRequest);
+    }
+
+    @Override
+    public void registerWithFiles(List<MultipartFile> fileList, DiaryRequest diaryRequest) {
+
+            Diary diary = registerDiaryContents(diaryRequest);
+
+            // 실제 파일 frontend 이미지 폴더 경로에 저장
+            try {
+                for (MultipartFile multipartFile: fileList) {
+                    log.info("requestUploadFilesWithText() - Make file: " + multipartFile.getOriginalFilename());
+
+                    UUID fileRandomName = UUID.randomUUID();
+
+                    String fileReName = fileRandomName+multipartFile.getOriginalFilename();
+
+                    //저장 경로 지정 + 파일네임
+                    FileOutputStream writer = new FileOutputStream("../../vue/frontend/src/assets/uploadImgs/" + fileReName);
+                    log.info("디렉토리에 파일 배치 성공!");
+
+                    //파일 저장(저장할때는 byte 형식으로 저장해야 해서 파라미터로 받은 multipartFile 파일들의 getBytes() 메소드 적용해서 저장하는 듯)
+                    writer.write(multipartFile.getBytes());
+
+                    //이미지 엔티티 값 셋팅
+                    Image image = new Image();
+
+                    image.setOriginalName(multipartFile.getOriginalFilename());
+                    image.setReName(fileReName);
+                    image.setDiary(diary);
+                    imageRepository.save(image);
+
+                    writer.close();
+
+
+                }
+            } catch (FileNotFoundException e) {
+                throw new RuntimeException(e);
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
     }
 
     public Diary registerDiaryContents(DiaryRequest diaryRequest){
@@ -179,6 +224,12 @@ public class DiaryServiceImpl implements DiaryService{
 
         for (Recommend recommend : recommendList){
             recommendRepository.delete(recommend);
+        }
+
+        List<Image> imageList = imageRepository.findAllImagesByBoardId(boardNo);
+
+        for (Image image : imageList){
+            imageRepository.delete(image);
         }
 
         repository.deleteById(boardNo);

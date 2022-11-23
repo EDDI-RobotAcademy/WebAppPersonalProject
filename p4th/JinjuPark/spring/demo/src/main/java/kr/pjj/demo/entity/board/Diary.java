@@ -64,6 +64,10 @@ public class Diary {
     @OneToMany(mappedBy = "diary", fetch = FetchType.EAGER)
     private List<Comment> comments = new ArrayList<>();
 
+    @JsonIgnore
+    @OneToMany(mappedBy = "diary", fetch = FetchType.LAZY)
+    private List<Image> images = new ArrayList<>();
+
     @PrePersist
     public void onPrePersist(){
         this.regDate = LocalDateTime.now().format(DateTimeFormatter.ofLocalizedDateTime(FormatStyle.SHORT));

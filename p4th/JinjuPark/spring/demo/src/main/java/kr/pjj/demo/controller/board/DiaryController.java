@@ -6,7 +6,9 @@ import kr.pjj.demo.entity.board.Diary;
 import kr.pjj.demo.service.board.DiaryService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
 
@@ -51,6 +53,22 @@ class DiaryController {
         service.register(diaryRequest);
     }
 
+
+    //이미지 업로드 게시글 등록
+    @ResponseBody
+    @PostMapping(value = "/registerWithFiles",
+            consumes = { MediaType.MULTIPART_FORM_DATA_VALUE, MediaType.APPLICATION_JSON_VALUE }) // 이미지+텍스트 업로드하는 경우 value , consumes 정보(이미지타입, json타입) 추가
+    public String diaryRegisterWithFiles (
+            @RequestPart(value = "fileList") List<MultipartFile> fileList,
+            @RequestPart(value = "info") DiaryRequest diaryRequest) {
+
+        log.info("requestUploadFilesWithText(): " + fileList.toString());
+        log.info("requestUploadFilesWithText(): " + diaryRequest);
+
+        service.registerWithFiles(fileList, diaryRequest);
+
+        return "게시글이 등록되었습니다.";
+    }
 
     @GetMapping("/{boardNo}")
     public Diary diaryRead (@PathVariable("boardNo") Long boardNo) {

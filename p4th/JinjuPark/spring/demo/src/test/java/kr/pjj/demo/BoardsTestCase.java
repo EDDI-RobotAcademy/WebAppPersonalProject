@@ -2,6 +2,7 @@ package kr.pjj.demo;
 
 import kr.pjj.demo.entity.board.Comment;
 import kr.pjj.demo.entity.board.Diary;
+import kr.pjj.demo.entity.board.Image;
 import kr.pjj.demo.entity.board.Recommend;
 import kr.pjj.demo.repository.board.*;
 import org.junit.jupiter.api.Test;
@@ -22,6 +23,9 @@ public class BoardsTestCase {
 
     @Autowired
     private RecommendRepository recommendRepository;
+
+    @Autowired
+    private ImageRepository imageRepository;
 
     @Autowired
     private CategoryRepository categoryRepository;
@@ -81,6 +85,13 @@ public class BoardsTestCase {
 
         for (Recommend recommend : recommendList){
             recommendRepository.delete(recommend);
+        }
+
+
+        List<Image> imageList = imageRepository.findAllImagesByBoardId(boardNo);
+
+        for (Image image : imageList){
+            imageRepository.delete(image);
         }
 
         diaryRepository.deleteById(boardNo);
