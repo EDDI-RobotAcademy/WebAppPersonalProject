@@ -141,6 +141,20 @@ export default {
             })
     },
 
+    // eslint-disable-next-line no-empty-pattern
+    requestSaveMyVideoFromSpring({}, payload) {
+
+        const memberId = payload.memberId
+        const videoId = payload.videoId
+
+        console.log("비디오 보관함에 저장하기()-비디오아이디:" +videoId)
+        return axios.post('http://localhost:7777/hometwang/videos/mysave', {memberId, videoId})
+            .then((res) => {
+                alert(res.data)
+                console.log("비디오 보관함 저장완료"+res)
+            })
+    },
+
     requestMySaveVideoListFromSpring({commit}, payload) {
 
             console.log("마이 세이브 비디오 멤버아이디 :"+payload)
