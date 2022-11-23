@@ -1,5 +1,6 @@
 package com.example.demo.service.boards.buyBoard.baram;
 
+import com.example.demo.controller.boards.commentRequest.CommentRequest;
 import com.example.demo.entity.boards.buyBoard.baram.BuyBaramComment;
 import com.example.demo.repository.buyBoard.baram.BuyBaramCommentRepository;
 import lombok.extern.slf4j.Slf4j;
@@ -21,5 +22,12 @@ public class BuyBaramCommentServiceImpl implements BuyBaramCommentService {
         return buyBaramCommentRepository.findAll(Sort.by(Sort.Direction.DESC, "buyBaramCommentNo"));
     }
 
+    @Override
+    public void buyBaramCommentRegister(CommentRequest commentRequest) {
+        BuyBaramComment buyBaramComment = new BuyBaramComment();
+        buyBaramComment.setCommentWriter(commentRequest.getCommentWriter());
+        buyBaramComment.setComment(commentRequest.getComment());
 
+        buyBaramCommentRepository.save(buyBaramComment);
+    }
 }

@@ -1,5 +1,6 @@
 package com.example.demo.controller.boards.buyBoard.baram;
 
+import com.example.demo.controller.boards.commentRequest.CommentRequest;
 import com.example.demo.entity.boards.buyBoard.baram.BuyBaramComment;
 import com.example.demo.service.boards.buyBoard.baram.BuyBaramCommentService;
 import lombok.extern.slf4j.Slf4j;
@@ -24,5 +25,10 @@ public class BuyBaramCommentController {
         return buyBaramCommentService.buyBaramCommentList();
     }
 
+    @PostMapping("/register")
+    public void buyBaramCommentRegister(@RequestBody CommentRequest commentRequest) {
+        log.info("buyBaramCommentRegister()");
 
+        buyBaramCommentService.buyBaramCommentRegister(commentRequest);
+    }
 }
