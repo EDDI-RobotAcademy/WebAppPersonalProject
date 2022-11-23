@@ -156,7 +156,7 @@
         <div class="text-center">
           <v-pagination
               v-model="pageValue"
-              :length="6"
+              :length="totalPage"
               @input="paging"
           ></v-pagination>
         </div>
@@ -176,14 +176,14 @@ export default {
   components: {
     ToolBarComponent,
   },
-  props:{
-    buckets:{
+  props: {
+    buckets: {
       type: Array
     },
-    totalPage:{
+    totalPage: {
       type: Number
     },
-    currentUserNickname:{
+    currentUserNickname: {
       type: String
     }
   },
@@ -206,7 +206,7 @@ export default {
   },
   methods: {
     ...mapActions([
-       'requestMyBucketListToSpring'
+      'requestMyBucketListToSpring',
     ]),
     fileUpload() {
       this.files = this.$refs.file.files
@@ -225,7 +225,7 @@ export default {
       }
       formData.append(
           "info",
-          new Blob([JSON.stringify(fileInfo)], { type: "application/json" })
+          new Blob([JSON.stringify(fileInfo)], {type: "application/json"})
       )
       await axios.post('http://localhost:7777/bucket/register', formData)
           .then(() => {
@@ -237,7 +237,7 @@ export default {
           });
 
     },
-    async paging(){
+    async paging() {
       const userNickname = this.currentUserNickname
       const pageValue = this.pageValue
       await this.requestMyBucketListToSpring({userNickname, pageValue})

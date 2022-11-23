@@ -9,7 +9,8 @@ import {
     REQUEST_MY_BUCKET_LIST_TO_SPRING,
     REQUEST_SEARCH_BUCKET_LIST_TO_SPRING,
     REQUEST_ALL_BUCKET_LIST_TOTAL_PAGE_FROM_SPRING,
-    REQUEST_BUCKET_LIST_TOTAL_PAGE_BY_CATEGORY_FROM_SPRING
+    REQUEST_BUCKET_LIST_TOTAL_PAGE_BY_CATEGORY_FROM_SPRING,
+    REQUEST_BUCKET_LIST_BY_CURRENT_USER_NICKNAME_PER_PAGE_FROM_SPRING
 } from './mutation-types'
 
 import axios from "axios";
@@ -203,6 +204,17 @@ export default {
         await axios.post(`http://localhost:7777/page/${categoryName}`)
             .then((res) => {
                 commit(REQUEST_BUCKET_LIST_TOTAL_PAGE_BY_CATEGORY_FROM_SPRING, res.data);
+            });
+    },
+
+    async requestBucketListByCurrentUserNicknamePerPageFromSpring({commit}, payload) {
+        console.log("requestBucketListByCurrentUserNicknamePerPageFromSpring")
+        const userNickname = payload
+        console.log(userNickname)
+
+        await axios.post(`http://localhost:7777/page/myBucket-total-page/${userNickname}`)
+            .then((res) => {
+                commit(REQUEST_BUCKET_LIST_BY_CURRENT_USER_NICKNAME_PER_PAGE_FROM_SPRING, res.data);
             });
     },
 

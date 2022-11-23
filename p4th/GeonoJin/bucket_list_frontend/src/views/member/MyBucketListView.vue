@@ -1,6 +1,9 @@
 <template>
   <div>
-    <my-bucket-list-form :buckets="bucketListByNickname" :currentUserNickname="userNickname"/>
+    <my-bucket-list-form :buckets="bucketListByNickname"
+                         :currentUserNickname="userNickname"
+                         :totalPage="myBucketListTotalPage"
+    />
   </div>
 </template>
 
@@ -14,32 +17,37 @@ export default {
   components: {
     MyBucketListForm
   },
-  computed:{
+  computed: {
     ...mapState([
-        'currentUserNickname',
-        'bucketListByNickname'
+      'currentUserNickname',
+      'bucketListByNickname',
+      'myBucketListTotalPage'
     ])
   },
-  props:{
-    userNickname:{
+  props: {
+    userNickname: {
       type: String,
       required: true
     }
   },
   data() {
-    return{
+    return {
       pageValue: 1
     }
   },
-  methods:{
+  methods: {
     ...mapActions([
-        'requestMyBucketListToSpring'
+      'requestMyBucketListToSpring',
+      'requestBucketListByCurrentUserNicknamePerPageFromSpring'
+
     ])
   },
   async mounted() {
     const pageValue = this.pageValue
     const userNickname = this.userNickname
     await this.requestMyBucketListToSpring({userNickname, pageValue})
+    await this.requestBucketListByCurrentUserNicknamePerPageFromSpring(userNickname)
+
   }
 }
 </script>
