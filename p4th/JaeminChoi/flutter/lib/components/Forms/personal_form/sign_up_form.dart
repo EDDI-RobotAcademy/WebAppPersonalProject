@@ -5,15 +5,16 @@ import 'package:flutter/material.dart';
 import 'package:leaing_helper/components/text_form_filed/email_text_form_field.dart';
 import 'package:leaing_helper/components/text_form_filed/nickname_text_form_feild.dart';
 import 'package:leaing_helper/components/text_form_filed/password_text_form_field.dart';
+import 'package:leaing_helper/utility/alert/common_alert_dialog.dart';
 
-import '../../api/state/sign_up_validate_state.dart';
-import '../../api/info/sign_up_info.dart';
-import '../../api/spring_sign_up_api.dart';
-import '../../utility/decorations/buttonStyle.dart';
-import '../../utility/decorations/text_style.dart';
-import '../../utility/size.dart';
-import '../../utility/snackBar/commonSnackBar.dart';
-import '../text_form_filed/password_checked_text_form_field.dart';
+import '../../../api/state/sign_up_validate_state.dart';
+import '../../../api/info/sign_up_info.dart';
+import '../../../api/spring_sign_up_api.dart';
+import '../../../utility/alert/commonSnackBar.dart';
+import '../../../utility/decorations/buttonStyle.dart';
+import '../../../utility/decorations/text_style.dart';
+import '../../../utility/size.dart';
+import '../../text_form_filed/password_checked_text_form_field.dart';
 
 class SignUpForm extends StatefulWidget{
   const SignUpForm({Key? key}) : super (key: key);
@@ -28,7 +29,7 @@ class _SingUpFormState extends State<SignUpForm> {
   late TextEditingController nicknameController;
   late TextEditingController passwordCheckController;
 
-
+  @override
   void initState() {
     super.initState();
     emailEditController = TextEditingController();
@@ -55,15 +56,15 @@ class _SingUpFormState extends State<SignUpForm> {
 
     await SpringSignUpApi().signUp(account);
 
-    if(SpringSignUpApi.response.statusCode == 200) {
-      var responseBody = jsonDecode(SpringSignUpApi.response.body);
-      debugPrint(responseBody.toString());
 
-      if (responseBody == true) {
+      if (SignUpValidateState.isSignUpCheck == true) {
         setSignUpValidateState();
         debugPrint("가입됨");
-        ScaffoldMessenger.of(context).showSnackBar(
-            CommonSnackBar.successSignUP(context));
+        showDialog(
+            context: context,
+            builder: (BuildContext context){
+              return showCusTomDialog().showSignUpDialog(context);
+            });
       } else {
         nicknameController.clear();
         emailEditController.clear();
@@ -72,12 +73,11 @@ class _SingUpFormState extends State<SignUpForm> {
         ScaffoldMessenger.of(context).showSnackBar(
             CommonSnackBar.failSignUP());
       }
-    }
+
   }
 
   setSignUpValidateState(){
     SignUpValidateState.isEmailCheck = false;
-    SignUpValidateState.isPasswordCheck = false;
     SignUpValidateState.isNicknameCheck = false;
   }
 
@@ -124,9 +124,8 @@ class _SingUpFormState extends State<SignUpForm> {
                     // 비밀 번호 체크
                     String myPassword = passwordController.text;
                     int tmp = myPassword.compareTo(passwordCheckController.text);
-                    if(tmp == 0){
-                      SignUpValidateState.isPasswordCheck == true;
-                    }
+                    debugPrint("myPassword : "+ myPassword
+                        +"passwordCheckController.text :"+ passwordCheckController.text + "tmp : "+tmp.toString());
 
                     if(SignUpValidateState.isEmailCheck != true){ // 이메일 체크 확인
                       ScaffoldMessenger.of(context).showSnackBar(
@@ -134,7 +133,7 @@ class _SingUpFormState extends State<SignUpForm> {
                     }else if(SignUpValidateState.isNicknameCheck != true){ // 닉네임 체크 확인
                       ScaffoldMessenger.of(context).showSnackBar(
                           CommonSnackBar.nickNameFailSnackBar());
-                    }else if(SignUpValidateState.isPasswordCheck != true){ // 비밀 번호 확인 체크
+                    }else if(tmp != 0){ // 비밀 번호 확인 체크
                       ScaffoldMessenger.of(context).showSnackBar(
                           CommonSnackBar.passwordFailSnackBar());
                     }else{ //모두 통과 하면 회원 가입 진행

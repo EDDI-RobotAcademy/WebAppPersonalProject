@@ -1,4 +1,3 @@
-import 'dart:js';
 
 import 'package:flutter/material.dart';
 
@@ -21,7 +20,7 @@ class CommonSnackBar{
 
   static SnackBar failSignUP(){
     return SnackBar(
-      content: Text("죄송합니다 로그인에 실패 했습니다 : " + SpringSignUpApi.response.toString()),
+      content: Text("죄송합니다 로그인에 실패 했습니다 : " + SpringSignUpApi.SignUpresponse.toString()),
       action: SnackBarAction(
         label: "done",
         textColor: Colors.white,
@@ -57,6 +56,17 @@ class CommonSnackBar{
   static SnackBar passwordFailSnackBar(){
     return SnackBar(
       content: const Text("비밀 번호가 유효 하지 않습니다"),
+      action: SnackBarAction(
+        label: "Done",
+        textColor: Colors.white,
+        onPressed: () {},
+      ),
+    );
+  }
+
+  static SnackBar registerWordSnackBar(){
+    return SnackBar(
+      content: const Text("단어 등록에 성공했습니다!"),
       action: SnackBarAction(
         label: "Done",
         textColor: Colors.white,

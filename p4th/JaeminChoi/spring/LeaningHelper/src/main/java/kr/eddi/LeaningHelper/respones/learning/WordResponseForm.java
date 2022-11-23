@@ -1,11 +1,23 @@
 package kr.eddi.LeaningHelper.respones.learning;
 
-public class WordResponseForm {
-    private String Word;
-    private String meaning;
+import lombok.Data;
 
-    public WordResponseForm(String word , String  meaning){
-        this.Word = word;
+@Data
+public class WordResponseForm {
+
+    private  final Long wordId;
+    private  final String word;
+    private  final String meaning;
+    private final String synonym;
+    private final String antonym;
+    private final String example;
+
+    public WordResponseForm(Long wordId, String word, String  meaning,String  synonym,String antonym, String example){
+        this.wordId = wordId;
+        this.word = word;
         this.meaning = meaning;
+        this.synonym =synonym;
+        this.antonym = antonym;
+        this.example = example;
     }
 }

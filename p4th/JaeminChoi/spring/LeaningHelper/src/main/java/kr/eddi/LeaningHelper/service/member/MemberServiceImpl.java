@@ -14,6 +14,8 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Optional;
 import java.util.UUID;
 
@@ -67,24 +69,32 @@ public class MemberServiceImpl implements MemberService{
     }
 
     @Override
-    public Boolean nickNameValidation(String nickName) {
+    public Integer nickNameValidation(String nickName) {
         Optional<Member> maybeMemberNickName = memberRepository.findByNickName(nickName);
 
         if (maybeMemberNickName.isPresent()) {
-            return false;
+            log.info("maybeMemberNickName.isPresent() : " + maybeMemberNickName.isPresent());
+            return FAILALIDATE;
         }
 
-        return true;
+        return PASSVALIDATE;
     }
 
     @Override
-    public String signIn(MemberSignInRequest memberSignInRequest) {
+    public Map<String, String> signIn(MemberSignInRequest memberSignInRequest) {
         String email = memberSignInRequest.getEmail();
         Optional<Member> maybeMember = memberRepository.findById(email);
 
-        if(maybeMember.isPresent()){
+        if(maybeMember.isPresent()) {
             Member member = maybeMember.get();
 
+            String admin = "admin@admin.com";
+            String isAdmin = "isNotAdmin";
+            int checkAdmin = admin.compareTo(member.getEmail());
+            if (checkAdmin == 0) {
+                isAdmin = "isAdmin";
+            }
+            log.info("isAdmin: " + isAdmin);
             log.info("member ID: " + member.getEmail());
             log.info("request ID: " + memberSignInRequest.getEmail());
             log.info("request PW: " + memberSignInRequest.getPassword());
@@ -96,8 +106,12 @@ public class MemberServiceImpl implements MemberService{
 
             redisService.deleteByKey(userToken.toString());
             redisService.setKeyAndValue(userToken.toString(), member.getMemberNo());
-
-            return userToken.toString();
+            Map<String, String> userData = new HashMap<>();
+            userData.put("userToken", userToken.toString());
+            userData.put("Email", member.getEmail());
+            userData.put("Nickname", member.getNickName());
+            userData.put("Admin", isAdmin);
+            return userData;
         }
 
         throw new RuntimeException("가입된 사용자가 아님!");

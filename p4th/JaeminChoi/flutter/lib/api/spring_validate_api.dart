@@ -30,10 +30,10 @@ class SpringValidateApi{
         var result =  json.decode(response.body);
         debugPrint(result.toString());
         if(result == isRESPONSEVALIDATE){
-          debugPrint("닉네임 사용 가능");
+          debugPrint("이메일 사용 가능");
           SignUpValidateState.isEmailCheck = PASSVALIDATE;
         }else{
-          debugPrint("닉네임 사용 불가능");
+          debugPrint("이메일 사용 불가능");
           SignUpValidateState.isEmailCheck = FAILVALIDATE;
         }
       }else{
@@ -47,6 +47,7 @@ class SpringValidateApi{
     var body = json.encode(data);
 
     debugPrint(body);
+    debugPrint("nickNameValidate() 실행됨");
 
     var response = await http.post(
       Uri.http(httpUri, 'member/check-nickName/$nickName'),

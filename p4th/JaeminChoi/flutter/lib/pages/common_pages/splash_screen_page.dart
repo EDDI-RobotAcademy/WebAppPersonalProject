@@ -2,6 +2,8 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:leaing_helper/utility/decorations/color.dart';
 
+import 'main_page.dart';
+
 class SplashScreenPage extends StatefulWidget{
   const SplashScreenPage({Key? key}) : super(key :key);
 
@@ -21,7 +23,7 @@ class _SplashScreenPageState extends State<SplashScreenPage>{
   }
   void moveToMain() {
     setState(() {
-      Navigator.pushNamed(context, "/main_page");
+      Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => const MainPage() ));
     });
   }
 
