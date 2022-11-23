@@ -1,6 +1,5 @@
 package com.example.backend.controller.board;
 
-import com.example.backend.entity.board.Board;
 import com.example.backend.service.board.BoardService;
 import com.example.backend.service.board.request.BoardModifyRequest;
 import com.example.backend.service.board.request.BoardRegisterRequest;
@@ -27,18 +26,18 @@ public class BoardController {
         return service.everyBoardList();
     }
 
-    @GetMapping(value = "/list/{category}", produces = "application/json; charset=utf8")
-    public List<BoardResponse> specificBoardList (@PathVariable("category") String category) {
+    @GetMapping(value = "/list/{categoryName}", produces = "application/json; charset=utf8")
+    public List<BoardResponse> specificBoardList (@PathVariable("categoryName") String categoryName) {
         log.info("specificBoardList()");
 
-        return service.specificBoardList(category);
+        return service.specificBoardList(categoryName);
     }
 
     @PostMapping("/register")
-    public void boardRegister (@RequestBody BoardRegisterRequest boardRegisterRequest) {
+    public boolean boardRegister (@RequestBody BoardRegisterRequest boardRegisterRequest) {
         log.info("boardRegister()");
 
-        service.register(boardRegisterRequest);
+        return service.register(boardRegisterRequest);
     }
 
     @GetMapping("/{boardNo}")

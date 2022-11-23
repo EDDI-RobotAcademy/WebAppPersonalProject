@@ -89,15 +89,15 @@ public class BoardServiceImpl implements BoardService{
 
     @Override
     public List<BoardResponse> specificBoardList(String categoryName) {
-        BoardCategory category;
+        BoardCategory boardCategory;
         List<BoardResponse> responses = new ArrayList<>();
         List<Board> boards = new ArrayList<>();
 
         Optional<BoardCategory> maybeCategory = categoryRepository.findByCategoryName(categoryName);
         if(maybeCategory.isPresent()) {
-            category = maybeCategory.get();
+            boardCategory = maybeCategory.get();
             // System.out.println(boardRepository.findAllBoardsByCategoryId(category.getCategoryId()));
-            boards = boardRepository.findAllBoardsByCategoryId(category.getCategoryId(), Sort.by(Sort.Direction.DESC, "boardNo"));
+            boards = boardRepository.findAllBoardsByCategoryId(boardCategory.getCategoryId(), Sort.by(Sort.Direction.DESC, "boardNo"));
 
             for(Board b : boards) {
                 BoardResponse target = new BoardResponse(
