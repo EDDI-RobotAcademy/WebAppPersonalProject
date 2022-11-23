@@ -9,6 +9,8 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Map;
+
 @Slf4j
 @RestController
 @RequestMapping("/member")
@@ -43,7 +45,22 @@ public class MemberController {
     @PostMapping("/login-user-profile/{userToken}")
     public ReadUsMember loginUserProfile(@PathVariable("userToken") String userToken) {
         log.info("nowMemberProfile()");
+        String token = userToken.replaceAll("\"", "");
+        log.info(token);
+        return service.getSignInMemberProfile(token);
+    }
 
-        return service.getSignInMemberProfile(userToken);
+    @PutMapping("/modify-nickname/{userToken}")
+    public Boolean modifyUserNickname(@PathVariable("userToken") String userToken, @RequestBody Map<String, String> param) {
+        String nickName = param.get("nickName");
+        String token = userToken.replaceAll("\"", "");
+        return service.modifyMemberNickName(token, nickName);
+    }
+
+    @PutMapping("/modify-biography/{userToken}")
+    public Boolean modifyUserBiography(@PathVariable("userToken") String userToken, @RequestBody Map<String, String> param) {
+        String biography = param.get("biography");
+        String token = userToken.replaceAll("\"", "");
+        return service.modifyMemberBiography(token, biography);
     }
 }

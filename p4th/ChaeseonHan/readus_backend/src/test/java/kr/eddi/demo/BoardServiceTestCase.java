@@ -21,16 +21,9 @@ public class BoardServiceTestCase {
 
     @Test
     void writeBoardTest() {
-        BoardWriteRequest boardWriteRequest = new BoardWriteRequest("정보", "안녕하세요", "ddd", "test123@gmail.com");
+        BoardWriteRequest boardWriteRequest = new BoardWriteRequest("정보", "십이국기 신작은", "정말 출간되긴할까요?", "test123@gmail.com");
         Boolean isItOk = service.write(boardWriteRequest);
         System.out.println("answer: " + isItOk);
-    }
-
-    @Test
-    void communityboardBasicPagination() {
-        System.out.println(repository.findWithPagination(Pageable.ofSize(10)).toString());
-        System.out.println(  repository.findWithPagination(PageRequest.of(0,2)).toString());
-
     }
 
     @Test

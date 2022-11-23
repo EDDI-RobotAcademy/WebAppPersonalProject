@@ -22,7 +22,7 @@ public class MemberServiceTestCase {
 
     @Test
     void signUpTestWithOutNickname() {
-        MemberRegisterRequest request = new MemberRegisterRequest("test@gmail.com", "123456", "", "");
+        MemberRegisterRequest request = new MemberRegisterRequest("test@gmail.com", "123456", "해파링", "");
         Boolean isSuccess = service.signUp(request);
         System.out.println("isSuccess: " + isSuccess);
     }
@@ -32,12 +32,6 @@ public class MemberServiceTestCase {
         MemberLoginRequest request = new MemberLoginRequest("test@gmail.com", "123456");
         String userToken = service.signIn(request);
         System.out.println("userToken: " + userToken);
-    }
-
-    @Test
-    void loginProfile() {
-        String nickName = service.getSignInMemberNickName("");
-        System.out.println("nickname: " + nickName);
     }
 
 }

@@ -9,4 +9,6 @@ public interface MemberService {
     Boolean emailValidation(String email);
     String signIn(MemberLoginRequest request);
     ReadUsMember getSignInMemberProfile(String signInUserToken);
+    Boolean modifyMemberNickName(String memberId, String nickName);
+    Boolean modifyMemberBiography(String userToken, String biography);
 }

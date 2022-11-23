@@ -140,4 +140,11 @@ public class BoardServiceImpl implements BoardService{
         boardRepository.delete(board);
         return true;
     }
+
+    @Override
+    public List<CommunityBoard> categoryBoardList(String category){
+
+        return boardRepository.findByCategoryContainingIgnoreCase(category, Sort.by(Sort.Direction.DESC, "boardNo"));
+    }
+
 }
