@@ -22,6 +22,7 @@ public class BuyBaramServiceImpl implements BuyBaramService{
         return buyBaramRepository.findAll(Sort.by(Sort.Direction.DESC, "buyBaramNo"));
     }
 
+    @Override
     public void buyBaramRegister(BoardsRequest boardsRequest) {
         BuyBaramBoard buyBaramBoard = new BuyBaramBoard();
         buyBaramBoard.setTitle(boardsRequest.getTitle());
