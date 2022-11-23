@@ -208,6 +208,28 @@ class BoardSpringApi {
       debugPrint("통신 확인");
     }
   }
+
+  Future<List<RequestBoard>> requestBoardListByWriter(String writer) async {
+
+    var response = await http.get(
+      Uri.http(httpUri, '/board/writer/list/$writer'),
+      headers: {"Content-Type": "application/json"},
+    );
+
+    if (response.statusCode == 200) {
+      debugPrint('통신 확인');
+      var data = jsonDecode(utf8.decode(response.bodyBytes)) as List;
+
+      List<RequestBoard> boardList = data.map((list) =>
+          RequestBoard.fromJson(list)).toList();
+
+      print(boardList);
+
+      return boardList;
+    } else {
+      throw Exception('에러');
+    }
+  }
 }
 
 
