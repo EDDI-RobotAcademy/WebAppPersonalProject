@@ -1,11 +1,11 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:frontend/components/forms/BoardListView.dart';
+import 'package:frontend/components/forms/board_list_view.dart';
 import 'package:frontend/components/custom_app_bar.dart';
 import 'package:frontend/components/custom_drawer.dart';
 import 'package:provider/provider.dart';
 
-import '../../utility/board_list_provider.dart';
+import '../../utility/providers/board_list_provider.dart';
 
 class BoardListPageNotice extends StatelessWidget {
   BoardListPageNotice({Key? key}) : super(key: key);
@@ -18,7 +18,7 @@ class BoardListPageNotice extends StatelessWidget {
     _providerTest.loadNoticeBoards();
     return Scaffold(
         appBar: CommonAppBar(title: "공지사항"),
-        drawer: CustomDrawer(isLogin: true,),
+        drawer: CustomDrawer(),
         body: Consumer<BoardListProvider>(
           builder: (context, provider, widget){
             if (provider.boards != null && provider.boards.length > 0) {
