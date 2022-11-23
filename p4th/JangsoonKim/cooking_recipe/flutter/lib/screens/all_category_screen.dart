@@ -16,10 +16,10 @@ class _AllCategoryScreenState extends State<AllCategoryScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      endDrawer: CustomDrawer(),
+      endDrawer: const CustomDrawer(),
       appBar: customAppbar('레시피'),
       backgroundColor: AppTheme.natureWhite,
-      body: AllCategoryForm(),
+      body: const AllCategoryForm(),
     );
   }
 }

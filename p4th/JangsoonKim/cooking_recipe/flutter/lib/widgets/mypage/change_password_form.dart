@@ -55,8 +55,8 @@ class _ChangePasswordFromState extends State<ChangePasswordFrom> {
               SizedBox(
                 height: size.height * 0.1,
               ),
-              Padding(
-                padding: const EdgeInsets.only(left: 15),
+              const Padding(
+                padding: EdgeInsets.only(left: 15),
                 child: Text(
                   "비밀번호",
                   style: TextStyle(fontSize: 18),
@@ -74,7 +74,7 @@ class _ChangePasswordFromState extends State<ChangePasswordFrom> {
                     filled: true,
                     fillColor: Colors.white,
                     suffixIcon: IconButton(
-                      icon: Icon(Icons.close),
+                      icon: const Icon(Icons.close),
                       color: Colors.black,
                       onPressed: _controller.clear,
                     ),

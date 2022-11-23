@@ -1,5 +1,6 @@
 import 'package:demo/screens/authentication%20/login_screen.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:introduction_screen/introduction_screen.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -24,7 +25,7 @@ class OnBoardingPage extends StatelessWidget {
           ),
           PageViewModel(
               title:'편리한 검색기능',
-              body: '재료명으로 편리하게 레시피를 찾아보세요.',
+              body: '음식명과 카테고리로 편리하게 검색해보세요.',
               image: Image.asset('assets/images/introduction/cooking.png',
                   height: size.height * 0.5),
               decoration: getPageDecoration()
@@ -72,7 +73,5 @@ class OnBoardingPage extends StatelessWidget {
 void onDone(context) async{
   final prefs = await SharedPreferences.getInstance();
   await prefs.setBool('ON_BOARDING', false);
-  Navigator.of(context).pushReplacement(
-      MaterialPageRoute(builder: (context) => LoginScreen())
-  );
+  Get.offAll(const LoginScreen());
 }

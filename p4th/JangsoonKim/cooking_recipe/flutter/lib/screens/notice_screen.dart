@@ -13,7 +13,7 @@ class NoticeScreen extends StatelessWidget {
       appBar: customAppbar('EZ.COOK'),
       body: Column(
         mainAxisAlignment: MainAxisAlignment.center,
-        children: [
+        children: const [
           Text("공지사항", style: TextStyle(
               fontSize: 30
           ),),

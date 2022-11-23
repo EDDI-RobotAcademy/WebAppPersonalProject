@@ -9,9 +9,9 @@ class MoreInformationScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: customAppbar('EZ.COOK'),
-      endDrawer: CustomDrawer(),
+      endDrawer: const CustomDrawer(),
       body: Column(
-        children: [
+        children: const [
           Text("더보기 페이지")
         ],
       ),

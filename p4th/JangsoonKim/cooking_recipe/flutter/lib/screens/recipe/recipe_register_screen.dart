@@ -1,4 +1,3 @@
-import 'package:demo/widgets/recipe/images_register_form.dart';
 import 'package:demo/widgets/recipe/recipe_register_form.dart';
 import 'package:demo/widgets/screen_controller.dart';
 import 'package:flutter/material.dart';
@@ -17,11 +16,11 @@ class RecipeRegisterScreen extends StatelessWidget {
               Navigator.pushReplacement(context,
                   MaterialPageRoute(builder: (context) => const ScreenController()));
             },
-            icon: Icon(Icons.close)),
+            icon: const Icon(Icons.close)),
         foregroundColor: Colors.black,
-        title: Text('레시피 작성'),
+        title: const Text('레시피 작성'),
       ),
-      body: RecipeRegisterForm()
+      body: const RecipeRegisterForm()
     );
   }
 }

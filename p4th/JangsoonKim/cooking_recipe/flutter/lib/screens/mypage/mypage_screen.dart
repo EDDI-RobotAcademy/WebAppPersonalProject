@@ -10,9 +10,9 @@ class MypageScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      endDrawer: CustomDrawer(),
+      endDrawer: const CustomDrawer(),
       appBar: customAppbar('EZ.COOK'),
-      body: MypageForm()
+      body: const MypageForm()
     );
   }
 }

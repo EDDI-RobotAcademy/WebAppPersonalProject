@@ -17,7 +17,8 @@ class HotRecipe {
         title: '1분만에 뚝딱 간장계란밥, 정말로 맛있어요',
         imagePath: 'assets/images/tmp/ggb.png',
         rating: 4.8,
-        foodCategory: '한식'),
+        foodCategory: '한식',
+    ),
     HotRecipe(
         title: '매일 먹어도 맛있는 김치볶음밥',
         imagePath: 'assets/images/tmp/gcb.png',

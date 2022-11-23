@@ -24,7 +24,6 @@ class SimpleCommentListForm extends StatefulWidget {
 class _SimpleCommentListFormState extends State<SimpleCommentListForm> {
   bool _onModify = false;
   int _current = 0;
-  int _delete = 0;
 
   @override
   Widget build(BuildContext context) {
@@ -44,14 +43,14 @@ class _SimpleCommentListFormState extends State<SimpleCommentListForm> {
                     children: [
                       Text(
                         widget.comments![index].writer,
-                        style: TextStyle(
+                        style: const TextStyle(
                             fontWeight: FontWeight.bold, fontSize: 18),
                       ),
                       const Padding(
                         padding: EdgeInsets.all(8.0),
                       ),
                       Text(widget.comments![index].regDate),
-                      Spacer(flex: 1),
+                      const Spacer(flex: 1),
                       (widget.nickname == widget.comments![index].writer)
                           ? Row(
                               children: [
@@ -83,7 +82,7 @@ class _SimpleCommentListFormState extends State<SimpleCommentListForm> {
                                         style: TextStyle(color: Colors.grey)))
                               ],
                             )
-                          : Text(""),
+                          : const Text(""),
                     ],
                   ),
                 ),

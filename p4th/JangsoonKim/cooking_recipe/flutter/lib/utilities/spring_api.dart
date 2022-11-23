@@ -85,11 +85,11 @@ class SpringApi {
     );
     if (response.statusCode == 200) {
       debugPrint("통신 확인");
-      Map<String, dynamic> jsonData = jsonDecode(response.body);
+      Map<String, dynamic> jsonData = jsonDecode(utf8.decode(response.bodyBytes));
       any.setString("userData", jsonData['userToken']);
       any.setString("userEmail", jsonData['memberEmail']);
       any.setString("userNickname", jsonData['memberNickname']);
-      Get.off(() => const ScreenController());
+      Get.offAll(() => const ScreenController());
       return UserLoginResponse(true);
     } else {
       throw ("error");

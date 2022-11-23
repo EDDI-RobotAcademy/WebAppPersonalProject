@@ -48,16 +48,16 @@ class CustomDrawerHeaderState extends State<CustomDrawerHeader> {
           children: [
             Text(
               nickname,
-              style: TextStyle(fontSize: 16,
+              style: const TextStyle(fontSize: 16,
                   color: Colors.black,
                   fontWeight: FontWeight.w600),
             ),
-            SizedBox(
+            const SizedBox(
               height: 10,
             ),
             Text(
               email,
-              style: TextStyle(fontSize: 14, color: Colors.black),
+              style: const TextStyle(fontSize: 14, color: Colors.black),
             ),
           ],),
       ],);

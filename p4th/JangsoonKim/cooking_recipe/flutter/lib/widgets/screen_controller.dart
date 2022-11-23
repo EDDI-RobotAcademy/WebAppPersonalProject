@@ -6,6 +6,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 import '../app_theme.dart';
+import '../screens/all_category_screen.dart';
 
 class ScreenController extends StatefulWidget {
   const ScreenController({Key? key}) : super(key: key);
@@ -21,6 +22,7 @@ class _ScreenControllerState extends State<ScreenController> {
   final List<Widget> _widgetOptions = <Widget>[
     const HomeScreen(),
     const SearchScreen(),
+    const AllCategoryScreen(),
     const RecipeRegisterScreen(),
     const MoreInformationScreen()
   ];
@@ -52,6 +54,13 @@ class _ScreenControllerState extends State<ScreenController> {
               size: 30,
             ),
             label: '검색',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(
+             Icons.menu,
+              size: 30,
+            ),
+            label: '레시피',
           ),
           BottomNavigationBarItem(
             icon: Icon(

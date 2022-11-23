@@ -10,11 +10,16 @@ class SearchScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      endDrawer: CustomDrawer(),
-      appBar: customAppbar('검색하기'),
-      backgroundColor: AppTheme.natureWhite,
-      body: SearchForm()
+    return GestureDetector(
+      onTap: () {
+        FocusManager.instance.primaryFocus?.unfocus();
+      },
+      child: Scaffold(
+        endDrawer: const CustomDrawer(),
+        appBar: customAppbar('검색하기'),
+        backgroundColor: AppTheme.natureWhite,
+        body: const SearchForm()
+      ),
     );
   }
 }

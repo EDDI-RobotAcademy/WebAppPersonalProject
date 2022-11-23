@@ -95,7 +95,7 @@ class _HomeScreenState extends State<HomeScreen> {
     Navigator.push<dynamic>(
       context,
       MaterialPageRoute<dynamic>(
-        builder: (BuildContext context) => RecipeScreen(),
+        builder: (BuildContext context) => const RecipeScreen(),
       ),
     );
   }

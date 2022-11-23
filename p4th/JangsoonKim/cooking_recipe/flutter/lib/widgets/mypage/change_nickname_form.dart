@@ -55,8 +55,8 @@ class _ChangeNicknameFormState extends State<ChangeNicknameForm> {
               SizedBox(
                 height: size.height * 0.1,
               ),
-              Padding(
-                padding: const EdgeInsets.only(left: 15),
+              const Padding(
+                padding: EdgeInsets.only(left: 15),
                 child: Text(
                   "닉네임",
                   style: TextStyle(fontSize: 18),
@@ -73,13 +73,13 @@ class _ChangeNicknameFormState extends State<ChangeNicknameForm> {
                     filled: true,
                     fillColor: Colors.white,
                     suffixIcon: IconButton(
-                      icon: Icon(Icons.close),
+                      icon: const Icon(Icons.close),
                       color: Colors.black,
                       onPressed: _controller.clear,
                     ),
                     border: InputBorder.none,
                     hintText: nickname,
-                    hintStyle: TextStyle(fontSize: 20),
+                    hintStyle: const TextStyle(fontSize: 20),
                   ),
                 ),
               ),

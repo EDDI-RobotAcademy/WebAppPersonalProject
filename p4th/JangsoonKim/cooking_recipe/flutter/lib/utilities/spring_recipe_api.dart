@@ -58,7 +58,7 @@ class SpringRecipeApi {
     }
   }
 
-  Future<List<imageLoadRequest>> loadImages(int recipeNo) async {
+  Future<List<ImageLoadRequest>> loadImages(int recipeNo) async {
     var response = await http.get(Uri.http(httpUrl, '/recipe/$recipeNo'),
         headers: {"Content-Type": "application/json"});
 
@@ -69,8 +69,8 @@ class SpringRecipeApi {
 
       print(jsonData);
 
-      List<imageLoadRequest> imageList = jsonData
-          .map((dataJson) => imageLoadRequest.fromJson(dataJson))
+      List<ImageLoadRequest> imageList = jsonData
+          .map((dataJson) => ImageLoadRequest.fromJson(dataJson))
           .toList();
 
       return imageList;
@@ -157,14 +157,14 @@ class RequestRecipe {
   }
 }
 
-class imageLoadRequest {
+class ImageLoadRequest {
   int imageNo;
   String imagePath;
 
-  imageLoadRequest({required this.imageNo, required this.imagePath});
+  ImageLoadRequest({required this.imageNo, required this.imagePath});
 
-  factory imageLoadRequest.fromJson(Map<String, dynamic> json) {
-    return imageLoadRequest(
+  factory ImageLoadRequest.fromJson(Map<String, dynamic> json) {
+    return ImageLoadRequest(
       imageNo: json["imageNo"],
       imagePath: json["imagePath"],
     );

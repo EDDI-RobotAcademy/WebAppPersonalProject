@@ -27,7 +27,7 @@ class _AllRecipesFormState extends State<AllRecipesForm> {
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
     return Container(
-        padding: EdgeInsets.all(7),
+        padding: const EdgeInsets.all(7),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
@@ -74,7 +74,7 @@ class _AllRecipesFormState extends State<AllRecipesForm> {
                                             "assets/images/uploadImgs/${recipe.thumbnail}"),
                                       ),
                                       Padding(
-                                        padding: EdgeInsets.all(7.0),
+                                        padding: const EdgeInsets.all(7.0),
                                         child: Text(
                                           recipe.title,
                                           style: const TextStyle(
@@ -93,7 +93,7 @@ class _AllRecipesFormState extends State<AllRecipesForm> {
                     ),
                   )
                 : Container(
-                    child: Text("게시물 없음"),
+                    child: const Text("게시물 없음"),
                   ),
           ],
         ));

@@ -53,8 +53,8 @@ class _MypageFormState extends State<MypageForm> {
                       SizedBox(
                         height: size.height * 0.25,
                       ),
-                      Padding(
-                        padding: const EdgeInsets.only(left: 15),
+                      const Padding(
+                        padding: EdgeInsets.only(left: 15),
                         child: Text(
                           '아이디',
                           style: TextStyle(fontSize: 18),
@@ -68,8 +68,8 @@ class _MypageFormState extends State<MypageForm> {
                       SizedBox(
                         height: size.height * 0.05,
                       ),
-                      Padding(
-                        padding: const EdgeInsets.only(left: 15),
+                      const Padding(
+                        padding: EdgeInsets.only(left: 15),
                         child: Text(
                           '닉네임',
                           style: TextStyle(fontSize: 18),
