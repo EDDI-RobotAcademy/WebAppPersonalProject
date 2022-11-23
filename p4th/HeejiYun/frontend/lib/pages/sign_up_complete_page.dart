@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:frontend/components/buttons/navigation_button.dart';
 
+import '../components/custom_app_bar.dart';
 import '../components/logo.dart';
 import '../utility/size.dart';
 
@@ -11,6 +12,7 @@ class SignUpCompletePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+        appBar: CommonAppBar(title: "HOME ALONE"),
         body: Container(
           padding: EdgeInsets.all(16),
             child: Center(

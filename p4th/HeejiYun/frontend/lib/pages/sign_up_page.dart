@@ -1,6 +1,8 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
+import '../components/custom_app_bar.dart';
+import '../components/custom_drawer.dart';
 import '../components/forms/sign_up_form.dart';
 import '../components/logo.dart';
 import '../utility/size.dart';
@@ -11,7 +13,7 @@ class SignUpPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        // appBar: AppBar(backgroundColor: Colors.cyanAccent,),
+          appBar: CommonAppBar(title: "SIGN UP PAGE"),
           body: Padding(
             padding: const EdgeInsets.all(16.0),
             child: ListView(
@@ -22,7 +24,8 @@ class SignUpPage extends StatelessWidget {
                 SignUpForm(),
               ],
             ),
-          )
+          ),
+        drawer: CustomDrawer()
       );
   }
 }
