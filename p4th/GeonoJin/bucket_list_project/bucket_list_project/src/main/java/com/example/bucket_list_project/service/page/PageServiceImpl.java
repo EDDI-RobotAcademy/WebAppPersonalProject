@@ -17,14 +17,22 @@ public class PageServiceImpl implements PageService{
 
     @Override
     public int getTotalPageNum(Pageable pageable) {
-
         Page<BucketBoard> bucketBoardPage = bucketBoardRepository.findAll(PageRequest.of(0,12));
+
         return bucketBoardPage.getTotalPages();
     }
 
     @Override
     public int getTotalPageByCategory(String categoryName) {
         Page<BucketBoard> bucketBoardPageByCategory = bucketBoardRepository.findByBucketCategory(categoryName, PageRequest.of(0, 12));
+
         return bucketBoardPageByCategory.getTotalPages();
+    }
+
+    @Override
+    public int getTotalPageByMyBucket(String userNickname) {
+        Page<BucketBoard> bucketBoardPageByUserNickname = bucketBoardRepository.findByBucketListWriter(userNickname, PageRequest.of(0, 12));
+
+        return bucketBoardPageByUserNickname.getTotalPages();
     }
 }

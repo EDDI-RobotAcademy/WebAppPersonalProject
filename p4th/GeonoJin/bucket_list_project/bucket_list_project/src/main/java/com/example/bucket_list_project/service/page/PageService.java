@@ -7,4 +7,6 @@ public interface PageService {
     public int getTotalPageNum(Pageable pageable);
 
     public int getTotalPageByCategory(String categoryName);
+
+    public int getTotalPageByMyBucket(String userNickname);
 }

@@ -16,7 +16,7 @@ public class PageController {
     private PageService pageService;
 
     @GetMapping("/totalPage")
-    public int getTotalPageNum(Pageable pageable){
+    public int getTotalPageNum(Pageable pageable) {
         log.info("getTotalPageNum");
 
         return pageService.getTotalPageNum(pageable);
@@ -29,4 +29,10 @@ public class PageController {
         return pageService.getTotalPageByCategory(categoryName);
     }
 
+    @PostMapping("/myBucket-total-page/{userNickname}")
+    public int getTotalPageByMyBucket(@PathVariable("userNickname") String userNickname) {
+        log.info("getTotalPageByMyBucket");
+
+        return pageService.getTotalPageByMyBucket(userNickname);
+    }
 }
