@@ -8,13 +8,12 @@
 
         -->
         <common-board-list
-            board-title= "운동 일기"
             icon-name="mdi-headphones"
-            imgName="diary_camera.jpg"
             board-sub-title="오.운.완"
-            board-sub-text="오늘의 운동은 어떠셨나요? 당신의 근성장을 응원합니다."
-            search-label="운동일기 게시판에서 검색"
+            search-label="게시판에서 검색"
             :contents= "diaryBoards"
+            :router-name="routerName"
+            :page-no="pageNo"
         />
       </v-col>
         <!--      사이드 배치-->
@@ -29,19 +28,17 @@
 </template>
 
 <script>
-import CommonMyTextField from "@/components/common/CommonMyTextField";
-import CommonSideBanner from "@/components/common/CommonSideBanner";
 
 export default {
   name: "DiaryBoardList",
   components:{
-    CommonMyTextField,
-    CommonSideBanner,
   },
   props: {
     diaryBoards: {
       type: Array
-    }
+    },
+    routerName: String,
+    pageNo: Number
   },
   data(){
     return{
