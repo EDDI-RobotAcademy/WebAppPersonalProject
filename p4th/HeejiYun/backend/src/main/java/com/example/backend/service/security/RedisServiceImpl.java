@@ -15,7 +15,7 @@ public class RedisServiceImpl implements RedisService {
     public void setKeyAndValue(String token, Long memNo) {
         String memNoToString = String.valueOf(memNo);
         ValueOperations<String, String> value = redisTemplate.opsForValue();
-        value.set(token, memNoToString, Duration.ofMinutes(5));
+        value.set(token, memNoToString, Duration.ofHours(2));
     }
 
     public Long getValueByKey(String token) {
