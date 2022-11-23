@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:lol_esports_korea_app/pages/main_menu/teams_page/drx_page.dart';
-import 'package:lol_esports_korea_app/pages/main_menu/teams_page/t1_page.dart';
+import 'package:lol_esports_korea_app/pages/main_menu/teams_info_page/drx_page.dart';
+import 'package:lol_esports_korea_app/pages/main_menu/teams_info_page/t1_page.dart';
 
 import '../../components/app_bar/common_drawer_menu.dart';
 import '../../components/app_bar/common_top_app_bar.dart';
@@ -50,13 +50,13 @@ class MyTeamPage extends StatelessWidget {
                   logoName: 'GEN',
                   teamName: '젠지',
                   onCustomButtonPressed: () {
-                    Navigator.of(context).pop();
+                    null;
                   }),
               MyTeamButtonWidget(
                   logoName: 'DK',
                   teamName: '담원 기아',
                   onCustomButtonPressed: () {
-                    Navigator.of(context).pop();
+                    null;
                   }),
             ],
           ),
@@ -66,13 +66,13 @@ class MyTeamPage extends StatelessWidget {
                   logoName: 'NS',
                   teamName: '농심',
                   onCustomButtonPressed: () {
-                    Navigator.of(context).pop();
+                    null;
                   }),
               MyTeamButtonWidget(
                   logoName: 'LSB',
                   teamName: '리브 샌박',
                   onCustomButtonPressed: () {
-                    Navigator.of(context).pop();
+                    null;
                   }),
             ],
           ),
@@ -82,13 +82,13 @@ class MyTeamPage extends StatelessWidget {
                   logoName: 'KT',
                   teamName: 'KT',
                   onCustomButtonPressed: () {
-                    Navigator.of(context).pop();
+                    null;
                   }),
               MyTeamButtonWidget(
                   logoName: 'KDF',
                   teamName: '광동',
                   onCustomButtonPressed: () {
-                    Navigator.of(context).pop();
+                    null;
                   }),
             ],
           ),
@@ -98,13 +98,13 @@ class MyTeamPage extends StatelessWidget {
                   logoName: 'BRO',
                   teamName: '프레딧',
                   onCustomButtonPressed: () {
-                    Navigator.of(context).pop();
+                    null;
                   }),
               MyTeamButtonWidget(
                   logoName: 'HLE',
                   teamName: '한화생명',
                   onCustomButtonPressed: () {
-                    Navigator.of(context).pop();
+                    null;
                   }),
             ],
           ),

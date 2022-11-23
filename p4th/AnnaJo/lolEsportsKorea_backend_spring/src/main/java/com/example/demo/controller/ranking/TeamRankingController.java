@@ -1,7 +1,6 @@
 package com.example.demo.controller.ranking;
 
 import com.example.demo.entity.ranking.TeamRanking;
-import com.example.demo.service.member.MemberService;
 import com.example.demo.service.ranking.RankingService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
