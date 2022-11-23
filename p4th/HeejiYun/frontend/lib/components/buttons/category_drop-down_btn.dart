@@ -1,6 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:frontend/utility/category_provider.dart';
+import 'package:frontend/utility/providers/category_provider.dart';
 import 'package:frontend/utility/main_color.dart';
 import 'package:provider/provider.dart';
 
