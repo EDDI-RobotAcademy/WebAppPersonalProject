@@ -15,7 +15,7 @@ class RankingPage extends StatelessWidget {
           title: const Text('순위'),
           appBar: AppBar(),
         ),
-        drawer: const Drawer(
+        drawer: Drawer(
           child: CommonDrawerMenu(),
         ),
         body: SingleChildScrollView(
