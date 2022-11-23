@@ -21,4 +21,10 @@ public class PageServiceImpl implements PageService{
         Page<BucketBoard> bucketBoardPage = bucketBoardRepository.findAll(PageRequest.of(0,12));
         return bucketBoardPage.getTotalPages();
     }
+
+    @Override
+    public int getTotalPageByCategory(String categoryName) {
+        Page<BucketBoard> bucketBoardPageByCategory = bucketBoardRepository.findByBucketCategory(categoryName, PageRequest.of(0, 12));
+        return bucketBoardPageByCategory.getTotalPages();
+    }
 }

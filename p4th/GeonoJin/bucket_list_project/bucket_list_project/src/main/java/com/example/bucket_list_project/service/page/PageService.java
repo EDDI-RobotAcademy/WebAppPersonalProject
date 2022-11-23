@@ -5,4 +5,6 @@ import org.springframework.data.domain.Pageable;
 public interface PageService {
 
     public int getTotalPageNum(Pageable pageable);
+
+    public int getTotalPageByCategory(String categoryName);
 }
