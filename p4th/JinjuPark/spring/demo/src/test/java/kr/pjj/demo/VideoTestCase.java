@@ -1,5 +1,7 @@
 package kr.pjj.demo;
 
+import kr.pjj.demo.entity.member.Member;
+import kr.pjj.demo.entity.video.MemberSaveVideo;
 import kr.pjj.demo.entity.video.Video;
 import kr.pjj.demo.repository.member.MemberRepository;
 import kr.pjj.demo.repository.video.MemberSaveVideoRepository;
@@ -57,6 +59,39 @@ public class VideoTestCase {
         List<Video> videoList= repository.findAll();
         System.out.println(videoList);
     }
+
+
+    @Test
+    void myVideoSaveAndCancel(){
+        Long memberId = 1L;
+        Long videoId = 1L;
+
+        Optional<MemberSaveVideo> maybeMyVideoList = saveVideoRepository.findByMemberIdAndVideoId(memberId, videoId);
+
+        if (maybeMyVideoList.equals(Optional.empty())) {
+            MemberSaveVideo memberSaveVideo = new MemberSaveVideo();
+
+            Optional<Member> maybeMember = memberRepository.findById(memberId);
+            Member member = maybeMember.get();
+
+            Optional<Video> maybeVideo = repository.findById(videoId);
+            Video video = maybeVideo.get();
+
+            memberSaveVideo.setMember(member);
+            memberSaveVideo.setVideo(video);
+            saveVideoRepository.save(memberSaveVideo);
+            //비디오가 My Video List에 저장되었습니다
+
+
+        } else {
+            saveVideoRepository.deleteById(maybeMyVideoList.get().getId());
+            //비디오가 My Video List에서 삭제되었습니다
+        }
+        //저장되었는 지 삭제되었는 지 결과 확인
+        List<String> myVideoList = saveVideoRepository.findMemberSaveVideoByMemberId(memberId);
+        System.out.println("나의 비디오 리스트: "+myVideoList);
+    }
+
 
     @Test
     void myVideoRead(){
