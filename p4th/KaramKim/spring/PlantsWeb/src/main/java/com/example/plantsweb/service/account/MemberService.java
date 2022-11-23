@@ -5,7 +5,7 @@ import com.example.plantsweb.service.account.request.MemberRegisterRequest;
 
 public interface MemberService {
 
-    Boolean emailValidation(String email);
-    Boolean signUp(MemberRegisterRequest request);
-    String signIn(MemberLoginRequest request);
+    public Boolean emailValidation(String email);
+    public Boolean signUp(MemberRegisterRequest request);
+    public String signIn(MemberLoginRequest request);
 }

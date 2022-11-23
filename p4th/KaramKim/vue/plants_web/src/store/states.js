@@ -3,5 +3,8 @@ export default {
     checkUserInfo: false,
 
     boards: [],
+    board: {},
+
+    comments: [],
 
 }

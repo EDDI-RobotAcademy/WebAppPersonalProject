@@ -1,7 +1,9 @@
 package com.example.plantsweb.service.board;
 
 import com.example.plantsweb.controller.board.request.BoardRequest;
+import com.example.plantsweb.entity.board.Comment;
 import com.example.plantsweb.entity.board.QuestionBoard;
+import com.example.plantsweb.repository.board.CommentRepository;
 import com.example.plantsweb.repository.board.QuestionBoardRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,6 +19,9 @@ public class QuestionBoardServiceImpl implements QuestionBoardService{
 
     @Autowired
     QuestionBoardRepository repository;
+
+    @Autowired
+    CommentRepository commentRepository;
 
     @Override
     public List<QuestionBoard> list() {
@@ -51,6 +56,12 @@ public class QuestionBoardServiceImpl implements QuestionBoardService{
 
     @Override
     public void delete(Long boardNo) {
+        List<Comment> commentList = commentRepository.findAllCommentsByBoardId(boardNo);
+
+        for (Comment comment : commentList) {
+            commentRepository.delete(comment);
+        }
+
         repository.deleteById(boardNo);
     }
 }

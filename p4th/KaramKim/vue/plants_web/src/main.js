@@ -6,9 +6,11 @@ import vuetify from './plugins/vuetify'
 import cookies from "vue-cookies";
 import CommonButton from "@/components/common/CommonButton";
 import CommonTextField from "@/components/common/CommonTextField";
+import commonPageDescription from "@/components/common/CommonPageDescription";
 
 Vue.component('CommonButton', CommonButton)
 Vue.component('CommonTextField', CommonTextField)
+Vue.component('CommonPageDescription', commonPageDescription)
 Vue.use(cookies)
 
 Vue.config.productionTip = false
