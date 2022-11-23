@@ -4,6 +4,7 @@ import com.example.bucket_list_project.entity.Board.BucketBoard;
 import com.example.bucket_list_project.entity.Board.ImgFile;
 import com.example.bucket_list_project.service.bucketBoard.BucketService;
 import com.example.bucket_list_project.service.bucketBoard.request.bucketBoard.BucketBoardRequest;
+import com.example.bucket_list_project.service.bucketBoard.request.bucketBoard.BucketListByUserNicknamePerPageRequest;
 import com.example.bucket_list_project.service.bucketBoard.request.bucketBoard.BucketListCategoryByPageRequest;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -85,11 +86,14 @@ public class BucketBoardController {
         return service.findBucketListByCategory(bucketCategory, currentPage);
     }
 
-    @PostMapping("/{userNickname}")
-    public List<BucketBoard> bucketListByUserNickname(@PathVariable("userNickname") String userNickname) {
-        log.info("bucketListByUserNickname" + userNickname);
+    @PostMapping("/myBucket")
+    public List<BucketBoard> bucketListByUserNickname(@RequestBody BucketListByUserNicknamePerPageRequest userNicknamePerPageRequest) {
+        log.info("bucketListByUserNickname");
 
-        return service.findBucketListByUserNickname(userNickname);
+        String userNickname = userNicknamePerPageRequest.getUserNickname();
+        int currentPage = userNicknamePerPageRequest.getPageValue();
+
+        return service.findBucketListByUserNickname(userNickname, currentPage);
     }
 
     @GetMapping("/search/{searchWord}")

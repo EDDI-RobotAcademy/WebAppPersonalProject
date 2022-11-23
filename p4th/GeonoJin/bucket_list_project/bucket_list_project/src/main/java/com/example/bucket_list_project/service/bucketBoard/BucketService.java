@@ -23,7 +23,7 @@ public interface BucketService {
     public void delete(Long bucketId);
 
     public List<BucketBoard> findBucketListByCategory(String bucketCategory, int currentPage);
-    public List<BucketBoard> findBucketListByUserNickname(String userNickname);
+    public List<BucketBoard> findBucketListByUserNickname(String userNickname, int currentPage);
 
     public List<BucketBoard> bucketLIstSearch(String searchWord);
 }

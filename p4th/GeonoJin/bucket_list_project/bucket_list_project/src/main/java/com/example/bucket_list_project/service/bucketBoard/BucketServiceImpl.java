@@ -143,10 +143,15 @@ public class BucketServiceImpl implements BucketService {
     }
 
     @Override
-    public List<BucketBoard> findBucketListByUserNickname(String userNickname) {
+    public List<BucketBoard> findBucketListByUserNickname(String userNickname, int currentPage) {
         log.info("findBucketListByUserNickname" + userNickname);
 
-        return bucketBoardRepository.findByBucketListWriter(userNickname);
+        int pageValue = (currentPage - 1);
+
+        Page<BucketBoard> bucketBoardByUserNickname = bucketBoardRepository.findByBucketListWriter(userNickname, PageRequest.of(pageValue, 12));
+        List<BucketBoard> myBucketBoardList = bucketBoardByUserNickname.getContent();
+
+        return myBucketBoardList;
     }
 
     @Override

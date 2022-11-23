@@ -87,7 +87,9 @@ public class BucketBoardTest {
 
     @Test
     public void findBucketListByNickname(){
-        List<BucketBoard> getWriterBucketList = bucketBoardRepository.findByBucketListWriter("관리자1");
+
+        Page<BucketBoard> bucketBoardPage = bucketBoardRepository.findByBucketListWriter("관리자1", PageRequest.of(0, 12));
+        List<BucketBoard> getWriterBucketList = bucketBoardPage.getContent();
 
 
         System.out.println(getWriterBucketList);
