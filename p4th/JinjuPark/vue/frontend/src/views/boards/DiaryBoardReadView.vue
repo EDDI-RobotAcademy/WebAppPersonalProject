@@ -3,9 +3,7 @@
   <div>
     <common-main-menu-template/>
     <common-image-card
-        board-title="운동 일기"
-        board-sub-text="오늘의 운동은 어떠셨나요? 당신의 근성장을 응원합니다."
-        imgName="diary_camera.jpg"/>
+        imgName="re_winter_white_banner.png"/>
     <diary-board-read v-if="diaryBoard" :diaryBoard="diaryBoard"/>
     <p v-else>Loading....</p>
     <v-container>
@@ -35,7 +33,7 @@
             {{this.$store.state.thumbStatusCount[1]}}비추천
           </v-btn>
         </v-col>
-      <v-col align="right" v-if="loginUser[0].nickname === diaryBoard.writer">
+      <v-col align="right" v-if="loginUser[0].id === diaryBoard.member.id">
         <common-button-white btn-name="수정" @click="toModifyView"/>
         <common-button-blue btn-name="삭제" @click="onDelete"/>
       </v-col>
@@ -79,7 +77,7 @@
 </template>
 
 <script>
-import DiaryBoardRead from "@/components/boards/exercise/DiaryBoardRead";
+import DiaryBoardRead from "@/components/boards/DiaryBoardRead";
 import {mapActions, mapState} from "vuex";
 
 export default {
@@ -89,7 +87,8 @@ export default {
     boardNo: {
       type: String,
       required: true
-    }
+    },
+    pageNo: Number
   },
   data(){
     return{
@@ -108,7 +107,8 @@ export default {
         'requestCreateDiaryBoardCommentToSpring',
         'requestCommentListFromSpring',
         'requestModifyDiaryBoardCommentToSpring',
-        'requestDeleteCommentBoardToSpring'
+        'requestDeleteCommentBoardToSpring',
+        'requestImageReadFromSpring'
     ]),
     async onDelete () {
       await this.requestDeleteDiaryBoardToSpring(this.boardNo);
@@ -119,7 +119,20 @@ export default {
         params: { boardNo: this.boardNo }})
     },
     back(){
-      this.$router.push({ name: 'DiaryBoardListView' })
+      //DiaryBoardReadView에서 게시글 클릭 시 router- link params에 boardNo와 pageNo 같이 보내서 props로 받음
+      if(this.pageNo == 0){
+        this.$router.push({ name: 'AllBoardListView' })
+      }else if(this.pageNo == 1){
+        this.$router.push({ name: 'DiaryBoardListView' })
+      }else if (this.pageNo == 2){
+        this.$router.push({ name: 'FreeBoardListView' })
+      } else if(this.pageNo ==3){
+        this.$router.push({ name: 'QNABoardListView' })
+      } else if(this.pageNo ==9){
+        this.$router.push({ name: 'MyDiaryBoardListView' })
+      } else{
+        this.$router.push({ name: 'AllBoardListView' })
+      }
     },
     async thumbUp(){
       if(window.localStorage.getItem('userInfo') != null) {
@@ -143,18 +156,20 @@ export default {
     },
     async onSubmit(payload){
       const { content, parentsCommentId } = payload
+      const writerId = this.$store.state.loginUser[0].id
       const writerNickname = this.$store.state.loginUser[0].nickname
       const boardNo = this.boardNo
       console.log("댓글 버튼 메소드 호출전:" +content+"부모댓글 id:"+parentsCommentId)
-      await this.requestCreateDiaryBoardCommentToSpring({ boardNo, writerNickname, parentsCommentId, content })
-      await this.requestCommentListFromSpring(this.boardNo)
+      await this.requestCreateDiaryBoardCommentToSpring({ boardNo, writerId, writerNickname, parentsCommentId, content })
+      await this.requestCommentListFromSpring(boardNo)
     },
     async commentModify(payload){
       const { commentId, updateContent, parentsCommentId } = payload
       const writerNickname = this.$store.state.loginUser[0].nickname
+      const writerId = this.$store.state.loginUser[0].id
       const boardNo = this.boardNo
       console.log("댓글 수정버튼 메소드 호출전:" +updateContent+"부모댓글 id:"+parentsCommentId)
-      await this.requestModifyDiaryBoardCommentToSpring({ commentId, boardNo, writerNickname, parentsCommentId, updateContent })
+      await this.requestModifyDiaryBoardCommentToSpring({ commentId, boardNo, writerId, writerNickname, parentsCommentId, updateContent })
       await this.requestCommentListFromSpring(this.boardNo)
     },
     async deleteComment(payload) {
@@ -165,22 +180,21 @@ export default {
       await this.requestCommentListFromSpring(this.boardNo)
     },
   },
-  created() {
-    console.log("다이어리 게시글 조회 페이지")
-    this.requestDiaryBoardFromSpring(this.boardNo)
-    const memberId = this.$store.state.loginUser[0].id
-    const thumbType = "thumbCheck"
-    const boardNo = this.boardNo
-    this.requestThumbStatusToSpring({ memberId, boardNo, thumbType})
-
-  },
-  mounted(){
-    this.requestCommentListFromSpring(this.boardNo)
+  async mounted(){
     if(window.localStorage.getItem('userInfo') != null) {
       this.$store.commit('USER_LOGIN_CHECK', true)
       let userToken = window.localStorage.getItem('userInfo')
-      this.requestLoginUserFromSpring(userToken)
+      await this.requestLoginUserFromSpring(userToken)
     }
+    const boardNo = this.boardNo
+    console.log("다이어리 게시글 조회 페이지")
+    const memberId = this.$store.state.loginUser[0].id
+    const thumbType = "thumbCheck"
+    await this.requestImageReadFromSpring(this.boardNo)
+    await this.requestDiaryBoardFromSpring(this.boardNo)
+    await this.requestThumbStatusToSpring({ memberId, boardNo, thumbType})
+    await this.requestCommentListFromSpring(this.boardNo)
+
   },
 }
 </script>

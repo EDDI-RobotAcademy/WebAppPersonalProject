@@ -4,7 +4,7 @@
       <form @submit.prevent="onSubmit">
       <v-col>
         <div class="justify-center">
-          <v-card width="850px" height="620px" class="justify-center" style="border-bottom: 4px solid gray; border-top: 4px solid gray" tile>
+          <v-card width="850px" height="auto" class="justify-center" style="border-bottom: 4px solid gray; border-top: 4px solid gray" tile>
             <v-card-title class="justify-center">운동 일기</v-card-title>
 
             <div class="justify-center">
@@ -13,12 +13,12 @@
                   <th width="100px">제목</th>
                   <td colspan="3" width="400"><input type="text" name="title" v-model="title" style="width:400px;" /></td>
                   <th width="100px">작성자</th>
-                  <td><input type="text" name="writer" :value="diaryBoard.writer" disabled></td>
+                  <td><input type="text" name="writer" :value="diaryBoard.member.nickname" disabled></td>
                 </tr>
                 <tr>
                   <th width="100px">카테고리</th>
                   <td>
-                    <input type="text" name="category" :value="diaryBoard.category" disabled/>
+                    <input type="text" name="category" :value="diaryBoard.category.categoryName" disabled/>
                   </td>
 
                   <th width="100px">공개/비공개</th>
@@ -40,18 +40,23 @@
 
                 </tr>
                 <tr ><th colspan="6">본문</th></tr>
+                <tr v-show="this.$store.state.diaryImages.length > 0" style="border-bottom: none">
+                  <td class="imageTd" colspan="6">
+                    <v-img v-for="(image, idx) in this.$store.state.diaryImages" :key="idx" :src="require(`@/assets/uploadImgs/${image}`)"
+                           max-width="750px" contain style="margin-left: auto; margin-right: auto; display: block;" />
+                  </td>
+                </tr>
                 <tr>
-                  <td colspan="6"><textarea v-model="content" name="content" style="width:840px; height:420px"></textarea></td>
+                  <td colspan="6"><textarea class="autosize" v-model="content" name="content" style="width:840px; "></textarea></td>
                 </tr>
               </table>
             </div>
 <!--              <v-card class="mt-3" width="850px" elevation="0">-->
-              <div class="mt-5" align ="right">
+              <div class="mt-5 mr-3 mb-5" align ="right">
                 <common-button-white btn-name="완료" type="submit"/>
                 <common-button-blue btn-name="취소" @click="cancel"/>
               </div>
 <!--              </v-card>-->
-
 
           </v-card>
         </div>
@@ -70,6 +75,8 @@
 </template>
 
 <script>
+import {mapState} from "vuex";
+
 export default {
   name: "DiaryBoardModifyForm",
   props: {
@@ -77,6 +84,9 @@ export default {
       type: Object,
       required: true,
     }
+  },
+  computed: {
+    ...mapState(['diaryImages'])
   },
   data() {
     return {
@@ -94,7 +104,7 @@ export default {
   },
   created() {
     this.title = this.diaryBoard.title
-    this.writer = this.diaryBoard.writer
+    this.writer = this.diaryBoard.member.nickname
     this.category = this.diaryBoard.category
     this.authority = this.diaryBoard.authority
     this.regDate = this.diaryBoard.regDate
@@ -102,19 +112,26 @@ export default {
     this.likes = this.diaryBoard.likes
     this.content = this.diaryBoard.content
     this.noLikes= this.diaryBoard.noLikes
-
   },
   methods: {
     onSubmit() {
-      const {title, writer, category, authority, regDate, views, likes, noLikes, content } = this
-      this.$emit('submit', {title, writer, category, authority, regDate, views, likes, noLikes, content})
+      const {title, content } = this
+      this.$emit('submit', {title, content})
     },
+    // onSubmit() {
+    //   const {title, category, authority, regDate, views, likes, noLikes, content } = this
+    //   this.$emit('submit', {title, member, category, authority, regDate, views, likes, noLikes, content})
+    // },
     cancel() {
       this.$router.push({
         name: 'DiaryBoardReadView',
         params: {boardNo: this.diaryBoard.boardNo.toString()}
       })
     },
+    resize(obj) {
+      obj.style.height = "1px";
+      obj.style.height = (12+obj.scrollHeight)+"px";
+    }
   }
 }
 </script>
@@ -141,4 +158,10 @@ td {
   border-collapse : collapse;
   border-radius: 5px;
 }
+td.imageTd{
+  border-bottom:none;
+  text-align: center;
+}
+
+textarea.autosize { min-height: 200px; }
 </style>

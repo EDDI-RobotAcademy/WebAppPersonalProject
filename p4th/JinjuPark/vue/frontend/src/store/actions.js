@@ -5,6 +5,7 @@ import {
    THUMB_STATUS_COUNT,
     REQUEST_COMMENT_LIST_FROM_SPRING,
     VIDEOS, MY_SAVE_VIDEOS_LIST,
+    REQUEST_IMAGES_FROM_SPRING
 } from './mutation-types'
 
 import axios from 'axios'
@@ -165,4 +166,15 @@ export default {
                     console.log("마이 세이브 비디오 조회 리턴완료: " + res.data)
                 })
         },
+    // eslint-disable-next-line no-empty-pattern
+    requestImageReadFromSpring ({ commit }, boardNo) {
+        console.log('다이어리 이미지 출력()')
+
+        return axios.get(`http://localhost:7777/hometwang/boards/diary/images/${boardNo}`)
+            .then((res) => {
+                commit(REQUEST_IMAGES_FROM_SPRING, res.data)
+                console.log("이미지 res.data: "+ res.data)
+            })
+    },
+
 }

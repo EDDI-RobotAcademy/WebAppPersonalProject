@@ -6,6 +6,7 @@ import {
     THUMB_STATUS_COUNT,
     REQUEST_COMMENT_LIST_FROM_SPRING,
     VIDEOS, MY_SAVE_VIDEOS_LIST,
+    REQUEST_IMAGES_FROM_SPRING
 } from './mutation-types'
 
 export default {
@@ -45,6 +46,10 @@ export default {
 
     [MY_SAVE_VIDEOS_LIST] (state, passingData) {
         state.mySaveVideos = passingData
+    },
+
+    [REQUEST_IMAGES_FROM_SPRING] (state, passingData) {
+        state.diaryImages = passingData
     },
 
 }

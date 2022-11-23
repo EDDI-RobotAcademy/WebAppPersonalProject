@@ -3,6 +3,8 @@
 
   <div>
     <common-main-menu-template/>
+    <common-image-card
+        imgName="re_winter_white_banner.png"/>
     <diary-board-register @submit="onSubmit"/>
     <common-footer-template/>
   </div>
@@ -12,8 +14,8 @@
 </template>
 
 <script>
-import DiaryBoardRegister from "@/components/boards/exercise/DiaryBoardRegisterForm";
-import {mapActions} from "vuex";
+import DiaryBoardRegister from "@/components/boards/DiaryBoardRegisterForm";
+ import {mapActions} from "vuex";
 
 export default {
   name: "DiaryBoardRegisterView",
@@ -26,10 +28,6 @@ export default {
     ]),
     async onSubmit (payload) {
       await this.requestCreateDiaryBoardContentsToSpring(payload)
-      console.log('운동일기 게시물 등록- registerview')
-      await this.$router.push({
-        name: 'DiaryBoardListView'
-      })
     }
   }
 }
