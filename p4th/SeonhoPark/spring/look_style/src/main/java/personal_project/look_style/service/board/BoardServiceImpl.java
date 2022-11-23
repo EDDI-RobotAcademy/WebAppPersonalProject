@@ -100,14 +100,16 @@ public class BoardServiceImpl implements BoardService{
     }
 
     @Override
-    public void modify(Board board, List<MultipartFile> file, Long[] imageNo) {
+    public void modify(Board board, List<MultipartFile> file, List<Long> imageNo) {
         List<BoardImage> boardImageList = new ArrayList<>();
 
         int i = 0;
 
         for (MultipartFile multipartFile: file) {
             BoardImage boardImage = new BoardImage();
-            boardImage.setImageNo(imageNo[i]);
+            if (imageNo != null) {
+                boardImage.setImageNo(imageNo.get(i));
+            }
             boardImage.setImageName(multipartFile.getOriginalFilename());
             boardImage.setBoard(board);
             boardImageList.add(boardImage);
@@ -136,6 +138,14 @@ public class BoardServiceImpl implements BoardService{
 
     @Override
     public void remove(Long boardNo) {
+        List<BoardImage> boardImages = boardImageRepository.findAllBoardImagesByBoardId(boardNo);
+        List<Long> boardImageIds = new ArrayList<>();
+        for (int i = 0; i < boardImages.size(); i++) {
+            boardImageIds.add(boardImages.get(i).getImageNo());
+        }
 
+        boardImageRepository.deleteAllById(boardImageIds);
+
+        boardRepository.deleteById(boardNo);
     }
 }

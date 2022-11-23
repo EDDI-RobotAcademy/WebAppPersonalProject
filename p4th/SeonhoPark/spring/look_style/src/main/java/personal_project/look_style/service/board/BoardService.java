@@ -14,7 +14,7 @@ public interface BoardService {
     public List<Board> list(String boardType);
     public Board read(Long boardNo);
     public List<BoardImage> findBoardImagesOnSpecificBoard(Long boardNo);
-    public void modify(Board board, List<MultipartFile> file, Long[] imageNo);
+    public void modify(Board board, List<MultipartFile> file, List<Long> imageNo);
     public void modify(Board board);
     public void remove(Long boardNo);
 }
