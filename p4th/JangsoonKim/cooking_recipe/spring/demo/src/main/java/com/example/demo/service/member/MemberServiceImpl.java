@@ -1,10 +1,14 @@
 package com.example.demo.service.member;
 
+import com.example.demo.entity.board.Comment;
+import com.example.demo.entity.board.Recipe;
 import com.example.demo.entity.member.Authentication;
 import com.example.demo.entity.member.BasicAuthentication;
 import com.example.demo.entity.member.Member;
 import com.example.demo.repository.member.AuthenticationRepository;
 import com.example.demo.repository.member.MemberRepository;
+import com.example.demo.repository.recipe.CommentRepository;
+import com.example.demo.repository.recipe.RecipeRepository;
 import com.example.demo.security.RedisService;
 import com.example.demo.service.member.request.MemberNicknameModifyRequest;
 import com.example.demo.service.member.request.MemberRegisterRequest;
@@ -14,10 +18,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.RequestBody;
 
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Optional;
-import java.util.UUID;
+import java.util.*;
 
 @Slf4j
 @Service
@@ -31,6 +32,12 @@ public class MemberServiceImpl implements MemberService {
 
     @Autowired
     private RedisService redisService;
+
+    @Autowired
+    private RecipeRepository recipeRepository;
+
+    @Autowired
+    private CommentRepository commentRepository;
 
 
     @Override
@@ -104,10 +111,28 @@ public class MemberServiceImpl implements MemberService {
         Optional<Member> maybeMember = memberRepository.findByEmail(email);
 
         if (maybeMember.isPresent()) {
+            final String exNickname = maybeMember.get().getNickname();
             final Member member = request.toMember();
             member.setId(maybeMember.get().getId());
 
             memberRepository.save(member);
+
+            List<Recipe> recipeList = recipeRepository.findAllRecipesByNickname(exNickname);
+            if(recipeList.size()>0){
+                for (int i = 0; i < recipeList.size(); i++) {
+                    recipeList.get(i).setWriter(request.getNickname());
+
+                }
+                recipeRepository.saveAll(recipeList);
+            }
+
+            List<Comment> commentList = commentRepository.findAllCommentsByNickname(exNickname);
+            if (commentList.size() > 0){
+                for (int i = 0; i < commentList.size(); i++) {
+                    commentList.get(i).setWriter(request.getNickname());
+                }
+                commentRepository.saveAll(commentList);
+            }
         }
         return true;
     }
