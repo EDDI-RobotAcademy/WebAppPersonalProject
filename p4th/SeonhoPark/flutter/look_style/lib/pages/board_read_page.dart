@@ -6,6 +6,8 @@ import 'package:look_style/pages/board_modify_page.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 import 'package:look_style/api/board_spring_api.dart';
 
+import 'main_page.dart';
+
 class BoardReadPage extends StatefulWidget {
   BoardReadPage({Key? key, required this.boardNo}) : super(key: key);
 
@@ -22,6 +24,7 @@ class _BoardReadPageState extends State<BoardReadPage> {
   var imageNameList;
   var boardData;
   var list = [];
+  List<BoardImage> imageNumberList = [];
   PageController _pageController = PageController();
 
   late RequestBoard board;
@@ -40,6 +43,7 @@ class _BoardReadPageState extends State<BoardReadPage> {
       for (int i = 0; i < value.length; i++) {
         setState(() {
           list.add(value[i].imageName);
+          imageNumberList.add(value[i]);
           if (value[i].imageName != null) {
             checkImageExistence = true;
             print(checkImageExistence);
@@ -84,10 +88,15 @@ class _BoardReadPageState extends State<BoardReadPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(
-          "Look Style",
-          style:
-          TextStyle(color: Colors.black, fontFamily: 'bazzi', fontSize: 25),
+        title: GestureDetector(
+          onTap: () {
+            Get.offAll(MainPage());
+          },
+          child: Text(
+            "Look Style",
+            style:
+            TextStyle(color: Colors.black, fontFamily: 'bazzi', fontSize: 25),
+          ),
         ),
         iconTheme: IconThemeData(color: Colors.black),
         centerTitle: true,
@@ -119,7 +128,37 @@ class _BoardReadPageState extends State<BoardReadPage> {
                       child: Text('수정')),
                   if(checkWriterCurrentBoard()!) TextButton(
                       onPressed: () {
-
+                        BoardSpringApi().deleteBoard(board.boardNo);
+                        showDialog(
+                            context: context,
+                            barrierDismissible: false,
+                            builder: (context) {
+                              return AlertDialog(
+                                title: Center(child: Text('Look Style',
+                                  style: TextStyle(fontFamily: 'bazzi'),)),
+                                shape: RoundedRectangleBorder(
+                                    borderRadius: BorderRadius
+                                        .circular(20)),
+                                content: Container(
+                                  width: 300,
+                                  height: 100,
+                                  child: Text(
+                                    "게시물이 성공적으로 삭제되었습니다.",
+                                    textAlign: TextAlign.center,
+                                  ),
+                                ),
+                                actions: [
+                                  TextButton(
+                                    onPressed: () {
+                                      Get.offAll(MainPage());
+                                    },
+                                    child: Text(
+                                      "확인", style: TextStyle(color: Colors.black),),
+                                  ),
+                                ],
+                              );
+                            }
+                        );
                       },
                       child: Text('삭제'))
                 ],

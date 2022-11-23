@@ -196,7 +196,21 @@ class BoardSpringApi {
       throw Exception('error');
     }
   }
+
+  Future<void> deleteBoard(int boardNo) async {
+
+    var response = await http.delete(
+        Uri.http(httpUri, '/board/delete/$boardNo'),
+        headers: {"Context-Type" : "application/json"},
+    );
+
+    if (response.statusCode == 200) {
+      debugPrint("통신 확인");
+    }
+  }
 }
+
+
 
 class Board {
   String title;
