@@ -58,6 +58,9 @@
           </div>
         </tr>
       </table>
+      <div>
+        <buy-baram-comment-register-form @submit="onSubmitRegister"/>
+      </div>
     </div>
   </v-container>
 </template>
@@ -68,10 +71,12 @@ import BuyBaramRead from "@/components/boards/buyBoard/baram/BuyBaramRead";
 import TopMenuForm from "@/components/topMenubar/TopMenuForm";
 import ToolbarForm from "@/components/toolbar/ToolbarForm";
 import BuyBaramCommentList from "@/components/boards/buyBoard/baram/comment/BuyBaramCommentList";
+import BuyBaramCommentRegisterForm from "@/components/boards/buyBoard/baram/comment/BuyBaramCommentRegisterForm";
 
 export default {
   name: "BuyBaramReadView",
   components: {
+    BuyBaramCommentRegisterForm,
     BuyBaramCommentList,
     BuyBaramRead,
     TopMenuForm,
@@ -103,8 +108,17 @@ export default {
     ...mapActions([
       'requestBuyBaramFromSpring',
       'requestDeleteBuyBaramToSpring',
-      'requestBuyBaramCommentListFromSpring'
+      'requestBuyBaramCommentListFromSpring',
+      'requestBuyBaramCommentRegisterToSpring'
     ]),
+    async onSubmitRegister( payload ) {
+      const { comment, commentWriter } = payload
+      const buyBaramNo = this.buyBaramNo
+      await this.requestBuyBaramCommentRegisterToSpring( {buyBaramNo, comment, commentWriter} )
+      await this.$router.push({
+        name: 'BuyBaramReadView', params: { buyBaramNo: this.buyBaramNo }
+      })
+    },
     async onDelete () {
       await this.requestDeleteBuyBaramToSpring(this.buyBaramNo);
       await this.$router.push({ name: 'BuyBaramListView' })

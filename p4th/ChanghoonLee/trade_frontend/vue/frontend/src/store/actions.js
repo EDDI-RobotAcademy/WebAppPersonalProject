@@ -106,4 +106,16 @@ export default {
                 commit(REQUEST_BUY_BARAM_COMMENT_LIST_FROM_SPRING, res.data)
             })
     },
+
+    //eslint-disable-next-line no-empty-pattern
+    requestBuyBaramCommentRegisterToSpring ({ }, payload) {
+        console.log('requestBuyBaramCommentRegisterToSpring()')
+
+        const { comment, commentWriter } = payload
+        return axios.post('http://localhost:7777/trade-item/boards/buy/baram/comment/register',
+            { comment, commentWriter })
+            .then(() => {
+                alert('댓글 등록 성공')
+            })
+    },
 }
