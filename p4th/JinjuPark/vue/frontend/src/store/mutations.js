@@ -5,7 +5,7 @@ import {
     IS_AUTHENTICATED, USER_LOGIN_CHECK,
     THUMB_STATUS_COUNT,
     REQUEST_COMMENT_LIST_FROM_SPRING,
-    VIDEOS,
+    VIDEOS, MY_SAVE_VIDEOS_LIST,
 } from './mutation-types'
 
 export default {
@@ -41,6 +41,10 @@ export default {
 
     [VIDEOS] (state, passingData) {
         state.videos = passingData
+    },
+
+    [MY_SAVE_VIDEOS_LIST] (state, passingData) {
+        state.mySaveVideos = passingData
     },
 
 }

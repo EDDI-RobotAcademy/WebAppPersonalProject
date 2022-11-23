@@ -4,7 +4,7 @@ import {
     REQUEST_LOGIN_USER_FROM_SPRING,
    THUMB_STATUS_COUNT,
     REQUEST_COMMENT_LIST_FROM_SPRING,
-    VIDEOS,
+    VIDEOS, MY_SAVE_VIDEOS_LIST,
 } from './mutation-types'
 
 import axios from 'axios'
@@ -141,4 +141,14 @@ export default {
             })
     },
 
+    requestMySaveVideoListFromSpring({commit}, payload) {
+
+            console.log("마이 세이브 비디오 멤버아이디 :"+payload)
+            const memberId = payload
+            return axios.post('http://localhost:7777/hometwang/videos/mysave/list', {memberId})
+                .then((res) => {
+                    commit(MY_SAVE_VIDEOS_LIST, res.data)
+                    console.log("마이 세이브 비디오 조회 리턴완료: " + res.data)
+                })
+        },
 }

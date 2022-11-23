@@ -11,4 +11,6 @@ export default {
     diaryComment:[],
 
     videos:{},
+    mySaveVideos:{},
+
 }

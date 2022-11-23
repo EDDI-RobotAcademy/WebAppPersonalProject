@@ -10,6 +10,7 @@ import FreeBoardListView from "@/views/boards/FreeBoardListView";
 import QNABoardListView from "@/views/boards/QNABoardListView";
 import AllBoardListView from "@/views/boards/AllBoardListView";
 import HomeMainView from "@/views/video/HomeMainView";
+import MySaveVideoView from "@/views/mypage/MySaveVideoView";
 
 Vue.use(VueRouter)
 
@@ -60,6 +61,12 @@ routes = [
     path: '/diary-board-register',
     name: 'DiaryBoardRegisterView',
     component: DiaryBoardRegisterView
+  },
+
+  {
+    path: '/my-save-video',
+    name: 'MySaveVideoView',
+    component: MySaveVideoView
   },
 
   {
