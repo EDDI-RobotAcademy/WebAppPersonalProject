@@ -6,5 +6,6 @@ export default {
     communityMainBoardList: [],
     communityBoard: {},
     searchResultBoard: [],
+    memberWriteBoardList: [],
 
 }

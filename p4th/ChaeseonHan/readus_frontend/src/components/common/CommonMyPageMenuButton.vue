@@ -14,9 +14,8 @@ export default {
   data() {
     return {
       menuList: [
-        { text: "회원정보", name: "MyPageView", route: "my-page"},
-        { text: "작성글 보기"},
-        { text: "작성댓글 보기"},
+        { text: "회원정보", name: "MyPageView", route: "/my-page"},
+        { text: "작성글 보기", name: "MyBoardListView", route: "/my-board"},
       ]
     }
   }

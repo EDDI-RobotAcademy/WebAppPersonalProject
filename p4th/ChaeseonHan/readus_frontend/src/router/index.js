@@ -12,6 +12,7 @@ import ReviewCategoryView from "@/views/routerView/community/CommunitiCategory/R
 import BoardModifyView from "@/views/routerView/community/Board/BoardModifyView";
 import CommunitySearchView from "@/views/routerView/community/CommunitySearchView";
 import MyPageView from "@/views/routerView/account/MyPageView";
+import MyBoardListView from "@/views/routerView/account/MyBoardListView";
 
 Vue.use(VueRouter)
 
@@ -40,6 +41,11 @@ const routes = [
     path: '/my-page',
     name: 'MyPageView',
     component: MyPageView,
+  },
+  {
+    path: '/my-board',
+    name: 'MyBoardListView',
+    component: MyBoardListView,
   },
 
 

@@ -2,7 +2,7 @@ import {
     REQUEST_BESTSELLER_LIST, REQUEST_BOARD_TO_READ,
     REQUEST_COMMUNITY_MAIN_BOARD_LIST,
     REQUEST_EMAIL_PASS_CHECK,
-    REQUEST_LOGGED_IN_USER_PROFILE, REQUEST_SEARCH_BOARD_WITH_TITLE_AND_KEYWORD
+    REQUEST_LOGGED_IN_USER_PROFILE, REQUEST_MEMBER_WRITE_BOARD_LIST, REQUEST_SEARCH_BOARD_WITH_TITLE_AND_KEYWORD
 } from './mutation-types'
 
 import axios from 'axios'
@@ -67,7 +67,7 @@ export default {
     requestBestSellerListToAladin ( { commit } ) {
         console.log("requestBestSellerListToAladin")
 
-        return axios.get('https://cors-anywhere.herokuapp.com/https://www.aladin.co.kr/ttb/api/ItemList.aspx?ttbkey=[ttb키]&QueryType=Bestseller&Cover=MidBig&MaxResults=7&start=1&SearchTarget=Book&output=js&Version=20131101')
+        return axios.get('https://cors-anywhere.herokuapp.com/https://www.aladin.co.kr/ttb/api/ItemList.aspx?ttbkey=ttbmdmodina341559001&QueryType=Bestseller&Cover=MidBig&MaxResults=7&start=1&SearchTarget=Book&output=js&Version=20131101')
             .then((res) => {
                 commit(REQUEST_BESTSELLER_LIST, res.data.item)
             }).catch((error) => {
@@ -293,7 +293,18 @@ export default {
             }).catch((error) => {
                 console.log(error.message)
             })
-    }
+    },
+
+    requestMemberWriteBoardList( { commit }, memberId ) {
+        console.log("requestMemberWriteBoardList()")
+
+        return axios.post(`http://localhost:7776/board/list/${memberId}`)
+            .then((res) => {
+                commit(REQUEST_MEMBER_WRITE_BOARD_LIST, res.data)
+            }).catch((error) => {
+                console.log(error.message)
+            })
+    },
 
 
 
