@@ -19,6 +19,8 @@ public class MemberAccountSetServiceImpl implements MemberAccountSetService {
 
     @Autowired
     private MemberRepository memberRepository;
+    @Autowired
+    private BucketBoardRepository bucketBoardRepository;
 
     @Autowired
     private RedisService redisService;
@@ -30,6 +32,15 @@ public class MemberAccountSetServiceImpl implements MemberAccountSetService {
 
         Optional<MemberInfo> findMember = memberRepository.findById(userId);
 
+        MemberInfo memberInfo = findMember.get();
+        String currentUserNickname = memberInfo.getNickName();
+        Optional<BucketBoard> maybeBucket = bucketBoardRepository.findByBucketListWriter(currentUserNickname);
+
+        BucketBoard bucketBoard = maybeBucket.get();
+        bucketBoard.setWriter(nicknameRequest.getNickName());
+
+        bucketBoardRepository.save(bucketBoard);
+
         findMember.ifPresent(selectUser->{
             MemberInfo userInfo = findMember.get();
             selectUser.setEmail(userInfo.getEmail());
@@ -37,6 +48,8 @@ public class MemberAccountSetServiceImpl implements MemberAccountSetService {
 
             memberRepository.save(selectUser);
         });
+
+
     }
 
     @Override
