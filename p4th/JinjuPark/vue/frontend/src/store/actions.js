@@ -3,22 +3,24 @@ import {
     REQUEST_DIARY_BOARD_FROM_SPRING,
     REQUEST_LOGIN_USER_FROM_SPRING,
    THUMB_STATUS_COUNT,
-    REQUEST_COMMENT_LIST_FROM_SPRING
+    REQUEST_COMMENT_LIST_FROM_SPRING,
 } from './mutation-types'
 
 import axios from 'axios'
 
 export default {
 
-    requestDiaryBoardListFromSpring ({ commit }, keyword) {
-        console.log('requestDiaryBoardListFromSpring()')
-        let url = 'http://localhost:7777/hometwang/boards/diary/list'
+    requestDiaryBoardListFromSpring ({ commit }, payload) {
+        // pageNo = 0(전체), 1(운동일기), 2(자유게시판), 3(질문게시판)
+        const pageNo = payload.pageNo
+        const keyword = payload.keyword
+        console.log('게시판 리스트 조회 페이지No: ' +pageNo +"키워드: "+ keyword)
+        let url = `http://localhost:7777/hometwang/boards/diary/list/${pageNo}`
         if(keyword != undefined){
             url += '?keyword='+encodeURIComponent(keyword)
         }
         return axios.get(url)
             .then((res) => {
-                //if payload = category 보내서 가져올때 diary는 diaryBoards에  이런식?
                 commit(REQUEST_DIARY_BOARD_LIST_FROM_SPRING, res.data)
                 console.log('다이어리 리스트 조회')
             })
@@ -58,10 +60,10 @@ export default {
     requestDiaryBoardModifyToSpring ({ }, payload) {
         console.log('다이어리 게시글 수정()')
 
-        const {  boardNo, title, writer, category, authority, regDate, views, likes, noLikes, content } = payload
+        const {  boardNo, title, content } = payload
 
         return axios.put(`http://localhost:7777/hometwang/boards/diary/${boardNo}`,
-            {  title, writer, category, authority, regDate, views, likes, noLikes, content })
+            {  boardNo, title, content })
             .then(() => {
                 alert('게시글 수정을 완료했습니다.')
             })
@@ -96,6 +98,8 @@ export default {
                 alert('댓글이 등록되었습니다.')
             })
     },
+
+    //eslint-disable-next-line no-empty-pattern
     requestCommentListFromSpring ({ commit }, boardNo) {
         console.log('다이어리 댓글 읽기()')
 
@@ -108,7 +112,7 @@ export default {
     // eslint-disable-next-line no-empty-pattern
     requestModifyDiaryBoardCommentToSpring ({ }, payload) {
         return axios.put(`http://localhost:7777/hometwang/boards/diary/comment/${payload.commentId}`,
-            {id: payload.commentId, boardNo: payload.boardNo,
+            {id: payload.commentId, boardNo: payload.boardNo, writerId: payload.writerId,
                 writerNickname: payload.writerNickname, parentsCommentId: payload.parentsCommentId , content: payload.updateContent})
             .then(() => {
                 alert('댓글이 수정되었습니다')
@@ -126,7 +130,5 @@ export default {
                 alert('댓글을 삭제했습니다.')
             })
     },
-
-
 
 }
