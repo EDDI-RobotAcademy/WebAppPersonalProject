@@ -1,5 +1,6 @@
 import 'package:comment_box/comment/comment.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:lol_esports_korea_app/components/my_team/team_comment_data.dart';
 
 import '../../../api/comment/spring_comment_api.dart';
@@ -19,6 +20,8 @@ class T1CommentTestPage extends StatefulWidget {
 }
 
 class _T1CommentTestPage extends State<T1CommentTestPage> {
+  static const _storage = FlutterSecureStorage();
+  dynamic nickname = '';
   final formKey = GlobalKey<FormState>();
   final TextEditingController commentController = TextEditingController();
   final RefreshController _refreshController =
@@ -26,14 +29,15 @@ class _T1CommentTestPage extends State<T1CommentTestPage> {
   var now = DateTime.now();
 
   commentRegisterAction() async {
-    CommentRequest commentRequest = CommentRequest('T1', 'T1 Fan',
+    CommentRequest commentRequest = CommentRequest('T1', nickname,
         'assets/images/T1.png', commentController.text, now.toString());
 
     await SpringCommentApi().registerApi(commentRequest);
 
     if (SpringCommentApi.commentRegisterResponse.statusCode == 200) {
-      //댓글 새로고침
-      getCommentList(myTeam);
+      setState(() {
+        getCommentList(myTeam);
+      });
       debugPrint('댓글 등록 성공');
     } else {
       _commentFailShowDialog();
@@ -45,6 +49,9 @@ class _T1CommentTestPage extends State<T1CommentTestPage> {
   void initState() {
     super.initState();
     getCommentList(myTeam);
+    WidgetsBinding.instance?.addPostFrameCallback((_) {
+      checkUserState();
+    });
   }
 
   Future getCommentList(String request) async {
@@ -61,6 +68,18 @@ class _T1CommentTestPage extends State<T1CommentTestPage> {
       }
       debugPrint("commentLists : " + commentLists[0].contents);
     });
+  }
+
+  /// 회원 닉네임 불러오기
+  Future<void> checkUserState() async {
+    try {
+      nickname = await _storage.read(key: 'nickname');
+      setState(() {
+        nickname = nickname;
+      });
+    } catch (e) {
+      debugPrint('e');
+    }
   }
 
   Widget commentChild(commentLists) {
@@ -120,7 +139,6 @@ class _T1CommentTestPage extends State<T1CommentTestPage> {
               sendButtonMethod: () {
                 if (formKey.currentState!.validate()) {
                   commentRegisterAction();
-                  print(commentController.text);
                   _refreshController.refreshCompleted();
                   commentController.clear();
                   FocusScope.of(context).unfocus();
@@ -157,8 +175,13 @@ class _T1CommentTestPage extends State<T1CommentTestPage> {
   }
 
   void _onLoading() async {
-    await Future.delayed(Duration(milliseconds: 1000));
+    await Future.delayed(const Duration(milliseconds: 1000));
     debugPrint("onLoading");
+    if (mounted) {
+      setState(() {
+        commentChild;
+      });
+    }
     _refreshController.loadComplete();
   }
 }
