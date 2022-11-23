@@ -8,4 +8,6 @@ export default {
     buyBaramBoard: {},
     buyBaramBoards: [],
 
+    buyBaramComment: {},
+    buyBaramComments: [],
 }

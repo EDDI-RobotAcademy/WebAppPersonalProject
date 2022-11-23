@@ -1,6 +1,6 @@
 package com.example.demo.entity.boards.buyBoard.baram;
 
-import lombok.Data;
+import lombok.*;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
@@ -9,8 +9,12 @@ import java.util.Date;
 
 @Data
 @Entity
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
 public class BuyBaramBoard {
     @Id
+    @Getter
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long buyBaramNo;
 
@@ -28,4 +32,13 @@ public class BuyBaramBoard {
 
     @UpdateTimestamp
     private Date updDate;
+
+//    @OneToMany(mappedBy = "buyBaramBoard")
+//    private List<BuyBaramComment> comments = new ArrayList<>();
+
+//    public void addComments(BuyBaramComment buyBaramComment) {
+//        this.comments.add(buyBaramComment);
+//        buyBaramComment.setBuyBaramBoard(this);
+//    }
+
 }

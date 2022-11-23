@@ -1,4 +1,5 @@
 import {
+    REQUEST_BUY_BARAM_COMMENT_LIST_FROM_SPRING,
     REQUEST_BUY_BARAM_FROM_SPRING,
     REQUEST_BUY_BARAM_LIST_FROM_SPRING,
     REQUEST_CHECK_DUPLICATE_EMAIL_TO_SPRING
@@ -95,4 +96,26 @@ export default {
             })
     },
 
+
+
+    requestBuyBaramCommentListFromSpring ({ commit }, buyBaramNo) {
+        console.log('requestBuyBaramCommentListFromSpring()')
+
+        return axios.get(`http://localhost:7777/trade-item/boards/buy/baram/comment/${buyBaramNo}`)
+            .then((res) => {
+                commit(REQUEST_BUY_BARAM_COMMENT_LIST_FROM_SPRING, res.data)
+            })
+    },
+
+    //eslint-disable-next-line no-empty-pattern
+    requestBuyBaramCommentRegisterToSpring ({ }, payload) {
+        console.log('requestBuyBaramCommentRegisterToSpring()')
+
+        const { comment, commentWriter } = payload
+        return axios.post('http://localhost:7777/trade-item/boards/buy/baram/comment/register',
+            { comment, commentWriter })
+            .then(() => {
+                alert('댓글 등록 성공')
+            })
+    },
 }
