@@ -8,4 +8,5 @@ public interface VideoService {
 
     public List<Video> videoList();
 
+    public List<String> myVideoRead(Long memberId);
 }

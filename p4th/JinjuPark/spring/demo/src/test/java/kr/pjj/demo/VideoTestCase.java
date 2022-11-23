@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
 import java.util.List;
+import java.util.Optional;
 
 @SpringBootTest
 public class VideoTestCase {
@@ -57,4 +58,16 @@ public class VideoTestCase {
         System.out.println(videoList);
     }
 
+    @Test
+    void myVideoRead(){
+        Long memberId = 1L;
+        List<String> myVideoList = saveVideoRepository.findMemberSaveVideoByMemberId(memberId);
+
+        if (myVideoList.equals(Optional.empty())) {
+            System.out.println("저장한 비디오 목록이 없어요");
+        }
+
+        System.out.println("나의 비디오 리스트: "+ myVideoList);
+
+    }
 }

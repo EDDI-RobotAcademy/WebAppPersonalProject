@@ -1,5 +1,6 @@
 package kr.pjj.demo.controller.video;
 
+import kr.pjj.demo.controller.video.request.MyVideoListRequest;
 import kr.pjj.demo.entity.video.Video;
 import kr.pjj.demo.service.video.VideoService;
 import lombok.extern.slf4j.Slf4j;
@@ -23,6 +24,14 @@ public class VideoController {
         log.info("비디오 리스트");
 
         return videoService.videoList();
+    }
+
+    @PostMapping("/mysave/list")
+    public List<String> myVideoRead(@RequestBody MyVideoListRequest myVideoListRequest){
+
+        Long memberId = myVideoListRequest.getMemberId();
+        log.info("마이비디오 조회하는 멤버아이디: "+memberId);
+        return videoService.myVideoRead(memberId);
     }
 
 }
