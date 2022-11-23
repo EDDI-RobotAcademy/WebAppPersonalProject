@@ -88,7 +88,7 @@ public class BucketServiceImpl implements BucketService {
 
         int page = (currentPage - 1);
 
-        Page<BucketBoard> bucketBoardPage = bucketBoardRepository.findAll(PageRequest.of(page, 12));
+        Page<BucketBoard> bucketBoardPage = bucketBoardRepository.findAll(PageRequest.of(page, 12,Sort.by("bucketId").descending()));
         List<BucketBoard> bucketBoards = bucketBoardPage.getContent();
 
         return bucketBoards;
@@ -137,7 +137,7 @@ public class BucketServiceImpl implements BucketService {
 
         int pageValue = (currentPage - 1);
 
-        Page<BucketBoard> bucketListByCategory = bucketBoardRepository.findByBucketCategory(bucketCategory, PageRequest.of(pageValue, 12));
+        Page<BucketBoard> bucketListByCategory = bucketBoardRepository.findByBucketCategory(bucketCategory, PageRequest.of(pageValue, 12,Sort.by("bucketId").descending()));
         List<BucketBoard> bucketBoardList = bucketListByCategory.getContent();
         return bucketBoardList;
     }
@@ -148,7 +148,7 @@ public class BucketServiceImpl implements BucketService {
 
         int pageValue = (currentPage - 1);
 
-        Page<BucketBoard> bucketBoardByUserNickname = bucketBoardRepository.findByBucketListWriter(userNickname, PageRequest.of(pageValue, 12));
+        Page<BucketBoard> bucketBoardByUserNickname = bucketBoardRepository.findByBucketListWriter(userNickname, PageRequest.of(pageValue, 12, Sort.by("bucketId").descending()));
         List<BucketBoard> myBucketBoardList = bucketBoardByUserNickname.getContent();
 
         return myBucketBoardList;
