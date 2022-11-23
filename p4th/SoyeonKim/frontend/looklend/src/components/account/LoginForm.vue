@@ -8,16 +8,16 @@
               <div class="text-h4 font-weight-black mb-10">로그인</div>
 
               <div class="d-flex">
-                <v-text-field v-model="email" label="이메일" @change="emailValidation" color="teal"
+                <v-text-field v-model="email" label="이메일" @change="emailValidation" color="grey"
                               :rules="email_rule" clearable prepend-icon="mdi-account-outline"/>
               </div>
 
               <div class="d-flex">
-                <v-text-field v-model="password" label="비밀번호" type="password" color="teal"
+                <v-text-field v-model="password" label="비밀번호" type="password" color="grey"
                               :rules="password_rule" clearable prepend-icon="mdi-lock-outline"/>
               </div>
 
-              <v-btn type="submit" block x-large rounded color="teal lighten-2"
+              <v-btn type="submit" block x-large rounded color="grey lighten-2"
                      class="mt-6"  :disabled="false">
                 로그인
               </v-btn>

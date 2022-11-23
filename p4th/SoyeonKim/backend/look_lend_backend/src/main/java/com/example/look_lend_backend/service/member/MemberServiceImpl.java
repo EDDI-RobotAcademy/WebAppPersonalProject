@@ -12,6 +12,8 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 
@@ -88,4 +90,38 @@ public class MemberServiceImpl implements MemberService{
 
         throw new RuntimeException("가입된 사용자가 아닙니다!");
     }
+
+    @Override
+    public List<Member> loginUserInfo(String loginUserToken) {
+        String userToken = loginUserToken.substring(3, 39);
+
+        log.info("로그인 유저토큰 : " + loginUserToken);
+        log.info("로그인 유저토큰 추출 : " + userToken);
+
+        Long loginUserId = redisService.getValueMyKey(userToken);
+        log.info("로그인 유저아이디 번호: " + redisService.getValueMyKey(userToken));
+
+        Optional<Member> maybeMember = memberRepository.findById(loginUserId);
+        List<Member> member = new ArrayList<>();
+        member.add(maybeMember.get());
+
+        log.info("로그인 멤버 정보: " + member.toString());
+        return member;
+    }
+
+    @Override
+    public String loginUserNickname(String replacedUserValue) {
+
+        Long loginUserId = redisService.getValueMyKey(replacedUserValue);
+
+        Optional<Member> maybeMemeberId = memberRepository.findById(loginUserId);
+
+        if (maybeMemeberId.isPresent()) {
+            Member memberNickname = maybeMemeberId.get();
+            return memberNickname.getNickname();
+        }
+
+        return null;
+    }
 }
+
