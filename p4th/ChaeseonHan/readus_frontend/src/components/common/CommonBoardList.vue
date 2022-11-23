@@ -31,6 +31,7 @@
             <router-link class="a" :to="{ name: 'BoardReadView',
                                 params: { boardNo : board.boardNo.toString() }}">
               {{ board.title }}
+              ({{ board.comments.length }})
             </router-link>
           </td>
 

@@ -23,4 +23,6 @@ public interface BoardService {
     Boolean delete(Long boardNo);
 
     List<CommunityBoard> categoryBoardList(String category);
+
+    List<CommunityBoard> memberBoardList(Long memberId);
 }

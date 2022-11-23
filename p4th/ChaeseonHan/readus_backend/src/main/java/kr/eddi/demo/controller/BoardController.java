@@ -7,9 +7,12 @@ import kr.eddi.demo.entity.CommunityBoard;
 import kr.eddi.demo.service.BoardServiceImpl;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.web.bind.annotation.*;
-
 import java.util.List;
+
+
 
 @Slf4j
 @RestController
@@ -34,10 +37,11 @@ public class BoardController {
 
 
     // TODO: 2022.11.10 페이징으로 게시판 리스트 구현하려는데 감이 안잡힌다
-    @GetMapping("/list-view")
-    public String readAllPost() {
+    @GetMapping("/list")
+    public Page<List<CommunityBoard>> readAllPost(Pageable pageable) {
         return null;
     }
+
 
     @GetMapping("/read/{boardNo}")
     public CommunityBoard read(@PathVariable("boardNo") Long boardNo) {
@@ -58,6 +62,12 @@ public class BoardController {
     @GetMapping("/category/{category}")
     public List<CommunityBoard> readCategoryList(@PathVariable("category") String category) {
         return service.categoryBoardList(category);
+    }
+
+
+    @PostMapping("/list/{memberId}")
+    public List<CommunityBoard> readMembersBoard(@PathVariable("memberId") Long memberId) {
+        return service.memberBoardList(memberId);
     }
 
 }

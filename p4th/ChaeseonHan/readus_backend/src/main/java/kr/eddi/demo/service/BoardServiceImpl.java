@@ -147,4 +147,18 @@ public class BoardServiceImpl implements BoardService{
         return boardRepository.findByCategoryContainingIgnoreCase(category, Sort.by(Sort.Direction.DESC, "boardNo"));
     }
 
+    @Override
+    @Transactional
+    public List<CommunityBoard> memberBoardList(Long memberId) {
+        Optional<ReadUsMember> maybeMember = memberRepository.findByIdWithBoards(memberId);
+
+        if(maybeMember.isPresent()) {
+            ReadUsMember member = maybeMember.get();
+            List<CommunityBoard> memberBoardList = member.getBoards();
+            return memberBoardList;
+        } else {
+            return null;
+        }
+    }
+
 }

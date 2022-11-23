@@ -10,4 +10,7 @@ public interface MemberRepository extends JpaRepository<ReadUsMember, Long> {
 
     @Query("select m from ReadUsMember m join fetch m.authentications where m.email = :email")
     Optional<ReadUsMember> findByEmail(String email);
+
+    @Query("select m from ReadUsMember m join fetch m.boards where m.id = :id")
+    Optional<ReadUsMember> findByIdWithBoards(Long id);
 }
