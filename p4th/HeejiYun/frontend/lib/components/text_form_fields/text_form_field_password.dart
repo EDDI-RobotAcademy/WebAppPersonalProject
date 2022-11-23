@@ -7,7 +7,6 @@ import '../../utility/validate.dart';
 class TextFormFieldPassword extends StatefulWidget {
   const TextFormFieldPassword({Key? key, required this.controller}) : super(key: key);
   final TextEditingController controller;
-  static FocusNode passwordFocus = FocusNode();
 
   @override
   State<TextFormFieldPassword> createState() => _TextFormFieldPasswordState();
@@ -24,7 +23,6 @@ class _TextFormFieldPasswordState extends State<TextFormFieldPassword> {
         const SizedBox(height: small_gap,),
         TextFormField(
           controller: widget.controller,
-          focusNode: TextFormFieldPassword.passwordFocus,
           obscureText: true,
           validator: (value) => CheckValidate().validatePassword(value!),
           autovalidateMode: AutovalidateMode.onUserInteraction,

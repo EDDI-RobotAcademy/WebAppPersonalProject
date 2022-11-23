@@ -1,6 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:frontend/components/sign_up_form.dart';
+import 'package:frontend/components/forms/sign_up_form.dart';
 
 import '../../utility/size.dart';
 
@@ -14,6 +14,12 @@ class TextFormFieldPasswordCheck extends StatefulWidget {
 class _TextFormFieldPasswordCheckState extends State<TextFormFieldPasswordCheck> {
 
   FocusNode _passwordCheckFocus = FocusNode();
+
+  @override
+  void dispose() {
+    _passwordCheckFocus.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
