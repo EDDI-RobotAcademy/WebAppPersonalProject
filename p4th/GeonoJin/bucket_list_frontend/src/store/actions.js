@@ -174,9 +174,9 @@ export default {
     requestMyBucketListToSpring({commit}, payload) {
         console.log("requestMyBucketListToSpring")
 
-        const userNickname = payload
+        const {userNickname, pageValue} = payload
 
-        axios.post(`http://localhost:7777/bucket/${userNickname}`)
+        axios.post("http://localhost:7777/bucket/myBucket",{userNickname, pageValue})
             .then((res) => {
                 commit(REQUEST_MY_BUCKET_LIST_TO_SPRING, res.data)
             });

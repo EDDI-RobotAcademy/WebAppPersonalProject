@@ -1,6 +1,6 @@
 <template>
   <div>
-    <my-bucket-list-form :buckets="bucketListByNickname"/>
+    <my-bucket-list-form :buckets="bucketListByNickname" :currentUserNickname="userNickname"/>
   </div>
 </template>
 
@@ -26,13 +26,20 @@ export default {
       required: true
     }
   },
+  data() {
+    return{
+      pageValue: 1
+    }
+  },
   methods:{
     ...mapActions([
         'requestMyBucketListToSpring'
     ])
   },
   async mounted() {
-    await this.requestMyBucketListToSpring(this.userNickname)
+    const pageValue = this.pageValue
+    const userNickname = this.userNickname
+    await this.requestMyBucketListToSpring({userNickname, pageValue})
   }
 }
 </script>
