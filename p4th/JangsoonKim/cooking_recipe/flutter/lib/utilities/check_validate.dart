@@ -49,6 +49,18 @@ class CheckValidate {
     }
   }
 
+  String? validateComment(FocusNode focusNode, String value) {
+    if (value.isEmpty) {
+      focusNode.requestFocus();
+      return '댓글을 입력해주세요.';
+    } else if (!value.isValidTitle()) {
+      focusNode.requestFocus();
+      return '댓글은 3자 이상 40자 이하로 입력 가능합니다.';
+    } else {
+      return null;
+    }
+  }
+
   String? validateContent(FocusNode focusNode, String value) {
     if (value.isEmpty) {
       focusNode.requestFocus();
@@ -57,6 +69,7 @@ class CheckValidate {
       return null;
     }
   }
+
 }
 
 extension InputValidate on String {
@@ -79,6 +92,10 @@ extension InputValidate on String {
 
   bool isValidTitle() {
     final nickNameRegExp = RegExp(r"^[a-zA-Z0-9ㄱ-ㅎㅏ-ㅣ가-힣-!?.@#\$&*~\s]{3,33}$");
+    return nickNameRegExp.hasMatch(this);
+  }
+  bool isValidComment() {
+    final nickNameRegExp = RegExp(r"^[a-zA-Z0-9ㄱ-ㅎㅏ-ㅣ가-힣-!?.@#\$&*~\s+]{0,40}$");
     return nickNameRegExp.hasMatch(this);
   }
 }
