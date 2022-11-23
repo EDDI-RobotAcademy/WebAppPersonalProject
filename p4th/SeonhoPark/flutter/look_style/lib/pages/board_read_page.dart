@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:get/get.dart';
+import 'package:intl/intl.dart';
+import 'package:look_style/pages/board_modify_page.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 import 'package:look_style/api/board_spring_api.dart';
 
@@ -22,11 +24,11 @@ class _BoardReadPageState extends State<BoardReadPage> {
   var list = [];
   PageController _pageController = PageController();
 
-  RequestBoard? board;
+  late RequestBoard board;
   bool checkImageExistence = false;
 
-  void getBoard() {
-    boardData.then((value) {
+  void getBoard() async {
+    await boardData.then((value) {
       setState(() {
         board = value;
       });
@@ -53,58 +55,17 @@ class _BoardReadPageState extends State<BoardReadPage> {
   }
 
   bool? checkWriterCurrentBoard() {
-    if(userNickname == board?.writer) {
+    if(userNickname == board.writer) {
       return true;
     } else {
       return false;
     }
   }
 
-  Widget MyBoard() {
-    return SingleChildScrollView(
-      child: Column(
-        children: [
-          Row(
-            children: [
-              Icon(Icons.account_circle),
-              SizedBox(width: 10),
-              Expanded(child: Text('${board?.writer}')),
-              checkWriterCurrentBoard()! ? TextButton(
-                  onPressed: () {
+  DateTime updateTime() {
+    DateTime time = DateTime.parse(board.updDate);
 
-                  },
-                  child: Text('수정')) : SizedBox(),
-              checkWriterCurrentBoard()! ? TextButton(
-                  onPressed: () {
-
-                  },
-                  child: Text('삭제')) : SizedBox()
-            ],
-          ),
-          Text('${board?.title}'),
-          PageView.builder(
-            controller: _pageController,
-            itemCount: list.length,
-              itemBuilder: (BuildContext context, int index) {
-                return Column(
-                  children: [
-                    Container(
-                      width: MediaQuery.of(context).size.width,
-                      height: 400,
-                      child: Image.asset('assets/${list[index]}', fit: BoxFit.cover,),
-                    ),
-                    SmoothPageIndicator(
-                      controller: _pageController,
-                      count: list.length,
-                    )
-                  ],
-                );
-              }
-          ),
-          Text('${board?.content}')
-        ],
-      ),
-    );
+    return time;
   }
 
   @override
@@ -143,10 +104,17 @@ class _BoardReadPageState extends State<BoardReadPage> {
                 children: [
                   Icon(Icons.account_circle),
                   SizedBox(width: 10),
-                  Expanded(child: Text('${board?.writer}', style: TextStyle(fontSize: 18),)),
+                  Expanded(child: Text('${board.writer}', style: TextStyle(fontSize: 16, ))),
                   if(checkWriterCurrentBoard()!) TextButton(
                       onPressed: () {
-
+                        Get.to(BoardModifyPage(
+                            nickname: board.writer,
+                            boardType: board.boardType,
+                            boardNo: board.boardNo,
+                            boardTitle: board.title,
+                            boardContent: board.content,
+                            regDate: board.regDate,
+                        ));
                       },
                       child: Text('수정')),
                   if(checkWriterCurrentBoard()!) TextButton(
@@ -157,12 +125,11 @@ class _BoardReadPageState extends State<BoardReadPage> {
                 ],
               ),
             ),
-            // Divider(thickness: 0.5, height: 2,),
             Container(
-              padding: EdgeInsets.only(left: 10),
+              padding: EdgeInsets.only(left: 10, top: 10, right: 10, bottom: 10),
               width: MediaQuery.of(context).size.width,
-                child: Text('${board?.title}', style: TextStyle(fontSize: 20))),
-            Divider(thickness: 0.7, height: 20),
+                child: Text('${board.title}', style: TextStyle(fontSize: 14), maxLines: 2, overflow: TextOverflow.ellipsis)
+            ),
             if(checkImageExistence) SizedBox(
               width: MediaQuery.of(context).size.width,
               height: 400,
@@ -205,11 +172,16 @@ class _BoardReadPageState extends State<BoardReadPage> {
                 )
               ],
             ),
-            Divider(thickness: 0.3, height: 20),
+            Divider(thickness: 0.7, height: 20),
+            Container(
+              padding: EdgeInsets.only(left: 10),
+              width: MediaQuery.of(context).size.width,
+                child: Text(DateFormat("yyyy/MM/dd").format(updateTime()), style: TextStyle(fontWeight: FontWeight.bold),)
+            ),
             Container(
                 width: MediaQuery.of(context).size.width,
-                padding: EdgeInsets.fromLTRB(10, 5, 10, 10),
-                child: Text('${board?.content}', maxLines: 5, overflow: TextOverflow.ellipsis,)),
+                padding: EdgeInsets.fromLTRB(10, 10, 10, 10),
+                child: Text('${board.content}', style: TextStyle(fontSize: 13),maxLines: 5, overflow: TextOverflow.ellipsis,)),
             Divider(thickness: 1, height: 10)
           ],
         ),

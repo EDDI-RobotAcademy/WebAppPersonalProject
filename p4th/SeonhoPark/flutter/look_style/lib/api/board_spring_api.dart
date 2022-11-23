@@ -131,6 +131,71 @@ class BoardSpringApi {
 
     return imageList;
   }
+
+  Future<int> boardModify(BoardModifyInfo board, List<XFile> images, List<int> imageNo) async {
+
+    Dio dio = Dio();
+
+    final List<MultipartFile> _files = images.map((img) => MultipartFile.fromFileSync(
+        img.path,
+        contentType: MediaType('image', 'jpg')
+    )).toList();
+
+    FormData _formData = FormData.fromMap({
+      'file': _files,
+      'board' : MultipartFile.fromString(
+        jsonEncode({
+          'title' : board.title,
+          'writer' : board.writer,
+          'content' : board.content,
+          'boardType' : board.boardType,
+          'regDate' : board.regDate
+        }),
+        contentType: MediaType.parse('application/json'),
+      ),
+      'imageNo' : imageNo,
+    });
+
+    var response = await dio.put('http://192.168.0.12:7777/board/modify/${board.boardNo}',
+        data: _formData);
+
+    if (response.statusCode == 200) {
+      debugPrint("통신 성공!");
+      return board.boardNo;
+    } else {
+      debugPrint("통신 실패....");
+      throw Exception('error');
+    }
+  }
+
+  Future<int> boardModifyWithoutImage(BoardModifyInfo board) async {
+
+    Dio dio = Dio();
+
+    FormData _formData = FormData.fromMap({
+      'board' : MultipartFile.fromString(
+        jsonEncode({
+          'title' : board.title,
+          'writer' : board.writer,
+          'content' : board.content,
+          'boardType' : board.boardType,
+          'regDate' : board.regDate
+        }),
+        contentType: MediaType.parse('application/json'),
+      )
+    });
+
+    var response = await dio.put('http://192.168.0.12:7777/board/modify/${board.boardNo}',
+        data: _formData);
+
+    if (response.statusCode == 200) {
+      debugPrint("통신 성공!");
+      return board.boardNo;
+    } else {
+      debugPrint("통신 실패....");
+      throw Exception('error');
+    }
+  }
 }
 
 class Board {
@@ -140,6 +205,17 @@ class Board {
   String boardType;
 
   Board(this.title, this.content, this.writer, this.boardType);
+}
+
+class BoardModifyInfo {
+  int boardNo;
+  String title;
+  String content;
+  String writer;
+  String boardType;
+  String regDate;
+
+  BoardModifyInfo(this.boardNo, this.title, this.content, this.writer, this.boardType, this.regDate);
 }
 
 class RequestBoard {
