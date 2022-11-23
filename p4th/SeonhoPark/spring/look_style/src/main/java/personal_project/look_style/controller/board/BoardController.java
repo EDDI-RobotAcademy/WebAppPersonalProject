@@ -56,4 +56,20 @@ public class BoardController {
 
         return boardService.findBoardImagesOnSpecificBoard(boardNo);
     }
+
+    @PutMapping(value = "/modify/{boardNo}", consumes = {MediaType.MULTIPART_FORM_DATA_VALUE, MediaType.APPLICATION_JSON_VALUE})
+    public void boardModify (@PathVariable("boardNo") Long boardNo,
+                              @RequestPart(value = "board") Board board,
+                              @RequestPart(value = "file",required = false) List<MultipartFile> file,
+                              @RequestParam(value = "imageNo", required = false) Long[] imageNo) {
+        log.info("boardModify()");
+
+        if (file == null && imageNo == null) {
+            board.setBoardNo(boardNo);
+            boardService.modify(board);
+        } else {
+            board.setBoardNo(boardNo);
+            boardService.modify(board, file, imageNo);
+        }
+    }
 }

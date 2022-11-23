@@ -40,8 +40,6 @@ public class BoardServiceImpl implements BoardService{
         board.setContent(request.getContent());
         board.setBoardType(request.getBoardType());
 
-        int i = 0;
-
         for (MultipartFile multipartFile: file) {
             BoardImage boardImage = new BoardImage();
             boardImage.setImageName(multipartFile.getOriginalFilename());
@@ -58,8 +56,6 @@ public class BoardServiceImpl implements BoardService{
             } catch (IOException e) {
                 throw new RuntimeException(e);
             }
-            log.info(String.valueOf(boardImageList.get(i)));
-            i++;
         }
 
         boardRepository.save(board);
@@ -104,8 +100,38 @@ public class BoardServiceImpl implements BoardService{
     }
 
     @Override
-    public void modify(Board board) {
+    public void modify(Board board, List<MultipartFile> file, Long[] imageNo) {
+        List<BoardImage> boardImageList = new ArrayList<>();
 
+        int i = 0;
+
+        for (MultipartFile multipartFile: file) {
+            BoardImage boardImage = new BoardImage();
+            boardImage.setImageNo(imageNo[i]);
+            boardImage.setImageName(multipartFile.getOriginalFilename());
+            boardImage.setBoard(board);
+            boardImageList.add(boardImage);
+            try {
+                FileOutputStream writer = new FileOutputStream(
+                        "../../flutter/look_style/assets/" + multipartFile.getOriginalFilename()
+                );
+                writer.write(multipartFile.getBytes());
+                writer.close();
+            } catch (FileNotFoundException e) {
+                throw new RuntimeException(e);
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
+        }
+        i++;
+
+        boardRepository.save(board);
+        boardImageRepository.saveAll(boardImageList);
+    }
+
+    @Override
+    public void modify(Board board) {
+        boardRepository.save(board);
     }
 
     @Override
