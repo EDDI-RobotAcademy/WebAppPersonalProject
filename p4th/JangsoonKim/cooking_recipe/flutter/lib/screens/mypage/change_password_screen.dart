@@ -9,7 +9,7 @@ class ChangePasswordScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: profileAppbar(),
-      body: ChangePasswordFrom(),
+      body: const ChangePasswordFrom(),
     );
   }
 }

@@ -1,4 +1,6 @@
 import 'package:demo/screens/recipe/recipe_modify_screen.dart';
+import 'package:demo/widgets/recipe/comment_field_form.dart';
+import 'package:demo/widgets/recipe/simple_comment_list_form.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -6,6 +8,8 @@ import 'package:shared_preferences/shared_preferences.dart';
 import '../../app_theme.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 
+import '../../screens/recipe/all_comments_screen.dart';
+import '../../utilities/spring_comment_api.dart';
 import '../../utilities/spring_recipe_api.dart';
 import '../screen_controller.dart';
 
@@ -29,6 +33,8 @@ class _RecipeDetailFormState extends State<RecipeDetailForm> {
   double _rate = 0.0;
   bool tmp = false;
   String nickname = '';
+  List<dynamic>? comments = [];
+  late Future<dynamic> _future;
 
   @override
   void initState() {
@@ -39,6 +45,7 @@ class _RecipeDetailFormState extends State<RecipeDetailForm> {
     super.initState();
     //_like = widget.recipe.like;
     _rate = widget.recipe.rating;
+    _future = getCommentList();
 
     for (var i = 0; i < widget.imageList.length; i++) {
       carouseImages!.add(Image.asset(
@@ -52,6 +59,16 @@ class _RecipeDetailFormState extends State<RecipeDetailForm> {
     var any = await SharedPreferences.getInstance();
     setState(() {
       nickname = any.getString("userNickname") ?? "없다";
+    });
+  }
+
+  Future getCommentList() async {
+    await SpringCommentApi()
+        .commentList(widget.recipe.recipeNo)
+        .then((commentList) {
+      setState(() {
+        comments = commentList;
+      });
     });
   }
 
@@ -236,7 +253,7 @@ class _RecipeDetailFormState extends State<RecipeDetailForm> {
                           height: size.height * 0.03,
                         )
                       ]),
-                      Spacer(
+                      const Spacer(
                         flex: 1,
                       ),
                       Column(
@@ -271,7 +288,8 @@ class _RecipeDetailFormState extends State<RecipeDetailForm> {
                                             print("레시피 삭제 실패");
                                             _showDeleteFailDialog(
                                                 title: "실패",
-                                                content: "레시피 삭제 실패했습니다. 통신상태를 확인해주세요.",
+                                                content:
+                                                    "레시피 삭제 실패했습니다. 통신상태를 확인해주세요.",
                                                 buttonText: "확인");
                                           });
                                         },
@@ -280,7 +298,7 @@ class _RecipeDetailFormState extends State<RecipeDetailForm> {
                                                 TextStyle(color: Colors.grey)))
                                   ],
                                 )
-                              : Text(''),
+                              : const Text(''),
                           Text(
                             widget.recipe.regDate,
                             style: const TextStyle(fontWeight: FontWeight.w600),
@@ -323,8 +341,73 @@ class _RecipeDetailFormState extends State<RecipeDetailForm> {
                       const EdgeInsets.only(left: 25, right: 20, bottom: 15),
                   child: Text(
                     widget.recipe.content,
-                    style: TextStyle(fontSize: 18),
+                    style: const TextStyle(fontSize: 18),
                   ),
+                ),
+                SizedBox(
+                  height: size.height * 0.03,
+                ),
+                Container(
+                  height: 1,
+                  color: Colors.grey.withOpacity(0.3),
+                ),
+                SizedBox(
+                  height: size.height * 0.03,
+                ),
+                Padding(
+                  padding: const EdgeInsets.fromLTRB(25, 5, 0, 5),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    children: <Widget>[
+                      Text(
+                        "댓글 ",
+                        style: TextStyle(fontSize: 20),
+                      ),
+                      Text("${comments!.length}")
+                    ],
+                  ),
+                ),
+                CommentFieldForm(
+                  nickname: nickname,
+                  recipe: widget.recipe,
+                ),
+                SizedBox(
+                  height: size.height * 0.03,
+                ),
+                (comments!.length > 5)?
+                TextButton(onPressed: (){
+                  Get.to(AllCommentsScreen(comments: comments, nickname: nickname, recipe: widget.recipe,));
+                }, child: Text("${comments!.length}개 댓글 전체보기", style: TextStyle(
+                  color: Colors.black,
+                  fontWeight: FontWeight.bold
+                ),))
+                :Text(""),
+                Container(
+                  height: 1,
+                  color: Colors.grey.withOpacity(0.3),
+                ),
+                FutureBuilder(
+                    future: _future,
+                    builder: ((context, snapshot) {
+                      if (snapshot.connectionState == ConnectionState.waiting) {
+                        return const Center(child: CircularProgressIndicator());
+                      } else if (snapshot.connectionState ==
+                          ConnectionState.done) {
+                        if (snapshot.hasError) {
+                          return Center(
+                            child: Text(snapshot.error.toString()),
+                          );
+                        } else {
+                          return SimpleCommentListForm(
+                              recipe: widget.recipe, comments: comments, nickname: nickname,);
+                        }
+                      } else {
+                        return const Text("작성된 댓글이 없습니다.");
+                      }
+                    })),
+                Container(
+                  height: 1,
+                  color: Colors.grey.withOpacity(0.3),
                 ),
               ],
             ),
@@ -333,6 +416,7 @@ class _RecipeDetailFormState extends State<RecipeDetailForm> {
       ),
     );
   }
+
   void _showDeleteFailDialog(
       {String? title, String? content, String? buttonText}) {
     showCupertinoDialog(

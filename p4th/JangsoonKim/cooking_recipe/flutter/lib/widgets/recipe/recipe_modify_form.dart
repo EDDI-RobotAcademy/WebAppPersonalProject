@@ -1,8 +1,6 @@
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:demo/utilities/spring_recipe_api.dart';
 import 'package:demo/widgets/recipe/content_editing_controller.dart';
-import 'package:demo/widgets/recipe/recipe_content_field.dart';
-import 'package:demo/widgets/recipe/recipe_title_field.dart';
 import 'package:demo/widgets/recipe/title_editing_controller.dart';
 import 'package:demo/widgets/screen_controller.dart';
 import 'package:flutter/cupertino.dart';
@@ -118,7 +116,7 @@ class RecipeModifyFormState extends State<RecipeModifyForm> {
                       children: <Widget>[
                         //글 제목 입력
                         Padding(
-                          padding: EdgeInsets.only(left: 10),
+                          padding: const EdgeInsets.only(left: 10),
                           child: TitleEditingController(
                             titleText: widget.recipe.title,
                           ),

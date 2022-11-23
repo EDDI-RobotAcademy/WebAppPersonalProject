@@ -1,5 +1,4 @@
 import 'package:demo/utilities/spring_comment_api.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -39,7 +38,7 @@ class _CommentModifyFormState extends State<CommentModifyForm> {
                   hintText: "댓글을 입력해주세요.",
                   border: InputBorder.none,
                   suffixIcon: IconButton(
-                    icon: Icon(Icons.send, color: Colors.black),
+                    icon: const Icon(Icons.send, color: Colors.black),
                     onPressed: () {
                       if (_formKey.currentState!.validate()) {
                         print(widget.comment.commentNo);

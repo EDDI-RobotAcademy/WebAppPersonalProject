@@ -1,8 +1,10 @@
 package com.example.demo.service.recipe;
 
+import com.example.demo.entity.board.Comment;
 import com.example.demo.entity.board.Image;
 import com.example.demo.entity.board.Recipe;
 import com.example.demo.repository.image.ImageListRepository;
+import com.example.demo.repository.recipe.CommentRepository;
 import com.example.demo.repository.recipe.RecipeRepository;
 import com.example.demo.service.recipe.request.ModifyRequest;
 import com.example.demo.service.recipe.request.RecipeRegisterRequest;
@@ -19,10 +21,15 @@ import java.util.Optional;
 public class RecipeServiceImpl implements RecipeService {
 
     @Autowired
-    RecipeRepository repository;
+    private RecipeRepository repository;
 
     @Autowired
-    ImageListRepository imagesRepository;
+    private ImageListRepository imagesRepository;
+
+    @Autowired
+    private CommentRepository commentRepository;
+
+
 
     @Override
     public void register(RecipeRegisterRequest recipeRequest, List<String> uploadImageList){
@@ -107,6 +114,12 @@ public class RecipeServiceImpl implements RecipeService {
 
         for(Image image: imageList){
             imagesRepository.delete(image);
+        }
+
+        List<Comment> commentList = commentRepository.findAllCommentsByRecipeId(recipeNo);
+
+        for(Comment comment: commentList){
+            commentRepository.delete(comment);
         }
 
         repository.deleteById(recipeNo);

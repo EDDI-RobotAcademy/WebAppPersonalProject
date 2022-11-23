@@ -9,7 +9,7 @@ class ChangeNicknameScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: profileAppbar(),
-      body: ChangeNicknameForm(
+      body: const ChangeNicknameForm(
       ),
     );
   }

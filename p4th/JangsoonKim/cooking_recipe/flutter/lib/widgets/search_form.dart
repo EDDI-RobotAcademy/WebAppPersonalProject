@@ -152,7 +152,7 @@ class _SearchFormState extends State<SearchForm> {
                       child: TextField(
                         focusNode: focusNode,
                         style: const TextStyle(fontSize: 15),
-                        autofocus: true,
+                        autofocus: false,
                         controller: _filter,
                         decoration: InputDecoration(
                             filled: true,

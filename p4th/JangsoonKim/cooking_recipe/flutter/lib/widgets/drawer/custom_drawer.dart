@@ -5,6 +5,7 @@ import 'package:demo/utilities/spring_api.dart';
 import 'package:demo/widgets/drawer/drawer_header.dart';
 import 'package:demo/widgets/screen_controller.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 import '../../screens/mypage/mypage_screen.dart';
 
@@ -25,7 +26,7 @@ class CustomDrawer extends StatelessWidget {
               SizedBox(
                 height: size.height * 0.05,
               ),
-              CustomDrawerHeader(),
+              const CustomDrawerHeader(),
               const Divider(
                 color: Colors.black54,
               ),
@@ -41,10 +42,7 @@ class CustomDrawer extends StatelessWidget {
                 trailing: const Icon(Icons.arrow_forward_ios_outlined,
                 size: 28,),
                 onTap: () {
-                  Navigator.of(context)
-                      .pushReplacement(MaterialPageRoute(builder: (context) {
-                    return const ScreenController();
-                  }));
+                  Get.offAll(const ScreenController());
                 },
               ),
               SizedBox(height: size.height * 0.01,),
@@ -84,7 +82,7 @@ class CustomDrawer extends StatelessWidget {
                   size: 28,
                 ),
                 title: const Text('공지사항'),
-                trailing: Icon(Icons.arrow_forward_ios_outlined),
+                trailing: const Icon(Icons.arrow_forward_ios_outlined),
                 onTap: () {
                   Navigator.of(context)
                       .push(MaterialPageRoute(builder: (context) {
@@ -111,7 +109,7 @@ class CustomDrawer extends StatelessWidget {
               const Divider(
                 color: Colors.black54,
               ),
-              TextButton(onPressed: (){SpringApi.logOut();}, child: Text("로그아웃"))
+              TextButton(onPressed: (){SpringApi.logOut();}, child: const Text("로그아웃"))
             ],
           ),
         ),
