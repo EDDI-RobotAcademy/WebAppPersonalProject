@@ -1,4 +1,5 @@
-import 'package:demo/widgets/recipe_register_form.dart';
+import 'package:demo/widgets/recipe/recipe_modify_form.dart';
+import 'package:demo/widgets/recipe/recipe_register_form.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
@@ -43,7 +44,7 @@ class _CustomDropdownPageState extends State<CustomDropdownPage> {
       _closeOverlay();
       isActive = false;
       RecipeRegisterFormState.getCategory(dropdownValue);
-
+      RecipeModifyFormState.getCategoryForModify(dropdownValue);
     }
   }
 
@@ -61,6 +62,7 @@ class _CustomDropdownPageState extends State<CustomDropdownPage> {
 
   @override
   Widget build(BuildContext context) {
+    Size size = MediaQuery.of(context).size;
     RecipeRegisterFormState? registerFormState = context.findAncestorStateOfType<RecipeRegisterFormState>();
     return Container(
       alignment: Alignment.centerRight,
@@ -75,7 +77,7 @@ class _CustomDropdownPageState extends State<CustomDropdownPage> {
             child: CompositedTransformTarget(
               link: _layerLink,
               child: Container(
-                width: _dropdownWidth,
+                width: size.width * 0.4,
                 height: _dropdownHeight,
                 padding: const EdgeInsets.symmetric(horizontal: 20),
                 decoration: BoxDecoration(

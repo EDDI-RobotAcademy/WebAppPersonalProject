@@ -10,7 +10,7 @@ class NoticeScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       endDrawer: const CustomDrawer(),
-      appBar: customAppbar(),
+      appBar: customAppbar('EZ.COOK'),
       body: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [

@@ -6,7 +6,7 @@ import 'package:demo/widgets/drawer/drawer_header.dart';
 import 'package:demo/widgets/screen_controller.dart';
 import 'package:flutter/material.dart';
 
-import '../../screens/profile_screen.dart';
+import '../../screens/mypage/mypage_screen.dart';
 
 
 class CustomDrawer extends StatelessWidget {
@@ -73,7 +73,7 @@ class CustomDrawer extends StatelessWidget {
                 onTap: () {
                   Navigator.of(context)
                       .push(MaterialPageRoute(builder: (context) {
-                    return const ProfileScreen();
+                    return const MypageScreen();
                   }));
                 },
               ),

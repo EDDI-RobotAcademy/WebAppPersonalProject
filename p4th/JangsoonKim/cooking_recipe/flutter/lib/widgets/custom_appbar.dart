@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 
-AppBar customAppbar(){
+AppBar customAppbar(String text){
   return AppBar(
     backgroundColor: Colors.transparent,
     elevation: 0.0,
     foregroundColor: Colors.black,
-    title: const Text('EZ.COOK'),
+    title: Text(text),
     centerTitle: false,
   );
 }

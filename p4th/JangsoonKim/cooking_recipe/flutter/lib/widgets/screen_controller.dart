@@ -1,6 +1,6 @@
 import 'package:demo/screens/home_screen.dart';
 import 'package:demo/screens/more_information_screen.dart';
-import 'package:demo/screens/recipe_register_screen.dart';
+import 'package:demo/screens/recipe/recipe_register_screen.dart';
 import 'package:demo/screens/search_screen.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';

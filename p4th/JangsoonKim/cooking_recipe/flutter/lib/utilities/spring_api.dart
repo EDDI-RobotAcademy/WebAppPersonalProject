@@ -19,7 +19,7 @@ class SpringApi {
     debugPrint(email);
 
     var response = await http.post(
-      Uri.http(httpUrl, 'member/user-email/$email'),
+      Uri.http(httpUrl, '/member/user-email/$email'),
       headers: {"Content-Type": "application/json"},
       body: body,
     );
@@ -38,7 +38,7 @@ class SpringApi {
     debugPrint(nickname);
 
     var response = await http.post(
-      Uri.http(httpUrl, 'member/user-nickname/$nickname'),
+      Uri.http(httpUrl, '/member/user-nickname/$nickname'),
       headers: {"Content-Type": "application/json"},
       body: body,
     );

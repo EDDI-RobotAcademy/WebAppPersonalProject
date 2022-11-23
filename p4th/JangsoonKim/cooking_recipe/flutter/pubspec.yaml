@@ -40,7 +40,10 @@ dependencies:
   shared_preferences: ^2.0.15
   http: ^0.13.5
   get: ^4.6.5
-  multiple_images_picker: ^1.0.1
+  file_picker: ^5.2.2
+  dio: ^4.0.6
+  image_picker: ^0.8.6
+  carousel_slider: ^4.1.1
 
 dev_dependencies:
   flutter_test:
@@ -70,6 +73,8 @@ flutter:
     - assets/images/signin/
     - assets/icons/sns/
     - assets/images/tmp/
+    - assets/images/mypage/
+    - assets/images/uploadImgs/
     - assets/icons/
 
   # An image asset can refer to one or more resolution-specific "variants", see
