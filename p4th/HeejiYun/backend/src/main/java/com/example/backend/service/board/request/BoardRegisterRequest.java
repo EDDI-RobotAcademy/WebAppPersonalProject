@@ -2,17 +2,17 @@ package com.example.backend.service.board.request;
 
 import com.example.backend.entity.board.Board;
 import lombok.Getter;
-import lombok.RequiredArgsConstructor;
+import lombok.NoArgsConstructor;
 import lombok.ToString;
 
 @Getter
 @ToString
-@RequiredArgsConstructor
+@NoArgsConstructor
 public class BoardRegisterRequest {
-    private final String title;
-    private final String writer;
-    private final String content;
-    private final String boardCategoryName;
+    private String title;
+    private String writer;
+    private String content;
+    private String boardCategoryName;
 
     public Board toBoard() { return new Board(title, writer, content); }
 }

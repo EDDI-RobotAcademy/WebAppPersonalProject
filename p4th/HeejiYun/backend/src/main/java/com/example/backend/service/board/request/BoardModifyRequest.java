@@ -1,11 +1,11 @@
 package com.example.backend.service.board.request;
 
 import lombok.Getter;
-import lombok.RequiredArgsConstructor;
+import lombok.NoArgsConstructor;
 
 @Getter
-@RequiredArgsConstructor
+@NoArgsConstructor
 public class BoardModifyRequest {
-    private final String title;
-    private final String content;
+    private String title;
+    private String content;
 }
