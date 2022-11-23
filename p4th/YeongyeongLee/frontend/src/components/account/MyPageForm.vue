@@ -1,6 +1,5 @@
 <template>
 
-
 <div>
   <div class="text"> My Page </div>
 
@@ -27,9 +26,7 @@
           <v-icon>mdi-login</v-icon>회원 탈퇴하기</v-btn>
 
         </div>
-
       </v-container>
-
 
     </div>
   </form>
@@ -104,7 +101,10 @@ export default {
   font-size: 45px;
   text-align: center;
   color: #FFECB3;
+
 }
+
+
 
 
 
