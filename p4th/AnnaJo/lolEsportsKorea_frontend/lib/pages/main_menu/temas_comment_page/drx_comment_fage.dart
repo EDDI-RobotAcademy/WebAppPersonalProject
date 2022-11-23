@@ -7,6 +7,7 @@ import '../../../api/comment/spring_comment_api.dart';
 import '../../../components/app_bar/common_top_app_bar.dart';
 import '../../../utility/common_alert_dialog.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
+import 'package:intl/intl.dart';
 
 bool load = false;
 String myTeam = 'DRX';
@@ -26,11 +27,11 @@ class _DRXCommentTestPage extends State<DRXCommentTestPage> {
   final TextEditingController commentController = TextEditingController();
   final RefreshController _refreshController =
       RefreshController(initialRefresh: false);
-  var now = DateTime.now();
+  String formatDate = DateFormat('yyyy-MM-dd HH:mm:ss').format(DateTime.now());
 
   commentRegisterAction() async {
     CommentRequest commentRequest = CommentRequest('DRX', nickname,
-        'assets/images/DRX.png', commentController.text, now.toString());
+        'assets/images/DRX.png', commentController.text, formatDate);
 
     await SpringCommentApi().registerApi(commentRequest);
 
@@ -139,12 +140,11 @@ class _DRXCommentTestPage extends State<DRXCommentTestPage> {
               sendButtonMethod: () {
                 if (formKey.currentState!.validate()) {
                   commentRegisterAction();
-                  print(commentController.text);
                   _refreshController.refreshCompleted();
                   commentController.clear();
                   FocusScope.of(context).unfocus();
                 } else {
-                  print("Not validated");
+                  debugPrint("Not validated");
                 }
               },
               formKey: formKey,

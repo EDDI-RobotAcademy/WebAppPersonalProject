@@ -1,6 +1,7 @@
 import 'package:comment_box/comment/comment.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
+import 'package:intl/intl.dart';
 import 'package:lol_esports_korea_app/components/my_team/team_comment_data.dart';
 
 import '../../../api/comment/spring_comment_api.dart';
@@ -26,11 +27,11 @@ class _T1CommentTestPage extends State<T1CommentTestPage> {
   final TextEditingController commentController = TextEditingController();
   final RefreshController _refreshController =
       RefreshController(initialRefresh: false);
-  var now = DateTime.now();
+  String formatDate = DateFormat('yyyy-MM-dd HH:mm:ss').format(DateTime.now());
 
   commentRegisterAction() async {
     CommentRequest commentRequest = CommentRequest('T1', nickname,
-        'assets/images/T1.png', commentController.text, now.toString());
+        'assets/images/T1.png', commentController.text, formatDate);
 
     await SpringCommentApi().registerApi(commentRequest);
 
@@ -143,7 +144,7 @@ class _T1CommentTestPage extends State<T1CommentTestPage> {
                   commentController.clear();
                   FocusScope.of(context).unfocus();
                 } else {
-                  print("Not validated");
+                  debugPrint("Not validated");
                 }
               },
               formKey: formKey,
