@@ -47,6 +47,17 @@
           <v-btn class="grey white--text" rounded depressed small>돌아가기</v-btn>
         </router-link>
       </div>
+      <br/>
+      <table class="boards">
+        <tr>
+          <div>
+            <h1>댓글</h1>
+          </div>
+          <div class="comment">
+            <buy-baram-comment-list :buyBaramComments="buyBaramComments"/>
+          </div>
+        </tr>
+      </table>
     </div>
   </v-container>
 </template>
@@ -56,19 +67,15 @@ import {mapActions, mapState} from "vuex";
 import BuyBaramRead from "@/components/boards/buyBoard/baram/BuyBaramRead";
 import TopMenuForm from "@/components/topMenubar/TopMenuForm";
 import ToolbarForm from "@/components/toolbar/ToolbarForm";
+import BuyBaramCommentList from "@/components/boards/buyBoard/baram/comment/BuyBaramCommentList";
 
 export default {
   name: "BuyBaramReadView",
-  data() {
-    return {
-      deleteDialog: false,
-      deleteTitle:"게시글 삭제"
-    }
-  },
   components: {
+    BuyBaramCommentList,
     BuyBaramRead,
     TopMenuForm,
-    ToolbarForm
+    ToolbarForm,
   },
   props: {
     buyBaramNo: {
@@ -80,8 +87,14 @@ export default {
       required: true,
     }
   },
+  data() {
+    return {
+      deleteDialog: false,
+      deleteTitle:"게시글 삭제"
+    }
+  },
   computed: {
-    ...mapState(['buyBaramBoard'])
+    ...mapState(['buyBaramBoard', 'buyBaramComments'])
   },
   methods: {
     cancelBtn() {
@@ -90,6 +103,7 @@ export default {
     ...mapActions([
       'requestBuyBaramFromSpring',
       'requestDeleteBuyBaramToSpring',
+      'requestBuyBaramCommentListFromSpring'
     ]),
     async onDelete () {
       await this.requestDeleteBuyBaramToSpring(this.buyBaramNo);
@@ -98,7 +112,11 @@ export default {
   },
   created() {
     this.requestBuyBaramFromSpring(this.buyBaramNo)
+    this.requestBuyBaramCommentListFromSpring(this.buyBaramCommentNo)
   },
+  mounted() {
+    this.requestBuyBaramCommentListFromSpring()
+  }
 }
 </script>
 
@@ -106,6 +124,50 @@ export default {
 
 a {
   text-decoration: none;
+}
+
+table.boards {
+  border-collapse: collapse;
+  text-align: left;
+  line-height: 1.5;
+  border: 1px solid #ccc;
+  margin: 20px 10px;
+}
+table.boards thead {
+  border-right: 1px solid #ccc;
+  border-left: 1px solid #ccc;
+  background: darkgrey;
+
+}
+table.boards thead th {
+  padding: 10px;
+  font-weight: bold;
+  vertical-align: top;
+  border-right: 1px solid #ccc;
+  color: #fff;
+
+}
+table.boards tbody th {
+  width: 150px;
+  padding: 10px;
+  font-weight: bold;
+  vertical-align: top;
+
+  border-bottom: 1px solid #ccc;
+  background: #ececec;
+
+}
+table.boards td {
+  width: 350px;
+  padding: 10px;
+  vertical-align: top;
+  border-bottom: 1px solid #ccc;
+}
+
+
+.comment {
+  display: flex;
+  flex-direction: column-reverse;
 }
 
 </style>
