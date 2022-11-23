@@ -21,4 +21,11 @@ public class MemberInfoSetController {
 
         memberService.replaceNickname(replaceNicknameform.toReplaceNicknameRequest());
     }
+
+    @PostMapping("/{nickName}")
+    public void deleteMember(@PathVariable("nickName") String nickName) {
+        log.info("deleteUser" + nickName);
+
+        memberService.deleteUserinfo(nickName);
+    }
 }

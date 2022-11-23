@@ -1,5 +1,5 @@
 <template>
-  <all-bucket-list :buckets="bucketList"/>
+  <all-bucket-list :buckets="bucketList" :totalPage="allBucketListTotalPageValue"/>
 </template>
 <script>
 
@@ -15,16 +15,19 @@ export default {
   components: {AllBucketList},
   computed: {
     ...mapState([
-        'bucketList'
+      'bucketList',
+      'allBucketListTotalPageValue'
     ]),
   },
   async mounted() {
-    await this.getBucketListToSpring()
+    await this.getBucketListToSpring(1)
+    await this.requestAllBucketListTotalPageFromSpring()
   },
   methods: {
     ...mapActions([
-      'getBucketListToSpring'
-    ])
+      'getBucketListToSpring',
+      'requestAllBucketListTotalPageFromSpring'
+    ]),
   },
 }
 </script>

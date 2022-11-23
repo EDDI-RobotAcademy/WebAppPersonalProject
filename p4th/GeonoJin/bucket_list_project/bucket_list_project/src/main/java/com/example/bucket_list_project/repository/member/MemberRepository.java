@@ -14,7 +14,8 @@ public interface MemberRepository extends JpaRepository<MemberInfo, Long> {
     Optional<MemberInfo> findByEmail(@Param("email") String email);
 
     @Query("select m from MemberInfo m join fetch m.authentications where m.nickName = :nickName")
-    Optional<MemberInfo> findByNickname(@Param("nickName")String nickName);
+    Optional<MemberInfo> findByNickname(@Param("nickName") String nickName);
 
-
+    @Query("select m from MemberInfo m where m.nickName = :nickName")
+    Optional<MemberInfo> findByMemberNickname(@Param("nickName") String nickName);
 }

@@ -29,7 +29,7 @@
         </v-card-text>
         <v-layout justify-end>
           <h4>
-            작성자: {{ bucket.writer }}
+            {{ bucket.writer }}
           </h4>
         </v-layout>
       </v-card>

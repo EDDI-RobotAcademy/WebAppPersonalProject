@@ -1,6 +1,6 @@
 <template>
   <div>
-    <my-page-form @submit="onSubmit" :nickname="nickName"/>
+    <my-page-form @submit="onSubmit" :nickname="nickName" @deleteMember="deleteUser"/>
   </div>
 </template>
 
@@ -9,25 +9,27 @@
 
 import MyPageForm from "@/components/mypage/MyPageForm";
 import {mapActions, mapState} from "vuex";
+
 export default {
   name: "MyPageView",
   components: {MyPageForm},
-  computed:{
+  computed: {
     ...mapState([
-        'currentUserNickname'
+      'currentUserNickname'
     ])
   },
-  props:{
-    nickName:{
+  props: {
+    nickName: {
       type: String,
       required: true
     }
   },
-  methods:{
+  methods: {
     ...mapActions([
-      'requestChangeNicknameToSpring'
+      'requestChangeNicknameToSpring',
+      'requestDeleteUserToSpring'
     ]),
-    async onSubmit(payload){
+    async onSubmit(payload) {
 
       const {nickName, currentUserToken} = payload
 
@@ -39,10 +41,16 @@ export default {
         await this.requestChangeNicknameToSpring({nickName, currentUserToken})
         await this.$router.push({name: 'HomeView'})
       }
-    }
+    },
+    async deleteUser(payload) {
+      const nickName = payload
+      await this.requestDeleteUserToSpring(nickName)
+      localStorage.removeItem("userInfo")
+      await this.$router.push({name: "HomeView"})
+    },
   },
-  data(){
-    return{
+  data() {
+    return {
       nickname: ''
     }
   },

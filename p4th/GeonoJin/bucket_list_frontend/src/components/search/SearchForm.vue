@@ -1,18 +1,27 @@
 <template>
   <v-container>
-    <header-component/>
-    <br/>
-    <div align="center">
-      <h3>전체</h3>
-    </div>
-    <br/><br/>
-    <br/>
+    <tool-bar-component style="margin-top: 50px"/>
+    <v-divider style="margin-top: 30px"></v-divider>
+    <v-container>
+      <h2 style="margin-left: 50px; margin-top: 30px">검색</h2>
+    </v-container>
 
-    <v-layout justify-center>
+    <v-layout justify-end style="margin-top: 20px">
+      <v-form style="width: 400px" @submit.prevent="onSearch">
+        <v-layout>
+          <v-text-field outlined dense placeholder="버킷리스트 제목을 입력하세요!" v-model="searchWord"/>
+          <v-btn rounded-xl elevation="0" color="green lighten-1" style="margin-top: 2px" type="submit">
+            검색
+          </v-btn>
+        </v-layout>
+      </v-form>
+    </v-layout>
+
+    <v-layout justify-center style="margin-top: 50px">
       <div>
         <v-row class="ma-auto">
           <div v-if="!buckets || (Array.isArray(buckets) && buckets.length === 0)">
-            <h3>현재 등록된 버킷리스트가 없습니다.</h3>
+            <h3>현재 검색된 버킷스트가 없습니다.</h3>
           </div>
           <v-card
               v-else
@@ -33,54 +42,34 @@
                   contain
               >
                 <v-card-title v-text="bucket.bucketTitle"></v-card-title>
-                <v-card-subtitle align="end" v-text="bucket.writer"></v-card-subtitle>
               </v-img>
             </router-link>
           </v-card>
         </v-row>
       </div>
     </v-layout>
-
-    <template>
-      <div class="text-center">
-        <v-pagination
-            v-model="pageValue"
-            :length="totalPage"
-            @input="paging"
-        ></v-pagination>
-      </div>
-    </template>
   </v-container>
 </template>
 
 <script>
-import HeaderComponent from "@/components/header/HeaderComponent";
-import {mapActions} from "vuex";
+import ToolBarComponent from "@/components/common/ToolBarComponent";
 
 export default {
-  name: "AllBucketList",
-  components: {
-    HeaderComponent,
-  },
+  name: "SearchForm",
+  components: {ToolBarComponent},
   props: {
     buckets: {
       type: Array
-    },
-    totalPage:{
-      type: Number
     }
   },
   data(){
     return{
-      pageValue: 1
+      searchWord: ''
     }
   },
   methods:{
-    ...mapActions([
-        'getBucketListToSpring'
-    ]),
-    async paging(){
-      await this.getBucketListToSpring(this.pageValue);
+    onSearch(){
+      this.$emit('search', this.searchWord)
     }
   }
 }

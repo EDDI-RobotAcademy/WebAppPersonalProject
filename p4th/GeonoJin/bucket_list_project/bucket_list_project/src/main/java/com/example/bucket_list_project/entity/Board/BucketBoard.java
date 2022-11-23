@@ -1,15 +1,13 @@
 package com.example.bucket_list_project.entity.Board;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
-import lombok.Data;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 import javax.persistence.*;
 
 
 @Entity
+@ToString
 @NoArgsConstructor
 public class BucketBoard {
 

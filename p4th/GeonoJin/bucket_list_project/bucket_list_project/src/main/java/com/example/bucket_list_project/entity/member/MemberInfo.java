@@ -27,7 +27,7 @@ public class MemberInfo {
     @Column(nullable = false)
     private String nickName;
 
-    @OneToMany(mappedBy = "memberInfo", fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "memberInfo", fetch = FetchType.LAZY, cascade = CascadeType.REMOVE)
     private Set<Authentication> authentications = new HashSet<>();
 
     public MemberInfo(String email, String nickName) {

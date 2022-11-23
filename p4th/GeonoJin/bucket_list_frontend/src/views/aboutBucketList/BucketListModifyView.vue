@@ -3,7 +3,7 @@
 </template>
 
 <script>
-import BucketListModifyForm from "@/components/BucketListModifyForm";
+import BucketListModifyForm from "@/components/aboutBucketList/BucketListModifyForm";
 import {mapActions, mapState} from "vuex";
 
 export default {

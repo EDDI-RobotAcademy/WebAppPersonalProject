@@ -6,8 +6,11 @@ import{
     REQUEST_BUCKET_FROM_SPRING,
     DOWN_LOAD_IMG_FILE_TO_SPRING,
     GET_CURRENT_BUCKET_LIST_CATEGORY,
-    REQUEST_MY_BUCKET_LIST_TO_SPRING
-    // REQUEST_LOGIN_STATE_TO_SPRING
+    REQUEST_MY_BUCKET_LIST_TO_SPRING,
+    REQUEST_SEARCH_BUCKET_LIST_TO_SPRING,
+    REQUEST_ALL_BUCKET_LIST_TOTAL_PAGE_FROM_SPRING,
+    REQUEST_BUCKET_LIST_TOTAL_PAGE_BY_CATEGORY_FROM_SPRING,
+    REQUEST_BUCKET_LIST_BY_CURRENT_USER_NICKNAME_PER_PAGE_FROM_SPRING
 } from "./mutation-types"
 
 export default {
@@ -34,5 +37,17 @@ export default {
     },
     [REQUEST_MY_BUCKET_LIST_TO_SPRING](state, passingData) {
         state.bucketListByNickname = passingData
+    },
+    [REQUEST_SEARCH_BUCKET_LIST_TO_SPRING](state, passingData) {
+        state.searchedBucketList = passingData
+    },
+    [REQUEST_ALL_BUCKET_LIST_TOTAL_PAGE_FROM_SPRING](state, passingData) {
+        state.allBucketListTotalPageValue = passingData;
+    },
+    [REQUEST_BUCKET_LIST_TOTAL_PAGE_BY_CATEGORY_FROM_SPRING](state, passingData) {
+        state.bucketListToTalPageByCategory = passingData
+    },
+    [REQUEST_BUCKET_LIST_BY_CURRENT_USER_NICKNAME_PER_PAGE_FROM_SPRING](state, passingData) {
+        state.myBucketListTotalPage = passingData
     },
 }

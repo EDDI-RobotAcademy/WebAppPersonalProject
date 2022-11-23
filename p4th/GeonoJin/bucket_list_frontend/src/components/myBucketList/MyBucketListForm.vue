@@ -151,6 +151,16 @@
           </v-row>
         </div>
       </v-layout>
+
+      <template>
+        <div class="text-center">
+          <v-pagination
+              v-model="pageValue"
+              :length="totalPage"
+              @input="paging"
+          ></v-pagination>
+        </div>
+      </template>
     </v-container>
   </div>
 
@@ -159,22 +169,26 @@
 <script>
 import ToolBarComponent from "@/components/common/ToolBarComponent";
 import axios from "axios";
+import {mapActions} from "vuex";
 
 export default {
   name: "MyBucketList",
   components: {
     ToolBarComponent,
   },
-  props:{
-    buckets:{
+  props: {
+    buckets: {
       type: Array
+    },
+    totalPage: {
+      type: Number
+    },
+    currentUserNickname: {
+      type: String
     }
   },
   data() {
     return {
-      bucketItems: [
-        {title: "시험", src: 'https://cdn.vuetifyjs.com/images/cards/house.jpg'}
-      ],
       dialog: false,
       bucketTitle: '',
       bucketContent: '',
@@ -186,10 +200,14 @@ export default {
       switchValue: false,
       switchValueTrue: "비공개",
       switchValueFalse: "공개",
-      currentWriter: ''
+      currentWriter: '',
+      pageValue: 1
     }
   },
   methods: {
+    ...mapActions([
+      'requestMyBucketListToSpring',
+    ]),
     fileUpload() {
       this.files = this.$refs.file.files
     },
@@ -207,16 +225,23 @@ export default {
       }
       formData.append(
           "info",
-          new Blob([JSON.stringify(fileInfo)], { type: "application/json" })
+          new Blob([JSON.stringify(fileInfo)], {type: "application/json"})
       )
       await axios.post('http://localhost:7777/bucket/register', formData)
           .then(() => {
             alert("버킷 등록 완료")
+            this.$router.push({name: 'HomeView'})
           })
           .catch(() => {
             alert("버킷 등록 실패")
           });
+
     },
+    async paging() {
+      const userNickname = this.currentUserNickname
+      const pageValue = this.pageValue
+      await this.requestMyBucketListToSpring({userNickname, pageValue})
+    }
   }
 }
 </script>

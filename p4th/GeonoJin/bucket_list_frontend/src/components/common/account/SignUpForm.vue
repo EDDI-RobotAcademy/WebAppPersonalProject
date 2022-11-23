@@ -12,8 +12,7 @@
         <div class="text-center px-12 py-16 mt-5">
           <v-form @submit.prevent="onSubmit" ref="form">
             <div class="text-h5 font-weight-black mb-10">
-              버킷리스트에 오신걸 환영합니다!
-
+              회원가입
             </div>
             <v-divider></v-divider>
             <br/>
@@ -168,8 +167,7 @@ export default {
     },
 
     async checkDuplicateNickname(){
-      const {nickName} = this
-      await this.checkDuplicateNicknameToSpring({nickName})
+      await this.checkDuplicateNicknameToSpring(this.nickName)
 
       if (this.$store.state.nicknamePassValue) {
         this.signInCheckNicknamePassValue = true

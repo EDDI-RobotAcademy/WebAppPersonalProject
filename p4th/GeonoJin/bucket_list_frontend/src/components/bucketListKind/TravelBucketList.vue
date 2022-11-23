@@ -39,11 +39,21 @@
         </v-row>
       </div>
     </v-layout>
+    <template>
+      <div class="text-center">
+        <v-pagination
+            v-model="pageValue"
+            :length="totalPage"
+            @input="paging"
+        ></v-pagination>
+      </div>
+    </template>
   </v-container>
 </template>
 
 <script>
 import HeaderComponent from "@/components/header/HeaderComponent";
+import {mapActions} from "vuex";
 export default {
   name: "TravelBucketList",
   components: {HeaderComponent},
@@ -53,6 +63,24 @@ export default {
     },
     currentCategoryBucketList:{
       type: Array
+    },
+    totalPage:{
+      type: Number
+    }
+  },
+  data(){
+    return{
+      pageValue: 1,
+      category: "여행"
+    }
+  },
+  methods:{
+    ...mapActions([
+      'getCurrentBucketListCategory'
+    ]),
+    async paging(){
+      const {category, pageValue} = this
+      await this.getCurrentBucketListCategory({category, pageValue});
     }
   }
 }

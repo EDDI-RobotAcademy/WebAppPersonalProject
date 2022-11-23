@@ -8,6 +8,10 @@ export default {
     bucket: {},
     downLoadImgFile: {},
     currentCategoryBucketList: [],
-    bucketListByNickname: []
+    bucketListByNickname: [],
+    searchedBucketList: [],
+    allBucketListTotalPageValue: 0,
+    bucketListToTalPageByCategory: 0,
+    myBucketListTotalPage: 0
 
 }

@@ -5,4 +5,6 @@ import com.example.bucket_list_project.service.member.request.accountSet.Replace
 public interface MemberAccountSetService {
 
     void replaceNickname (ReplaceNicknameRequest nicknameRequest);
+
+    void deleteUserinfo(String nickName);
 }

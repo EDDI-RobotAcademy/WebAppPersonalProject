@@ -30,8 +30,8 @@
                   <v-list-item-title align="center">
                     <div style="margin-bottom: 10px; margin-top: 5px"
                     >
-                      <v-btn color="white" rounded elevation="0" to="/myBucket">
-                        <h4>마이버킷</h4>
+                      <v-btn color="white" rounded elevation="0" :to="{name: 'MyBucketListView', params: {userNickname: nickName}}">
+                        <h4>My Bucket</h4>
                       </v-btn>
                     </div>
                     <div>
@@ -121,9 +121,6 @@ export default {
       }
     }
   },
-  created() {
-    this.categoryPath = this.btnValues.route
-  }
 }
 </script>
 

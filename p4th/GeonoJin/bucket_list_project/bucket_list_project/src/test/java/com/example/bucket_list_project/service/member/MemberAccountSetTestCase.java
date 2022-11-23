@@ -48,4 +48,9 @@ public class MemberAccountSetTestCase {
         String replaceNickname = memberService.findCurrentUserNickName(token);
         System.out.println("변경된 닉네임: "+replaceNickname);
     }
+
+    @Test
+    public void deleteMember() {
+        memberAccountSetService.deleteUserinfo("ggg");
+    }
 }
