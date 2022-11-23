@@ -13,4 +13,5 @@ public interface BoardService {
     public void modify(Board board);
     public void remove(Long boardNo);
 
+
 }

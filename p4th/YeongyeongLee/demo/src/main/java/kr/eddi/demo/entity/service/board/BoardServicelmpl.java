@@ -59,7 +59,4 @@ public class BoardServicelmpl implements BoardService {
 
 
 
-
-
-
 }

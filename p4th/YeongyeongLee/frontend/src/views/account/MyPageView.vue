@@ -2,9 +2,6 @@
 <div>
 <my-page-form/>
 
-
-
-
 </div>
 </template>
 
@@ -14,9 +11,7 @@ import MyPageForm from "@/components/account/MyPageForm";
 export default {
   name: "MyPageView",
   components:{
-
     MyPageForm,
-
 
   }
 

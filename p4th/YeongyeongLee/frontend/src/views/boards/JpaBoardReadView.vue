@@ -2,10 +2,15 @@
   <div align="center">
     <div class="text"> 게시글 읽기</div>
     <br><br>
+
+    <board-read-img-page/>
+
     <jpa-board-read v-if="board" :board="board"/>
     <p v-else>Loading .......</p>
 
     <br><br><br><br>
+
+
 
     <div style="float:right">
     <v-icon>mdi-note-check</v-icon>
@@ -31,16 +36,25 @@
 <script>
 import JpaBoardRead from "@/components/boards/JpaBoardRead";
 import {mapActions, mapState} from "vuex";
+import BoardReadImgPage from "@/views/boards/BoardReadImgPage";
+
+
+
 
 export default {
   name: "JpaBoardReadView",
   components: {
+    BoardReadImgPage,
+
     JpaBoardRead
   },
   props: {
     boardNo: {
       type: String,
-      required: true
+      required: true,
+      boardReadImg: {
+        type: Array
+      },
     }
   },
   computed: {

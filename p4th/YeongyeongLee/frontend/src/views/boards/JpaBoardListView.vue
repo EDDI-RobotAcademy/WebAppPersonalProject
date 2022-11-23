@@ -2,17 +2,7 @@
 
 
   <div>
-    <div style="float: right">
-      <v-btn class="Normal" rounded>
-        <v-icon>mdi-account-outline</v-icon>
-        <router-link to="/login-view"> 로그인</router-link>
-      </v-btn>
-
-      <v-btn class="Normal" rounded>
-        <v-icon>mdi-account-plus-outline</v-icon>
-        <router-link to="/signup-view"> 회원가입</router-link>
-      </v-btn>
-    </div>
+    <MemberButton/>
 
     <br>
     <p></p><br><br><br>
@@ -28,10 +18,10 @@
     <jpa-board-list :boards="boards"/>
 
 
-  <br><br><br><br><br><br><br><br><br><br><br>
+    <br><br><br><br><br><br><br><br><br><br><br>
 
 
-  <FooterView/>
+    <FooterView/>
 
   </div>
 </template>
@@ -44,10 +34,12 @@ import JpaBoardList from "@/components/boards/JpaBoardList";
 import ToolbarButton from "@/components/common/button/ToolbarButton";
 import FooterView from "@/views/mainpage/FooterView";
 import BoardWriteButton from "@/components/common/button/BoardWriteButton";
+import MemberButton from "@/components/common/button/MemberButton";
 
 export default {
   name: "BoardListView.vue",
   components: {
+    MemberButton,
     BoardWriteButton,
     FooterView,
     JpaBoardList,

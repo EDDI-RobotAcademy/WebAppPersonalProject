@@ -33,12 +33,25 @@
         </td>
       </tr>
     </table>
+
+
+<board-comment-view/>
+
+
   </div>
 </template>
 
 <script>
+
+
+
+import BoardCommentView from "@/views/boards/BoardCommentView";
 export default {
   name: "JpaBoardRead",
+  components: {
+    BoardCommentView
+
+    },
   props: {
     board: {
       type: Object,
