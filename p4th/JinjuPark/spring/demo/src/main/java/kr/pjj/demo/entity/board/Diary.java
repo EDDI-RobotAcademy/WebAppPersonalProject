@@ -1,6 +1,7 @@
-package kr.pjj.demo.entity.boards.exercise;
+package kr.pjj.demo.entity.board;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import kr.pjj.demo.entity.member.Member;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -27,14 +28,16 @@ public class Diary {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long boardNo;
 
-    @Column(length = 32, nullable = false)
-    private String category;
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name="category_id")
+    private Category category;
 
     @Column(length = 128, nullable = false)
     private String title;
 
-    @Column(length = 32, nullable = false)
-    private String writer;
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name="member_id")
+    private Member member;
 
     @Column(length = 32, nullable = false)
     private String authority;
@@ -67,10 +70,8 @@ public class Diary {
     }
 
     //테스트 케이스용 메소드들
-    public Diary (String category, String title, String writer, String authority, String content) {
-        this.category = category;
+    public Diary ( String title, String authority, String content) {
         this.title = title;
-        this.writer = writer;
         this.authority = authority;
         this.content = content;
     }
