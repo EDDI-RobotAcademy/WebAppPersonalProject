@@ -1,10 +1,10 @@
-package kr.pjj.demo.controller.member.boards.exercise;
+package kr.pjj.demo.controller.board;
 
-import kr.pjj.demo.controller.member.boards.exercise.request.CommentDeleteId;
-import kr.pjj.demo.controller.member.boards.exercise.request.CommentModify;
-import kr.pjj.demo.controller.member.boards.exercise.request.CommentRequest;
-import kr.pjj.demo.entity.boards.exercise.Comment;
-import kr.pjj.demo.service.boards.exercise.CommentService;
+import kr.pjj.demo.controller.board.request.CommentDeleteId;
+import kr.pjj.demo.controller.board.request.CommentModify;
+import kr.pjj.demo.controller.board.request.CommentRequest;
+import kr.pjj.demo.entity.board.Comment;
+import kr.pjj.demo.service.board.CommentService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -23,7 +23,7 @@ public class CommentController {
     @PostMapping("/register")
     public void commentRegister (@RequestBody CommentRequest commentRequest) {
         log.info(" 댓글 등록()- boardNo:" +commentRequest.getBoardNo()+"parentsId: "+commentRequest.getParentsCommentId());
-        log.info(" 댓글 등록()- memberId:" +commentRequest.getWriterNickname()+"comment: "+commentRequest.getContent());
+        log.info(" 댓글 등록()- memberId:" +commentRequest.getWriterId()+"comment: "+commentRequest.getContent());
 
         service.register(commentRequest);
     }

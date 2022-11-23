@@ -1,4 +1,4 @@
-package kr.pjj.demo.service.boards.exercise;
+package kr.pjj.demo.service.board;
 
 import java.util.List;
 

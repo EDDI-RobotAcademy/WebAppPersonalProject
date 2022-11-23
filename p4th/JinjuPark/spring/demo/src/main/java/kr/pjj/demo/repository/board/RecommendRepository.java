@@ -1,7 +1,6 @@
-package kr.pjj.demo.repository.boards.exercise;
+package kr.pjj.demo.repository.board;
 
-import kr.pjj.demo.entity.boards.exercise.Comment;
-import kr.pjj.demo.entity.boards.exercise.Recommend;
+import kr.pjj.demo.entity.board.Recommend;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 

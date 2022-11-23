@@ -1,4 +1,4 @@
-package kr.pjj.demo.entity.boards.exercise;
+package kr.pjj.demo.entity.board;
 
 import kr.pjj.demo.entity.member.Member;
 import lombok.*;

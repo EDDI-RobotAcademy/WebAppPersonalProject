@@ -1,4 +1,4 @@
-package kr.pjj.demo.entity.boards.exercise.response;
+package kr.pjj.demo.entity.board.response;
 
 import lombok.Data;
 

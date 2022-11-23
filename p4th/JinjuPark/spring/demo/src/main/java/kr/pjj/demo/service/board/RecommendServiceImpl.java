@@ -1,10 +1,10 @@
-package kr.pjj.demo.service.boards.exercise;
+package kr.pjj.demo.service.board;
 
-import kr.pjj.demo.entity.boards.exercise.Diary;
-import kr.pjj.demo.entity.boards.exercise.Recommend;
+import kr.pjj.demo.entity.board.Diary;
+import kr.pjj.demo.entity.board.Recommend;
 import kr.pjj.demo.entity.member.Member;
-import kr.pjj.demo.repository.boards.exercise.DiaryRepository;
-import kr.pjj.demo.repository.boards.exercise.RecommendRepository;
+import kr.pjj.demo.repository.board.DiaryRepository;
+import kr.pjj.demo.repository.board.RecommendRepository;
 import kr.pjj.demo.repository.member.MemberRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;

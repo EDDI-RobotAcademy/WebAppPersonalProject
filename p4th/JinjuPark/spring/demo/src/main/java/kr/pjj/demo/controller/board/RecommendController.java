@@ -1,7 +1,7 @@
-package kr.pjj.demo.controller.member.boards.exercise;
+package kr.pjj.demo.controller.board;
 
-import kr.pjj.demo.controller.member.boards.exercise.request.ThumbUpDown;
-import kr.pjj.demo.service.boards.exercise.RecommendService;
+import kr.pjj.demo.controller.board.request.ThumbUpDown;
+import kr.pjj.demo.service.board.RecommendService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;

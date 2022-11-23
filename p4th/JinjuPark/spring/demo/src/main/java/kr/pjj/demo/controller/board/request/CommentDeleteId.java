@@ -1,4 +1,4 @@
-package kr.pjj.demo.controller.member.boards.exercise.request;
+package kr.pjj.demo.controller.board.request;
 
 import lombok.Getter;
 
