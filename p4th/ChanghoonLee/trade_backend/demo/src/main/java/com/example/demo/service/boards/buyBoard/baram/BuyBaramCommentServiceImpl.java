@@ -19,7 +19,7 @@ public class BuyBaramCommentServiceImpl implements BuyBaramCommentService {
 
     @Override
     public List<BuyBaramComment> buyBaramCommentList() {
-        return buyBaramCommentRepository.findAll(Sort.by(Sort.Direction.DESC, "buyBaramCommentNo"));
+        return buyBaramCommentRepository.findAll(Sort.by(Sort.Direction.ASC, "buyBaramCommentNo"));
     }
 
     @Override
