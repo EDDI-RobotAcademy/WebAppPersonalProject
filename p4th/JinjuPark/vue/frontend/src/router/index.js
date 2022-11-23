@@ -9,6 +9,7 @@ import DiaryBoardModifyView from "@/views/boards/DiaryBoardModifyView";
 import FreeBoardListView from "@/views/boards/FreeBoardListView";
 import QNABoardListView from "@/views/boards/QNABoardListView";
 import AllBoardListView from "@/views/boards/AllBoardListView";
+import HomeMainView from "@/views/video/HomeMainView";
 
 Vue.use(VueRouter)
 
@@ -48,6 +49,13 @@ routes = [
     name: 'AllBoardListView',
     component: AllBoardListView
   },
+
+  {
+    path: '/',
+    name: 'HomeMainView',
+    component: HomeMainView
+  },
+
   {
     path: '/diary-board-register',
     name: 'DiaryBoardRegisterView',

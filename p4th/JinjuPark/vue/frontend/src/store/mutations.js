@@ -5,6 +5,7 @@ import {
     IS_AUTHENTICATED, USER_LOGIN_CHECK,
     THUMB_STATUS_COUNT,
     REQUEST_COMMENT_LIST_FROM_SPRING,
+    VIDEOS,
 } from './mutation-types'
 
 export default {
@@ -36,6 +37,10 @@ export default {
 
     [REQUEST_COMMENT_LIST_FROM_SPRING] (state, passingData) {
         state.diaryComment = passingData
+    },
+
+    [VIDEOS] (state, passingData) {
+        state.videos = passingData
     },
 
 }

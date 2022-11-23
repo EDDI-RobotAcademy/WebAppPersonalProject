@@ -4,6 +4,7 @@ import {
     REQUEST_LOGIN_USER_FROM_SPRING,
    THUMB_STATUS_COUNT,
     REQUEST_COMMENT_LIST_FROM_SPRING,
+    VIDEOS,
 } from './mutation-types'
 
 import axios from 'axios'
@@ -128,6 +129,15 @@ export default {
         return axios.post(`http://localhost:7777/hometwang/boards/diary/comment/delete`, {id})
             .then(() => {
                 alert('댓글을 삭제했습니다.')
+            })
+    },
+
+    requestVideoListFromSpring({commit}) {
+        console.log("비디오목록 받아오기()")
+
+        return axios.get('http://localhost:7777/hometwang/videos/list')
+            .then((res) => {
+                commit(VIDEOS, res.data)
             })
     },
 
