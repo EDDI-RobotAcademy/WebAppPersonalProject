@@ -16,7 +16,7 @@ class MyTeamPage extends StatelessWidget {
         title: const Text('My Team'),
         appBar: AppBar(),
       ),
-      drawer: const Drawer(
+      drawer: Drawer(
         child: CommonDrawerMenu(),
       ),
       body: SingleChildScrollView(

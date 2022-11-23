@@ -32,7 +32,7 @@ class AcceptCheck extends StatelessWidget {
                   "당사자는 개인 정보를 재생이 불가능한 방법으로 즉시 파기합니다. \n"
                   "※ 귀하는 이에 대한 동의를 거부할 수 있습니다.\n"
                   "다만 동의가 없을 경우 당 기관의 앱 서비스 이용이 불가능할 수도 있음을 알려드립니다.",
-                  style: TextStyle(color: Colors.white12),
+                  style: TextStyle(color: Colors.grey),
                 ),
               ),
             ),
