@@ -7,8 +7,8 @@ import DiaryBoardRegisterView from "@/views/boards/DiaryBoardRegisterView";
 import DiaryBoardReadView from "@/views/boards/DiaryBoardReadView";
 import DiaryBoardModifyView from "@/views/boards/DiaryBoardModifyView";
 import FreeBoardListView from "@/views/boards/FreeBoardListView";
+import QNABoardListView from "@/views/boards/QNABoardListView";
 import AllBoardListView from "@/views/boards/AllBoardListView";
-
 
 Vue.use(VueRouter)
 
@@ -36,6 +36,13 @@ routes = [
     name: 'FreeBoardListView',
     component: FreeBoardListView
   },
+
+  {
+    path: '/qna-board-list',
+    name: 'QNABoardListView',
+    component:QNABoardListView
+  },
+
   {
     path: '/all-board-list',
     name: 'AllBoardListView',
