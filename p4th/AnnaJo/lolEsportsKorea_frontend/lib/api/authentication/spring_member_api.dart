@@ -8,6 +8,7 @@ class SpringHttpApi {
   static const String httpUri = '192.168.0.8:8888';
   static var signInResponse;
   static var signUpResponse;
+  static var removeResponse;
 
   signInApi(MemberSignInRequest request) async {
     var body = json.encode(request);
@@ -18,7 +19,7 @@ class SpringHttpApi {
         headers: {"Content-Type": "application/json"},
         body: body,
       );
-    } catch (e){
+    } catch (e) {
       debugPrint(e.toString());
     }
   }
@@ -32,7 +33,18 @@ class SpringHttpApi {
         headers: {"Content-Type": "application/json"},
         body: body,
       );
-    } catch (e){
+    } catch (e) {
+      debugPrint(e.toString());
+    }
+  }
+
+  memberRemoveApi(String email) async {
+    try {
+      removeResponse = await http.post(
+        Uri.http(httpUri, '/member/remove/$email'),
+        headers: {"Content-Type": "application/json"},
+      );
+    } catch (e) {
       debugPrint(e.toString());
     }
   }
@@ -44,10 +56,7 @@ class MemberSignInRequest {
 
   MemberSignInRequest(this.email, this.password);
 
-  Map<String, dynamic> toJson() => {
-    'email' : email,
-    'password' : password
-  };
+  Map<String, dynamic> toJson() => {'email': email, 'password': password};
 }
 
 class MemberSignUpRequest {
@@ -58,8 +67,8 @@ class MemberSignUpRequest {
   MemberSignUpRequest(this.email, this.password, this.nickname);
 
   Map<String, dynamic> toJson() => {
-    'email' : email,
-    'password' : password,
-    'nickname' : nickname,
-  };
+        'email': email,
+        'password': password,
+        'nickname': nickname,
+      };
 }
