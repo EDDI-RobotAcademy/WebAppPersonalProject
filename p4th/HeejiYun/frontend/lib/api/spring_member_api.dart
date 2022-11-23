@@ -3,16 +3,16 @@ import 'dart:convert';
 import 'package:flutter/cupertino.dart';
 import 'package:http/http.dart' as http;
 
+import '../utility/http_uri.dart';
+
 class SpringMemberApi {
-  static const String httpUriHome = '192.168.1.102:7779';
-  static const String httpUriTmp = '192.168.0.15:7779';
 
   Future<bool?> emailCheck ( String email ) async {
     var data = { 'email': email };
     var body = json.encode(data);
 
     var response = await http.post(
-      Uri.http(httpUriHome, '/member/check-email/$email'),
+      Uri.http(HttpUri.home, '/member/check-email/$email'),
       headers: {"Content-Type": "application/json"},
       body: body,
     );
@@ -31,7 +31,7 @@ class SpringMemberApi {
     var body = json.encode(data);
 
     var response = await http.post(
-      Uri.http(httpUriHome, '/member/check-nickname/$nickname'),
+      Uri.http(HttpUri.home, '/member/check-nickname/$nickname'),
       headers: {"Content-Type": "application/json"},
       body: body,
     );
@@ -54,7 +54,7 @@ class SpringMemberApi {
     debugPrint(body);
 
     var response = await http.post(
-      Uri.http(httpUriHome, '/member/sign-up'),
+      Uri.http(HttpUri.home, '/member/sign-up'),
       headers: {"Content-Type": "application/json"},
       body: body,
     );
@@ -76,7 +76,7 @@ class SpringMemberApi {
     debugPrint(body);
 
     var response = await http.post(
-      Uri.http(httpUriHome, '/member/sign-in'),
+      Uri.http(HttpUri.home, '/member/sign-in'),
       headers: {"Content-Type": "application/json"},
       body: body,
     );
@@ -90,7 +90,61 @@ class SpringMemberApi {
       throw Exception("통신 실패");
     }
   }
+
+  Future<UserDataResponse> requestUserData(String? userToken) async {
+
+    var data = { 'userToken' : userToken };
+    var body = json.encode(data);
+
+    var response = await http.post(
+        Uri.http(HttpUri.home, '/member/data-read'),
+        headers: {"Content-Type": "application/json"},
+        body: body,);
+
+    if (response.statusCode == 200) {
+      debugPrint("통신 확인");
+
+      var jsonResData = jsonDecode(utf8.decode(response.bodyBytes));
+      UserDataResponse resData = UserDataResponse.fromJson(jsonResData);
+
+      return resData;
+    } else {
+      throw Exception("통신 실패");
+    }
+  }
+
+  Future<bool?> requestSignOut (String? userToken) async {
+    var data = { 'userToken': userToken };
+    var body = json.encode(data);
+
+    var response = await http.post(
+      Uri.http(HttpUri.home, '/member/sign-out'),
+      headers: {"Content-Type": "application/json"},
+      body: body,
+    );
+
+    if (response.statusCode == 200) {
+      debugPrint("통신 확인");
+      return json.decode(response.body);
+    } else {
+      throw Exception("통신 실패");
+    }
+  }
 }
+class UserDataResponse {
+  String userEmail;
+  String userNickname;
+
+  UserDataResponse({required this.userEmail, required this.userNickname});
+
+  factory UserDataResponse.fromJson(Map<String, dynamic> json) {
+    return UserDataResponse(
+        userEmail: json["userEmail"] as String,
+        userNickname: json["userNickname"] as String
+    );
+  }
+}
+
 
 class SignInResponse {
   var userToken;

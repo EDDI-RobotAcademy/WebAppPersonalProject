@@ -1,11 +1,13 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:frontend/api/spring_member_api.dart';
+import 'package:frontend/utility/providers/login_data_provider.dart';
 import 'package:provider/provider.dart';
 
-import '../components/forms/BoardListView.dart';
+import '../components/forms/board_list_view.dart';
 import '../components/custom_drawer.dart';
 import '../components/custom_app_bar.dart';
-import '../utility/board_list_provider.dart';
+import '../utility/providers/board_list_provider.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({Key? key}) : super(key: key);
@@ -15,19 +17,26 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
+  late UserDataResponse res;
   late BoardListProvider _providerTest;
-  dynamic userInfo;
-  bool loginState = false;
+  late LoginDataProvider _loginDataProvider;
 
   @override
   void initState() {
+    _loginDataProvider = Provider.of<LoginDataProvider>(context, listen: false);
+    _providerTest = Provider.of<BoardListProvider>(context, listen: false);
+
     super.initState();
   }
 
   @override
   Widget build(BuildContext context) {
-    _providerTest = Provider.of<BoardListProvider>(context, listen: false);
     _providerTest.loadEveryBoards();
+    debugPrint("homepage loginstate:" + _loginDataProvider.loginState.toString());
+
+    if(_loginDataProvider.loginState == true) {
+      _loginDataProvider.getUserData();
+    }
 
     return Scaffold(
       appBar: CommonAppBar(title: "HOME-ALONE"),
@@ -41,7 +50,7 @@ class _HomePageState extends State<HomePage> {
             );
           },
         ),
-      drawer: CustomDrawer(isLogin: loginState),
+      drawer: CustomDrawer(),
     );
   }
 }

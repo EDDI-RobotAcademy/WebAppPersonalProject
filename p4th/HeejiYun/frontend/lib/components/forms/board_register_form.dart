@@ -5,7 +5,8 @@ import 'package:frontend/components/buttons/category_drop-down_btn.dart';
 import 'package:frontend/components/custom_app_bar.dart';
 import 'package:frontend/components/custom_drawer.dart';
 import 'package:frontend/components/text_form_fields/text_form_field_for_board.dart';
-import 'package:frontend/utility/category_provider.dart';
+import 'package:frontend/utility/providers/category_provider.dart';
+import 'package:frontend/utility/providers/login_data_provider.dart';
 import 'package:provider/provider.dart';
 
 import '../../utility/size.dart';
@@ -22,6 +23,7 @@ class _BoardRegisterFormState extends State<BoardRegisterForm> {
 
   late TextEditingController titleController = TextEditingController();
   late TextEditingController contentController = TextEditingController();
+  late LoginDataProvider _loginDataProvider;
 
   late String title;
   late String writer;
@@ -36,7 +38,8 @@ class _BoardRegisterFormState extends State<BoardRegisterForm> {
     contentController.addListener(() {
       content = contentController.text;
     });
-    // 여기서 로그인 중인 사용자 nickname을 받아올 예정
+    _loginDataProvider = Provider.of<LoginDataProvider>(context, listen: false);
+
     super.initState();
   }
 
@@ -51,10 +54,11 @@ class _BoardRegisterFormState extends State<BoardRegisterForm> {
   @override
   Widget build(BuildContext context) {
     final _formKey = GlobalKey<FormState>();
+    writer = _loginDataProvider.userNickname;
 
     return Scaffold(
       appBar: CommonAppBar(title: "게시물 작성하기"),
-      drawer: CustomDrawer(isLogin: true,),
+      drawer: CustomDrawer(),
       body: Container(
             padding: const EdgeInsets.all(16),
             child: Form(
@@ -71,9 +75,7 @@ class _BoardRegisterFormState extends State<BoardRegisterForm> {
                       return TextButton(
                           onPressed: () {
                             if (_formKey.currentState!.validate()) {
-                              writer = "철수";
                               boardCategoryName = category.category;
-                              // debugPrint("폼에서 카테고리:" + boardCategoryName);
                               SpringBoardApi().requestBoardRegister(BoardRegisterRequest(title, writer, content, boardCategoryName));
                               moveToList(boardCategoryName);
                             } else {

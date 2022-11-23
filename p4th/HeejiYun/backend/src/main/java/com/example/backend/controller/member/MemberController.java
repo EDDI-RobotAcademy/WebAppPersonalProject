@@ -1,8 +1,11 @@
 package com.example.backend.controller.member;
 
 import com.example.backend.service.member.MemberService;
+import com.example.backend.service.member.request.FlutterUserTokenRequest;
+import com.example.backend.service.member.request.MemberModifyRequest;
 import com.example.backend.service.member.request.MemberRegisterRequest;
 import com.example.backend.service.member.request.MemberSignInRequest;
+import com.example.backend.service.member.response.MemberDataResponse;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -44,5 +47,33 @@ public class MemberController {
         log.info("signIn: " + request);
 
         return service.signIn(request);
+    }
+
+    @PostMapping("/sign-out")
+    public Boolean signOut(@RequestBody FlutterUserTokenRequest request) {
+        log.info("signOutRequest: " + request);
+
+        return service.signOut(request);
+    }
+
+    @PostMapping("/data-read")
+    public MemberDataResponse readUserData(@RequestBody FlutterUserTokenRequest request) {
+        log.info("readUserData: " + request);
+
+        return service.userData(request);
+    }
+
+    @PutMapping("/data-modify")
+    public Boolean modifyUserData(@RequestBody MemberModifyRequest request) {
+        log.info("modifyUserData: " + request);
+
+        return service.modifyUserData(request);
+    }
+
+    @DeleteMapping("/unregister")
+    public Boolean removeMember(@RequestBody FlutterUserTokenRequest request) {
+        log.info("removeMember: " + request);
+
+        return service.removeMember(request);
     }
 }

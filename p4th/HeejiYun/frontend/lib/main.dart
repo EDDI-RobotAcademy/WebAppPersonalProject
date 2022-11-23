@@ -8,8 +8,10 @@ import 'package:frontend/pages/my_page.dart';
 import 'package:frontend/pages/sign_in_page.dart';
 import 'package:frontend/pages/sign_up_complete_page.dart';
 import 'package:frontend/pages/sign_up_page.dart';
+import 'package:frontend/utility/providers/category_provider.dart';
 import 'package:frontend/utility/main_color.dart';
-import 'package:frontend/utility/board_list_provider.dart';
+import 'package:frontend/utility/providers/board_list_provider.dart';
+import 'package:frontend/utility/providers/login_data_provider.dart';
 import 'package:provider/provider.dart';
 
 void main() {
@@ -26,7 +28,9 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MultiProvider(
         providers: [
-          ChangeNotifierProvider(create: (BuildContext context) => BoardListProvider())
+          ChangeNotifierProvider(create: (BuildContext context) => BoardListProvider()),
+          ChangeNotifierProvider(create: (BuildContext context) => CategoryProvider()),
+          ChangeNotifierProvider(create: (BuildContext context) => LoginDataProvider()),
       ],
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
@@ -43,7 +47,7 @@ class MyApp extends StatelessWidget {
         minimumSize: Size(300, 45),
         ))),
         title: 'HOME ALONE',
-        initialRoute: "/home",
+        initialRoute: "/my-page",
         routes: {
         "/sign-up": (context) => SignUpPage(),
         "/home": (context) => HomePage(),
