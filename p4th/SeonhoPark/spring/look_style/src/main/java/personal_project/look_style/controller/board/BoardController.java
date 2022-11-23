@@ -43,6 +43,13 @@ public class BoardController {
         return boardService.list(boardType);
     }
 
+    @GetMapping("/writer/list/{writer}")
+    public List<Board> findBoardListByWriter(@PathVariable("writer") String writer) {
+        log.info("findBoardListByWriter()");
+
+        return boardService.findBoardListByWriter(writer);
+    }
+
     @GetMapping("/read/{boardNo}")
     public Board boardRead(@PathVariable("boardNo") Long boardNo) {
         log.info("boardRead()");

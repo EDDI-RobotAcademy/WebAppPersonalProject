@@ -12,4 +12,7 @@ public interface BoardRepository extends JpaRepository<Board, Long> {
 
     @Query("select b from Board b where b.boardType = :boardType")
     List<Board> findBoardsByBoardType(Sort sort, @Param("boardType") String boardType);
+
+    @Query("select b from Board b where b.writer = :writer")
+    List<Board> findBoardsByWriter(Sort sort, @Param("writer") String writer);
 }

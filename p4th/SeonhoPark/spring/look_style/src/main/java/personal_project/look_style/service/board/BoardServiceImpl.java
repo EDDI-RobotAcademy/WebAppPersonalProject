@@ -76,7 +76,12 @@ public class BoardServiceImpl implements BoardService{
 
     @Override
     public List<Board> list(String boardType) {
-        return boardRepository.findBoardsByBoardType(Sort.by(Sort.Direction.DESC, "boardNo"),boardType);
+        return boardRepository.findBoardsByBoardType(Sort.by(Sort.Direction.DESC, "boardNo"), boardType);
+    }
+
+    @Override
+    public List<Board> findBoardListByWriter(String writer) {
+        return boardRepository.findBoardsByWriter(Sort.by(Sort.Direction.DESC, "boardNo"), writer);
     }
 
     @Override
