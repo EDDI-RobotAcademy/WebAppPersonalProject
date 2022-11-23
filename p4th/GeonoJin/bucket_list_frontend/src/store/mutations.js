@@ -8,7 +8,8 @@ import{
     GET_CURRENT_BUCKET_LIST_CATEGORY,
     REQUEST_MY_BUCKET_LIST_TO_SPRING,
     REQUEST_SEARCH_BUCKET_LIST_TO_SPRING,
-    REQUEST_ALL_BUCKET_LIST_TOTAL_PAGE_FROM_SPRING
+    REQUEST_ALL_BUCKET_LIST_TOTAL_PAGE_FROM_SPRING,
+    REQUEST_BUCKET_LIST_TOTAL_PAGE_BY_CATEGORY_FROM_SPRING
 } from "./mutation-types"
 
 export default {
@@ -41,5 +42,8 @@ export default {
     },
     [REQUEST_ALL_BUCKET_LIST_TOTAL_PAGE_FROM_SPRING](state, passingData) {
         state.allBucketListTotalPageValue = passingData;
+    },
+    [REQUEST_BUCKET_LIST_TOTAL_PAGE_BY_CATEGORY_FROM_SPRING](state, passingData) {
+        state.bucketListToTalPageByCategory = passingData
     },
 }

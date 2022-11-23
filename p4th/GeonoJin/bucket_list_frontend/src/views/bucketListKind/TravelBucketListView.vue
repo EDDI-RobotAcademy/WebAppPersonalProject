@@ -1,5 +1,9 @@
 <template>
-  <travel-bucket-list :categoryName="categoryName" :currentCategoryBucketList="currentCategoryBucketList"/>
+  <travel-bucket-list :categoryName="categoryName"
+                      :currentCategoryBucketList="currentCategoryBucketList"
+                      :totalPage="bucketListToTalPageByCategory"
+  />
+
 </template>
 
 <script>
@@ -12,7 +16,8 @@ export default {
   },
   computed:{
     ...mapState([
-      'currentCategoryBucketList'
+      'currentCategoryBucketList',
+      'bucketListToTalPageByCategory'
     ])
   },
   data(){
@@ -23,12 +28,14 @@ export default {
   },
   methods:{
     ...mapActions([
-      'getCurrentBucketListCategory'
+      'getCurrentBucketListCategory',
+      'requestBucketListTotalPageByCategoryFromSpring'
     ])
   },
   async mounted() {
     const {categoryName, pageValue} = this
     await this.getCurrentBucketListCategory({categoryName, pageValue})
+    await this.requestBucketListTotalPageByCategoryFromSpring(this.categoryName)
   }
 }
 </script>

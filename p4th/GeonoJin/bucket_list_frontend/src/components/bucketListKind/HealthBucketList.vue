@@ -43,7 +43,7 @@
       <div class="text-center">
         <v-pagination
             v-model="pageValue"
-            :length="6"
+            :length="totalPage"
             @input="paging"
         ></v-pagination>
       </div>
@@ -64,6 +64,9 @@ export default {
     },
     currentCategoryBucketList:{
       type: Array
+    },
+    totalPage:{
+      type: Number
     }
   },
   data(){

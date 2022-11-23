@@ -10,6 +10,7 @@ export default {
     currentCategoryBucketList: [],
     bucketListByNickname: [],
     searchedBucketList: [],
-    allBucketListTotalPageValue: 0
+    allBucketListTotalPageValue: 0,
+    bucketListToTalPageByCategory: 0
 
 }
