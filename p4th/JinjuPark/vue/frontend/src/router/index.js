@@ -6,6 +6,7 @@ import DiaryBoardListView from "@/views/boards/DiaryBoardListView";
 import DiaryBoardRegisterView from "@/views/boards/DiaryBoardRegisterView";
 import DiaryBoardReadView from "@/views/boards/DiaryBoardReadView";
 import DiaryBoardModifyView from "@/views/boards/DiaryBoardModifyView";
+import FreeBoardListView from "@/views/boards/FreeBoardListView";
 import AllBoardListView from "@/views/boards/AllBoardListView";
 
 
@@ -30,6 +31,11 @@ routes = [
     component:  DiaryBoardListView
   },
 
+  {
+    path: '/free-board-list',
+    name: 'FreeBoardListView',
+    component: FreeBoardListView
+  },
   {
     path: '/all-board-list',
     name: 'AllBoardListView',
