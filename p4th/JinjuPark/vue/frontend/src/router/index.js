@@ -1,29 +1,19 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
-import CommonComponentsTestView from "@/views/board/CommonComponentsTestView";
 import SignInView from "@/views/account/SignInView";
 import SignUpView from "@/views/account/SignUpView";
-import MainHomeBoardView from "@/components/common/CommonMainMenuTemplate";
-import BoardTestView from "@/views/board/BoardTestView";
-import HomeView from "@/views/HomeView";
-import DiaryBoardListView from "@/views/boards/exercise/DiaryBoardListView";
-import DiaryBoardRegisterView from "@/views/boards/exercise/DiaryBoardRegisterView";
-import DiaryBoardReadView from "@/views/boards/exercise/DiaryBoardReadView";
-import DiaryBoardModifyView from "@/views/boards/exercise/DiaryBoardModifyView";
+import DiaryBoardListView from "@/views/boards/DiaryBoardListView";
+import DiaryBoardRegisterView from "@/views/boards/DiaryBoardRegisterView";
+import DiaryBoardReadView from "@/views/boards/DiaryBoardReadView";
+import DiaryBoardModifyView from "@/views/boards/DiaryBoardModifyView";
+import AllBoardListView from "@/views/boards/AllBoardListView";
+
 
 Vue.use(VueRouter)
 
-const routes = [
-  {
-    path: '/home',
-    name: 'home',
-    component: HomeView
-  },
-  {
-    path: '/common-components',
-    name: 'CommonComponentsTestView',
-    component: CommonComponentsTestView
-  },
+let routes;
+routes = [
+
   {
     path: '/sign-up',
     name: 'SignUpView',
@@ -35,21 +25,16 @@ const routes = [
     component: SignInView
   },
   {
-    path: '/main-home-board',
-    name: 'MainHomeBoardView',
-    component: MainHomeBoardView
-  },
-  {
-    path: '/',
-    name: 'BoardTest',
-    component: BoardTestView
-  },
-  {
     path: '/diary-board-list',
     name: 'DiaryBoardListView',
-    component: DiaryBoardListView
+    component:  DiaryBoardListView
   },
 
+  {
+    path: '/all-board-list',
+    name: 'AllBoardListView',
+    component: AllBoardListView
+  },
   {
     path: '/diary-board-register',
     name: 'DiaryBoardRegisterView',
@@ -62,7 +47,7 @@ const routes = [
     components: {
       default: DiaryBoardReadView
     },
-    props:{
+    props: {
       default: true
     }
   },
@@ -72,12 +57,12 @@ const routes = [
     components: {
       default: DiaryBoardModifyView
     },
-    props:{
+    props: {
       default: true
     }
   },
 
-]
+];
 
 const router = new VueRouter({
   mode: 'history',
