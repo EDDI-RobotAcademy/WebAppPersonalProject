@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import '../components/app_bar/common_drawer_menu.dart';
-import '../components/app_bar/common_top_app_bar.dart';
-import '../components/match_schedule/match_schedule_form.dart';
+import '../../components/app_bar/common_drawer_menu.dart';
+import '../../components/app_bar/common_top_app_bar.dart';
+import '../../components/match_schedule/match_schedule_form.dart';
 
 class MatchSchedulePage extends StatefulWidget {
   const MatchSchedulePage({Key? key}) : super(key: key);
@@ -19,7 +19,7 @@ class _MatchScheduleState extends State<MatchSchedulePage> {
         title: const Text('경기 일정'),
         appBar: AppBar(),
       ),
-      drawer: const Drawer(
+      drawer: Drawer(
         child: CommonDrawerMenu(),
       ),
       body: SingleChildScrollView(

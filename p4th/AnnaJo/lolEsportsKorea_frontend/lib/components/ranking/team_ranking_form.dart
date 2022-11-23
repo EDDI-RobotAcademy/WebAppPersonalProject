@@ -61,73 +61,76 @@ class _TeamRankingFormState extends State<TeamRankingForm> {
         ),
       );
     } else {
-      return Column(children: <Widget>[
-        DropdownButton(
-          value: selectedDropdown,
-          items: dropdownList.map((String item) {
-            return DropdownMenuItem<String>(
-              child: Text(
-                '$item',
-                style: const TextStyle(fontSize: 20),
-              ),
-              value: item,
-            );
-          }).toList(),
-          borderRadius: BorderRadius.circular(10),
-          onChanged: (dynamic value) {
-            setState(() {
-              selectedDropdown = value;
-            });
-            addTeamRankingInfo(selectedDropdown);
-          },
-        ),
-        const SizedBox(height: 10.0),
-        SingleChildScrollView(
-          child: ListView(shrinkWrap: true, children: [
-            TeamTankingCardWidget(
-              list: rankingList,
-              index: 0,
+      return SingleChildScrollView(
+        child: Column(children: <Widget>[
+          DropdownButton(
+            value: selectedDropdown,
+            items: dropdownList.map((String item) {
+              return DropdownMenuItem<String>(
+                child: Text(
+                  '$item',
+                  style: const TextStyle(fontSize: 20),
+                ),
+                value: item,
+              );
+            }).toList(),
+            borderRadius: BorderRadius.circular(10),
+            onChanged: (dynamic value) {
+              setState(() {
+                selectedDropdown = value;
+              });
+              addTeamRankingInfo(selectedDropdown);
+            },
+          ),
+          const SizedBox(height: 10.0),
+          SingleChildScrollView(
+            child: Column(
+              children: <Widget>[
+                TeamTankingCardWidget(
+                  list: rankingList,
+                  index: 0,
+                ),
+                TeamTankingCardWidget(
+                  list: rankingList,
+                  index: 1,
+                ),
+                TeamTankingCardWidget(
+                  list: rankingList,
+                  index: 2,
+                ),
+                TeamTankingCardWidget(
+                  list: rankingList,
+                  index: 3,
+                ),
+                TeamTankingCardWidget(
+                  list: rankingList,
+                  index: 4,
+                ),
+                TeamTankingCardWidget(
+                  list: rankingList,
+                  index: 5,
+                ),
+                TeamTankingCardWidget(
+                  list: rankingList,
+                  index: 6,
+                ),
+                TeamTankingCardWidget(
+                  list: rankingList,
+                  index: 7,
+                ),
+                TeamTankingCardWidget(
+                  list: rankingList,
+                  index: 8,
+                ),
+                TeamTankingCardWidget(
+                  list: rankingList,
+                  index: 9,
+                ),
+              ],
             ),
-            TeamTankingCardWidget(
-              list: rankingList,
-              index: 1,
-            ),
-            TeamTankingCardWidget(
-              list: rankingList,
-              index: 2,
-            ),
-            TeamTankingCardWidget(
-              list: rankingList,
-              index: 3,
-            ),
-            TeamTankingCardWidget(
-              list: rankingList,
-              index: 4,
-            ),
-            TeamTankingCardWidget(
-              list: rankingList,
-              index: 5,
-            ),
-            TeamTankingCardWidget(
-              list: rankingList,
-              index: 6,
-            ),
-            TeamTankingCardWidget(
-              list: rankingList,
-              index: 7,
-            ),
-            TeamTankingCardWidget(
-              list: rankingList,
-              index: 8,
-            ),
-            TeamTankingCardWidget(
-              list: rankingList,
-              index: 9,
-            ),
-          ]),
-        ),
-      ]);
-      // }
+          )
+        ]),
+      ); // }
     }
   }
 }

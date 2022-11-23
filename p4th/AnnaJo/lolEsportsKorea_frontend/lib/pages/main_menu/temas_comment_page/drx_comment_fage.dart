@@ -1,11 +1,13 @@
 import 'package:comment_box/comment/comment.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:lol_esports_korea_app/components/my_team/team_comment_data.dart';
 
 import '../../../api/comment/spring_comment_api.dart';
 import '../../../components/app_bar/common_top_app_bar.dart';
 import '../../../utility/common_alert_dialog.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
+import 'package:intl/intl.dart';
 
 bool load = false;
 String myTeam = 'DRX';
@@ -19,21 +21,24 @@ class DRXCommentTestPage extends StatefulWidget {
 }
 
 class _DRXCommentTestPage extends State<DRXCommentTestPage> {
+  static const _storage = FlutterSecureStorage();
+  dynamic nickname = '';
   final formKey = GlobalKey<FormState>();
   final TextEditingController commentController = TextEditingController();
   final RefreshController _refreshController =
       RefreshController(initialRefresh: false);
-  var now = DateTime.now();
+  String formatDate = DateFormat('yyyy-MM-dd HH:mm:ss').format(DateTime.now());
 
   commentRegisterAction() async {
-    CommentRequest commentRequest = CommentRequest('DRX', 'Drx Fan',
-        'assets/images/DRX.png', commentController.text, now.toString());
+    CommentRequest commentRequest = CommentRequest('DRX', nickname,
+        'assets/images/DRX.png', commentController.text, formatDate);
 
     await SpringCommentApi().registerApi(commentRequest);
 
     if (SpringCommentApi.commentRegisterResponse.statusCode == 200) {
-      //댓글 새로고침
-      getCommentList(myTeam);
+      setState(() {
+        getCommentList(myTeam);
+      });
       debugPrint('댓글 등록 성공');
     } else {
       _commentFailShowDialog();
@@ -45,6 +50,9 @@ class _DRXCommentTestPage extends State<DRXCommentTestPage> {
   void initState() {
     super.initState();
     getCommentList(myTeam);
+    WidgetsBinding.instance?.addPostFrameCallback((_) {
+      checkUserState();
+    });
   }
 
   Future getCommentList(String request) async {
@@ -61,6 +69,18 @@ class _DRXCommentTestPage extends State<DRXCommentTestPage> {
       }
       debugPrint("commentLists : " + commentLists[0].contents);
     });
+  }
+
+  /// 회원 닉네임 불러오기
+  Future<void> checkUserState() async {
+    try {
+      nickname = await _storage.read(key: 'nickname');
+      setState(() {
+        nickname = nickname;
+      });
+    } catch (e) {
+      debugPrint('e');
+    }
   }
 
   Widget commentChild(commentLists) {
@@ -105,7 +125,7 @@ class _DRXCommentTestPage extends State<DRXCommentTestPage> {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: CommonTopAppBar(
-          title: const Text('T1'),
+          title: const Text('DRX'),
           appBar: AppBar(),
         ),
         body: SmartRefresher(
@@ -120,12 +140,11 @@ class _DRXCommentTestPage extends State<DRXCommentTestPage> {
               sendButtonMethod: () {
                 if (formKey.currentState!.validate()) {
                   commentRegisterAction();
-                  print(commentController.text);
                   _refreshController.refreshCompleted();
                   commentController.clear();
                   FocusScope.of(context).unfocus();
                 } else {
-                  print("Not validated");
+                  debugPrint("Not validated");
                 }
               },
               formKey: formKey,

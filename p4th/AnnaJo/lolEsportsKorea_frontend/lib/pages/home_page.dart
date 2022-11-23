@@ -9,18 +9,15 @@ class HomePage extends StatefulWidget {
   _HomePageState createState() => _HomePageState();
 }
 
-class _HomePageState extends State<HomePage>{
-
+class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
-    return const Scaffold(
+    return Scaffold(
       resizeToAvoidBottomInset: false,
       drawer: Drawer(
         child: CommonDrawerMenu(),
       ),
-      body: Center(
-        child: BottomBar(),
-      ),
+      body: const Center(child: BottomBar()),
     );
   }
 }
