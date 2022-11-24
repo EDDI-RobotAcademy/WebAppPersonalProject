@@ -4,6 +4,7 @@ import SignInView from "@/views/account/SignInView";
 import SignUpView from "@/views/account/SignUpView";
 import DiaryBoardListView from "@/views/boards/DiaryBoardListView";
 import DiaryBoardRegisterView from "@/views/boards/DiaryBoardRegisterView";
+import MyPageView from "@/views/mypage/MyPageView";
 import DiaryBoardReadView from "@/views/boards/DiaryBoardReadView";
 import DiaryBoardModifyView from "@/views/boards/DiaryBoardModifyView";
 import FreeBoardListView from "@/views/boards/FreeBoardListView";
@@ -63,7 +64,13 @@ routes = [
     name: 'DiaryBoardRegisterView',
     component: DiaryBoardRegisterView
   },
-
+  //마이페이지
+  {
+    path: '/my-page',
+    name: 'MyPageView',
+    component: MyPageView
+  },
+//마이 비디오 페이지
   {
     path: '/my-save-video',
     name: 'MySaveVideoView',

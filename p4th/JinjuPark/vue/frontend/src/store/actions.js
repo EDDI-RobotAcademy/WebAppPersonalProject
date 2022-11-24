@@ -79,6 +79,7 @@ export default {
                 alert('게시글 수정을 완료했습니다.')
             })
     },
+
     // eslint-disable-next-line no-empty-pattern
     requestDeleteDiaryBoardToSpring ({ }, boardNo) {
         console.log('다이어리 삭제()')
@@ -186,4 +187,14 @@ export default {
             })
     },
 
+    // eslint-disable-next-line no-empty-pattern
+    requestModifyNickNameToSpring ({}, payload) {
+        console.log('닉네임 변경: '+payload.reNickName)
+        return axios.post(`http://localhost:7777/hometwang/member/modify-info/`,
+            {memberId: payload.memberId, reNickName: payload.reNickName})
+            .then((res) => {
+               alert(res.data)
+            })
+
+    },
 }
