@@ -11,10 +11,6 @@
 
 4. 여기서 사용자가 실제 사용하는 veiw단 파일에서 지정하는 값은 {{iconName}}과 {{btnName}}
  -->
-<!-- 버튼 색/ 글자 색
- class ="white--text"는 하얀색 글자
- class ="pink"는 버튼 핑크색 , 겅정 글자(기본 적용)
- class ="pink white--text"는 핑크색 버튼에 하얀색 글자  -->
   <v-btn
     class="ma-2"
     color="blue lighten-1"
@@ -31,7 +27,7 @@
   </v-btn>
 
 <!--
- isMobile이 true(모바일화면인 경우-> 화면사이즈 작음) icon만 보임
+ isMobile이 true(모바일화면인 경우-> 화면사이즈 작음) btnName만 보임
  -->
   <v-btn
       class="ma-2"
@@ -54,7 +50,7 @@ import commonMixins from '@/mixins/CommonMixins'
 export default {
   name: "CommonButton",
   mixins: [commonMixins],
-  props: {                 //글로벌컴포넌트이지만 속성을 받아야해서 props 써주는 건가?
+  props: {
     iconName: String,
     btnName: String,
   }

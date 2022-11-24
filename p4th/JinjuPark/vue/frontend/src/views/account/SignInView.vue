@@ -10,6 +10,7 @@ import LoginForm from "@/components/account/LoginForm";
 import cookies from 'vue-cookies';
 import axios from "axios";
 import Vue from 'vue';
+import {mapState} from "vuex";
 
 Vue.use(cookies);
 
@@ -20,15 +21,20 @@ export default {
   },
   data () {
     return {
-      isLogin: false
+      isLogin: false,
     }
   },
-  mounted () {
-    if (this.$store.state.isAuthenticated != false) {
-      this.isLogin = true
-    } else {
-      this.isLogin = false
-    }
+  computed: {
+    ...mapState([
+      'isAuthenticated'
+    ]),
+  },
+  beforeMount() {
+      if (this.$store.state.isAuthenticated != false) {
+        this.isLogin = true
+      } else {
+        this.isLogin = false
+      }
   },
   methods: {
      onSubmit (payload) {
@@ -38,9 +44,10 @@ export default {
         axios.post("http://localhost:7777/hometwang/member/sign-in", { email, password })
           .then((res) => {
             if (res.data) {
-              alert("로그인 성공!")
+              alert("로그인되었습니다.")
 
-              this.$store.state.isAuthenticated = true
+              this.$store.commit('IS_AUTHENTICATED', true)
+              this.$store.commit('USER_LOGIN_CHECK', true)
               this.$cookies.set("user", res.data, 3600);
               localStorage.setItem("userInfo", JSON.stringify(res.data))
               this.isLogin = true
@@ -53,12 +60,20 @@ export default {
             alert(res.response.data.message)
           })
       } else {
-        alert("이미 로그인 되어 있습니다!")
+        alert("이미 로그인되어 있습니다.")
       }
     }
   }
 }
+
+/**
+ 저장 → localStorage.setItem(”이름”, 저장할 데이터)
+ 가져올 때 → localStorage.getItem (”이름”)
+ 삭제 → localStorage.removeItem(”이름”)
+ */
+
 </script>
+
 
 <style scoped>
 

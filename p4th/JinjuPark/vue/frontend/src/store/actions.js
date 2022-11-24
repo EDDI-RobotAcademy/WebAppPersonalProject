@@ -3,24 +3,37 @@ import {
     REQUEST_DIARY_BOARD_FROM_SPRING,
     REQUEST_LOGIN_USER_FROM_SPRING,
    THUMB_STATUS_COUNT,
-    REQUEST_COMMENT_LIST_FROM_SPRING
+    REQUEST_COMMENT_LIST_FROM_SPRING,
+    VIDEOS, MY_SAVE_VIDEOS_LIST,
+    REQUEST_IMAGES_FROM_SPRING
 } from './mutation-types'
 
 import axios from 'axios'
 
 export default {
 
-    requestDiaryBoardListFromSpring ({ commit }, keyword) {
-        console.log('requestDiaryBoardListFromSpring()')
-        let url = 'http://localhost:7777/hometwang/boards/diary/list'
+    requestDiaryBoardListFromSpring ({ commit }, payload) {
+        // pageNo = 0(전체), 1(운동일기), 2(자유게시판), 3(질문게시판)
+        const pageNo = payload.pageNo
+        const keyword = payload.keyword
+        console.log('게시판 리스트 조회 페이지No: ' +pageNo +"키워드: "+ keyword)
+        let url = `http://localhost:7777/hometwang/boards/diary/list/${pageNo}`
         if(keyword != undefined){
             url += '?keyword='+encodeURIComponent(keyword)
         }
         return axios.get(url)
             .then((res) => {
-                //if payload = category 보내서 가져올때 diary는 diaryBoards에  이런식?
                 commit(REQUEST_DIARY_BOARD_LIST_FROM_SPRING, res.data)
                 console.log('다이어리 리스트 조회')
+            })
+    },
+    // eslint-disable-next-line no-empty-pattern
+    requestMyDiaryBoardListFromSpring ({ commit }, memberId) {
+
+        return axios.get(`http://localhost:7777/hometwang/boards/diary/mylist/${memberId}`)
+            .then((res) => {
+                commit(REQUEST_DIARY_BOARD_LIST_FROM_SPRING, res.data)
+                console.log('마이 다이어리 리스트 조회')
             })
     },
 
@@ -58,14 +71,15 @@ export default {
     requestDiaryBoardModifyToSpring ({ }, payload) {
         console.log('다이어리 게시글 수정()')
 
-        const {  boardNo, title, writer, category, authority, regDate, views, likes, noLikes, content } = payload
+        const {  boardNo, title, content } = payload
 
         return axios.put(`http://localhost:7777/hometwang/boards/diary/${boardNo}`,
-            {  title, writer, category, authority, regDate, views, likes, noLikes, content })
+            {  boardNo, title, content })
             .then(() => {
                 alert('게시글 수정을 완료했습니다.')
             })
     },
+
     // eslint-disable-next-line no-empty-pattern
     requestDeleteDiaryBoardToSpring ({ }, boardNo) {
         console.log('다이어리 삭제()')
@@ -96,6 +110,8 @@ export default {
                 alert('댓글이 등록되었습니다.')
             })
     },
+
+    //eslint-disable-next-line no-empty-pattern
     requestCommentListFromSpring ({ commit }, boardNo) {
         console.log('다이어리 댓글 읽기()')
 
@@ -108,7 +124,7 @@ export default {
     // eslint-disable-next-line no-empty-pattern
     requestModifyDiaryBoardCommentToSpring ({ }, payload) {
         return axios.put(`http://localhost:7777/hometwang/boards/diary/comment/${payload.commentId}`,
-            {id: payload.commentId, boardNo: payload.boardNo,
+            {id: payload.commentId, boardNo: payload.boardNo, writerId: payload.writerId,
                 writerNickname: payload.writerNickname, parentsCommentId: payload.parentsCommentId , content: payload.updateContent})
             .then(() => {
                 alert('댓글이 수정되었습니다')
@@ -127,6 +143,58 @@ export default {
             })
     },
 
+    requestVideoListFromSpring({commit}) {
+        console.log("비디오목록 받아오기()")
 
+        return axios.get('http://localhost:7777/hometwang/videos/list')
+            .then((res) => {
+                commit(VIDEOS, res.data)
+            })
+    },
 
+    // eslint-disable-next-line no-empty-pattern
+    requestSaveMyVideoFromSpring({}, payload) {
+
+        const memberId = payload.memberId
+        const videoId = payload.videoId
+
+        console.log("비디오 보관함에 저장하기()-비디오아이디:" +videoId)
+        return axios.post('http://localhost:7777/hometwang/videos/mysave', {memberId, videoId})
+            .then((res) => {
+                alert(res.data)
+                console.log("비디오 보관함 저장완료"+res)
+            })
+    },
+
+    requestMySaveVideoListFromSpring({commit}, payload) {
+
+            console.log("마이 세이브 비디오 멤버아이디 :"+payload)
+            const memberId = payload
+            return axios.post('http://localhost:7777/hometwang/videos/mysave/list', {memberId})
+                .then((res) => {
+                    commit(MY_SAVE_VIDEOS_LIST, res.data)
+                    console.log("마이 세이브 비디오 조회 리턴완료: " + res.data)
+                })
+        },
+    // eslint-disable-next-line no-empty-pattern
+    requestImageReadFromSpring ({ commit }, boardNo) {
+        console.log('다이어리 이미지 출력()')
+
+        return axios.get(`http://localhost:7777/hometwang/boards/diary/images/${boardNo}`)
+            .then((res) => {
+                commit(REQUEST_IMAGES_FROM_SPRING, res.data)
+                console.log("이미지 res.data: "+ res.data)
+            })
+    },
+
+    // eslint-disable-next-line no-empty-pattern
+    requestModifyNickNameToSpring ({}, payload) {
+        console.log('닉네임 변경: '+payload.reNickName)
+        return axios.post(`http://localhost:7777/hometwang/member/modify-info/`,
+            {memberId: payload.memberId, reNickName: payload.reNickName})
+            .then((res) => {
+               alert(res.data)
+            })
+
+    },
 }

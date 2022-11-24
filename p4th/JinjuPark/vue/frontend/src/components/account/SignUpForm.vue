@@ -70,7 +70,7 @@
               </div>
 
               <common-button-blue type="submit" block x-large
-                     class="mt-6" color="purple lighten-1" :disabled="(emailPass & streetPass) == false"
+                     class="mt-6" color="purple lighten-1" :disabled="(emailPass & streetPass &nicknamePass) == false"
                       btn-name="가입하기">
               </common-button-blue>
 
@@ -161,13 +161,7 @@ export default {
             })
       }
     },
-    // nicknameValidation() {
-    //   if (nicknameValid) {
-    //     this.nicknamePass = true
-    //   }
-    // },
     checkDuplicateNickName(){
-      // if (nicknameValid) {
         const {nickname} = this
         axios.post(`http://localhost:7777/hometwang/member/check-nickname/${nickname}`)
             .then((res) => {

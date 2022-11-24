@@ -8,5 +8,10 @@ export default {
 
     thumbStatusCount:{},
 
-    diaryComment:[]
+    diaryComment:[],
+
+    videos:{},
+    mySaveVideos:{},
+
+    diaryImages:{}
 }

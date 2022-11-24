@@ -2,8 +2,10 @@
   <v-card width="250px" max-height="150px" class="mb-5" v-show="this.$store.state.userLoginCheck">
     <v-card-subtitle> {{ loginUser[0].nickname }}님의 마이 페이지</v-card-subtitle>
 
+    <!--    [ { "id": 1, "email": "wow@gmail.com", "username": "wow", "nickname": "와우굿" } ] -->
+
     <v-card-text class="text--primary">
-      <div> {{loginUser[0].nickname}} 회원님, 안녕하세요</div>
+      <div> {{loginUser[0].username}} 회원님, 안녕하세요</div>
     </v-card-text>
 
     <v-card-actions>
@@ -16,9 +18,10 @@
       </v-btn>
       <v-btn
           color="grey"
-          text>
+          text
+          @click="MySaveVideo">
         <v-icon>mdi-heart-outline</v-icon>
-        Subscribe
+        Save
       </v-btn>
     </v-card-actions>
   </v-card>
@@ -47,10 +50,11 @@ export default {
       'requestLoginUserFromSpring'
     ]),
     myPage(){
-        this.$router.push({
-          name: 'MyPageView'
-        })
-      }
+      this.$router.push({ name: 'MyPageView'})
+      },
+    MySaveVideo(){
+      this.$router.push({ name: 'MySaveVideoView'})
+    }
   },
 
 }

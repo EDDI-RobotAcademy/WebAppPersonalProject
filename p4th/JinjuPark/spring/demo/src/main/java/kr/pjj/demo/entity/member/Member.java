@@ -2,11 +2,10 @@ package kr.pjj.demo.entity.member;
 
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 import javax.persistence.*;
-import java.util.HashSet;
-import java.util.Optional;
-import java.util.Set;
+import java.util.*;
 
 @Entity
 @NoArgsConstructor
@@ -27,6 +26,7 @@ public class Member {
     private String username;
 
     @Getter
+    @Setter
     @Column(nullable = false)
     private String nickname;
 

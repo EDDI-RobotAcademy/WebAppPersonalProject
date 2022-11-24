@@ -2,6 +2,7 @@ package kr.pjj.demo.controller.member;
 
 import kr.pjj.demo.controller.member.form.MemberLoginForm;
 import kr.pjj.demo.controller.member.form.MemberRegisterForm;
+import kr.pjj.demo.controller.member.request.MemberModifyInfo;
 import kr.pjj.demo.entity.member.Member;
 import kr.pjj.demo.service.member.MemberService;
 import lombok.extern.slf4j.Slf4j;
@@ -51,5 +52,15 @@ public class MemberController {
     public List<Member> loginUserInfo(@RequestBody String loginUserToken){
 
         return service.loginUserInfo(loginUserToken);
+    }
+
+    @PostMapping("/modify-info")
+    public String modifyInfo(@RequestBody MemberModifyInfo memberModifyInfo){
+        log.info("닉네임 변경 멤버아이디: "+ memberModifyInfo.getMemberId());
+        log.info("닉네임 변경 내용: "+ memberModifyInfo.getReNickName());
+        Long memberId = memberModifyInfo.getMemberId();
+        String reNickName = memberModifyInfo.getReNickName();
+
+        return service.modifyNickName(memberId, reNickName);
     }
 }
