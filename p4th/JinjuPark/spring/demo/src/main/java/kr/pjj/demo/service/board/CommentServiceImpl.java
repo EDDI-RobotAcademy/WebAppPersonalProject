@@ -1,11 +1,11 @@
-package kr.pjj.demo.service.boards.exercise;
+package kr.pjj.demo.service.board;
 
-import kr.pjj.demo.controller.member.boards.exercise.request.CommentModify;
-import kr.pjj.demo.controller.member.boards.exercise.request.CommentRequest;
-import kr.pjj.demo.entity.boards.exercise.Comment;
-import kr.pjj.demo.entity.boards.exercise.Diary;
-import kr.pjj.demo.repository.boards.exercise.CommentRepository;
-import kr.pjj.demo.repository.boards.exercise.DiaryRepository;
+import kr.pjj.demo.controller.board.request.CommentModify;
+import kr.pjj.demo.controller.board.request.CommentRequest;
+import kr.pjj.demo.entity.board.Comment;
+import kr.pjj.demo.entity.board.Diary;
+import kr.pjj.demo.repository.board.CommentRepository;
+import kr.pjj.demo.repository.board.DiaryRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -30,6 +30,7 @@ public class CommentServiceImpl implements CommentService{
     public void register(CommentRequest commentRequest) {
         Long boardNo = commentRequest.getBoardNo();
         String writerNickname = commentRequest.getWriterNickname();
+        Long writerId = commentRequest.getWriterId();
         Long parentsId = commentRequest.getParentsCommentId();
         String inputComment = commentRequest.getContent();
 
@@ -38,6 +39,7 @@ public class CommentServiceImpl implements CommentService{
 
         Comment comment = Comment.builder()
                 .writerNickname(writerNickname)
+                .writerId(writerId)
                 .content(inputComment)
                 .diary(diary)
                 .parentsCommentId(parentsId)
@@ -64,6 +66,7 @@ public class CommentServiceImpl implements CommentService{
 
         comment.setParentsCommentId(commentModify.getParentsCommentId());
         comment.setContent(commentModify.getContent());
+        comment.setWriterId(commentModify.getWriterId());
         comment.setWriterNickname(commentModify.getWriterNickname());
         comment.setDiary(diary);
         comment.setRegDate(regDate);

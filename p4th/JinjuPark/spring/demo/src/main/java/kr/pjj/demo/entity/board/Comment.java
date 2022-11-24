@@ -1,4 +1,4 @@
-package kr.pjj.demo.entity.boards.exercise;
+package kr.pjj.demo.entity.board;
 
 
 import lombok.AllArgsConstructor;
@@ -26,6 +26,8 @@ public class Comment {
 
     private Long parentsCommentId;
 
+    private Long writerId;
+
     private String writerNickname;
 
     @Column
@@ -39,7 +41,7 @@ public class Comment {
     private String regDate;
 
     @UpdateTimestamp
-    private Date updDate;
+    private Date upDate;
 
     @PrePersist
     public void onPrePersist(){

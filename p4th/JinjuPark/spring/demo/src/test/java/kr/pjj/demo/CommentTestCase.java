@@ -1,10 +1,10 @@
 package kr.pjj.demo;
 
-import kr.pjj.demo.entity.boards.exercise.Comment;
-import kr.pjj.demo.entity.boards.exercise.Diary;
-import kr.pjj.demo.entity.boards.exercise.response.CommentResponse;
-import kr.pjj.demo.repository.boards.exercise.CommentRepository;
-import kr.pjj.demo.repository.boards.exercise.DiaryRepository;
+import kr.pjj.demo.entity.board.Comment;
+import kr.pjj.demo.entity.board.Diary;
+import kr.pjj.demo.entity.board.response.CommentResponse;
+import kr.pjj.demo.repository.board.CommentRepository;
+import kr.pjj.demo.repository.board.DiaryRepository;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -27,7 +27,7 @@ public class CommentTestCase {
 
     @Test
     void createBoard(){
-        Diary diary = new Diary("운동일기", "오운완", "wow", "public", "wow");
+        Diary diary = new Diary( "오운완", "public", "wow");
         diaryRepository.save(diary);
 
     }
