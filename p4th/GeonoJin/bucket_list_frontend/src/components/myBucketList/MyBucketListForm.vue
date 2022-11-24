@@ -131,7 +131,6 @@
                 v-for="bucket in buckets" :key="bucket.bucketId"
                 max-width="250"
                 class="ma-5"
-                v-show="bucket.switchValue === false"
             >
               <router-link :to="{name: 'BucketListReadView',
             params: { bucketId: bucket.bucketId.toString() }}"

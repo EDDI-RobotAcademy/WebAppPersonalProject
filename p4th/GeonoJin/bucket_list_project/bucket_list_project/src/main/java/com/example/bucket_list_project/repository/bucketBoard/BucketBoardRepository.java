@@ -10,6 +10,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 
 import java.util.List;
+import java.util.Optional;
 
 public interface BucketBoardRepository extends JpaRepository<BucketBoard, Long> {
 
@@ -18,6 +19,9 @@ public interface BucketBoardRepository extends JpaRepository<BucketBoard, Long> 
 
     @Query("select b from BucketBoard b where b.writer = :writer")
     Page<BucketBoard> findByBucketListWriter(@Param("writer") String writer, Pageable pageable);
+
+    @Query("select b from BucketBoard b where b.writer = :writer")
+    Optional<BucketBoard> findByBucketListWriter(@Param("writer") String writer);
 
     List<BucketBoard> findByBucketTitleContaining(String bucketTitle);
 }

@@ -60,10 +60,12 @@
               <v-layout style="margin-left: 90px">
                 <v-card>
                   <v-card-text>
-                    <h4 style="margin-bottom: 20px">주의!🚨</h4>
+                    <h4 style="margin-bottom: 20px">주의!🚨 꼭 읽어봐주세요!</h4>
                     <hr/>
-                    <h5 style="margin-top: 30px"> ▪ 탈퇴 시 작성된 버킷리스트들은 모두 삭제됩니다.</h5>
-                    <h5>▪ 탈퇴 후 동일한 메일로 재가입이 가능합니다.</h5>
+                    <h5 style="margin-top: 5px"> ▪ 직접 작성한 버킷리스트는 자동으로 삭제되지 않으며, <br/> &nbsp;&nbsp;&nbsp; 만일 삭제를 원하시면 탈퇴 이전에 직접 삭제해야합니다. </h5>
+                    <h5 style="margin-top: 10px; margin-bottom: 30px">▪ 탈퇴 후 동일한 메일로 재가입이 가능합니다.</h5>
+                    <v-divider></v-divider>
+                    <h5 style="margin-top: 10px">▪ 닉네임 확인 시 위의 항목들에 대해 동의한 것으로 간주됩니다.</h5>
                   </v-card-text>
                 </v-card>
               </v-layout>
@@ -179,7 +181,7 @@ export default {
     checkNickname(){
       if (this.deleteNickname == this.nickname) {
         this.checkNicknameValue = true;
-        this.alertMessage = "입력한 닉네임과 일치합니다.";
+        this.alertMessage = "입력한 닉네임과 일치합니다. 회원탈퇴를 진행합니다.";
         this.alertWarning = true
 
       } else {
