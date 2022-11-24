@@ -20,7 +20,7 @@
           작성자
         </th>
         <td>
-          <input type="text" v-model="this.$store.state.loginEmail" readonly>
+          {{ this.$store.state.loginEmail }}
         </td>
       </tr>
       <tr>
