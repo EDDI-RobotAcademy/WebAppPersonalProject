@@ -43,6 +43,13 @@ public class BoardController {
         return boardService.list(boardType);
     }
 
+    @GetMapping("/writer/list/{writer}")
+    public List<Board> findBoardListByWriter(@PathVariable("writer") String writer) {
+        log.info("findBoardListByWriter()");
+
+        return boardService.findBoardListByWriter(writer);
+    }
+
     @GetMapping("/read/{boardNo}")
     public Board boardRead(@PathVariable("boardNo") Long boardNo) {
         log.info("boardRead()");
@@ -55,5 +62,28 @@ public class BoardController {
         log.info("findBoardImagesOnSpecificBoard()");
 
         return boardService.findBoardImagesOnSpecificBoard(boardNo);
+    }
+
+    @PutMapping(value = "/modify/{boardNo}", consumes = {MediaType.MULTIPART_FORM_DATA_VALUE, MediaType.APPLICATION_JSON_VALUE})
+    public void boardModify (@PathVariable("boardNo") Long boardNo,
+                              @RequestPart(value = "board") Board board,
+                              @RequestPart(value = "file",required = false) List<MultipartFile> file,
+                              @RequestParam(value = "imageNo", required = false) List<Long> imageNo) {
+        log.info("boardModify()");
+
+        if (file == null && imageNo == null) {
+            board.setBoardNo(boardNo);
+            boardService.modify(board);
+        } else  {
+            board.setBoardNo(boardNo);
+            boardService.modify(board, file, imageNo);
+        }
+    }
+
+    @DeleteMapping("/delete/{boardNo}")
+    public void boardRemove (@PathVariable("boardNo") Long boardNo) {
+        log.info("boardRemove()");
+
+        boardService.remove(boardNo);
     }
 }

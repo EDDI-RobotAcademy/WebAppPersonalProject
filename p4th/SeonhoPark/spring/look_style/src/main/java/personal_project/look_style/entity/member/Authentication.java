@@ -1,4 +1,4 @@
-package personal_project.look_style.entity;
+package personal_project.look_style.entity.member;
 
 import lombok.Getter;
 import lombok.NoArgsConstructor;

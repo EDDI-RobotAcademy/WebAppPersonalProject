@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:look_style/api/spring_api.dart';
+import 'package:look_style/api/member_spring_api.dart';
 import 'package:look_style/components/signUp/sign_up_form_field.dart';
 import 'package:look_style/utility/validation.dart';
 
@@ -48,9 +48,8 @@ class _SignUpNicknameTextFormFieldState
             child: TextButton(
               onPressed: buttonEnable
                   ? () {
-                      var validation = SpringApi().duplicateNicknameValidation(
-                          UserSignUpDuplicateNicknameValidationRequest(
-                              nickname!));
+                      var validation = MemberSpringApi().duplicateNicknameValidation(
+                          CheckDuplicateNicknameRequest(nickname!));
 
                       validation.then((value) {
                         if (value.success == true) {
@@ -59,6 +58,7 @@ class _SignUpNicknameTextFormFieldState
                               barrierDismissible: false,
                               builder: (context) {
                                 return AlertDialog(
+                                  shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
                                   content: Text(
                                     "사용 가능한 닉네임입니다.",
                                     textAlign: TextAlign.center,
@@ -68,7 +68,7 @@ class _SignUpNicknameTextFormFieldState
                                       onPressed: () {
                                         Get.back();
                                       },
-                                      child: Text("확인"),
+                                      child: Text("확인", style: TextStyle(color: Colors.black)),
                                     ),
                                   ],
                                 );
@@ -85,6 +85,7 @@ class _SignUpNicknameTextFormFieldState
                               barrierDismissible: false,
                               builder: (context) {
                                 return AlertDialog(
+                                  shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
                                   content: Text(
                                     "중복된 닉네임 입니다",
                                     textAlign: TextAlign.center,
@@ -94,7 +95,7 @@ class _SignUpNicknameTextFormFieldState
                                       onPressed: () {
                                         Get.back();
                                       },
-                                      child: Text("확인"),
+                                      child: Text("확인", style: TextStyle(color: Colors.black)),
                                     ),
                                   ],
                                 );

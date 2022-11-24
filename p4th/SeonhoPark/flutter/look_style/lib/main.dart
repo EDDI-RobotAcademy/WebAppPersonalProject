@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:look_style/pages/board_register_page.dart';
 import 'package:look_style/pages/main_page.dart';
 import 'package:look_style/pages/sign_in_page.dart';
 import 'package:look_style/pages/sign_up_page.dart';
@@ -21,10 +22,13 @@ class MyApp extends StatelessWidget {
         title: 'Look Style',
         debugShowCheckedModeBanner: false,
         theme: ThemeData(
+          // primarySwatch: Colors.grey,
+          // primaryColor: Colors.white10
         ),
         home: SignInPage(),
         getPages: [
           GetPage(name: '/main', page: () => MainPage()),
+          GetPage(name: '/sign-in', page: () => SignInPage()),
           GetPage(name: '/sign-up', page: () => SignUpPage()),
         ],
       ),

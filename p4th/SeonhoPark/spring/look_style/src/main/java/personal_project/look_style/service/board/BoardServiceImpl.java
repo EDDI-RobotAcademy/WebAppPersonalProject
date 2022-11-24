@@ -7,8 +7,10 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 import personal_project.look_style.entity.board.Board;
 import personal_project.look_style.entity.board.BoardImage;
+import personal_project.look_style.entity.board.Comment;
 import personal_project.look_style.repository.board.BoardImageRepository;
 import personal_project.look_style.repository.board.BoardRepository;
+import personal_project.look_style.repository.board.CommentRepository;
 import personal_project.look_style.service.board.request.BoardRequest;
 
 import java.io.FileNotFoundException;
@@ -30,6 +32,9 @@ public class BoardServiceImpl implements BoardService{
     @Autowired
     BoardImageRepository boardImageRepository;
 
+    @Autowired
+    CommentRepository commentRepository;
+
     @Override
     public void register(BoardRequest request, List<MultipartFile> file) {
         Board board = new Board();
@@ -39,8 +44,6 @@ public class BoardServiceImpl implements BoardService{
         board.setWriter(request.getWriter());
         board.setContent(request.getContent());
         board.setBoardType(request.getBoardType());
-
-        int i = 0;
 
         for (MultipartFile multipartFile: file) {
             BoardImage boardImage = new BoardImage();
@@ -58,8 +61,6 @@ public class BoardServiceImpl implements BoardService{
             } catch (IOException e) {
                 throw new RuntimeException(e);
             }
-            log.info(String.valueOf(boardImageList.get(i)));
-            i++;
         }
 
         boardRepository.save(board);
@@ -80,7 +81,12 @@ public class BoardServiceImpl implements BoardService{
 
     @Override
     public List<Board> list(String boardType) {
-        return boardRepository.findBoardsByBoardType(Sort.by(Sort.Direction.DESC, "boardNo"),boardType);
+        return boardRepository.findBoardsByBoardType(Sort.by(Sort.Direction.DESC, "boardNo"), boardType);
+    }
+
+    @Override
+    public List<Board> findBoardListByWriter(String writer) {
+        return boardRepository.findBoardsByWriter(Sort.by(Sort.Direction.DESC, "boardNo"), writer);
     }
 
     @Override
@@ -104,12 +110,58 @@ public class BoardServiceImpl implements BoardService{
     }
 
     @Override
-    public void modify(Board board) {
+    public void modify(Board board, List<MultipartFile> file, List<Long> imageNo) {
+        List<BoardImage> boardImageList = new ArrayList<>();
 
+        int i = 0;
+
+        for (MultipartFile multipartFile: file) {
+            BoardImage boardImage = new BoardImage();
+            if (imageNo != null) {
+                boardImage.setImageNo(imageNo.get(i));
+            }
+            boardImage.setImageName(multipartFile.getOriginalFilename());
+            boardImage.setBoard(board);
+            boardImageList.add(boardImage);
+            try {
+                FileOutputStream writer = new FileOutputStream(
+                        "../../flutter/look_style/assets/" + multipartFile.getOriginalFilename()
+                );
+                writer.write(multipartFile.getBytes());
+                writer.close();
+            } catch (FileNotFoundException e) {
+                throw new RuntimeException(e);
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
+        }
+        i++;
+
+        boardRepository.save(board);
+        boardImageRepository.saveAll(boardImageList);
+    }
+
+    @Override
+    public void modify(Board board) {
+        boardRepository.save(board);
     }
 
     @Override
     public void remove(Long boardNo) {
+        List<BoardImage> boardImages = boardImageRepository.findAllBoardImagesByBoardId(boardNo);
+        List<Comment> comments = commentRepository.findAllCommentsByBoardNo(boardNo);
+        List<Long> boardImageIds = new ArrayList<>();
+        List<Long> commentIds = new ArrayList<>();
+        for (int i = 0; i < boardImages.size(); i++) {
+            boardImageIds.add(boardImages.get(i).getImageNo());
+        }
+        for (int i = 0; i < comments.size(); i++) {
+            commentIds.add(comments.get(i).getId());
+        }
 
+        boardImageRepository.deleteAllById(boardImageIds);
+        commentRepository.deleteAllById(commentIds);
+
+        boardRepository.deleteById(boardNo);
     }
 }

@@ -1,8 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:get/get.dart';
+import 'package:look_style/api/board_spring_api.dart';
+import 'package:look_style/components/board/fashion_board_list.dart';
+import 'package:look_style/components/board/hairstyle_board_list.dart';
+import 'package:look_style/components/board/makeup_board_list.dart';
 import 'package:look_style/pages/board_register_page.dart';
+import 'package:look_style/pages/my_page.dart';
 import 'package:look_style/utility/custom_icons_icons.dart';
+
+import 'board_register_page.dart';
 
 class MainPage extends StatefulWidget {
   MainPage({Key? key, this.email, this.nickname}) : super(key: key);
@@ -23,13 +30,6 @@ class _MainPageState extends State<MainPage> {
 
   int _selectedPageIndex = 0;
 
-  List _pages = [
-    Text('1'),
-    Text('2'),
-    Text('3'),
-    Text('4'),
-  ];
-
   @override
   void initState() {
     WidgetsBinding.instance!.addPostFrameCallback((_) {
@@ -48,7 +48,7 @@ class _MainPageState extends State<MainPage> {
   _checkUserState() async{
     userToken = await storage.read(key: 'userToken');
     userEmail = await storage.read(key: 'userEmail');
-    userNickname = await storage.read(key: 'userNickname');
+    userNickname = (await storage.read(key: 'userNickname'))!;
     if (userToken == null) {
       print('로그인 된 사용자가 아님');
       Get.offNamed('/');
@@ -62,6 +62,12 @@ class _MainPageState extends State<MainPage> {
 
   @override
   Widget build(BuildContext context) {
+    List _pages = [
+      FashionBoardList(),
+      HairStyleBoardList(),
+      MakeUpBoardList(),
+      MyPage(userToken: userToken, userEmail: userEmail, userNickname: userNickname,)
+    ];
     return Scaffold(
       appBar: AppBar(
           leading: IconButton(
@@ -97,7 +103,7 @@ class _MainPageState extends State<MainPage> {
                                 leading: Icon(CustomIcons.outfit),
                                 title: Text('Fashion'),
                                 onTap: () {
-                                  Get.to(BoardRegisterPage(), arguments: [userNickname, '패션']);
+                                  Get.offAll(BoardRegisterPage(nickname: userNickname!, boardType: '패션'));
                                 },
                                 trailing: Icon(Icons.add),
                               ),
@@ -105,7 +111,7 @@ class _MainPageState extends State<MainPage> {
                                 leading: Icon(CustomIcons.salon),
                                 title: Text('Hair style'),
                                 onTap: () {
-                                  Get.to(BoardRegisterPage(), arguments: [userNickname, '헤어스타일']);
+                                  Get.offAll(BoardRegisterPage(nickname: userNickname!, boardType: '헤어스타일'));
                                 },
                                 trailing: Icon(Icons.add),
                               ),
@@ -113,7 +119,7 @@ class _MainPageState extends State<MainPage> {
                                 leading: Icon(CustomIcons.makeup),
                                 title: Text('Make-up'),
                                 onTap: () {
-                                  Get.to(BoardRegisterPage(), arguments: [userNickname, '메이크업']);
+                                  Get.offAll(BoardRegisterPage(nickname: userNickname!, boardType: '메이크업'));
                                 },
                                 trailing: Icon(Icons.add),
                               ),

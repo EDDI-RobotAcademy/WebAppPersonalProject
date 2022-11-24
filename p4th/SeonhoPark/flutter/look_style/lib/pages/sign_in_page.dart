@@ -48,9 +48,8 @@ class _SignInPageState extends State<SignInPage> {
           child: Center(
             child: Column(
               children: [
-                Image.asset('assets/logo.png' ,width: 300, height: 300,),
-                // Text("Look Style", style: TextStyle(fontSize: 40, fontFamily: "bazzi")),
-                SignInFormField(storage: storage,),
+                Image.asset('assets/look_style_logo.png' ,width: 300, height: 300,),
+                SignInFormField(storage: storage),
                 SizedBox(height: 20,),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,

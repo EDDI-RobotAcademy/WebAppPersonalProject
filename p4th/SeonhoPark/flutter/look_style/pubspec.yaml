@@ -35,6 +35,12 @@ dependencies:
   # Use with the CupertinoIcons class for iOS style icons.
   cupertino_icons: ^1.0.2
   http: ^0.13.4
+  get: ^4.6.5
+  flutter_secure_storage: ^6.0.0
+  dio: ^4.0.6
+  image_picker: ^0.8.6
+  smooth_page_indicator: ^1.0.0+2
+  intl: ^0.17.0
 
 dev_dependencies:
   flutter_test:
@@ -91,6 +97,14 @@ flutter:
     - family: jua
       fonts:
         - asset: fonts/BMJUA_ttf.ttf
+
+    - family: bazzi
+      fonts:
+        - asset: fonts/Bazzi.ttf
+
+    - family: CustomIcons
+      fonts:
+       - asset: assets/fonts/CustomIcons.ttf
   #
   # For details regarding fonts from package dependencies,
   # see https://flutter.dev/custom-fonts/#from-packages

@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 import 'package:look_style/api/board_spring_api.dart';
 import 'package:look_style/pages/board_read_page.dart';
 import 'package:get/get.dart';
@@ -25,6 +26,12 @@ class _FashionBoardListState extends State<FashionBoardList> {
           });
       }
     });
+  }
+  
+  DateTime updateTime(int index) {
+    DateTime time = DateTime.parse(list[index].updDate);
+    
+    return time;
   }
 
 
@@ -61,7 +68,8 @@ class _FashionBoardListState extends State<FashionBoardList> {
                             children: [
                               Icon(Icons.account_circle, size: 30,),
                               SizedBox(width: 10),
-                              Text('${list[index].writer}')
+                              Expanded(child: Text('${list[index].writer}')),
+                              Text(DateFormat("yyyy/MM/dd").format(updateTime(index)))
                             ],
                           ),
                           SizedBox(height: 10),

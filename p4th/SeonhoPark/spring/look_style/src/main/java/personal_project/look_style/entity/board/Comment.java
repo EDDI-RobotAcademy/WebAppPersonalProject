@@ -2,20 +2,31 @@ package personal_project.look_style.entity.board;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
-import personal_project.look_style.entity.member.Member;
+import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.UpdateTimestamp;
 
 import javax.persistence.*;
+import java.util.Date;
 
 @Data
 @Entity
-public class BoardImage {
+public class Comment {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long imageNo;
+    private Long id;
 
     @Column
-    private String imageName;
+    private String writer;
+
+    @Column
+    private String content;
+
+    @CreationTimestamp
+    private Date regDate;
+
+    @UpdateTimestamp
+    private Date updDate;
 
     @JsonIgnore
     @ManyToOne(fetch = FetchType.EAGER)
