@@ -12,6 +12,8 @@ public interface DiaryService {
 
     public List<Diary> AllList();
 
+    public List<Diary> MyDiaryList(Long memberId);
+
     public void register(DiaryRequest diaryRequest);
 
     public void registerWithFiles(List<MultipartFile> fileList, DiaryRequest diaryRequest);

@@ -85,6 +85,9 @@ public class DiaryServiceImpl implements DiaryService{
         return searchPageList;
     }
 
+    public List<Diary> MyDiaryList(Long memberId) {
+        return repository.findMyDiaryByMemberIdOrderByBoardNoDesc(memberId);
+    }
 
     @Override
     public void register(DiaryRequest diaryRequest) {

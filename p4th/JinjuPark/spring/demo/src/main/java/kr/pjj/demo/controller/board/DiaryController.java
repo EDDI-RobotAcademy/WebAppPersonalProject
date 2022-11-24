@@ -45,6 +45,12 @@ class DiaryController {
             }
     }
 
+    @GetMapping("/mylist/{memberId}")
+    public List<Diary> myDiaryList (@PathVariable("memberId") Long memberId) {
+        log.info("마이 다이어리 멤버아이디: "+ memberId);
+            return service.MyDiaryList(memberId);
+    }
+
     //이미지 없이 게시글 등록
     @PostMapping("/register")
     public void diaryRegister (@RequestBody DiaryRequest diaryRequest) {
@@ -87,7 +93,6 @@ class DiaryController {
     @PutMapping("/{boardNo}")
     public Diary diaryModify (@PathVariable("boardNo") Long boardNo, @RequestBody DiaryModify diaryModify) {
         log.info("다이어리 수정 ");
-
         return service.modify(diaryModify);
     }
 

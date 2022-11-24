@@ -119,4 +119,59 @@ public class BoardsTestCase {
         System.out.println(searchPageList);
     }
 
+    @Test
+    void myDiaryList() {
+        Long memberId = 1L;
+        List<Diary> myDiaryList = diaryRepository.findMyDiaryByMemberIdOrderByBoardNoDesc(memberId);
+        System.out.println("회원 1의 마이 다이어리:"+ myDiaryList);
+    }
+
+    @Test
+    void publicDiaryList() {
+        List<Diary> publicDiaryList = diaryRepository.findDiaryByPublicBoardNoDesc();
+        System.out.println("공개된 전체 다이어리:"+ publicDiaryList);
+    }
+
+    @Test
+    void publicSearchDiaryList() {
+        String titleKeyword="운동";
+        String contentKeyword ="운동";
+        List<Diary> publicSearchDiaryList = diaryRepository.findDiaryByPublicAndTitleContaining(titleKeyword, contentKeyword);
+        System.out.println("공개된 전체 다이어리 검색 결과:"+ publicSearchDiaryList);
+    }
+
+    @Test
+    void publicPageDiaryList() {
+        Long pageNo = 2L;
+        List<Diary> publicPageDiaryList = diaryRepository.findDiaryByPublicAndPageNoOrderByBoardNoDesc(pageNo);
+        System.out.println("공개된 전체 다이어리 검색 결과:"+ publicPageDiaryList);
+    }
+
+    @Test
+    void publicSearchPageDiaryList() {
+        Long pageNo = 2L;
+        String titleKeyword="운동";
+        String contentKeyword ="운동";
+        List<Diary> publicPageDiaryList = diaryRepository.findDiaryByPageNoAndTitleContaining(pageNo, titleKeyword, contentKeyword);
+        System.out.println("공개된 전체 다이어리 검색 결과:"+ publicPageDiaryList);
+    }
+
+    @Test
+    void search() {
+        Long pageNo = 2L;
+        String keyword = "홈트";
+        List<Diary> searchPageList = null;
+
+        if (pageNo == 0) {
+            searchPageList = diaryRepository.findDiaryByPublicAndTitleContaining(keyword, keyword);
+        } else if (pageNo == 1) {
+            searchPageList = diaryRepository.findDiaryByPageNoAndTitleContaining(pageNo, keyword, keyword);
+        } else if (pageNo == 2) {
+            searchPageList = diaryRepository.findDiaryByPageNoAndTitleContaining(pageNo, keyword, keyword);
+        } else if (pageNo == 3) {
+            searchPageList = diaryRepository.findDiaryByPageNoAndTitleContaining(pageNo, keyword, keyword);
+        }
+        System.out.println("공개된 페이지 게시판별 검색:"+ searchPageList);
+    }
+
 }
