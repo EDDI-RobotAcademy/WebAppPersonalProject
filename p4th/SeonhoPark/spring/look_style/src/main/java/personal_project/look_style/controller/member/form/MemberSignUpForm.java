@@ -1,4 +1,4 @@
-package personal_project.look_style.controller.form;
+package personal_project.look_style.controller.member.form;
 
 import lombok.Getter;
 import lombok.NoArgsConstructor;

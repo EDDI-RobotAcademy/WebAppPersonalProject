@@ -1,12 +1,13 @@
-package personal_project.look_style.controller;
+package personal_project.look_style.controller.member;
 
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
-import personal_project.look_style.controller.form.MemberSignInForm;
-import personal_project.look_style.controller.form.MemberSignUpForm;
+import personal_project.look_style.controller.member.form.MemberSignInForm;
+import personal_project.look_style.controller.member.form.MemberSignUpForm;
 import personal_project.look_style.service.member.MemberService;
-import personal_project.look_style.service.member.request.MemberSignInRequest;
+
+import java.util.Map;
 
 @Slf4j
 @RestController
@@ -43,5 +44,12 @@ public class MemberController {
         log.info("memberSignIn : " + form);
 
         return service.signIn(form.toSignInRequest());
+    }
+
+    @PostMapping ("/send-info")
+    public Map sendInfo(@RequestBody MemberSignInForm form) {
+        log.info("sendInfo : " + form);
+
+        return service.sendUserInfo(form.toSignInRequest());
     }
 }

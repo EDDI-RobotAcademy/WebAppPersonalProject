@@ -1,8 +1,8 @@
-package personal_project.look_style.repository;
+package personal_project.look_style.repository.member;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
-import personal_project.look_style.entity.Member;
+import personal_project.look_style.entity.member.Member;
 
 import java.util.Optional;
 

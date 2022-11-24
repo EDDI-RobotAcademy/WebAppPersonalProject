@@ -3,7 +3,7 @@ package personal_project.look_style.service.member.request;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import lombok.ToString;
-import personal_project.look_style.entity.Member;
+import personal_project.look_style.entity.member.Member;
 
 @Getter
 @ToString
