@@ -1,4 +1,5 @@
 <template>
+  <v-container>
   <v-footer
       color="blue lighten-1"
       padless
@@ -9,16 +10,22 @@
         justify="center"
         no-gutters
     >
-      <v-btn
-          v-for="icon in icons"
-          :key="icon"
-          class="mx-4 white--text"
-          icon
-      >
-        <v-icon size="24px">
-        {{ icon }}
-        </v-icon>
+      <v-btn class="mx-4 white--text" icon @click="goHome">
+        <v-icon size="24px">mdi-home</v-icon>
       </v-btn>
+
+      <v-btn class="mx-4 white--text" icon @click="goMypage">
+        <v-icon size="24px">mdi-account</v-icon>
+      </v-btn>
+
+      <v-btn class="mx-4 white--text" icon @click="goBoard">
+        <v-icon size="24px">mdi-calendar-check-outline</v-icon>
+      </v-btn>
+
+      <v-btn class="mx-4 white--text" icon @click="goMyVideo">
+        <v-icon size="24px">mdi-heart</v-icon>
+      </v-btn>
+
       <v-col
           class="blue lighten-1 py-4 text-center white--text"
           cols="12"
@@ -28,21 +35,41 @@
       </v-col>
     </v-row>
   </v-footer>
+  </v-container>
 </template>
 
 <script>
+import {mapState} from "vuex";
+
 export default {
   name: "CommonFooterTemplate",
-  data() {
-    return{
-      icons: [
-        'mdi-home',
-        'mdi-account',
-        'mdi-youtube',
-        'mdi-heart',
-      ],
-    }
+  computed: {
+    ...mapState([
+      'isAuthenticated'
+    ])
   },
+  methods:{
+    goHome(){
+      this.$router.push({name:'HomeMainView'})
+    },
+    goMypage(){
+      if(this.isAuthenticated){
+        this.$router.push({name:'MyPageView'})
+      } else {
+        alert("로그인이 필요합니다.")
+      }
+    },
+    goBoard(){
+      this.$router.push({name:'AllBoardListView'})
+    },
+    goMyVideo(){
+      if(this.isAuthenticated){
+        this.$router.push({name:'MySaveVideoView'})
+      } else {
+        alert("로그인이 필요합니다.")
+      }
+    }
+  }
 }
 </script>
 

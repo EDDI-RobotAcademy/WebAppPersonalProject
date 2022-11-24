@@ -26,7 +26,7 @@
             <p><v-btn plain class="mt-0 " style=" font-size: small" >답글</v-btn></p>
             <v-spacer></v-spacer>
       <!-- 작성자 본인만 수정 삭제 버튼 보이도록   -->
-            <span v-if="isAuthenticated && (loginUser[0].nickname == commentList.writerNickname)">
+            <span v-if="isAuthenticated && (loginUser[0].id == commentList.writerId)">
               <p class="mt-1 mr-3">
               <v-btn plain style="padding-right:0px; font-size: small" @click="commentModify(commentList.id)" >수정</v-btn>
               <v-btn plain style="font-size: small" @click="deleteComment(commentList.id)"><v-icon >mdi-trash-can-outline</v-icon></v-btn>
@@ -36,7 +36,7 @@
       <!-- 댓글 수정버튼 누름 : !commentModifyShow 이지만 commentModifySelectId가 아닌 게시글은 그대로 출력되게-->
         <!-- (1) 댓글 수정 버튼 누르기 전   -->
           <v-row v-if="!commentModifyShow" class="ml-3" style=" width:770px">{{commentList.content}}</v-row>
-        <!-- (2) 댓글 수정 버튼 눌렀을 때 해당 댓글 아닌 경우 ->조건:  commentModifyShow= true & 해당 댓글 id와 일치 안함  -->
+        <!-- (2) 댓글 수정 버튼 눌렀을 때 해당 수정 댓글 아닌 다른 댓글의 경우 그냥 그대로 있기 ->조건:  commentModifyShow= true & 해당 댓글 id와 일치 안함  -->
           <v-row v-else-if="commentModifyShow && !(commentList.id == commentModifySelectId)" class="ml-3" style=" width:770px">{{commentList.content}}</v-row>
         <!-- (3) 댓글 수정 버튼 눌렀을 때 해당 댓글인 경우 -> 해당 댓글 본문 담아서(v-for 값) input 박스 보여줌  -->
           <v-row v-else>
