@@ -59,6 +59,7 @@ class _SignInFormFieldState extends State<SignInFormField> {
                           barrierDismissible: false,
                           builder: (context) {
                             return AlertDialog(
+                              shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
                               content: Text(
                                 "입력한 정보가 맞지 않습니다.",
                                 textAlign: TextAlign.center,
@@ -68,7 +69,7 @@ class _SignInFormFieldState extends State<SignInFormField> {
                                   onPressed: () {
                                     Get.back();
                                   },
-                                  child: Text("확인"),
+                                  child: Text("확인", style: TextStyle(color: Colors.black),),
                                 ),
                               ],
                             );

@@ -1,11 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
-import 'package:look_style/api/spring_api.dart';
-import 'package:look_style/components/signIn/sign_in_email_text_form_field.dart';
-import 'package:look_style/components/signIn/sign_in_password_text_form_field.dart';
-import 'package:look_style/components/signUp/sign_up_email_text_form_field.dart';
 import 'package:look_style/components/signUp/sign_up_form_field.dart';
-import 'package:look_style/components/sign_up_drop_down_button.dart';
 
 class SignUpPage extends StatefulWidget {
   const SignUpPage({Key? key}) : super(key: key);

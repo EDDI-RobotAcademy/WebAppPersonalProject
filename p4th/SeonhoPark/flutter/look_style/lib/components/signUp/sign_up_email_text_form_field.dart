@@ -1,7 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:look_style/api/spring_api.dart';
+import 'package:look_style/api/member_spring_api.dart';
 import 'package:look_style/components/signUp/sign_up_form_field.dart';
 
 import '../../utility/validation.dart';
@@ -51,8 +51,8 @@ class _SignUpEmailTextFieldState extends State<SignUpEmailTextFormField> {
             child: TextButton(
               onPressed: buttonEnable
                   ? () {
-                      var validation = SpringApi().duplicateEmailValidation(
-                          UserSignUpDuplicateEmailValidationRequest(email!));
+                      var validation = MemberSpringApi().duplicateEmailValidation(
+                          CheckDuplicateEmailRequest(email!));
 
 
 
@@ -63,6 +63,7 @@ class _SignUpEmailTextFieldState extends State<SignUpEmailTextFormField> {
                               barrierDismissible: false,
                               builder: (context) {
                                 return AlertDialog(
+                                  shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
                                   content: Text(
                                     "사용 가능한 이메일입니다.",
                                     textAlign: TextAlign.center,
@@ -72,7 +73,7 @@ class _SignUpEmailTextFieldState extends State<SignUpEmailTextFormField> {
                                       onPressed: () {
                                         Get.back();
                                       },
-                                      child: Text("확인"),
+                                      child: Text("확인", style: TextStyle(color: Colors.black)),
                                     ),
                                   ],
                                 );
@@ -88,6 +89,7 @@ class _SignUpEmailTextFieldState extends State<SignUpEmailTextFormField> {
                               barrierDismissible: false,
                               builder: (context) {
                                 return AlertDialog(
+                                  shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
                                   content: Text(
                                     "중복된 이메일 입니다.",
                                     textAlign: TextAlign.center,
@@ -97,7 +99,7 @@ class _SignUpEmailTextFieldState extends State<SignUpEmailTextFormField> {
                                       onPressed: () {
                                         Get.back();
                                       },
-                                      child: Text("확인"),
+                                      child: Text("확인", style: TextStyle(color: Colors.black)),
                                     ),
                                   ],
                                 );

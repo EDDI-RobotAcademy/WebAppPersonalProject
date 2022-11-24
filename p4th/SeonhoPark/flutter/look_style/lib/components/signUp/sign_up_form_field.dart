@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:look_style/api/spring_api.dart';
+import 'package:look_style/api/member_spring_api.dart';
 import 'package:look_style/components/signUp/sign_up_email_text_form_field.dart';
 import 'package:look_style/components/signUp/sign_up_nickname_text_form_field.dart';
 import 'package:look_style/components/signUp/sign_up_password_text_form_field.dart';
@@ -54,7 +54,7 @@ class _SignUpFormFieldState extends State<SignUpFormField> {
               onPressed: () {
               if (_formKey.currentState!.validate()) {
                 if (SignUpEmailTextFormField.buttonStatus == true && SignUpNicknameTextFormField.buttonStatus == true) {
-                  var validation = SpringApi().signUp(UserSignUpRequest(
+                  var validation = MemberSpringApi().signUp(UserSignUpRequest(
                       emailController.text,
                       confirmPasswordController.text,
                       nicknameController.text));
@@ -67,6 +67,7 @@ class _SignUpFormFieldState extends State<SignUpFormField> {
                           barrierDismissible: false,
                           builder: (context) {
                             return AlertDialog(
+                              shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
                               content: Text(
                                 "오류 발생",
                                 textAlign: TextAlign.center,
@@ -76,7 +77,7 @@ class _SignUpFormFieldState extends State<SignUpFormField> {
                                   onPressed: () {
                                     Get.back();
                                   },
-                                  child: Text("확인"),
+                                  child: Text("확인", style: TextStyle(color: Colors.black)),
                                 ),
                               ],
                             );
@@ -89,6 +90,7 @@ class _SignUpFormFieldState extends State<SignUpFormField> {
                       barrierDismissible: false,
                       builder: (context) {
                         return AlertDialog(
+                          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
                           content: Text(
                             "중복확인을 진행해주세요",
                             textAlign: TextAlign.center,
@@ -98,7 +100,7 @@ class _SignUpFormFieldState extends State<SignUpFormField> {
                               onPressed: () {
                                 Get.back();
                               },
-                              child: Text("확인"),
+                              child: Text("확인", style: TextStyle(color: Colors.black)),
                             ),
                           ],
                         );
