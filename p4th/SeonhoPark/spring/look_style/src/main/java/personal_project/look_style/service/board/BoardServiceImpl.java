@@ -7,8 +7,10 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 import personal_project.look_style.entity.board.Board;
 import personal_project.look_style.entity.board.BoardImage;
+import personal_project.look_style.entity.board.Comment;
 import personal_project.look_style.repository.board.BoardImageRepository;
 import personal_project.look_style.repository.board.BoardRepository;
+import personal_project.look_style.repository.board.CommentRepository;
 import personal_project.look_style.service.board.request.BoardRequest;
 
 import java.io.FileNotFoundException;
@@ -29,6 +31,9 @@ public class BoardServiceImpl implements BoardService{
 
     @Autowired
     BoardImageRepository boardImageRepository;
+
+    @Autowired
+    CommentRepository commentRepository;
 
     @Override
     public void register(BoardRequest request, List<MultipartFile> file) {
@@ -144,12 +149,18 @@ public class BoardServiceImpl implements BoardService{
     @Override
     public void remove(Long boardNo) {
         List<BoardImage> boardImages = boardImageRepository.findAllBoardImagesByBoardId(boardNo);
+        List<Comment> comments = commentRepository.findAllCommentsByBoardNo(boardNo);
         List<Long> boardImageIds = new ArrayList<>();
+        List<Long> commentIds = new ArrayList<>();
         for (int i = 0; i < boardImages.size(); i++) {
             boardImageIds.add(boardImages.get(i).getImageNo());
         }
+        for (int i = 0; i < comments.size(); i++) {
+            commentIds.add(comments.get(i).getId());
+        }
 
         boardImageRepository.deleteAllById(boardImageIds);
+        commentRepository.deleteAllById(commentIds);
 
         boardRepository.deleteById(boardNo);
     }
