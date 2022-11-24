@@ -11,6 +11,7 @@ import QNABoardListView from "@/views/boards/QNABoardListView";
 import AllBoardListView from "@/views/boards/AllBoardListView";
 import HomeMainView from "@/views/video/HomeMainView";
 import MySaveVideoView from "@/views/mypage/MySaveVideoView";
+import MyDiaryBoardListView from "@/views/mypage/MyDiaryBoardListView";
 
 Vue.use(VueRouter)
 
@@ -67,6 +68,12 @@ routes = [
     path: '/my-save-video',
     name: 'MySaveVideoView',
     component: MySaveVideoView
+  },
+
+  {
+    path: '/my-diary',
+    name: 'MyDiaryBoardListView',
+    component: MyDiaryBoardListView
   },
 
   {

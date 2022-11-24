@@ -27,6 +27,15 @@ export default {
                 console.log('다이어리 리스트 조회')
             })
     },
+    // eslint-disable-next-line no-empty-pattern
+    requestMyDiaryBoardListFromSpring ({ commit }, memberId) {
+
+        return axios.get(`http://localhost:7777/hometwang/boards/diary/mylist/${memberId}`)
+            .then((res) => {
+                commit(REQUEST_DIARY_BOARD_LIST_FROM_SPRING, res.data)
+                console.log('마이 다이어리 리스트 조회')
+            })
+    },
 
     // eslint-disable-next-line no-empty-pattern
     requestCreateDiaryBoardContentsToSpring ({ }, payload) {
