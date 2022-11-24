@@ -2,7 +2,16 @@ import {
     REQUEST_BUY_BARAM_COMMENT_LIST_FROM_SPRING,
     REQUEST_BUY_BARAM_FROM_SPRING,
     REQUEST_BUY_BARAM_LIST_FROM_SPRING,
-    REQUEST_CHECK_DUPLICATE_EMAIL_TO_SPRING
+    REQUEST_BUY_DIABLO_COMMENT_LIST_FROM_SPRING,
+    REQUEST_BUY_DIABLO_FROM_SPRING,
+    REQUEST_BUY_DIABLO_LIST_FROM_SPRING,
+    REQUEST_CHECK_DUPLICATE_EMAIL_TO_SPRING,
+    REQUEST_SELL_BARAM_COMMENT_LIST_FROM_SPRING,
+    REQUEST_SELL_BARAM_FROM_SPRING,
+    REQUEST_SELL_BARAM_LIST_FROM_SPRING,
+    REQUEST_SELL_DIABLO_COMMENT_LIST_FROM_SPRING,
+    REQUEST_SELL_DIABLO_FROM_SPRING,
+    REQUEST_SELL_DIABLO_LIST_FROM_SPRING
 
 } from './mutation-types'
 import axios from "axios";
@@ -42,7 +51,6 @@ export default {
                 }
             })
     },
-
     requestBuyBaramListFromSpring ({ commit }) {
         console.log('requestBuyBaramListFromSpring()')
 
@@ -113,6 +121,234 @@ export default {
 
         const { comment, commentWriter } = payload
         return axios.post('http://localhost:7777/trade-item/boards/buy/baram/comment/register',
+            { comment, commentWriter })
+            .then(() => {
+                alert('댓글 등록 성공')
+            })
+    },
+
+    requestSellBaramListFromSpring ({ commit }) {
+        console.log('requestSellBaramListFromSpring()')
+
+        return axios.get('http://localhost:7777/trade-item/boards/sell/baram/list')
+            .then((res) => {
+                commit(REQUEST_SELL_BARAM_LIST_FROM_SPRING, res.data)
+            })
+    },
+
+    requestSellBaramFromSpring ({ commit }, sellBaramNo) {
+        console.log('requestSellBaramFromSpring()')
+
+        return axios.get(`http://localhost:7777/trade-item/boards/sell/baram/${sellBaramNo}`)
+            .then((res) => {
+                commit(REQUEST_SELL_BARAM_FROM_SPRING, res.data)
+            })
+    },
+
+    //eslint-disable-next-line no-empty-pattern
+    requestCreateSellBaramContentsToSpring ({ }, payload) {
+        console.log('requestCreateSellBaramContentsToSpring()')
+
+        const { title, content, writer } = payload
+        return axios.post('http://localhost:7777/trade-item/boards/sell/baram/register',
+            { title, content, writer })
+            .then(() => {
+                alert('게시물 등록 성공')
+            })
+    },
+
+    // eslint-disable-next-line no-empty-pattern
+    requestSellBaramModifyToSpring ({ }, payload) {
+        console.log('requestSellBaramModifyToSpring()')
+
+        const { title, content, sellBaramNo, writer, regDate } = payload
+
+        return axios.put(`http://localhost:7777/trade-item/boards/sell/baram/${sellBaramNo}`,
+            { title, content, writer, regDate })
+            .then(() => {
+                alert('수정 성공')
+            })
+    },
+
+    // eslint-disable-next-line no-empty-pattern
+    requestDeleteSellBaramToSpring ({ }, sellBaramNo) {
+        console.log('requestDeleteBuyBaramToSpring()')
+
+        return axios.delete(`http://localhost:7777/trade-item/boards/sell/baram/${sellBaramNo}`)
+            .then(() => {
+                alert('삭제 성공')
+            })
+    },
+
+
+
+    requestSellBaramCommentListFromSpring ({ commit }, sellBaramNo) {
+        console.log('requestBuyBaramCommentListFromSpring()')
+
+        return axios.get(`http://localhost:7777/trade-item/boards/sell/baram/comment/${sellBaramNo}`)
+            .then((res) => {
+                commit(REQUEST_SELL_BARAM_COMMENT_LIST_FROM_SPRING, res.data)
+            })
+    },
+
+    //eslint-disable-next-line no-empty-pattern
+    requestSellBaramCommentRegisterToSpring ({ }, payload) {
+        console.log('requestSellBaramCommentRegisterToSpring()')
+
+        const { comment, commentWriter } = payload
+        return axios.post('http://localhost:7777/trade-item/boards/sell/baram/comment/register',
+            { comment, commentWriter })
+            .then(() => {
+                alert('댓글 등록 성공')
+            })
+    },
+
+    requestBuyDiabloListFromSpring ({ commit }) {
+        console.log('requestBuyDiabloListFromSpring()')
+
+        return axios.get('http://localhost:7777/trade-item/boards/buy/diablo/list')
+            .then((res) => {
+                commit(REQUEST_BUY_DIABLO_LIST_FROM_SPRING, res.data)
+            })
+    },
+
+    requestBuyDiabloFromSpring ({ commit }, buyDiabloNo) {
+        console.log('requestBuyDiabloFromSpring()')
+
+        return axios.get(`http://localhost:7777/trade-item/boards/buy/diablo/${buyDiabloNo}`)
+            .then((res) => {
+                commit(REQUEST_BUY_DIABLO_FROM_SPRING, res.data)
+            })
+    },
+
+    //eslint-disable-next-line no-empty-pattern
+    requestCreateBuyDiabloContentsToSpring ({ }, payload) {
+        console.log('requestCreateBuyDiabloContentsToSpring()')
+
+        const { title, content, writer } = payload
+        return axios.post('http://localhost:7777/trade-item/boards/buy/diablo/register',
+            { title, content, writer })
+            .then(() => {
+                alert('게시물 등록 성공')
+            })
+    },
+
+    // eslint-disable-next-line no-empty-pattern
+    requestBuyDiabloModifyToSpring ({ }, payload) {
+        console.log('requestBuyDiabloModifyToSpring()')
+
+        const { title, content, buyDiabloNo, writer, regDate } = payload
+
+        return axios.put(`http://localhost:7777/trade-item/boards/buy/diablo/${buyDiabloNo}`,
+            { title, content, writer, regDate })
+            .then(() => {
+                alert('수정 성공')
+            })
+    },
+
+    // eslint-disable-next-line no-empty-pattern
+    requestDeleteBuyDiabloToSpring ({ }, buyDiabloNo) {
+        console.log('requestDeleteBuyDiabloToSpring()')
+
+        return axios.delete(`http://localhost:7777/trade-item/boards/buy/diablo/${buyDiabloNo}`)
+            .then(() => {
+                alert('삭제 성공')
+            })
+    },
+
+
+
+    requestBuyDiabloCommentListFromSpring ({ commit }, buyDiabloNo) {
+        console.log('requestBuyDiabloCommentListFromSpring()')
+
+        return axios.get(`http://localhost:7777/trade-item/boards/buy/diablo/comment/${buyDiabloNo}`)
+            .then((res) => {
+                commit(REQUEST_BUY_DIABLO_COMMENT_LIST_FROM_SPRING, res.data)
+            })
+    },
+
+    //eslint-disable-next-line no-empty-pattern
+    requestBuyDiabloCommentRegisterToSpring ({ }, payload) {
+        console.log('requestBuyDiabloCommentRegisterToSpring()')
+
+        const { comment, commentWriter } = payload
+        return axios.post('http://localhost:7777/trade-item/boards/buy/diablo/comment/register',
+            { comment, commentWriter })
+            .then(() => {
+                alert('댓글 등록 성공')
+            })
+    },
+
+    requestSellDiabloListFromSpring ({ commit }) {
+        console.log('requestSellDiabloListFromSpring()')
+
+        return axios.get('http://localhost:7777/trade-item/boards/sell/diablo/list')
+            .then((res) => {
+                commit(REQUEST_SELL_DIABLO_LIST_FROM_SPRING, res.data)
+            })
+    },
+
+    requestSellDiabloFromSpring ({ commit }, sellDiabloNo) {
+        console.log('requestSellDiabloFromSpring()')
+
+        return axios.get(`http://localhost:7777/trade-item/boards/sell/diablo/${sellDiabloNo}`)
+            .then((res) => {
+                commit(REQUEST_SELL_DIABLO_FROM_SPRING, res.data)
+            })
+    },
+
+    //eslint-disable-next-line no-empty-pattern
+    requestCreateSellDiabloContentsToSpring ({ }, payload) {
+        console.log('requestCreateSellDiabloContentsToSpring()')
+
+        const { title, content, writer } = payload
+        return axios.post('http://localhost:7777/trade-item/boards/sell/diablo/register',
+            { title, content, writer })
+            .then(() => {
+                alert('게시물 등록 성공')
+            })
+    },
+
+    // eslint-disable-next-line no-empty-pattern
+    requestSellDiabloModifyToSpring ({ }, payload) {
+        console.log('requestSellDiabloModifyToSpring()')
+
+        const { title, content, sellDiabloNo, writer, regDate } = payload
+
+        return axios.put(`http://localhost:7777/trade-item/boards/sell/diablo/${sellDiabloNo}`,
+            { title, content, writer, regDate })
+            .then(() => {
+                alert('수정 성공')
+            })
+    },
+
+    // eslint-disable-next-line no-empty-pattern
+    requestDeleteSellDiabloToSpring ({ }, sellDiabloNo) {
+        console.log('requestDeleteBuyDiabloToSpring()')
+
+        return axios.delete(`http://localhost:7777/trade-item/boards/sell/diablo/${sellDiabloNo}`)
+            .then(() => {
+                alert('삭제 성공')
+            })
+    },
+
+
+
+    requestSellDiabloCommentListFromSpring ({ commit }, sellDiabloNo) {
+        console.log('requestBuyDiabloCommentListFromSpring()')
+
+        return axios.get(`http://localhost:7777/trade-item/boards/sell/diablo/comment/${sellDiabloNo}`)
+            .then((res) => {
+                commit(REQUEST_SELL_DIABLO_COMMENT_LIST_FROM_SPRING, res.data)
+            })
+    },
+
+    //eslint-disable-next-line no-empty-pattern
+    requestSellDiabloCommentRegisterToSpring ({ }, payload) {
+        console.log('requestSellDiabloCommentRegisterToSpring()')
+
+        const { comment, commentWriter } = payload
+        return axios.post('http://localhost:7777/trade-item/boards/sell/diablo/comment/register',
             { comment, commentWriter })
             .then(() => {
                 alert('댓글 등록 성공')

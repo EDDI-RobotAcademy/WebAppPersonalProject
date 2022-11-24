@@ -57,16 +57,16 @@ export default {
         { text: '포인트 충전', route: '/' },
       ],
       buyItemDrop: [
-        { title: '디아블로2', route: '/'},
+        { title: '디아블로2', route: '/buy-diablo-list'},
         { title: '바람의나라', route: '/buy-baram-list'},
-        { title: '아이온', route: '/'},
-        { title: '던전엔파이터', route: '/'},
+        { title: '게임3', route: '/'},
+        { title: '게임4', route: '/'},
       ],
       sellItemDrop: [
-        { title: '디아블로2', route: '/'},
-        { title: '바람의나라', route: '/'},
-        { title: '아이온', route: '/'},
-        { title: '던전엔파이터', route: '/'},
+        { title: '디아블로2', route: '/sell-diablo-list'},
+        { title: '바람의나라', route: '/sell-baram-list'},
+        { title: '게임3', route: '/'},
+        { title: '게임4', route: '/'},
       ]
 
     }

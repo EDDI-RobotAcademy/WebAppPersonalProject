@@ -10,4 +10,23 @@ export default {
 
     buyBaramComment: {},
     buyBaramComments: [],
+
+    sellBaramBoard: {},
+    sellBaramBoards: [],
+
+    sellBaramComment: {},
+    sellBaramComments: [],
+
+    buyDiabloBoard: {},
+    buyDiabloBoards: [],
+
+    buyDiabloComment: {},
+    buyDiabloComments: [],
+
+    sellDiabloBoard: {},
+    sellDiabloBoards: [],
+
+    sellDiabloComment: {},
+    sellDiabloComments: [],
+
 }
