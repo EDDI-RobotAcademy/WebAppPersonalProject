@@ -12,20 +12,21 @@ import java.time.Duration;
 public class RedisServiceImpl implements RedisService {
     private final StringRedisTemplate redisTemplate;
 
-    public void setKeyAndValue(String token, Long memNo) {
+    public void setKeyAndValue( String refreshToken, Long memNo) {
         String memNoToString = String.valueOf(memNo);
         ValueOperations<String, String> value = redisTemplate.opsForValue();
-        value.set(token, memNoToString, Duration.ofMinutes(3)); // 시간 조절 예정 -- 우선 3분
+        value.set(refreshToken, memNoToString, Duration.ofDays(30)); // 리프레시 토큰 30일
     }
+
 
     public Long getValueByKey(String token) {
         ValueOperations<String, String> value = redisTemplate.opsForValue();
         String tempMemNo = value.get(token);
         Long memNo;
-        if(tempMemNo == null){
-            memNo = null;
-        } else {
+        if(tempMemNo != null){
             memNo = Long.parseLong(tempMemNo);
+        } else {
+            memNo = null;
         }
         return memNo;
     }
@@ -34,7 +35,8 @@ public class RedisServiceImpl implements RedisService {
         redisTemplate.delete(token);
     }
 
+    //true면 새로운 토큰 발행된 상태 -> false면 새로운 토큰 발행 안된 상태
     public boolean isRefreshTokenExists(String token) {
-        return getValueByKey(token) != null;
+        return getValueByKey(token) == null;
     }
 }
