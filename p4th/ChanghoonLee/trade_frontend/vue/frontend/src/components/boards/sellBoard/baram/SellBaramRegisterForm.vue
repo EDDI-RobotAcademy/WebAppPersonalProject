@@ -37,7 +37,7 @@
     </table>
     <div>
       <v-btn class="grey white--text" rounded depressed small type="submit">등록</v-btn>&nbsp;
-      <router-link :to="{ name: 'BuyBaramListView' }">
+      <router-link :to="{ name: 'SellBaramListView' }">
         <v-btn class="grey white--text" rounded depressed small>취소</v-btn>
       </router-link>
     </div>
@@ -46,7 +46,7 @@
 
 <script>
 export default {
-  name: "BuyBaramRegisterForm",
+  name: "SellBaramRegisterForm",
   data () {
     return {
       title: '',

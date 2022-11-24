@@ -1,4 +1,4 @@
-package com.example.demo.repository.buyBoard.baram;
+package com.example.demo.repository.boards.buyBoard.baram;
 
 import com.example.demo.entity.boards.buyBoard.baram.BuyBaramComment;
 import org.springframework.data.jpa.repository.JpaRepository;
