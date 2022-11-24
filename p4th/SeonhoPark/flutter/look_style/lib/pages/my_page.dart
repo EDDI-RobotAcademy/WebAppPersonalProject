@@ -3,18 +3,16 @@ import 'package:flutter/material.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
-import 'package:look_style/components/my_page_tab_bar.dart';
-import 'package:look_style/utility/custom_icons_icons.dart';
 
 import '../api/board_spring_api.dart';
 import 'board_read_page.dart';
 
 class MyPage extends StatefulWidget {
-  MyPage({Key? key, this.userToken, this.userEmail, required this.userNickname}) : super(key: key);
+  MyPage({Key? key, this.userToken, this.userEmail, this.userNickname}) : super(key: key);
 
   String? userToken;
   String? userEmail;
-  String userNickname;
+  final userNickname;
 
   @override
   State<MyPage> createState() => _MyPageState();
@@ -74,6 +72,7 @@ class _MyPageState extends State<MyPage> {
 
   @override
   Widget build(BuildContext context) {
+    Duration(seconds: 2);
     return Container(
       child: Column(
         children: [
@@ -108,7 +107,45 @@ class _MyPageState extends State<MyPage> {
                         ),
                         TextButton(
                             onPressed: () {
-                              logout();
+                              showDialog(
+                                  context: context,
+                                  barrierDismissible: false,
+                                  builder: (context) {
+                                    return AlertDialog(
+                                      title: Center(child: Text('Look Style',
+                                        style: TextStyle(fontFamily: 'bazzi'),)),
+                                      shape: RoundedRectangleBorder(
+                                          borderRadius: BorderRadius
+                                              .circular(20)),
+                                      content: Container(
+                                        width: 300,
+                                        height: 100,
+                                        child: Text(
+                                          "정말 로그아웃 하시겠습니까?",
+                                          textAlign: TextAlign.center,
+                                        ),
+                                      ),
+                                      actions: [
+                                        TextButton(
+                                          onPressed: () {
+                                            logout();
+                                            Get.offAllNamed('/');
+                                            // Get.offAllNamed('/main');
+                                          },
+                                          child: Text(
+                                            "확인", style: TextStyle(color: Colors.black),),
+                                        ),
+                                        TextButton(
+                                          onPressed: () {
+                                            Get.back();
+                                          },
+                                          child: Text(
+                                            "취소", style: TextStyle(color: Colors.black),),
+                                        ),
+                                      ],
+                                    );
+                                  }
+                              );
                               },
                             style: TextButton.styleFrom(primary: Colors.black),
                             child: Text('로그아웃', style: TextStyle(color: Colors.black))
