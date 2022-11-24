@@ -91,7 +91,7 @@ class BoardSpringApi {
 
       return boardList;
     } else {
-      throw Exception('에러');
+      throw Exception('에러닷');
     }
   }
 
@@ -197,7 +197,7 @@ class BoardSpringApi {
     }
   }
 
-  Future<void> deleteBoard(int boardNo) async {
+  Future<bool?> deleteBoard(int boardNo) async {
 
     var response = await http.delete(
         Uri.http(httpUri, '/board/delete/$boardNo'),
@@ -206,6 +206,9 @@ class BoardSpringApi {
 
     if (response.statusCode == 200) {
       debugPrint("통신 확인");
+      return true;
+    } else {
+      return false;
     }
   }
 

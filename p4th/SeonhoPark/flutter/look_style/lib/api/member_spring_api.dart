@@ -3,33 +3,30 @@ import 'dart:convert';
 import 'package:flutter/cupertino.dart';
 import 'package:http/http.dart' as http;
 
-class SpringApi {
+class MemberSpringApi {
   static const String httpUri = '192.168.0.12:7777';
 
-  Future<UserSignInResponse> SignIn (UserSignInRequest request) async {
+  Future<UserInfo> signIn (UserSignInRequest request) async {
     var data = { 'email': request.email, 'password': request.password };
     var body = json.encode(data);
 
-    // debugPrint(request.email);
-    // debugPrint(request.password);
-    // debugPrint(body);
-
     var response = await http.post(
-      Uri.http(httpUri, '/member/sign-in'),
+      Uri.http(httpUri, '/member/send-info'),
       headers: {"Content-Type": "application/json"},
       body: body,
     );
 
-    // debugPrint(response.body);
+    print('가즈아 : ' + response.body);
 
     if (response.statusCode == 200) {
       debugPrint("통신 확인");
-      return UserSignInResponse(true);
+      return UserInfo.fromJson(jsonDecode(utf8.decode(response.bodyBytes)));
     } else {
       debugPrint("통신 실패");
-      return UserSignInResponse(false);
+      throw Exception("failed post");
     }
   }
+
 
   Future<UserSignUpResponse> signUp (UserSignUpRequest request) async {
     var data = {
@@ -61,7 +58,7 @@ class SpringApi {
     }
   }
 
-  Future<UserSignUpDuplicateEmailValidationResponse> duplicateEmailValidation (UserSignUpDuplicateEmailValidationRequest request) async {
+  Future<CheckDuplicateEmailResponse> duplicateEmailValidation (CheckDuplicateEmailRequest request) async {
     var data = {
       'email': request.email,
     };
@@ -85,13 +82,13 @@ class SpringApi {
     }
 
     if(response.body == "true") {
-      return UserSignUpDuplicateEmailValidationResponse(true);
+      return CheckDuplicateEmailResponse(true);
     } else {
-      return UserSignUpDuplicateEmailValidationResponse(false);
+      return CheckDuplicateEmailResponse(false);
     }
   }
 
-  Future<UserSignUpDuplicateNicknameValidationResponse> duplicateNicknameValidation (UserSignUpDuplicateNicknameValidationRequest request) async {
+  Future<CheckDuplicateNicknameResponse> duplicateNicknameValidation (CheckDuplicateNicknameRequest request) async {
     var data = {
       'nickname': request.nickname,
     };
@@ -115,35 +112,53 @@ class SpringApi {
     }
 
     if(response.body == "true") {
-      return UserSignUpDuplicateNicknameValidationResponse(true);
+      return CheckDuplicateNicknameResponse(true);
     } else {
-      return UserSignUpDuplicateNicknameValidationResponse(false);
+      return CheckDuplicateNicknameResponse(false);
     }
   }
 }
 
-class UserSignUpDuplicateEmailValidationRequest {
+class UserInfo {
+  String token;
   String email;
-
-  UserSignUpDuplicateEmailValidationRequest(this.email);
-}
-
-class UserSignUpDuplicateEmailValidationResponse {
-  bool? success;
-
-  UserSignUpDuplicateEmailValidationResponse(this.success);
-}
-
-class UserSignUpDuplicateNicknameValidationRequest {
   String nickname;
 
-  UserSignUpDuplicateNicknameValidationRequest(this.nickname);
+  UserInfo({
+    required this.token,
+    required this.email,
+    required this.nickname,
+  });
+  factory UserInfo.fromJson(Map<String, dynamic> json) {
+    return UserInfo(
+        token: json['token'],
+        email: json['email'],
+        nickname: json['nickname']);
+  }
 }
 
-class UserSignUpDuplicateNicknameValidationResponse {
+class CheckDuplicateEmailRequest {
+  String email;
+
+  CheckDuplicateEmailRequest(this.email);
+}
+
+class CheckDuplicateEmailResponse {
   bool? success;
 
-  UserSignUpDuplicateNicknameValidationResponse(this.success);
+  CheckDuplicateEmailResponse(this.success);
+}
+
+class CheckDuplicateNicknameRequest {
+  String nickname;
+
+  CheckDuplicateNicknameRequest(this.nickname);
+}
+
+class CheckDuplicateNicknameResponse {
+  bool? success;
+
+  CheckDuplicateNicknameResponse(this.success);
 }
 
 class UserSignUpResponse {
