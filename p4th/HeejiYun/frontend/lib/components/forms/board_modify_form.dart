@@ -60,7 +60,7 @@ class _BoardModifyFormState extends State<BoardModifyForm> {
 
     return Scaffold(
       appBar: CommonAppBar(title: "게시물 수정하기"),
-      drawer: CustomDrawer(isLogin: true,),
+      drawer: CustomDrawer(),
       body: Container(
             padding: const EdgeInsets.all(16),
             child: Form(

@@ -77,6 +77,7 @@ class _BoardRegisterFormState extends State<BoardRegisterForm> {
                             if (_formKey.currentState!.validate()) {
                               boardCategoryName = category.category;
                               SpringBoardApi().requestBoardRegister(BoardRegisterRequest(title, writer, content, boardCategoryName));
+                              category.setDefaultCategory();
                               moveToList(boardCategoryName);
                             } else {
                               showResultDialog(context, "게시물 등록 실패", "제목과 내용을 작성해주세요!");

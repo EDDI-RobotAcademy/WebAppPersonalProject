@@ -47,7 +47,7 @@ class SpringBoardApi{
 
   Future<bool> requestBoardRegister(BoardRegisterRequest request) async {
     var data = { 'title': request.title, 'writer': request.writer,
-                'content' : request.content, 'boardCategoryName' : request.boardCategoryname };
+                'content' : request.content, 'boardCategoryName' : request.boardCategoryName };
     var body = json.encode(data);
 
     var response = await http.post(
@@ -86,10 +86,10 @@ class SpringBoardApi{
     }
   }
 
-  Future<List<Board>?> requestSpecificBoardList(String category) async {
+  Future<List<Board>?> requestSpecificBoardList(String categoryName) async {
 
     var response = await http.get(
-        Uri.http(HttpUri.home, '/board/list/$category'),
+        Uri.http(HttpUri.home, '/board/list/$categoryName'),
         headers: {"Content-Type": "application/json"},
     );
 
@@ -113,9 +113,9 @@ class BoardRegisterRequest {
   String title;
   String writer;
   String content;
-  String boardCategoryname;
+  String boardCategoryName;
 
-  BoardRegisterRequest(this.title, this.writer, this.content, this.boardCategoryname);
+  BoardRegisterRequest(this.title, this.writer, this.content, this.boardCategoryName);
 }
 
 class BoardModifyRequest {

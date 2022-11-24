@@ -130,7 +130,44 @@ class SpringMemberApi {
       throw Exception("통신 실패");
     }
   }
+
+  Future<bool?> requestModifyUserData (ModifyUserDataRequest request) async {
+    var data = { 'userToken': request.userToken, 'modifyNickname' : request.modifyNickname };
+    var body = json.encode(data);
+
+    var response = await http.put(
+      Uri.http(HttpUri.home, '/member/data-modify'),
+      headers: {"Content-Type": "application/json"},
+      body: body,
+    );
+
+    if (response.statusCode == 200) {
+      debugPrint("통신 확인");
+      return json.decode(response.body);
+    } else {
+      throw Exception("통신 실패");
+    }
+  }
+
+  Future<bool?> requestUnregister (String? userToken) async {
+    var data = { 'userToken': userToken };
+    var body = json.encode(data);
+
+    var response = await http.delete(
+      Uri.http(HttpUri.home, '/member/unregister'),
+      headers: {"Content-Type": "application/json"},
+      body: body,
+    );
+
+    if (response.statusCode == 200) {
+      debugPrint("통신 확인");
+      return json.decode(response.body);
+    } else {
+      throw Exception("통신 실패");
+    }
+  }
 }
+
 class UserDataResponse {
   String userEmail;
   String userNickname;
@@ -145,7 +182,6 @@ class UserDataResponse {
   }
 }
 
-
 class SignInResponse {
   var userToken;
 
@@ -158,6 +194,13 @@ class MemberSignUpRequest {
   String nickname;
 
   MemberSignUpRequest(this.email, this.password, this.nickname);
+}
+
+class ModifyUserDataRequest {
+  String userToken;
+  String modifyNickname;
+
+  ModifyUserDataRequest(this.userToken, this.modifyNickname);
 }
 
 class MemberSignInRequest {

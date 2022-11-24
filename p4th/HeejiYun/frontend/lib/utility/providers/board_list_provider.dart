@@ -2,7 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:frontend/api/spring_board_api.dart';
 
-import '../api/board.dart';
+import '../../api/board.dart';
 
 class BoardListProvider extends ChangeNotifier{
   List<Board> _boards = [];

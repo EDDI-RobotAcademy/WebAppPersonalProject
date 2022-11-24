@@ -47,7 +47,7 @@ class MyApp extends StatelessWidget {
         minimumSize: Size(300, 45),
         ))),
         title: 'HOME ALONE',
-        initialRoute: "/my-page",
+        initialRoute: "/home",
         routes: {
         "/sign-up": (context) => SignUpPage(),
         "/home": (context) => HomePage(),

@@ -50,8 +50,6 @@ class _SignInFormState extends State<SignInForm> {
   void dispose() {
     emailController.dispose();
     passwordController.dispose();
-    // TextFormFieldEmail.emailFocus.dispose();
-    // TextFormFieldPassword.passwordFocus.dispose();
     super.dispose();
   }
 

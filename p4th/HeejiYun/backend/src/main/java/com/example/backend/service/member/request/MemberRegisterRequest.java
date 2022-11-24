@@ -5,11 +5,12 @@ import lombok.*;
 
 @Getter
 @ToString
-@RequiredArgsConstructor
+@NoArgsConstructor
+
 public class MemberRegisterRequest {
-    private final String email;
-    private final String password;
-    private final String nickname;
+    private String email;
+    private String password;
+    private String nickname;
 
     public Member toMember () {
         return new Member( email, nickname );

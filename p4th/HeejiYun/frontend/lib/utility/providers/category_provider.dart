@@ -8,4 +8,8 @@ class CategoryProvider extends ChangeNotifier {
     _category = categoryValue;
     notifyListeners();
   }
+
+  void setDefaultCategory() {
+    _category = '자유';
+  }
 }
