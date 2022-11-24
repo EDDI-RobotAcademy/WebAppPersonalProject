@@ -14,4 +14,6 @@ public interface MemberService {
     Boolean nickNameValidation(String nickname);
     String signIn(MemberLoginRequest request);
     List<Member> loginUserInfo(String loginUserToken);
+
+    String modifyNickName(Long memberId, String reNickName);
 }

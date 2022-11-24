@@ -31,6 +31,7 @@ public class MemberServiceImpl implements MemberService {
     @Autowired
     private RedisService redisService;
 
+
     @Override
     public Boolean emailValidation(String email) {
         Optional<Member> maybeMember = memberRepository.findByEmail(email);
@@ -114,5 +115,26 @@ public class MemberServiceImpl implements MemberService {
 
         log.info("로그인 멤버 정보: "+ member.toString() );
         return member;
+    }
+
+    @Override
+    public String modifyNickName(Long memberId, String reNickName) {
+
+        String msg = "";
+        if(nickNameValidation(reNickName)){
+            Optional<Member> maybeMember= memberRepository.findById(memberId);
+            if(maybeMember.isEmpty()){
+                msg="회원 정보를 찾을 수 없습니다";
+                return msg;
+            }
+            Member member = maybeMember.get();
+            member.setNickname(reNickName);
+
+            memberRepository.save(member);
+            msg ="닉네임이 변경되었습니다.";
+        } else{
+            msg ="중복된 닉네임입니다.";
+        }
+        return msg;
     }
 }
