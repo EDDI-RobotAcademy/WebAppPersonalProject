@@ -11,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.swing.text.html.Option;
+import java.util.List;
 import java.util.Optional;
 
 @Slf4j
@@ -34,12 +35,15 @@ public class MemberAccountSetServiceImpl implements MemberAccountSetService {
 
         MemberInfo memberInfo = findMember.get();
         String currentUserNickname = memberInfo.getNickName();
-        Optional<BucketBoard> maybeBucket = bucketBoardRepository.findByBucketListWriter(currentUserNickname);
+        List<BucketBoard> bucketList = bucketBoardRepository.findByBucketListWriter(currentUserNickname);
 
-        BucketBoard bucketBoard = maybeBucket.get();
-        bucketBoard.setWriter(nicknameRequest.getNickName());
+        for (int i = 0; i < bucketList.size(); i++) {
+            BucketBoard bucketBoard = bucketList.get(i);
+            bucketBoard.setWriter(nicknameRequest.getNickName());
 
-        bucketBoardRepository.save(bucketBoard);
+            bucketBoardRepository.save(bucketBoard);
+        }
+
 
         findMember.ifPresent(selectUser->{
             MemberInfo userInfo = findMember.get();
