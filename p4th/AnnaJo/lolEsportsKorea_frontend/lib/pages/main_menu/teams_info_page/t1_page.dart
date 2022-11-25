@@ -53,9 +53,9 @@ class _T1PageState extends State<T1Page> {
                   ],
                 ),
               ),
-              ListView(shrinkWrap: true, children: const [
-                T1InfoForm(),
-              ])
+              const SingleChildScrollView(
+                child: T1InfoForm(),
+              )
             ],
           ),
         ));
