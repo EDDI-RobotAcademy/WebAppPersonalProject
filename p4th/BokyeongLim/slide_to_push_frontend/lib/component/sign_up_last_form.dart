@@ -3,7 +3,6 @@ import 'package:get/get.dart';
 import 'package:my_todos/component/sign_up_first_form.dart';
 
 import '../view/sign_in_view.dart';
-import 'custom_email_input.dart';
 import '../controller/sign_up_controller.dart';
 import '../component/sign_up_second_form.dart';
 import '../utility/style/common_size.dart';
@@ -16,6 +15,7 @@ class SignUpLastForm extends StatelessWidget {
   TextEditingController passwordController = TextEditingController();
   TextEditingController checkPasswordController = TextEditingController();
   SignUpController signUpController = Get.put(SignUpController());
+
 
   @override
   Widget build(BuildContext context) {

@@ -38,11 +38,12 @@ class _SignInFormState extends State<SignInForm> {
           children: <Widget>[
             CustomEmailInput( controller: emailController),
             CustomPasswordInput( controller: passwordController),
-            Container(
-              padding: EdgeInsets.symmetric(vertical: 8, horizontal: 0),
-              alignment: Alignment.centerRight,
-              child: TextButton(child: Text('Forgot Password'), onPressed: (){ Get.to(SignInView()); }),
-            ),
+            // Container(
+            //   padding: EdgeInsets.symmetric(vertical: 8, horizontal: 0),
+            //   alignment: Alignment.centerRight,
+            //   child: TextButton(child: Text('Forgot Password'), onPressed: (){ Get.to(SignInView()); }),
+            // ),
+            SizedBox(height: 50),
             SizedBox(
               width: MediaQuery.of(context).size.width,
               height: 54,

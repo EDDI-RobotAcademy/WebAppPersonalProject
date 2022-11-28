@@ -30,10 +30,11 @@ public class FriendController {
     }
 
     @PostMapping("/add")
-    public Boolean addFriend (@RequestBody ReqFriend reqDelete) {
-        log.info("addFriend()" + reqDelete.toString());
-        Account account = memberService.findAccount(reqDelete.getToken());
-        return friendService.add(account, reqDelete.getFriendEmail());
+    public Boolean addFriend (@RequestBody ReqFriend request) {
+        Account account = memberService.findAccount(request.getToken());
+        Boolean result = friendService.add(account, request.getFriendEmail());
+        log.info( "친구 추가 결과 : " + result.toString());
+        return result;
     }
 
     @DeleteMapping("/delete")

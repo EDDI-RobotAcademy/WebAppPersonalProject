@@ -2,7 +2,6 @@ import 'package:get/get.dart';
 import 'package:my_todos/controller/sign_in_controller.dart';
 import 'package:my_todos/utility/api/todos_service_api.dart';
 import '../model/todos.dart';
-import '../utility/states/authentication.dart';
 
 class ListController extends GetxController{
   SignInController signInController = Get.find();
