@@ -50,9 +50,9 @@ class _DrxPageState extends State<DrxPage> {
                   ],
                 ),
               ),
-              ListView(shrinkWrap: true, children: const [
-                DrxInfoForm(),
-              ])
+              const SingleChildScrollView(
+                  child: DrxInfoForm(),
+              )
             ],
           ),
         ));
