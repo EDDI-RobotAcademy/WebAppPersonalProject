@@ -21,7 +21,7 @@ public interface BucketBoardRepository extends JpaRepository<BucketBoard, Long> 
     Page<BucketBoard> findByBucketListWriter(@Param("writer") String writer, Pageable pageable);
 
     @Query("select b from BucketBoard b where b.writer = :writer")
-    Optional<BucketBoard> findByBucketListWriter(@Param("writer") String writer);
+    List<BucketBoard> findByBucketListWriter(@Param("writer") String writer);
 
-    List<BucketBoard> findByBucketTitleContaining(String bucketTitle);
+    Page<BucketBoard> findByBucketTitleContaining(String bucketTitle, Pageable pageable);
 }

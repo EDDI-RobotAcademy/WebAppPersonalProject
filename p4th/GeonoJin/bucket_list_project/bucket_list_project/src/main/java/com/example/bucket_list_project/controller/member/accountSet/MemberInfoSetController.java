@@ -2,6 +2,7 @@ package com.example.bucket_list_project.controller.member.accountSet;
 
 import com.example.bucket_list_project.controller.member.form.account.ReplaceNicknameForm;
 import com.example.bucket_list_project.service.member.accountSet.MemberAccountSetService;
+import com.example.bucket_list_project.service.member.request.accountSet.ReplaceNicknameRequest;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -16,10 +17,10 @@ public class MemberInfoSetController {
     private MemberAccountSetService memberService;
 
     @PostMapping("/changeNickname")
-    public void nicknameModify(@RequestBody ReplaceNicknameForm replaceNicknameform) {
-        log.info("nicknameModify: " + replaceNicknameform);
+    public void nicknameModify(@RequestBody ReplaceNicknameRequest replaceNicknameRequest) {
+        log.info("nicknameModify: " );
 
-        memberService.replaceNickname(replaceNicknameform.toReplaceNicknameRequest());
+        memberService.replaceNickname(replaceNicknameRequest);
     }
 
     @PostMapping("/{nickName}")
