@@ -1,6 +1,9 @@
+import 'package:email_auth/email_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:my_todos/view/sign_in_view.dart';
 
+import '../auth.config.dart';
 import 'custom_email_input.dart';
 import '../controller/sign_up_controller.dart';
 import '../component/sign_up_second_form.dart';
@@ -13,6 +16,22 @@ class SignUpFirstForm extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    EmailAuth emailAuth = new EmailAuth(
+      sessionName: "slide to push",
+    );
+
+    /// Configuring the remote server
+    emailAuth.config(remoteServerConfiguration);
+    void sendOTP(String email) async {
+      bool res = await emailAuth.sendOtp(recipientMail: email, otpLength: 5);
+
+      if(res) {
+        print("잘 보내짐");
+      } else {
+        print("잘안됨");
+      }
+    }
+
     return Scaffold(
       resizeToAvoidBottomInset : false,
       body: SafeArea(
@@ -38,7 +57,6 @@ class SignUpFirstForm extends StatelessWidget {
                       child: ElevatedButton(
                           child: Text('Email 중복확인'),
                           onPressed: () async{
-                            // test를 위해 일단 무조건 true로
                             bool result = await signUpController.checkDuplicatedEmail(emailController.text);
 
                             if (result) {
@@ -48,7 +66,7 @@ class SignUpFirstForm extends StatelessWidget {
                                 '사용할 수 있는 이메일입니다.',
                                 backgroundColor: Colors.white,
                               );
-                              signUpController.sendOTP(emailController.text);
+                              sendOTP(emailController.text);
                               Get.to(() => SignUpSecondForm());
                             } else {
                               Get.snackbar(
@@ -60,7 +78,9 @@ class SignUpFirstForm extends StatelessWidget {
                             }
                           }
                       ),
-                    )
+                    ),
+                    SizedBox(height: 10),
+                    TextButton(onPressed: (){Get.off(() => SignInView());}, child: Text('Back'))
                   ]
               )
             ],
@@ -71,7 +91,7 @@ class SignUpFirstForm extends StatelessWidget {
   }
 }
 
-//controller로 옮기기
+
 
 
 

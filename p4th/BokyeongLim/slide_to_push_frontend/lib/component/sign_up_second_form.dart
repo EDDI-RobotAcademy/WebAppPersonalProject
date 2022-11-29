@@ -1,5 +1,7 @@
+import 'package:email_auth/email_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import '../auth.config.dart';
 import '../component/sign_up_last_form.dart';
 import '../component/sign_up_first_form.dart';
 import '../controller/sign_up_controller.dart';
@@ -12,9 +14,31 @@ class SignUpSecondForm extends StatelessWidget {
   SignUpController signUpController = Get.put(SignUpController());
 
 
-
   @override
   Widget build(BuildContext context) {
+
+    EmailAuth emailAuth = new EmailAuth(
+      sessionName: "slide to push",
+    );
+
+    /// Configuring the remote server
+    emailAuth.config(remoteServerConfiguration);
+    void sendOTP(String email) async {
+      bool res = await emailAuth.sendOtp(recipientMail: email, otpLength: 5);
+
+      if(res) {
+        print("잘 보내짐");
+      } else {
+        print("잘안됨");
+      }
+    }
+    Future<bool> verify(String code) async{
+      print(emailAuth.validateOtp( recipientMail: signUpController.saveEmail, userOtp: code));
+      bool result = await emailAuth.validateOtp(recipientMail: signUpController.saveEmail, userOtp: code);
+      return result;
+    }
+
+
     return Scaffold(
       resizeToAvoidBottomInset : false,
       body: SafeArea(
@@ -41,7 +65,7 @@ class SignUpSecondForm extends StatelessWidget {
                       child: ElevatedButton(
                           child: Text('확인'),
                           onPressed: () async{
-                            bool? result = await signUpController.verify(codeController.text);
+                            bool? result = await verify(codeController.text);
                               if(result) {
 
                                 Get.snackbar(

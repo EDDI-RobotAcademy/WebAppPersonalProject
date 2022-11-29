@@ -8,6 +8,7 @@ class FriendController extends GetxController {
   SignInController signInController = Get.find();
   var friendsList = <Friend>[].obs;
 
+
   @override
   void onInit() {
     super.onInit();
@@ -23,5 +24,27 @@ class FriendController extends GetxController {
     if(friend != null) {
       friendsList.value = friend;
     }
+  }
+  delete(String friendEmail) async {
+    if(signInController.isAuthenticated.value) {
+      await FriendService.requestDeleteFriend(friendEmail);
+    }
+
+    if(FriendService.reqDeleteFriend.statusCode != 200) {
+      return false;
+    }
+
+    return true;
+  }
+
+  add(String friendEmail) async {
+
+    bool? result;
+    if (signInController.isAuthenticated.value) {
+      result = await FriendService.requestAddFriend(friendEmail);
+      print("controller로 리턴된 값 : " + result.toString());
+    }
+
+    return result;
   }
 }

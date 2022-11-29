@@ -15,7 +15,6 @@ class SignInController extends GetxController {
     }
     return token;
   }
-
   void logout(){
     isAuthenticated.value = false;
     storage.delete(key: 'user');

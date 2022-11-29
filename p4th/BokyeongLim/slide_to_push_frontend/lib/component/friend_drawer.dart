@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:my_todos/component/add_friend_alert_dialog.dart';
 
 import '../controller/friend_controller.dart';
 import '../utility/style/common_text_style.dart';
@@ -9,6 +10,16 @@ class FriendsDrawer extends StatelessWidget {
   var refreshKey = GlobalKey<RefreshIndicatorState>();
   @override
   Widget build(BuildContext context) {
+
+    Future<void> _showMyDialog() async {
+      return showDialog<void> (
+          context: context,
+          barrierDismissible: false,
+          builder: (BuildContext context) {
+            return AddFriendPopup();
+          }
+      );
+    }
     return Drawer(
       child:Column(
         mainAxisAlignment: MainAxisAlignment.start,
@@ -21,7 +32,10 @@ class FriendsDrawer extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Text("Friends", style: subHeaderText()),
-                IconButton(onPressed: (){}, icon: Icon(Icons.person_search, color: Colors.black87,))
+                IconButton(
+                    icon: Icon(Icons.person_search, color: Colors.black87,),
+                    onPressed: (){_showMyDialog();},
+                )
               ],
             ),
           ),
@@ -50,7 +64,17 @@ class FriendsDrawer extends StatelessWidget {
                                         ),
                                         trailing : TextButton(
                                           child: Text('삭제', style: TextStyle(fontSize: 10),),
-                                          onPressed: (){},
+                                          onPressed: () async{
+                                            bool result =  await friendController.delete
+                                              (friendController.friendsList[index].friendEmail);
+
+                                            if(result) {
+                                              friendController.fetchData();
+                                            } else {
+                                              print("통신 오류");
+                                            }
+
+                                            },
                                         )
                                     ),
                                     SizedBox( width: MediaQuery.of(context).size.width, child: Container(height: 1, color: Colors.black12,),)
@@ -67,3 +91,4 @@ class FriendsDrawer extends StatelessWidget {
     );
   }
 }
+
