@@ -3,14 +3,14 @@ import 'dart:convert';
 import '../../components/ranking/team_ranking_data.dart';
 import 'package:http/http.dart' as http;
 
-class RankingApi {
-  static const String httpUri = '192.168.0.8:8888';
+import '../ipInfo.dart';
 
+class RankingApi {
   static Future<List<TeamRankingData>> getTeamRankingInfo(
       String request) async {
     try {
       final teamRankingInfoResponse = await http.get(
-        Uri.http(httpUri, '/ranking/$request'),
+        Uri.http(IpInfo.httpUri, '/ranking/$request'),
         headers: {"Content-Type": "application/json"},
       );
       String responseBody = utf8.decode(teamRankingInfoResponse.bodyBytes);

@@ -5,9 +5,9 @@ import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 
 import '../../components/my_team/team_comment_data.dart';
+import '../ipInfo.dart';
 
 class SpringCommentApi {
-  static const String httpUri = '192.168.0.8:8888';
   static var commentRegisterResponse;
   static var commentDeleteResponse;
 
@@ -15,7 +15,7 @@ class SpringCommentApi {
       String request) async {
     try {
       final commentListResponse = await http.get(
-        Uri.http(httpUri, '/comment/$request'),
+        Uri.http(IpInfo.httpUri, '/comment/$request'),
         headers: {"Content-Type": "application/json"},
       );
       String responseBody = utf8.decode(commentListResponse.bodyBytes);
@@ -35,7 +35,7 @@ class SpringCommentApi {
 
     try {
       commentRegisterResponse = await http.post(
-        Uri.http(httpUri, '/comment/register'),
+        Uri.http(IpInfo.httpUri, '/comment/register'),
         headers: {"Content-Type": "application/json"},
         body: body,
       );
@@ -49,7 +49,7 @@ class SpringCommentApi {
 
     try {
       commentDeleteResponse = await http.post(
-        Uri.http(httpUri, '/comment/delete'),
+        Uri.http(IpInfo.httpUri, '/comment/delete'),
         headers: {"Content-Type": "application/json"},
         body: body,
       );
