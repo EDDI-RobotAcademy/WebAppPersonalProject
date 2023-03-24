@@ -4,8 +4,9 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 
+import '../ipInfo.dart';
+
 class SpringHttpApi {
-  static const String httpUri = '192.168.0.8:8888';
   static var signInResponse;
   static var signUpResponse;
   static var removeResponse;
@@ -15,7 +16,7 @@ class SpringHttpApi {
 
     try {
       signInResponse = await http.post(
-        Uri.http(httpUri, '/member/sign-in'),
+        Uri.http(IpInfo.httpUri, '/member/sign-in'),
         headers: {"Content-Type": "application/json"},
         body: body,
       );
@@ -29,7 +30,7 @@ class SpringHttpApi {
 
     try {
       signUpResponse = await http.post(
-        Uri.http(httpUri, '/member/sign-up'),
+        Uri.http(IpInfo.httpUri, '/member/sign-up'),
         headers: {"Content-Type": "application/json"},
         body: body,
       );
@@ -41,7 +42,7 @@ class SpringHttpApi {
   memberRemoveApi(String email) async {
     try {
       removeResponse = await http.post(
-        Uri.http(httpUri, '/member/remove/$email'),
+        Uri.http(IpInfo.httpUri, '/member/remove/$email'),
         headers: {"Content-Type": "application/json"},
       );
     } catch (e) {

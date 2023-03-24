@@ -2,14 +2,13 @@ import 'dart:convert';
 
 import 'package:http/http.dart' as http;
 import '../../components/match_schedule/league_data.dart';
+import '../ipInfo.dart';
 
 class LeagueApi {
-  static const String httpUri = '192.168.0.8:8888';
-
   static Future<List<LeagueData>> getLeagueInfo() async {
     try {
       final leagueInfoResponse = await http.get(
-        Uri.http(httpUri, '/league/list'),
+        Uri.http(IpInfo.httpUri, '/league/list'),
         headers: {"Content-Type": "application/json"},
       );
       String responseBody = utf8.decode(leagueInfoResponse.bodyBytes);
