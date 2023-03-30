@@ -90,7 +90,6 @@ export default {
             })
     },
 
-    // eslint-disable-next-line no-empty-pattern
     requestThumbStatusToSpring({commit}, payload) {
 
         const{ memberId, boardNo, thumbType} = payload
@@ -100,6 +99,17 @@ export default {
             .then((res) => {
                 commit(THUMB_STATUS_COUNT, res.data)
                 console.log("추천/비추천- 게시글: " + res.data)
+            })
+
+
+    },
+
+    requestThumbCheckToSpring({commit}, boardNo) {
+        console.log("추천/비추천- 게시물 번호"+ boardNo)
+        return axios.get(`http://localhost:7777/hometwang/boards/diary/recommend/${boardNo}`)
+            .then((res) => {
+                commit(THUMB_STATUS_COUNT, res.data)
+                console.log("추천/비추천수 조회: " + res.data)
             })
     },
 
@@ -111,7 +121,6 @@ export default {
             })
     },
 
-    //eslint-disable-next-line no-empty-pattern
     requestCommentListFromSpring ({ commit }, boardNo) {
         console.log('다이어리 댓글 읽기()')
 
