@@ -88,7 +88,7 @@ public class VideoTestCase {
             //비디오가 My Video List에서 삭제되었습니다
         }
         //저장되었는 지 삭제되었는 지 결과 확인
-        List<String> myVideoList = saveVideoRepository.findMemberSaveVideoByMemberId(memberId);
+        List<MemberSaveVideo> myVideoList = saveVideoRepository.findMemberSaveVideoByMemberId(memberId);
         System.out.println("나의 비디오 리스트: "+myVideoList);
     }
 
@@ -96,7 +96,8 @@ public class VideoTestCase {
     @Test
     void myVideoRead(){
         Long memberId = 1L;
-        List<String> myVideoList = saveVideoRepository.findMemberSaveVideoByMemberId(memberId);
+
+        List<MemberSaveVideo> myVideoList = saveVideoRepository.findMemberSaveVideoByMemberId(memberId);
 
         if (myVideoList.equals(Optional.empty())) {
             System.out.println("저장한 비디오 목록이 없어요");

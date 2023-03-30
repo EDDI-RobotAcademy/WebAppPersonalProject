@@ -13,9 +13,7 @@ import javax.persistence.*;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.FormatStyle;
-import java.util.ArrayList;
 import java.util.Date;
-import java.util.List;
 
 @Data
 @Entity
@@ -28,14 +26,14 @@ public class Diary {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long boardNo;
 
-    @ManyToOne(fetch = FetchType.EAGER)
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name="category_id")
     private Category category;
 
     @Column(length = 128, nullable = false)
     private String title;
 
-    @ManyToOne(fetch = FetchType.EAGER)
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name="member_id")
     private Member member;
 
@@ -60,20 +58,11 @@ public class Diary {
     @UpdateTimestamp
     private Date updDate;
 
-    @JsonIgnore
-    @OneToMany(mappedBy = "diary", fetch = FetchType.EAGER)
-    private List<Comment> comments = new ArrayList<>();
-
-    @JsonIgnore
-    @OneToMany(mappedBy = "diary", fetch = FetchType.LAZY)
-    private List<Image> images = new ArrayList<>();
-
     @PrePersist
     public void onPrePersist(){
         this.regDate = LocalDateTime.now().format(DateTimeFormatter.ofLocalizedDateTime(FormatStyle.SHORT));
     }
 
-    //테스트 케이스용 메소드들
     public Diary ( String title, String authority, String content) {
         this.title = title;
         this.authority = authority;
@@ -84,9 +73,6 @@ public class Diary {
         this.title= title;
         this.content= content;
     }
-    public void setComment (Comment comment) {
-        comments.add(comment);
-        comment.setDiary(this);
-    }
+
 
 }

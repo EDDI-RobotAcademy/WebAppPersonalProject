@@ -2,7 +2,7 @@ package kr.pjj.demo;
 
 import kr.pjj.demo.entity.board.Comment;
 import kr.pjj.demo.entity.board.Diary;
-import kr.pjj.demo.entity.board.response.CommentResponse;
+import kr.pjj.demo.controller.board.response.CommentResponse;
 import kr.pjj.demo.repository.board.CommentRepository;
 import kr.pjj.demo.repository.board.DiaryRepository;
 import org.junit.jupiter.api.Test;

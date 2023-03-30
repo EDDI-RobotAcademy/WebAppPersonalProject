@@ -13,6 +13,6 @@ public interface RecommendRepository extends JpaRepository<Recommend, Long> {
     @Query("select r from Recommend r join fetch r.diary join fetch r.member where r.diary.boardNo = :board_id and r.member.id= :member_id")
     Optional<Recommend> findByDiaryAndMember(Long board_id, Long member_id);
 
-    @Query("select r from Recommend r join r.diary dy where dy.boardNo = :boardNo")
+    @Query("select r from Recommend r join fetch r.diary dy where dy.boardNo = :boardNo")
     List<Recommend> findAllRecommendsByBoardId(Long boardNo);
 }
