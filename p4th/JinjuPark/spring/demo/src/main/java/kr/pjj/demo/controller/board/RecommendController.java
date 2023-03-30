@@ -18,13 +18,19 @@ public class RecommendController {
     private RecommendService service;
 
     @PostMapping("/recommend")
-    public List<Integer> diaryThumbStatus (@RequestBody ThumbUpDown thumbUpDown) {
+    public List<Integer> diaryThumbUpDown (@RequestBody ThumbUpDown thumbUpDown) {
         log.info("다이어리 추천_비추천 메소드 실행- 게시물번호: "+ thumbUpDown.getBoardNo());
         Long memberId = thumbUpDown.getMemberId();
         Long boardNo = thumbUpDown.getBoardNo();
         String thumbType = thumbUpDown.getThumbType();
 
-        return service.recommendStatus(memberId, boardNo, thumbType);
+        return service.recommendUpDown(memberId, boardNo, thumbType);
     }
 
+    @GetMapping("/recommend/{boardNo}")
+    public List<Integer> diaryThumbStatus (@PathVariable("boardNo") Long boardNo) {
+        log.info("다이어리 추천수 Read()");
+
+        return service.recommendStatus(boardNo);
+    }
 }
