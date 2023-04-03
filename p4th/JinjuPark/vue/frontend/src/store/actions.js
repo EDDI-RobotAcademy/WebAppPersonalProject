@@ -75,7 +75,6 @@ export default {
     },
 
     requestThumbStatusToSpring({commit}, payload) {
-        const{ memberId, boardNo, thumbType} = payload
         return axios.post('http://localhost:7777/hometwang/boards/diary/recommend', payload)
             .then((res) => {
                 commit(THUMB_STATUS_COUNT, res.data)
