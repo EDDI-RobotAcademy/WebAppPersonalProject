@@ -30,8 +30,7 @@ public class RecommendServiceImpl implements RecommendService{
 
 
     @Override
-    public List<Integer> recommendStatus(Long memberId, Long boardNo, String thumbType){
-        final String THUMB_CHECK = "thumbCheck";
+    public List<Integer> recommendUpDown(Long memberId, Long boardNo, String thumbType){
         final String THUMB_UP = "thumbUp";
         final String THUMB_DOWN = "thumbDown";
 
@@ -42,12 +41,7 @@ public class RecommendServiceImpl implements RecommendService{
         Diary diary = maybeDiary.get();
         List<Integer> thumbStatus = new ArrayList<>();
 
-        // 1. 추천/비추천수 조회인 경우 하단의 JPQL 검색쿼리 전에 실행
-        if(Objects.equals(thumbType, "THUMB_CHECK")){
-            thumbStatus.add(diary.getLikes());
-            thumbStatus.add(diary.getNoLikes());
-            return thumbStatus;
-        }
+
         Optional<Recommend> maybeRecommend = recommendRepository.findByDiaryAndMember(boardNo, memberId);
 
         Optional<Member> maybeMember = memberRepository.findById(memberId) ;
@@ -135,6 +129,18 @@ public class RecommendServiceImpl implements RecommendService{
         return thumbStatus;
     }
 
+
+    public List<Integer> recommendStatus(Long boardNo){
+
+        Optional<Diary> maybeDiary = diaryRepository.findById(boardNo);
+        Diary diary = maybeDiary.get();
+        List<Integer> thumbStatus = new ArrayList<>();
+
+        thumbStatus.add(diary.getLikes());
+        thumbStatus.add(diary.getNoLikes());
+        return thumbStatus;
+
+    }
 }       // 추천/ 비추천 멤버 id 당 1번 가능하고, 다시 누를 시 추천/비추천 취소되는 기능
         //1. thump 타입(thumbCheck, thumbUp, thumbDown)을 확인
         // (1) thumbCheck 상태체크면 그냥 값만 리턴 (게시글 상세페이지에 첫 reload 시 해당 게시글의 추천/비추천수 출력용)

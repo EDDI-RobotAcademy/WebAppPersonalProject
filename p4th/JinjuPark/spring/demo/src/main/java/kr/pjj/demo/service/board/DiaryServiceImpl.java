@@ -186,7 +186,7 @@ public class DiaryServiceImpl implements DiaryService{
     @Override
     public Diary read(Long boardNo) {
         //findById 사용할 때는 Optional 사용 -> 객체가 Board 아닐 가능성도 있기때문에
-        Optional<Diary> maybeDiary = repository.findById(boardNo);
+        Optional<Diary> maybeDiary = repository.findByDiaryId(boardNo);
 
         if (maybeDiary.equals(Optional.empty())) {
             log.info("Can't read board!!!");
@@ -205,18 +205,25 @@ public class DiaryServiceImpl implements DiaryService{
 
     @Override
     public Diary modify(DiaryModify diaryModify) {
-        Optional<Diary> maybeDiary = repository.findById(diaryModify.getBoardNo());
+        Optional<Diary> maybeDiary = repository.findByDiaryId(diaryModify.getBoardNo());
         if (maybeDiary.equals(Optional.empty())) {
             log.info("Can't modify board!!!");
         }
         Diary diary= maybeDiary.get();
         diary.setTitle(diaryModify.getTitle());
         diary.setContent(diaryModify.getContent());
-        return repository.save(diary);
+
+        repository.save(diary);
+        return diary;
     }
 
     @Override
     public void remove(Long boardNo) {
+
+        Optional<Diary> maybeDiary = repository.findByDiaryId(boardNo);
+        Long categoryId = maybeDiary.get().getCategory().getId();
+
+
         List<Comment> commentList = commentRepository.findAllCommentsByBoardId(boardNo);
 
         for (Comment comment : commentList) {
@@ -236,8 +243,7 @@ public class DiaryServiceImpl implements DiaryService{
         }
 
         repository.deleteById(boardNo);
-        categoryRepository.deleteById(boardNo); // 다이어리 먼저 지우고 카테고리 지워야 함
+        categoryRepository.deleteById(categoryId);
     }
-
 
 }

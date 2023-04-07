@@ -8,6 +8,6 @@ import java.util.List;
 
 public interface CommentRepository extends JpaRepository<Comment, Long> {
 
-    @Query("select c from Comment c join c.diary dy where dy.boardNo = :boardNo")
+    @Query("select c from Comment c join fetch c.diary dy join fetch dy.category dyc join fetch dy.member dym where dy.boardNo = :boardNo")
     List<Comment> findAllCommentsByBoardId(Long boardNo);
 }

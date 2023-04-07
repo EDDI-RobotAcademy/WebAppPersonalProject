@@ -21,8 +21,6 @@ export default {
   name: "CommonImageCard",
   props: {
     imgName: String,
-    boardTitle: String,
-    boardSubText: String,
   }
 }
 </script>

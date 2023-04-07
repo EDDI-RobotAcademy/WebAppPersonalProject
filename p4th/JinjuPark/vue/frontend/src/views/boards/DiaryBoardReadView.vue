@@ -104,15 +104,16 @@ export default {
       'requestDeleteDiaryBoardToSpring',
         'requestLoginUserFromSpring',
         'requestThumbStatusToSpring',
+        'requestThumbCheckToSpring',
         'requestCreateDiaryBoardCommentToSpring',
         'requestCommentListFromSpring',
         'requestModifyDiaryBoardCommentToSpring',
         'requestDeleteCommentBoardToSpring',
         'requestImageReadFromSpring'
     ]),
-    async onDelete () {
-      await this.requestDeleteDiaryBoardToSpring(this.boardNo);
-      await this.$router.push({ name: 'DiaryBoardListView' })             // 삭제후 리스트 화면으로 바로 전환되도록
+    onDelete () {
+        this.requestDeleteDiaryBoardToSpring(this.boardNo);
+       this.$router.push({ name: 'DiaryBoardListView' })             // 삭제후 리스트 화면으로 바로 전환되도록
     },
     toModifyView(){
       this.$router.push({name: 'DiaryBoardModifyView',
@@ -186,14 +187,10 @@ export default {
       let userToken = window.localStorage.getItem('userInfo')
       await this.requestLoginUserFromSpring(userToken)
     }
-    const boardNo = this.boardNo
-    console.log("다이어리 게시글 조회 페이지")
-    const memberId = this.$store.state.loginUser[0].id
-    const thumbType = "thumbCheck"
     await this.requestImageReadFromSpring(this.boardNo)
     await this.requestDiaryBoardFromSpring(this.boardNo)
-    await this.requestThumbStatusToSpring({ memberId, boardNo, thumbType})
     await this.requestCommentListFromSpring(this.boardNo)
+    await this.requestThumbCheckToSpring(this.boardNo)
 
   },
 }

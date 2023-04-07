@@ -10,6 +10,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -36,15 +37,20 @@ public class VideoServiceImpl implements VideoService {
     public List<String> myVideoRead(Long memberId){
 
         log.info("세이브 비디오리스트- 저장한 멤버아이디: " + memberId);
-        List<String> myVideoList = saveVideoRepository.findMemberSaveVideoByMemberId(memberId);
+        List<MemberSaveVideo> myVideoList = saveVideoRepository.findMemberSaveVideoByMemberId(memberId);
+        List<String> myVideoSrcList = new ArrayList<>();
 
-        if (myVideoList.equals(Optional.empty())) {
+        for (int i = 0; i < myVideoList.size(); i++) {
+            myVideoSrcList.add(i,myVideoList.get(i).getVideo().getSrc());
+        }
+
+        if (myVideoSrcList.equals(Optional.empty())) {
             log.info("Can't find save video!!");
             return null;
             }
 
         log.info("멤버가 저장한 세이브 비디오리스트- src: " + myVideoList);
-        return myVideoList;
+        return myVideoSrcList;
     }
 
     @Override

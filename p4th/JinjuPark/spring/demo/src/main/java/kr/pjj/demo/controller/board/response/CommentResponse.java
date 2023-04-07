@@ -1,4 +1,4 @@
-package kr.pjj.demo.entity.board.response;
+package kr.pjj.demo.controller.board.response;
 
 import lombok.Data;
 
